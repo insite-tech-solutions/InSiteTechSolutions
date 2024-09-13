@@ -3,6 +3,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+
+//import HeroSection from '../components/HomepageHeroSec';
+import HeroSection from '@/components/HomepageHero/HeroSection';
+
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-very-light-grey">
@@ -54,6 +59,8 @@ export default function Home() {
       </header>
       
       {/* Add your main content here */}
+
+      <HeroSection />
 
       {/* Hero Section */}
       <section className="hero-bg h-screen flex flex-col items-center justify-center relative">
