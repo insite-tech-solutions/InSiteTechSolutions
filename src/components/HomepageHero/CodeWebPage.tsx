@@ -1,3 +1,5 @@
+// CodeWebPage.tsx
+
 "use client";
 
 import React from 'react';
@@ -8,15 +10,20 @@ interface CodeWebPageProps {
   cursorPosition: CursorPosition;
 }
 
-const CodeWebPage: React.FC<CodeWebPageProps> = ({ revealStyle, cursorPosition }) => {
+/**
+ * CodeWebPage component displays the code of the MiniWebPage,
+ * revealed through a circular clip path based on cursor position.
+ */
+const CodeWebPage = ({ revealStyle, cursorPosition }: CodeWebPageProps): JSX.Element => {
   return (
-    <div 
+    <div
       className="absolute inset-0 bg-gray-900 text-gray-300 font-mono text-xs overflow-hidden rounded-lg"
       style={{
         clipPath: `circle(40.5px at ${cursorPosition.x}px ${cursorPosition.y}px)`,
         pointerEvents: 'none',
-        zIndex: 20
+        zIndex: 20,
       }}
+      aria-hidden="true"
     >
       <pre className="whitespace-pre-wrap p-4" style={revealStyle}>
         <code>{`<!DOCTYPE html>

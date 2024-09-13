@@ -1,0 +1,63 @@
+/* MagnifyingGlass.module.css */
+
+.magnifierContainer {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  .magnifierContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .circle1,
+  .circle2,
+  .circle3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  
+  .circle1 {
+    width: 92%;
+    height: 92%;
+    background-color: #929699;
+  }
+  
+  .circle2 {
+    width: 89%;
+    height: 89%;
+    background-color: #ffffff;
+  }
+  
+  .circle3 {
+    width: 81%;
+    height: 81%;
+    background-color: #1472bb;
+  }
+  
+  .magnifierHandle {
+    position: absolute;
+    bottom: -42%;
+    right: -9%;
+    width: 14%;
+    height: 59%;
+    background-color: #929699;
+    transform: rotate(-40deg);
+    border-radius: 5px;
+  }
+  
+  .magnifierHandle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 59%;
+    bottom: 25%;
+    left: 0;
+    background-color: #1472bb;
+  }
+  

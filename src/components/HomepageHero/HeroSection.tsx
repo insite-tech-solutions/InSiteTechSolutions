@@ -1,3 +1,5 @@
+// HeroSection.tsx
+
 "use client";
 
 import React from 'react';
@@ -7,12 +9,16 @@ import MagnifyingGlass from './MagnifyingGlass';
 import { useInteraction } from './useInteraction';
 import { useRevealEffect } from './useRevealEffect';
 
-const HeroSection: React.FC = () => {
+/**
+ * HeroSection component represents the main hero section of the homepage,
+ * including text content and interactive components.
+ */
+const HeroSection = (): JSX.Element => {
   const { cursorPosition, webpageRef, handleMouseMove } = useInteraction();
   const { revealStyle } = useRevealEffect(cursorPosition);
 
   return (
-    <div className="bg-gradient-to-br from-blue-500 to-blue-700 min-h-screen flex items-center justify-center p-8">
+    <section className="bg-gradient-to-br from-blue-500 to-blue-700 min-h-screen flex items-center justify-center p-8">
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
         {/* Left side - Text content */}
         <div className="lg:w-1/2 text-white mb-8 lg:mb-0">
@@ -20,16 +26,18 @@ const HeroSection: React.FC = () => {
             Innovative Website and Software Solutions
           </h1>
           <p className="text-xl">
-            From simple web design to complex software applications, InSite Tech provides the expertise to tailor solutions to all your tech-related needs.
+            From simple web design to complex software applications, InSite Tech provides the
+            expertise to tailor solutions to all your tech-related needs.
           </p>
         </div>
 
         {/* Right side - Interactive components */}
         <div className="lg:w-1/2 flex flex-col items-center">
-          <div 
+          <div
             className="relative w-full max-w-md"
             ref={webpageRef}
             onMouseMove={handleMouseMove}
+            aria-label="Interactive code reveal area"
           >
             <MiniWebPage />
             <MagnifyingGlass cursorPosition={cursorPosition} />
@@ -37,7 +45,7 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

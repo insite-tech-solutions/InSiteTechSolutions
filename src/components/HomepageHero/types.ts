@@ -5,7 +5,9 @@ import { ReactNode } from 'react';
 // Constants
 export const MAGNIFIER_SIZE = 100;
 
-// Types for cursor position
+/**
+ * Represents the cursor position within an element.
+ */
 export interface CursorPosition {
   x: number;
   y: number;
