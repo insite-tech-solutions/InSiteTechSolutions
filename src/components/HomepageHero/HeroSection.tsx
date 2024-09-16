@@ -10,8 +10,10 @@ import { useInteraction } from './useInteraction';
 import { useRevealEffect } from './useRevealEffect';
 
 /**
- * HeroSection component represents the main hero section of the homepage,
+ * Represents the main hero section of the homepage,
  * including text content and interactive components.
+ *
+ * @returns {JSX.Element} The rendered hero section component.
  */
 const HeroSection = (): JSX.Element => {
   const { cursorPosition, webpageRef, handleMouseMove } = useInteraction();

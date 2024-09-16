@@ -6,10 +6,20 @@ import React from 'react';
 import { Code, Layout } from 'lucide-react';
 
 /**
- * MiniWebPage component simulates a mini version of a webpage,
- * used in the HeroSection for interactive effects.
+ * Props interface for the MiniWebPage component.
+ * Currently, there are no props, but this interface
+ * is defined for future extensibility.
  */
-const MiniWebPage = (): JSX.Element => {
+/*interface MiniWebPageProps {}*/
+
+/**
+ * Simulates a mini version of a webpage,
+ * used in the HeroSection for interactive effects.
+ *
+ * @param props - The props for the component.
+ * @returns The rendered MiniWebPage component.
+ */
+const MiniWebPage = React.memo((): JSX.Element => {
   return (
     <div className="bg-white rounded-lg shadow-xl overflow-hidden">
       {/* Browser-like top bar */}
@@ -19,7 +29,10 @@ const MiniWebPage = (): JSX.Element => {
           <div className="w-3 h-3 rounded-full bg-yellow-500" aria-label="Minimize"></div>
           <div className="w-3 h-3 rounded-full bg-green-500" aria-label="Maximize"></div>
         </div>
-        <div className="ml-4 bg-white rounded px-2 py-1 text-sm text-gray-600 flex-grow">
+        <div
+          className="ml-4 bg-white rounded px-2 py-1 text-sm text-gray-600 flex-grow"
+          aria-label="Address bar"
+        >
           www.insitetech.com
         </div>
       </div>
@@ -49,6 +62,8 @@ const MiniWebPage = (): JSX.Element => {
       </div>
     </div>
   );
-};
+});
 
-export default React.memo(MiniWebPage);
+MiniWebPage.displayName = "MiniWebPage";
+
+export default MiniWebPage;

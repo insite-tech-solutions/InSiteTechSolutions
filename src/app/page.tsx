@@ -6,11 +6,15 @@ import Link from 'next/link'
 
 //import HeroSection from '../components/HomepageHeroSec';
 import HeroSection from '@/components/HomepageHero/HeroSection';
+//import Header from '@/components/Header';
+import Header from '@/components/Header';
 
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-very-light-grey">
+
+      {/*
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
@@ -57,7 +61,11 @@ export default function Home() {
           </div>
         </div>
       </header>
-      
+      */}
+
+      <Header />
+    
+
       {/* Add your main content here */}
 
       <HeroSection />

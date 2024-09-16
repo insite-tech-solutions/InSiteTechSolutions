@@ -6,15 +6,24 @@ import React from 'react';
 import { CursorPosition } from './types';
 import styles from './MagnifyingGlass.module.css';
 
+/**
+ * Props interface for the MagnifyingGlass component.
+ */
 interface MagnifyingGlassProps {
+  /**
+   * The current cursor position within the element.
+   */
   cursorPosition: CursorPosition;
 }
 
 /**
- * MagnifyingGlass component displays a magnifying glass icon
- * that follows the cursor position.
+ * Displays a magnifying glass icon that follows the cursor position.
+ *
+ * @param props - The props for the component.
+ * @returns The rendered MagnifyingGlass component.
  */
-const MagnifyingGlass = ({ cursorPosition }: MagnifyingGlassProps): JSX.Element => {
+const MagnifyingGlass = (props: MagnifyingGlassProps): JSX.Element => {
+  const { cursorPosition } = props;
   const MAGNIFIER_SIZE = 100;
 
   return (

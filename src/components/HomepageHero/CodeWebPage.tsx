@@ -5,28 +5,43 @@
 import React from 'react';
 import { CursorPosition } from './types';
 
+/**
+ * Props interface for the CodeWebPage component.
+ */
 interface CodeWebPageProps {
+  /**
+   * The style object for the reveal effect.
+   */
   revealStyle: React.CSSProperties;
+  /**
+   * The current cursor position within the element.
+   */
   cursorPosition: CursorPosition;
 }
 
 /**
- * CodeWebPage component displays the code of the MiniWebPage,
+ * Displays the code of the MiniWebPage,
  * revealed through a circular clip path based on cursor position.
+ *
+ * @param props - The props for the component.
+ * @returns The rendered CodeWebPage component.
  */
-const CodeWebPage = ({ revealStyle, cursorPosition }: CodeWebPageProps): JSX.Element => {
-  return (
-    <div
-      className="absolute inset-0 bg-gray-900 text-gray-300 font-mono text-xs overflow-hidden rounded-lg"
-      style={{
-        clipPath: `circle(40.5px at ${cursorPosition.x}px ${cursorPosition.y}px)`,
-        pointerEvents: 'none',
-        zIndex: 20,
-      }}
-      aria-hidden="true"
-    >
-      <pre className="whitespace-pre-wrap p-4" style={revealStyle}>
-        <code>{`<!DOCTYPE html>
+const CodeWebPage = React.memo(
+  (props: CodeWebPageProps): JSX.Element => {
+    const { revealStyle, cursorPosition } = props;
+
+    return (
+      <div
+        className="absolute inset-0 bg-gray-900 text-gray-300 font-mono text-xs overflow-hidden rounded-lg"
+        style={{
+          clipPath: `circle(40.5px at ${cursorPosition.x}px ${cursorPosition.y}px)`,
+          pointerEvents: 'none',
+          zIndex: 20,
+        }}
+        aria-hidden="true"
+      >
+        <pre className="whitespace-pre-wrap p-4" style={revealStyle}>
+          <code>{`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -53,9 +68,11 @@ const CodeWebPage = ({ revealStyle, cursorPosition }: CodeWebPageProps): JSX.Ele
   <script src="app.js"></script>
 </body>
 </html>`}</code>
-      </pre>
-    </div>
-  );
-};
+        </pre>
+      </div>
+    );
+  }
+);
 
+CodeWebPage.displayName = "CodeWebPage";
 export default CodeWebPage;

@@ -9,7 +9,13 @@ export const MAGNIFIER_SIZE = 100;
  * Represents the cursor position within an element.
  */
 export interface CursorPosition {
+  /**
+   * The horizontal coordinate (X-axis) of the cursor position.
+   */
   x: number;
+  /**
+   * The vertical coordinate (Y-axis) of the cursor position.
+   */
   y: number;
 }
 
