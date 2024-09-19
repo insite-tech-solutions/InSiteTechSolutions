@@ -8,6 +8,7 @@ import CodeWebPage from './CodeWebPage';
 import MagnifyingGlass from './MagnifyingGlass';
 import { useInteraction } from './useInteraction';
 import { useRevealEffect } from './useRevealEffect';
+import styles from './HeroSection.module.css';
 
 /**
  * Represents the main hero section of the homepage,
@@ -20,7 +21,7 @@ const HeroSection = (): JSX.Element => {
   const { revealStyle } = useRevealEffect(cursorPosition);
 
   return (
-    <section className="bg-gradient-to-br from-blue-500 to-blue-700 min-h-screen flex items-center justify-center p-8">
+    <section className={`${styles.bgPrimary} ${styles.bgDecor} min-h-screen flex items-center justify-center p-8`}>
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
         {/* Left side - Text content */}
         <div className="lg:w-1/2 text-white mb-8 lg:mb-0">

@@ -7,7 +7,8 @@ import Link from 'next/link'
 //import HeroSection from '../components/HomepageHeroSec';
 import HeroSection from '@/components/HomepageHero/HeroSection';
 //import Header from '@/components/Header';
-import Header from '@/components/Header';
+//import Header from '@/components/Header';
+import Header from '@/components/Header/Header'
 
 
 export default function Home() {
@@ -63,7 +64,7 @@ export default function Home() {
       </header>
       */}
 
-      <Header />
+      <Header menuItems={[]} />
     
 
       {/* Add your main content here */}
@@ -71,7 +72,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Hero Section */}
-      <section className="hero-bg h-screen flex flex-col items-center justify-center relative">
+      <section className="bg-white h-screen flex flex-col items-center justify-center relative">
         <div className="flex flex-col items-center">
           <Image 
             src="/Insite Tech Solutions Light.svg" 
