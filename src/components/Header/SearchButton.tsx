@@ -21,7 +21,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({ className = '' }) => {
       <button
         onClick={handleSearchClick}
         className={`
-          p-2 rounded-md
+          p-3 rounded-md
           transition-colors duration-200
           bg-white hover:bg-blue-600 focus:bg-blue-600
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500

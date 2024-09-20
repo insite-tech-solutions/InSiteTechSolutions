@@ -33,17 +33,17 @@ const Header: React.FC = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white shadow-md' : 'bg-white'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+      <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-2">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/" className="text-blue-600 font-bold text-xl">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">InSite Tech Solutions</span>
               {/* Using next/image for optimized image loading */}
               <Image
                 src="/Insite Tech Solutions Light.svg"
                 alt="InSite Tech Solutions Logo"
-                width={200}
-                height={50}
+                width={190}
+                height={88}
                 priority
               />
             </Link>
