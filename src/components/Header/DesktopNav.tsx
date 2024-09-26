@@ -23,6 +23,60 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
     setOpenDropdown(null)
   }
 
+  /**
+   * Splits a given text into individual <span> elements with sequential hover animations.
+   * Optionally includes an additional element (e.g., chevron) at the end.
+   * 
+   * @param text - The text to split and animate
+   * @param additionalElement - Optional React node to append after the text
+   * @returns An array of <span> elements
+   */
+  const splitTextIntoSpans = (text: string, includeChevron: boolean = false) => {
+    const delayIncrement = 25 // milliseconds
+    const letters = text.split('')
+    const spans = letters.map((letter, index) => {
+      // Handle spaces or special characters if necessary
+      if (letter === ' ') {
+        return (
+          <span key={`letter-${index}`} className="inline-block w-1">
+            &nbsp;
+          </span>
+        )
+      }
+
+      return (
+        <span
+          key={`letter-${index}`}
+          className="text-gray-500 group-hover:text-blue-600 transition-colors duration-300"
+          style={{ transitionDelay: `${index * delayIncrement}ms`,
+          letterSpacing: '0.11em' }}
+        >
+          {letter}
+        </span>
+      )
+    })
+
+    if (includeChevron) {
+      spans.push(
+        <span
+          key="chevron"
+//          className="text-gray-500 group-hover:text-blue-600 transition-colors transition-transform duration-300 group-hover:rotate-180"
+          className="text-gray-500 group-hover:text-blue-600 transition-colors duration-300"
+          style={{ transitionDelay: `${letters.length * delayIncrement}ms` }}
+        >
+          <ChevronDown
+            className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-180"
+            style={{ transitionDelay: `${letters.length * (delayIncrement/2.65)}ms` }}
+//            style={{ transitionDelay: `${letters.length * (delayIncrement/2.75)}ms`, transitionDuration: `${letters.length * (delayIncrement*1.65)}ms` }}
+            aria-hidden="true"
+          />
+        </span>
+      )
+    }
+
+    return spans
+  }
+
   return (
     <nav className="hidden md:flex space-x-2">
       {menuItems.map((item: MenuItem) => (
@@ -34,14 +88,11 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
               onMouseLeave={handleMouseLeave}
             >
               <button
-                className="text-gray-500 group inline-flex items-center rounded-md bg-white text-base font-medium 
-                hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 px-4 py-8"
+                className="group text-gray-500 inline-flex items-center rounded-md bg-white text-base font-medium 
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 px-4 py-8"            
+                style={{ fontFamily: "'Open Sans', sans-serif", fontSize: '1rem', fontWeight: 500 }}
               >
-                <span>{item.name}</span>
-                <ChevronDown 
-                  className="ml-2 h-5 w-5 text-gray-400 group-hover:text-blue-500" 
-                  aria-hidden="true" 
-                />
+                {splitTextIntoSpans(item.name, true)}
               </button>
               <div className="absolute left-0 w-full h-4 -bottom-4"></div>
               <DropdownMenu items={item.submenu} isOpen={openDropdown === item.name} />
@@ -49,9 +100,10 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
           ) : (
             <Link
               href={item.href}
-              className="text-base font-medium text-gray-500 hover:text-blue-600 inline-flex items-center px-3 py-8"
+              className="group text-gray-500 inline-flex items-center px-3 py-8"
+              style={{ fontFamily: "'Open Sans', sans-serif", fontSize: '1rem', fontWeight: 500 }}
             >
-              {item.name}
+              {splitTextIntoSpans(item.name)}
             </Link>
           )}
         </div>
