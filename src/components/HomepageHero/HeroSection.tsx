@@ -21,7 +21,7 @@ const HeroSection = (): JSX.Element => {
   const { revealStyle } = useRevealEffect(cursorPosition);
 
   return (
-    <section className={`${styles.bgPrimary} ${styles.bgDecor} min-h-screen flex items-center justify-center p-8`}>
+    <section className={`${styles.bgPrimary} ${styles.bgDecor} ${styles.heroHeight} flex items-center justify-center p-8`}>
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between">
         {/* Left side - Text content */}
         <div className="lg:w-1/2 text-white mb-8 lg:mb-0">
@@ -37,7 +37,7 @@ const HeroSection = (): JSX.Element => {
         {/* Right side - Interactive components */}
         <div className="lg:w-1/2 flex flex-col items-center">
           <div
-            className="relative w-full max-w-md"
+            className="relative w-full max-w-lg"
             ref={webpageRef}
             onMouseMove={handleMouseMove}
             aria-label="Interactive code reveal area"

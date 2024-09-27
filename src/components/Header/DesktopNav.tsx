@@ -49,7 +49,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
           key={`letter-${index}`}
           className="text-gray-500 group-hover:text-blue-600 transition-colors duration-300"
           style={{ transitionDelay: `${index * delayIncrement}ms`,
-          letterSpacing: '0.11em' }}
+          letterSpacing: '0.1em' }}
         >
           {letter}
         </span>

@@ -38,10 +38,10 @@ const MagnifyingGlass = (props: MagnifyingGlassProps): JSX.Element => {
       aria-hidden="true"
     >
       <div className={styles.magnifierContent}>
-        <div className={styles.circle1}></div>
+        <div className={`${styles.circle1} shadow-xl`}></div>
         <div className={styles.circle2}></div>
         <div className={styles.circle3}></div>
-        <div className={styles.magnifierHandle}></div>
+        <div className={`${styles.magnifierHandle} shadow-xl`}></div>
       </div>
     </div>
   );
