@@ -42,6 +42,12 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-open-sans)', 'var(--font-noto-sans)', 'var(--font-lato)', 'var(--font-roboto)', 'sans-serif'],
+        kohinoor: ['Kohinoor Latin', 'sans-serif'],
+      },
+      fontWeight: {
+        light: '300',  // This maps to 'Book'
+        normal: '600', // This maps to 'Demi'
+        bold: '700',   // This keeps 'Bold' as is
       },
     },
   },

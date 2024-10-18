@@ -53,3 +53,46 @@ body {
 }
 
 /* Add any additional global styles here */
+
+
+@font-face {
+  font-family: 'Kohinoor Latin';
+  src: url('./fonts/KohinoorLatin-Book.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kohinoor Latin';
+  src: url('./fonts/KohinoorLatin-BookItalic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Kohinoor Latin';
+  src: url('./fonts/KohinoorLatin-Demi.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kohinoor Latin';
+  src: url('./fonts/KohinoorLatin-DemiItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Kohinoor Latin';
+  src: url('./fonts/KohinoorLatin-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kohinoor Latin';
+  src: url('./fonts/KohinoorLatin-BoldItalic.otf') format('opentype');
+  font-weight: bold;
+  font-style: italic;
+}

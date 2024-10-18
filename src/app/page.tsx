@@ -6,14 +6,14 @@ import Link from 'next/link'
 
 //import HeroSection from '../components/HomepageHeroSec';
 import HeroSection from '@/components/HomepageHero/HeroSection';
-//import Header from '@/components/Header';
-//import Header from '@/components/Header';
-import Header from '@/components/Header/Header'
+import Header from '@/components/Header/Header';
+import ScrollAnimationSection from '@/components/ScrollAnimatedSection';
+import ImmersiveHeroSection from '@/components/ServicesSection';
 
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-very-light-grey">
+    <main className="min-h-screen bg-white">
 
       {/*
       <header className="bg-white shadow-md sticky top-0 z-50">
@@ -64,12 +64,13 @@ export default function Home() {
       </header>
       */}
 
-      <Header menuItems={[]} />
+      <Header />
     
 
       {/* Add your main content here */}
 
       <HeroSection />
+      <ScrollAnimationSection />
 
       {/* Hero Section */}
       <section className="bg-white h-screen flex flex-col items-center justify-center relative">
@@ -91,6 +92,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ImmersiveHeroSection />
+
       {/* Services Section */}
       <section className="py-20 bg-very-light-grey">
         <div className="container mx-auto px-6">
@@ -99,7 +102,7 @@ export default function Home() {
             {['Web Development', 'AI Integrations', 'Data Analysis', 'Custom Software'].map((service, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6 transition duration-300 hover:shadow-xl">
                 <div className="w-16 h-16 mx-auto mb-4 bg-light-blue rounded-full flex items-center justify-center">
-                  <Image src={`/api/placeholder/64/64`} alt={`${service} Icon`} width={40} height={40} />
+                  {/*<Image src={`/api/placeholder/64/64`} alt={`${service} Icon`} width={40} height={40} />*/}
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center text-dark-grey">{service}</h3>
                 <p className="text-medium-grey text-center">Custom solutions to help your business grow and innovate.</p>
@@ -153,33 +156,4 @@ export default function Home() {
       </footer>
     </main>
   )
-}
-
-function NavLink({ href, children }: { href: string, children: React.ReactNode }) {
-  return (
-    <Link href={href} className="py-4 px-2 text-medium-grey font-semibold hover:text-dark-blue transition duration-300">
-      {children}
-    </Link>
-  )
-}
-
-function NavDropdown({ title, children }: { title: string, children: React.ReactNode }) {
-  return (
-    <div className="relative group">
-      <button className="py-4 px-2 text-medium-grey font-semibold hover:text-dark-blue transition duration-300">
-        {title}
-      </button>
-      <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 transition duration-300">
-        {children}
-      </div>
-    </div>
-  )
-}
-
-function DropdownLink({ href, children }: { href: string, children: React.ReactNode }) {
-  return (
-    <Link href={href} className="block px-4 py-2 text-sm text-medium-grey hover:bg-light-grey">
-      {children}
-    </Link>
-  )
-}
+};
