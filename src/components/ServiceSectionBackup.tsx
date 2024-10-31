@@ -125,7 +125,7 @@ export default function ImmersiveHeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Our Services & Solutions
+          InSite Tech Solutions
         </motion.h1>
         <motion.p 
           className="text-xl text-center mb-12"
@@ -133,7 +133,7 @@ export default function ImmersiveHeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Empowering your digital journey with comprehensive technology services
+          Empowering your digital journey with innovative technology solutions
         </motion.p>
 
         <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-2xl">

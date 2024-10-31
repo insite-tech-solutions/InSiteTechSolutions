@@ -21,7 +21,7 @@ export const menuItems: MenuItem[] = [
     name: 'Services',
     href: '/services',
     submenu: [
-      { name: 'Web & App Development', href: '/services/web-app-development' },
+      { name: 'Web & App Development', href: '/services/web-and-app-development' },
       { name: 'Custom Software Solutions', href: '/services/custom-software' },
       { name: 'SEO & Online Marketing', href: '/services/seo-marketing' },
       { name: 'Graphic Design & Branding', href: '/services/design-branding' },

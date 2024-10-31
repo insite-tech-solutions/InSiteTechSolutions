@@ -8,7 +8,7 @@ import Link from 'next/link'
 import HeroSection from '@/components/HomepageHero/HeroSection';
 import Header from '@/components/Header/Header';
 import ScrollAnimationSection from '@/components/ScrollAnimatedSection';
-import ImmersiveHeroSection from '@/components/ServicesSection';
+import ServiceSection from '@/components/ServicesSection';
 
 
 export default function Home() {
@@ -71,6 +71,7 @@ export default function Home() {
 
       <HeroSection />
       <ScrollAnimationSection />
+      <ServiceSection />
 
       {/* Hero Section */}
       <section className="bg-white h-screen flex flex-col items-center justify-center relative">
@@ -92,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ImmersiveHeroSection />
+      
 
       {/* Services Section */}
       <section className="py-20 bg-very-light-grey">

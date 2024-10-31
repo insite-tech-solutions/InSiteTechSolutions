@@ -44,6 +44,10 @@ const ScrollAnimationSection: React.FC = () => {
   const imageRefLeft = useRef<HTMLImageElement>(null);
   const imageRefRight = useRef<HTMLImageElement>(null);
 
+  // References to the circle element
+  const circleRef = useRef<HTMLDivElement>(null);
+
+
   // Reference to the section element
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -102,6 +106,17 @@ const ScrollAnimationSection: React.FC = () => {
         ease: 'power2.out',
       });
 
+      // Animate the circle to fade in
+      tl.to(
+        circleRef.current,
+        {
+          opacity: 1,
+          duration: 0.1, // Duration of the fade-in
+          ease: 'power2.out',
+        },
+        '+=0.1' // Start this animation 0.5 seconds after the images
+      );
+
       // Animate each pair of words
       text_right.forEach((_, index) => {
         const wordElRight = wordRefsRight.current[index];
@@ -155,7 +170,7 @@ const ScrollAnimationSection: React.FC = () => {
                   top: '50%',
                   right: 0,
                   transform: 'translateY(-50%)',
-                  fontSize: 'clamp(2rem, 5vw, 10rem)',
+                  fontSize: 'clamp(1.5rem, 5vw, 10rem)',
                 }}
               >
                 {word}
@@ -169,10 +184,12 @@ const ScrollAnimationSection: React.FC = () => {
               width={275}
               height={275}
               style={{
+                width: 'clamp(125px, 25vw, 275px)', // Responsive width
+                height: 'auto',                      // Maintain aspect ratio
                 objectFit: 'contain',
                 top: '50%',
                 right: 0, // Align to the right
-                transform: 'translateY(-45%)',
+                transform: 'translateY(-44%)',
               }}
               className="absolute z-5 drop-shadow-lg"
             />
@@ -191,7 +208,7 @@ const ScrollAnimationSection: React.FC = () => {
                   top: '50%',
                   left: 0,
                   transform: 'translateY(-50%)',
-                  fontSize: 'clamp(2rem, 5vw, 10rem)',
+                  fontSize: 'clamp(1.5rem, 5vw, 10rem)',
                 }}
               >
                 {word}
@@ -205,14 +222,32 @@ const ScrollAnimationSection: React.FC = () => {
               width={275}
               height={275}
               style={{
+                width: 'clamp(125px, 25vw, 275px)', // Responsive width
+                height: 'auto',                      // Maintain aspect ratio
                 objectFit: 'contain',
                 top: '50%',
                 left: 0, // Start at 0
-                transform: 'translateY(-45%)',
+                transform: 'translateY(-44%)',
               }}
               className="absolute drop-shadow-lg"
             />
           </div>
+            {/* White Circle to cover the dividing line between left and right sections */}
+          <div
+            ref={circleRef}
+            className="absolute z-50"
+            style={{
+              width: 'clamp(16px, 4.5vw, 225px)',
+              height: 'clamp(62px, 9vw, 225px)',
+              backgroundColor: 'white',
+              borderRadius: '50%',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-51%, -61%) rotate(41deg)',
+              filter: 'blur(clamp(3px, 0.85vw, 16px))',
+              opacity: 0, // Start invisible
+            }}
+          ></div>
         </div>
       </div>
     </div>
