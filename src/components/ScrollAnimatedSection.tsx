@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getHeaderHeight } from '@/lib/utils';
 
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -91,11 +92,12 @@ const ScrollAnimationSection: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top top',
+          start:'top top',
           end: `+=${(text_right.length + 1) * 95}%`, // Adjusted to include images
           scrub: true,
           pin: true,
           anticipatePin: 1,
+          markers: true,
         },
       });
 
@@ -170,7 +172,7 @@ const ScrollAnimationSection: React.FC = () => {
                   top: '50%',
                   right: 0,
                   transform: 'translateY(-50%)',
-                  fontSize: 'clamp(1.5rem, 5vw, 10rem)',
+                  fontSize: 'clamp(1.25rem, 5vw, 10rem)',
                 }}
               >
                 {word}
@@ -184,7 +186,7 @@ const ScrollAnimationSection: React.FC = () => {
               width={275}
               height={275}
               style={{
-                width: 'clamp(125px, 25vw, 275px)', // Responsive width
+                width: 'clamp(115px, 25vw, 275px)', // Responsive width
                 height: 'auto',                      // Maintain aspect ratio
                 objectFit: 'contain',
                 top: '50%',
@@ -208,7 +210,7 @@ const ScrollAnimationSection: React.FC = () => {
                   top: '50%',
                   left: 0,
                   transform: 'translateY(-50%)',
-                  fontSize: 'clamp(1.5rem, 5vw, 10rem)',
+                  fontSize: 'clamp(1.25rem, 5vw, 10rem)',
                 }}
               >
                 {word}
@@ -222,7 +224,7 @@ const ScrollAnimationSection: React.FC = () => {
               width={275}
               height={275}
               style={{
-                width: 'clamp(125px, 25vw, 275px)', // Responsive width
+                width: 'clamp(115px, 25vw, 275px)', // Responsive width
                 height: 'auto',                      // Maintain aspect ratio
                 objectFit: 'contain',
                 top: '50%',
@@ -237,8 +239,8 @@ const ScrollAnimationSection: React.FC = () => {
             ref={circleRef}
             className="absolute z-50"
             style={{
-              width: 'clamp(16px, 4.5vw, 225px)',
-              height: 'clamp(62px, 9vw, 225px)',
+              width: 'clamp(14px, 4.5vw, 225px)',
+              height: 'clamp(60px, 9vw, 225px)',
               backgroundColor: 'white',
               borderRadius: '50%',
               top: '50%',

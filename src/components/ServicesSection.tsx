@@ -117,7 +117,8 @@ export default function ImmersiveHeroSection() {
   const ActiveIcon = tabs.find(tab => tab.id === activeTab)?.icon || Laptop
 
   return (
-    <div className="bg-gradient-to-br from-blue-500 via-blue-800 to-blue-600 min-h-screen text-white overflow-hidden">
+    <div className="bg-white p-2">
+    <div className="rounded-xl bg-gradient-to-br from-blue-500 via-blue-800 to-blue-600 min-h-screen text-white shadow-xl overflow-hidden">
       <div className="container mx-auto px-4 py-12">
         <motion.h1 
           className="text-4xl md:text-6xl font-bold text-center mb-8"
@@ -254,6 +255,7 @@ export default function ImmersiveHeroSection() {
           </div>
         </motion.div>
       </div>
+    </div>
     </div>
   )
 }

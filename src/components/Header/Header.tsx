@@ -13,6 +13,8 @@ import SearchButton from './SearchButton'
  * Header component that combines all navigation elements.
  * It includes both desktop and mobile navigation, and handles responsive behavior.
  */
+
+
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
@@ -21,8 +23,27 @@ const Header: React.FC = () => {
     const handleScroll = (): void => {
       setIsScrolled(window.scrollY > 10)
     }
+
+    const updateNavbarHeight = () => {
+      setTimeout(() => {
+        const header = document.querySelector('header');
+        if (header) {
+          const navbarHeight = header.offsetHeight;
+          document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
+        }
+      }, 100);
+    };
+
+    // Add all event listeners
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', updateNavbarHeight)
+    updateNavbarHeight()
+
+    // Clean up all listeners
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', updateNavbarHeight)
+    }
   }, [])
 
   const toggleMobileMenu = (): void => {

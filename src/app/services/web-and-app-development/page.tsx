@@ -11,7 +11,7 @@ import ApplicationsSection from '@/components/WebAppServicePage/ApplicationsSect
 import ProcessSection from '@/components/WebAppServicePage/ProcessSection';
 import PriceSection from '@/components/WebAppServicePage/PriceSection';
 import InSiteAdvantageSection from '@/components/WebAppServicePage/InsiteAdvantageSection';
-import FAQSection from '@/components/WebAppServicePage/FaqSection';
+import FAQSection from '@/components/WebAppServicePage/FAQSection';
 
 const HeroSection: React.FC = () => {
   return (
