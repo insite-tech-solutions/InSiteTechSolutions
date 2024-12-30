@@ -8,10 +8,11 @@ import Header from '@/components/Header/Header';
 import ValuePropSection from '@/components/CustomSoftwareServicePage/ValuePropSection';
 import ServiceScopeSection from '@/components/CustomSoftwareServicePage/ServiceScopeSection';
 import ApplicationsSection from '@/components/CustomSoftwareServicePage/ApplicationsSection';
-//import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection';
+import ProcessOld from '@/components/CustomSoftwareServicePage/ProcessSection';
 import PriceSection from '@/components/CustomSoftwareServicePage/PriceSection';
 import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InsiteAdvantageSection';
 import FAQSection from '@/components/CustomSoftwareServicePage/FAQSection';
+import { TracingBeam } from '@/components/CustomSoftwareServicePage/ProcessSection/TracingBeam';
 
 
 import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
@@ -20,34 +21,40 @@ import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSectio
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative bg-gradient-to-tr from-blue-600 to-dark-blue text-white py-24 px-6 flex items-center justify-center">
-      <div className="max-w-5xl mx-auto text-center p-6">
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
-          Custom Software Solutions
-        </h1>
-        <p className="text-xl md:text-2xl mb-6 drop-shadow-lg">
-          Turn your technical challenges into opportunities with tailored software
-        </p>
-        <p className="max-w-2xl mx-auto mb-8 text-lg md:text-xl drop-shadow-lg">
-          From streamlining operations to solving complex computational problems, we create custom software that perfectly aligns with your business processes or research goals. Our solutions combine innovative technology with practical business sense to deliver measurable results.
-        </p>
-        <Link
-          href="#contact"
-          className="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
-        >
-          Start Your Project Today
-        </Link>
-        <div className="mt-12">
+    <section className="relative bg-gradient-to-tr from-blue-600 to-dark-blue text-white py-48 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        {/* Text Content */}
+        <div className="text-left">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+            Custom Software Solutions
+          </h1>
+          <p className="text-xl md:text-2xl mb-6 drop-shadow-lg">
+            Turn your technical challenges into opportunities with tailored software
+          </p>
+          <p className="mb-8 text-lg md:text-xl drop-shadow-lg">
+            From streamlining operations to solving complex computational problems, we create custom software that perfectly aligns with your business processes or research goals. Our solutions combine innovative technology with practical business sense to deliver measurable results.
+          </p>
+          <Link
+            href="#contact"
+            className="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
+          >
+            Start Your Project Today
+          </Link>
+        </div>
+
+        {/* Image */}
+        <div className="flex justify-center md:justify-end">
           <Image
-            src="/graphics/responsive-design.gif" // Ensure this path is correct
+            src="/CustomSoftwareGraphic.svg"
             alt="Responsive Design Animation"
             width={600}
             height={400}
-            className="mx-auto rounded-lg shadow-xl"
+            className="rounded-lg"
             priority
           />
         </div>
       </div>
+
       {/* Decorative Background Shapes */}
       <div className="absolute top-0 left-0 w-full h-full opacity-20">
         {/* Add any decorative SVGs or shapes here for visual enhancement */}
@@ -107,6 +114,8 @@ const CSSolPage = () => {
 
         {/* Applications Section */}
         <ApplicationsSection />
+
+        {/* <ProcessOld /> */}
 
         {/* Process Section */}
         <ProcessSection />

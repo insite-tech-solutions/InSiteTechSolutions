@@ -96,10 +96,10 @@ const ProcessSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h2 className="text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
               Our Approach
             </h2>
-            <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-xl text-gray-700 leading-relaxed">
               We follow a systematic, collaborative approach to ensure your
               custom software solution meets all requirements while maintaining
               flexibility for future growth:
@@ -112,8 +112,7 @@ const ProcessSection: React.FC = () => {
               <ProcessStep
                 key={index}
                 {...step}
-                isLast={index === processSteps.length - 1}
-                animationDelay={index * 4} // 4 seconds per step
+                animationDelay={index * 0.1} // 4 seconds per step
               />
             ))}
           </div>
@@ -123,7 +122,7 @@ const ProcessSection: React.FC = () => {
             className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 max-w-4xl mx-auto shadow-md border border-blue-600"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: processSteps.length * 4 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: processSteps.length * 0.1 }}
           >
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               We cannot provide exact timelines until we have a well-defined

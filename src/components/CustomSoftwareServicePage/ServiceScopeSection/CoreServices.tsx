@@ -1,23 +1,15 @@
 // CoreServices.tsx
 'use client'
 
-import { motion, useInView, useAnimation, Variants } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Code, Cog, Cpu, Shield, Layers, CheckCircle } from 'lucide-react'
 
-// Animation variants for individual service cards
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-}
 
+/**
+ * ServiceCard: A single translucent "white" card
+ */
 interface ServiceCardProps {
   icon: React.ElementType
   title: string
@@ -25,25 +17,14 @@ interface ServiceCardProps {
   benefits: string[]
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description, benefits }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const controls = useAnimation()
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible")
-    }
-  }, [isInView, controls])
-
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  icon: Icon,
+  title,
+  description,
+  benefits,
+}) => {
   return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={fadeInUp}
-      className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all group"
-    >
+    <div className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all group">
       <div className="flex items-center gap-4 mb-4">
         <div className="p-3 rounded-full bg-blue-100 group-hover:bg-blue-600 transition-colors">
           <Icon className="h-6 w-6 text-blue-600 group-hover:text-white" />
@@ -59,74 +40,162 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, descriptio
           </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   )
 }
 
+/**
+ * CoreServices: The pinned blue card with text on left, translucent cards on right.
+ * The pinned container unpins once the final translucent card has fully scrolled into view.
+ */
 const CoreServices: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null)  // Section wrapping everything
+  const pinnedRef = useRef<HTMLDivElement>(null)     // The single blue pinned card
+  const cardsRef = useRef<HTMLDivElement>(null)      // Container holding the translucent cards
+
+  // Sample service data
   const services = [
     {
       icon: Code,
-      title: "Bespoke Software & Desktop Application Development",
-      description: "We develop custom software that addresses your specific business or research objectives, whether that's automating workflows, integrating systems, or solving complex computational problems.",
+      title: 'Bespoke Software & Desktop Application Development',
+      description:
+        "We develop custom software that addresses your specific business or research objectives, whether that's automating workflows, integrating systems, or solving complex computational problems.",
       benefits: [
-        "Custom desktop and server applications",
-        "Industry-specific tools and utilities",
-        "Data processing and analytics platforms",
-        "Enterprise Resource Planning (ERP) systems"
-      ]
+        'Custom desktop and server applications',
+        'Industry-specific tools and utilities',
+        'Data processing and analytics platforms',
+        'Enterprise Resource Planning (ERP) systems',
+      ],
     },
     {
       icon: Cog,
-      title: "System Integration & API Development",
-      description: "Seamlessly connect disparate systems and ensure smooth data flow across your organization.",
+      title: 'System Integration & API Development',
+      description:
+        'Seamlessly connect disparate systems and ensure smooth data flow across your organization.',
       benefits: [
-        "Seamless connection of disparate systems",
-        "Custom API design and implementation",
-        "Legacy system integration",
-        "Cloud service integration"
-      ]
+        'Seamless connection of disparate systems',
+        'Custom API design and implementation',
+        'Legacy system integration',
+        'Cloud service integration',
+      ],
     },
     {
       icon: Cpu,
-      title: "Computational Science & Simulations",
-      description: "Harness the power of computational science to drive innovation and research.",
+      title: 'Computational Science & Simulations',
+      description:
+        'Harness the power of computational science to drive innovation and research.',
       benefits: [
-        "Scientific computing solutions",
-        "Process simulation and modeling",
-        "Data analysis and visualization tools",
-        "Research and development tools"
-      ]
+        'Scientific computing solutions',
+        'Process simulation and modeling',
+        'Data analysis and visualization tools',
+        'Research and development tools',
+      ],
     },
     {
       icon: Shield,
-      title: "Legacy Software Modernization",
-      description: "Upgrade and enhance your existing software to meet current standards and performance requirements.",
+      title: 'Legacy Software Modernization',
+      description:
+        'Upgrade and enhance your existing software to meet current standards and performance requirements.',
       benefits: [
-        "Codebase modernization",
-        "Platform migration",
-        "Performance optimization",
-        "Security updates and improvements"
-      ]
+        'Codebase modernization',
+        'Platform migration',
+        'Performance optimization',
+        'Security updates and improvements',
+      ],
     },
     {
       icon: Layers,
-      title: "Inverse Design & Process Optimization",
-      description: "Optimize your design processes and operations through advanced algorithms and machine learning.",
+      title: 'Inverse Design & Process Optimization',
+      description:
+        'Optimize your design processes and operations through advanced algorithms and machine learning.',
       benefits: [
-        "Automated design optimization",
-        "Machine learning integration",
-        "Performance modeling",
-        "Predictive analytics"
-      ]
-    }
+        'Automated design optimization',
+        'Machine learning integration',
+        'Performance modeling',
+        'Predictive analytics',
+      ],
+    },
   ]
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const ctx = gsap.context(() => {
+      // Get the height of the cards container
+      const cardsHeight = cardsRef.current?.getBoundingClientRect().height || 0;
+      // Get the height of the pinned container (blue card)
+      const pinnedHeight = pinnedRef.current?.getBoundingClientRect().height || 0;
+      
+      // Calculate the distance we need to scroll
+      // This will be the total height of cards minus the visible height of the pinned container
+      // Plus any padding you want at the bottom (matching the top padding)
+      const scrollDistance = cardsHeight - pinnedHeight + 48; // 48px for padding, adjust as needed
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: () => `top 128px`, // 104px is the navbar height, 24px is the padding
+          end: `+=${scrollDistance}`,
+          pin: pinnedRef.current,
+          pinSpacing: true,
+          scrub: true,
+          markers: true,
+        },
+      })
+
+      // Move the cards container upward by the calculated scroll distance
+      tl.to(cardsRef.current, { 
+        y: -scrollDistance,
+        ease: 'none'
+      })
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-      {services.map((service, index) => (
-        <ServiceCard key={index} {...service} />
-      ))}
+    <div className="container mx-auto bg-gray-50">
+      <section ref={containerRef} className="relative">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* SINGLE BLUE CARD (Pinned) */}
+          <div
+            ref={pinnedRef}
+            // We set a fixed height so it only shows ~1 translucent card by default
+            className="rounded-xl w-full mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600 
+            shadow-2xl overflow-hidden flex flex-col lg:flex-row"
+            style={{
+              // Subtract hardcoded navbar height and padding (top+bottom) from viewport height
+              height: `calc(100vh - 104px - 3rem)`,
+              minHeight: 0,
+              overflow: 'hidden'
+            }}
+          >
+            {/* LEFT SIDE: Title & Description */}
+            <div className="lg:w-1/2 lg:pr-6 flex flex-col justify-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-50 text-center lg:text-left">
+                Specialized Custom Software Development
+              </h2>
+              <p className="text-lg text-gray-50 leading-relaxed text-center lg:text-left">
+                We develop custom software that addresses your specific business
+                or research objectives, whether that&apos;s automating workflows,
+                integrating systems, or solving complex computational problems.
+              </p>
+            </div>
+
+            {/* RIGHT SIDE: Translucent Cards (Column) */}
+            <div className="lg:w-1/2">
+              <div ref={cardsRef} className="space-y-6">
+                {services.map((service, index) => (
+                  <ServiceCard key={index} {...service} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* SPACER to allow enough scroll for unpinning */}
+          {/* <div className="h-[100vh]" /> */}
+        </div>
+      </section>
     </div>
   )
 }

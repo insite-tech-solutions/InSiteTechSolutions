@@ -30,24 +30,8 @@ const fadeInUp: Variants = {
 const ServiceScopeSection: React.FC = () => {
   return (
     <section className="p-2 bg-gray-50">
-      <div className="container rounded-xl mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerChildren}
-        >
-          <motion.div variants={fadeInUp} className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-4xl font-bold mb-6 text-gray-50">
-              Specialized Custom Software Development
-            </h2>
-            <p className="text-lg text-gray-50 leading-relaxed">
-              We develop custom software that addresses your specific business or research objectives, whether that&apos;s automating workflows, integrating systems, or solving complex computational problems.
-            </p>
-          </motion.div>
-          <CoreServices />
-        </motion.div>
-      </div>
+
+      <CoreServices />
       <div className="p-6">
         <KeyBenefits />
         <motion.div
