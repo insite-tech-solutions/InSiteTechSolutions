@@ -13,6 +13,7 @@ import {
   ArrowRight,
   ExternalLink
 } from 'lucide-react'
+import BenefitsSection from '@/components/CustomSoftwareServicePage/InSiteAdvantageSection/BenefitsSection';
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -189,7 +190,7 @@ const InSiteAdvantageSection: React.FC = () => {
           
           <div>
           {/* Competitive Advantages and Client Benefits */}
-          <div className="max-w-3xl mx-auto">
+          {/* <div className="max-w-3xl mx-auto">
             <motion.h3 
               variants={fadeInUp}
               className="text-2xl font-semibold text-gray-800 text-center mb-8"
@@ -206,7 +207,7 @@ const InSiteAdvantageSection: React.FC = () => {
               ))}
             </motion.ul>
 
-            {/* Call-to-Action Button */}
+            
             <motion.div
               variants={fadeInUp}
               className="mt-12 text-center"
@@ -216,7 +217,9 @@ const InSiteAdvantageSection: React.FC = () => {
                 <ArrowRight className="h-5 w-5" />
               </button>
             </motion.div>
-          </div>
+          </div> */}
+
+          <BenefitsSection />
         
       </div>
     </section>

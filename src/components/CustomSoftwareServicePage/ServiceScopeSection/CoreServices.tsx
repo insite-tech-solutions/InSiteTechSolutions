@@ -129,7 +129,9 @@ const CoreServices: React.FC = () => {
       // Calculate the distance we need to scroll
       // This will be the total height of cards minus the visible height of the pinned container
       // Plus any padding you want at the bottom (matching the top padding)
-      const scrollDistance = cardsHeight - pinnedHeight + 48; // 48px for padding, adjust as needed
+      const scrollDistance = window.innerWidth < 768 // Tailwind's md breakpoint
+        ? cardsHeight - pinnedHeight + 48 + 236 // Increase scroll distance for mobile
+        : cardsHeight - pinnedHeight + 48; // Default for larger screens
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -172,10 +174,10 @@ const CoreServices: React.FC = () => {
           >
             {/* LEFT SIDE: Title & Description */}
             <div className="lg:w-1/2 lg:pr-6 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-50 text-center lg:text-left">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-50 text-center md:text-left">
                 Specialized Custom Software Development
               </h2>
-              <p className="text-lg text-gray-50 leading-relaxed text-center lg:text-left">
+              <p className="text-base md:text-lg text-gray-50 mb-3 leading-relaxed text-center md:text-left">
                 We develop custom software that addresses your specific business
                 or research objectives, whether that&apos;s automating workflows,
                 integrating systems, or solving complex computational problems.

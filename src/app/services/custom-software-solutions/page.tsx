@@ -5,15 +5,16 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header/Header';
+import { ArrowRight } from 'lucide-react';
 import ValuePropSection from '@/components/CustomSoftwareServicePage/ValuePropSection';
 import ServiceScopeSection from '@/components/CustomSoftwareServicePage/ServiceScopeSection';
 import ApplicationsSection from '@/components/CustomSoftwareServicePage/ApplicationsSection';
 import ProcessOld from '@/components/CustomSoftwareServicePage/ProcessSection';
 import PriceSection from '@/components/CustomSoftwareServicePage/PriceSection';
-import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InsiteAdvantageSection';
+import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InsiteAdvantageSection/InsiteAdvantageSection';
 import FAQSection from '@/components/CustomSoftwareServicePage/FAQSection';
 import { TracingBeam } from '@/components/CustomSoftwareServicePage/ProcessSection/TracingBeam';
-
+import PriceCalculator from '@/components/CustomSoftwareServicePage/PricingSection/PriceCalculator';
 
 import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
 
@@ -21,7 +22,7 @@ import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSectio
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative bg-gradient-to-tr from-blue-600 to-dark-blue text-white py-48 px-6">
+    <section className="relative bg-gradient-to-tr from-blue-600 to-dark-blue text-white mt-[104px] px-8 py-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Text Content */}
         <div className="text-left">
@@ -35,10 +36,11 @@ const HeroSection: React.FC = () => {
             From streamlining operations to solving complex computational problems, we create custom software that perfectly aligns with your business processes or research goals. Our solutions combine innovative technology with practical business sense to deliver measurable results.
           </p>
           <Link
-            href="#contact"
-            className="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
+            href="/contact"
+            className="group inline-flex items-center bg-white text-blue-600 font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-xl transition duration-300"
           >
-            Start Your Project Today
+            <span>Start Your Project Today</span>
+            <ArrowRight className="ml-2 h-4 w-4 transform transition-all duration-300 ease-in-out group-hover:translate-x-2" />
           </Link>
         </div>
 
@@ -56,9 +58,9 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Decorative Background Shapes */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-20">
+      {/* <div className="absolute top-0 left-0 w-full h-full opacity-20"> */}
         {/* Add any decorative SVGs or shapes here for visual enhancement */}
-      </div>
+      {/* </div> */}
     </section>
   );
 };
@@ -81,9 +83,9 @@ const FinalCTASection: React.FC = () => {
         </Link>
       </div>
       {/* Decorative Background Shapes */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-20">
+      {/* <div className="absolute top-0 left-0 w-full h-full opacity-20"> */}
         {/* Add any decorative SVGs or shapes here for visual enhancement */}
-      </div>
+      {/* </div> */}
     </section>
   );
 };
@@ -91,7 +93,7 @@ const FinalCTASection: React.FC = () => {
 
 const CSSolPage = () => {
     return (
-        <div>
+      <div className='bg-gray-50'>
         <Head>
           <title>Custom Software Solutions | InSite Tech</title>
           <meta
@@ -100,7 +102,7 @@ const CSSolPage = () => {
           />
         </Head>
   
-      <Header />
+        <Header />
 
 
         {/* Hero Section */}
@@ -125,6 +127,13 @@ const CSSolPage = () => {
 
         {/* InSite Advantage Section */}
         <InSiteAdvantageSection />
+
+        {/* Price Calculator Section */}
+        <PriceCalculator />
+
+
+
+
 
         {/* FAQ Section */}
         <FAQSection />

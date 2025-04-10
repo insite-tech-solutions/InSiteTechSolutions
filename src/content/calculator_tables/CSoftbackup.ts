@@ -1,0 +1,268 @@
+// content/calculator_tables/customSoftwareSolutions.ts
+
+//import { CostRange, Multiplier } from './types';
+
+export const customSoftwareSolutionsTable = {
+    name: "Custom Software Solutions",
+    
+    // 1. Project Scope & Size
+    projectScope: {
+      projectType: {
+        title: "Project Type",
+        options: {
+          notebook: { 
+            name: "Notebook", 
+            cost: { min: 500, max: 1500 } 
+          },
+          script: { 
+            name: "Script", 
+            cost: { min: 1000, max: 3000 } 
+          },
+          packageApi: { 
+            name: "Package/API", 
+            cost: { min: 3000, max: 7000 } 
+          },
+          fullApplication: { 
+            name: "Full Application", 
+            cost: { min: 7000, max: 20000 } 
+          }
+        }
+      },
+      integrationsRequired: {
+        title: "Integrations Required",
+        options: {
+          standalone: { 
+            name: "Standalone (No Integrations)", 
+            multiplier: { value: 1.0 },
+            description: "Base"
+          },
+          thirdParty: { 
+            name: "Third-Party Services", 
+            multiplier: { value: 1.25 } 
+          },
+          legacySystems: { 
+            name: "Legacy Systems", 
+            multiplier: { value: 1.5 } 
+          }
+        },
+        description: "Integration needs can significantly influence overall complexity and cost."
+      }
+    },
+    
+    // 2. Platform & Deployment
+    platformDeployment: {
+      platformSpecifics: {
+        title: "Platform Specifics",
+        options: {
+          windows: { 
+            name: "Windows", 
+            multiplier: { value: 1.0 } 
+          },
+          mac: { 
+            name: "Mac", 
+            multiplier: { value: 1.0 } 
+          },
+          linux: { 
+            name: "Linux", 
+            multiplier: { value: 1.1 } 
+          },
+          crossPlatform: { 
+            name: "Cross-Platform", 
+            multiplier: { value: 1.5 } 
+          },
+          other: { 
+            name: "Other", 
+            multiplier: { value: 1.5 } 
+          }
+        },
+        description: "Cross-platform solutions require additional compatibility and testing."
+      },
+      computingEnvironment: {
+        title: "Computing Environment",
+        options: {
+          local: { 
+            name: "Local", 
+            cost: { min: 0, max: 0 },
+            description: "Base"
+          },
+          cloudBased: { 
+            name: "Cloud-Based", 
+            cost: { min: 1000, max: 3000 },
+            description: "Plus potential hosting costs"
+          },
+          hybrid: { 
+            name: "Hybrid (Local & Cloud)", 
+            cost: { min: 3000, max: 6000 },
+            description: "Plus potential hosting costs"
+          }
+        },
+        description: "Deployment choices can add complexity and influence ongoing costs."
+      }
+    },
+    
+    // 3. Architecture & Development Approach
+    developmentApproach: {
+      developmentFocus: {
+        title: "Development Focus",
+        options: {
+          backend: { 
+            name: "Backend (Computation/Processing)", 
+            multiplier: { value: 1.0 },
+            description: "Base"
+          },
+          frontend: { 
+            name: "Frontend (User Interface)", 
+            multiplier: { value: 1.0 },
+            description: "Base"
+          },
+          fullStack: { 
+            name: "Full Stack (Both)", 
+            multiplier: { value: 2.5 } 
+          }
+        },
+        description: "Full stack projects combine the complexities from both development ends."
+      },
+      programmingLanguages: {
+        title: "Programming Languages/Frameworks",
+        options: {
+          flexible: { 
+            name: "Flexible / No Preference", 
+            multiplier: { value: 1.0 },
+            description: "Base"
+          },
+          specified: { 
+            name: "Specified Language (e.g., Python, JSX, etc.)", 
+            multiplier: { value: 1.5 }, // Using middle value of 1.1-2.0 range
+            description: "Choosing a specific language or framework may require additional expertise and can affect pricing."
+          }
+        }
+      }
+    },
+    
+    // 4. Features & Integrations
+    features: {
+      title: "Features & Integrations",
+      description: "These technical features may require custom code and extensive testing, increasing development time and costs.",
+      options: {
+        iotNetworking: { 
+          name: "Advanced IoT or Networking Integration", 
+          cost: { min: 1000, max: 3000 } 
+        },
+        highPerformance: { 
+          name: "High Performance/Optimization Needs", 
+          cost: { min: 1000, max: 4000 } 
+        },
+        dataAnalytics: { 
+          name: "Advanced Reporting & Data Analytics", 
+          cost: { min: 1000, max: 3500 } 
+        },
+        advancedSecurity: { 
+          name: "Advanced Security (e.g., encryption, 2FA)", 
+          cost: { min: 1000, max: 3000 } 
+        }
+      }
+    },
+    
+    // 5. Documentation & Support
+    documentationSupport: {
+      documentation: {
+        title: "Documentation",
+        options: {
+          minimal: { 
+            name: "Minimal Documentation (project summary, code comments, etc.)", 
+            cost: { min: 0, max: 0 },
+            description: "Base"
+          },
+          apiDocs: { 
+            name: "API Documentation", 
+            cost: { min: 1000, max: 3000 } 
+          },
+          userManuals: { 
+            name: "User Manuals / Developer Training", 
+            cost: { min: 3000, max: 6000 } 
+          }
+        }
+      },
+      ongoingMaintenance: {
+        title: "Ongoing Maintenance",
+        description: "Extra work beyond retainer is billed hourly. Expedited services and additional requests may incur extra fees.",
+        options: {
+          none: { 
+            name: "None", 
+            cost: { min: 0, max: 0 } 
+          },
+          basic: { 
+            name: "Basic Maintenance (updates, troubleshooting)", 
+            cost: { min: 150, max: 500 },
+            description: "Up to 10 hours dedicated support per month"
+          },
+          extended: { 
+            name: "Extended Support (continuous updates, technical support)", 
+            cost: { min: 400, max: 900 },
+            description: "Up to 20 hours dedicated support per month"
+          },
+          dedicated: { 
+            name: "Dedicated Developer/Analyst Support", 
+            cost: { min: 1000, max: 3000 },
+            description: "Up to 40 hours dedicated support per month"
+          }
+        }
+      }
+    },
+    
+    // 6. Optional Add-Ons
+    addOns: {
+      title: "Optional Add-Ons",
+      options: {
+        migrations: { 
+          name: "Migrations & Legacy Software Modernization", 
+          cost: { min: 500, max: 3000 },
+          description: "Migrations and Modernization refer to moving content from an old platform to a new one, or updating old codebases to modern languages/frameworks"
+        },
+        additionalRevisions: { 
+          name: "Additional Revisions / Development Iterations", 
+          cost: { min: 300, max: 1000 },
+          description: "Basic check-ins and revisions are complimentary, extra revisions increase cost and development time."
+        }
+      }
+    },
+    
+    // 7. Timeline & Delivery
+    timeline: {
+      title: "Project Timeline",
+      description: "Timeline adjustments affect resource allocation and overall project cost.",
+      options: {
+        noRush: { 
+          name: "No-Rush Development", 
+          multiplier: { value: 0.9 } 
+        },
+        standard: { 
+          name: "Standard Development Timeline", 
+          multiplier: { value: 1.0 } 
+        },
+        expedited: { 
+          name: "Expedited/Rush Development", 
+          multiplier: { value: 1.5 } 
+        }
+      }
+    },
+    
+    // Extra Services & Customizations
+    extraServices: {
+      title: "Extra Services & Customizations",
+      description: "Available as separate services that can be bundled custom software development.",
+      options: [
+        "AI & Automation",
+        "Data Analysis",
+        "Consulting and training"
+      ]
+    },
+    
+    // Special notes
+    specialNotes: [
+      "Discounts available for Open Source (OSS) projects.",
+      "Proprietary development and NDAs may incur additional costs."
+    ]
+  };
+  
+  export default customSoftwareSolutionsTable;

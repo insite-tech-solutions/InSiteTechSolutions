@@ -36,13 +36,13 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
     className={`
       relative
       bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg 
-      rounded-xl shadow-lg p-6 
-      transition-all duration-800 ease-in-out
-      w-80 h-72 
+      rounded-xl shadow-md p-6 
+      transition-all duration-500 ease-in-out
+      w-80 h-[17rem] 
       ${
         isActive
-          ? 'border-2 border-blue-600 z-10'
-          : 'border-2 filter blur-[1.65px] opacity-97'
+          ? 'shadow-lg border-2 border-blue-600 z-10'
+          : 'shadow-md border-2 border-transparent filter blur-[1.5px] opacity-97'
       }
     `}
   >

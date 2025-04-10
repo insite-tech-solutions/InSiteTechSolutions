@@ -1,0 +1,715 @@
+'use client';
+
+import React, { useState, useMemo, useEffect } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Info, ExternalLink } from 'lucide-react';
+
+
+
+// Import service tables
+import webAppDevelopmentTable from '@/content/calculator_tables/webAppDevelopment';
+import customSoftwareSolutionsTable from '@/content/calculator_tables/customSoftwareSolutions';
+import seoOnlineMarketingTable from '@/content/calculator_tables/seoOnlineMarketing';
+import graphicDesignBrandingTable from '@/content/calculator_tables/graphicDesignBranding';
+import dataAnalysisTable from '@/content/calculator_tables/dataAnalysis';
+import aiAutomationTable from '@/content/calculator_tables/aiAutomation';
+import consultingTrainingTable from '@/content/calculator_tables/consultingTraining';
+
+// Type definitions
+interface CostRange {
+  min: number;
+  max: number;
+}
+
+interface Multiplier {
+  value: number;
+  description?: string;
+}
+
+// Renamed from Option to avoid conflict and be more specific
+interface CalculatorOption {
+  name: string;
+  cost?: CostRange;
+  multiplier?: Multiplier;
+  description?: string;
+}
+
+// Type for options in the 'extraServices' section or similar informational lists
+interface ExtraServiceOption {
+  name: string;
+  url?: string;
+}
+
+// Type for a generic section within a service table
+// It can have options structured as a Record or an array (for informational lists)
+interface ServiceSection {
+  title: string;
+  description?: string;
+  options: Record<string, CalculatorOption> | (string | ExtraServiceOption)[];
+}
+
+// Type for the metadata within a service table
+interface ServiceMetadata {
+  categories: Record<string, string[]>;
+  renderTypes: Record<string, string | Record<string, string>>; // Can be string or nested object
+  recurringCosts?: Record<string, string>;
+}
+
+// The main interface for a service table object being imported
+interface ServiceTable {
+  name: string;
+  metadata: ServiceMetadata;
+  specialNotes?: string[];
+  // Define sections dynamically based on string keys.
+  // The value can be a ServiceSection, or other top-level properties like name, metadata, specialNotes.
+  [key: string]: string | ServiceMetadata | string[] | ServiceSection | undefined;
+}
+
+// Type for the map holding all service tables
+type ServiceTablesMap = Record<string, ServiceTable>;
+
+interface CalculatorState {
+  service: string;
+  selectedOptions: Record<string, string>;  // Values are option keys (strings)
+  selectedMultiOptions: Record<string, string[]>;  // For checkboxes
+}
+
+interface RecurringCostItem {
+  name: string;
+  period: string;
+  min: number;
+  max: number;
+}
+
+// Type for a section entry tuple used when iterating over organized sections
+// The value can be a ServiceSection or the specific structure for specialNotes/extraServices
+type SectionEntryValue = ServiceSection | { description?: string; options?: (string | ExtraServiceOption)[] } | string[];
+type SectionEntry = [string, SectionEntryValue];
+
+// Type for the categorized sections object
+type CategorizedSections = Record<string, SectionEntry[]>;
+
+const PriceCalculator: React.FC = () => {
+  const [calculatorState, setCalculatorState] = useState<CalculatorState>({
+    service: 'customSoftwareSolutions', // Default to our updated table
+    selectedOptions: {},
+    selectedMultiOptions: {}
+  });
+
+  // Get the selected service table
+  const serviceTable = useMemo(() => {
+    const tables: ServiceTablesMap = {
+      webAppDevelopment: webAppDevelopmentTable,
+      customSoftwareSolutions: customSoftwareSolutionsTable,
+      seoOnlineMarketing: seoOnlineMarketingTable,
+      graphicDesignBranding: graphicDesignBrandingTable,
+      dataAnalysis: dataAnalysisTable,
+      aiAutomation: aiAutomationTable,
+      consultingTraining: consultingTrainingTable
+    };
+    return tables[calculatorState.service];
+  }, [calculatorState.service]);
+
+  // Set default selections when service changes
+  useEffect(() => {
+    if (!serviceTable) return;
+    
+    const defaultOptions: Record<string, string> = {};
+    const defaultMultiOptions: Record<string, string[]> = {};
+    
+    // For tables with metadata
+    if (serviceTable.metadata) {
+      // Initialize multi-select sections as empty arrays
+      Object.entries(serviceTable.metadata.renderTypes).forEach(([sectionKey, renderType]) => {
+        if (renderType === 'multi-checkbox') {
+          defaultMultiOptions[sectionKey] = [];
+        }
+      });
+    }
+    
+    // Process each section to find default options
+    Object.entries(serviceTable).forEach(([sectionKey, sectionValue]) => {
+      // Skip non-object sections or special sections
+      if (typeof sectionValue !== 'object' || 
+          sectionValue === null || // Add null check for safety
+          Array.isArray(sectionValue) || // Skip arrays like specialNotes
+          sectionKey === 'name' || 
+          sectionKey === 'metadata') {
+        return;
+      }
+
+      // Assert sectionValue as a potential ServiceSection to access properties
+      const section = sectionValue as Partial<ServiceSection>; 
+      // Get render type if available
+      const renderType = serviceTable.metadata?.renderTypes?.[sectionKey] || null;
+      
+      // Handle sections with options property (structured as Record<string, CalculatorOption>)
+      if (section.options && typeof section.options === 'object' && !Array.isArray(section.options)) {
+        // For dropdown sections
+        if (renderType === 'dropdown') {
+          const options = Object.entries(section.options as Record<string, CalculatorOption>);
+          if (options.length > 0) {
+            // Find base or standard option
+            const defaultOption = options.find(([key, opt]: [string, CalculatorOption]) => 
+              key === 'standard' || 
+              key === 'none' || 
+              (opt.multiplier && opt.multiplier.value === 1.0) ||
+              (opt.cost && opt.cost.min === 0 && opt.cost.max === 0) ||
+              (opt.description && opt.description?.includes('Base'))
+            );
+            
+            if (defaultOption) {
+              defaultOptions[sectionKey] = defaultOption[0];
+            } else {
+              // Default to first option if no base found
+              defaultOptions[sectionKey] = options[0][0];
+            }
+          }
+        }
+      }
+    });
+    
+    // Set default selections
+    setCalculatorState(prev => ({
+      ...prev,
+      selectedOptions: defaultOptions,
+      selectedMultiOptions: defaultMultiOptions
+    }));
+  }, [serviceTable]);
+
+  const handleServiceChange = (value: string) => {
+    // Reset the state when changing services
+    setCalculatorState({
+      service: value,
+      selectedOptions: {},
+      selectedMultiOptions: {}
+    });
+  };
+
+  // Handler for dropdown selections
+  const handleOptionChange = (section: string, value: string) => {
+    setCalculatorState(prev => ({
+      ...prev,
+      selectedOptions: {
+        ...prev.selectedOptions,
+        [section]: value
+      }
+    }));
+  };
+
+  // Handler for multi-select checkboxes
+  const handleMultiOptionToggle = (section: string, key: string) => {
+    setCalculatorState(prev => {
+      const currentSelections = prev.selectedMultiOptions[section] || [];
+      const isSelected = currentSelections.includes(key);
+      
+      return {
+        ...prev,
+        selectedMultiOptions: {
+          ...prev.selectedMultiOptions,
+          [section]: isSelected
+            ? currentSelections.filter(k => k !== key)
+            : [...currentSelections, key]
+        }
+      };
+    });
+  };
+
+  // Calculate the one-time and recurring costs
+  const calculateCosts = () => {
+    let oneTimeMin = 0;
+    let oneTimeMax = 0;
+    let multiplier = 1.0;
+    const recurringCosts: RecurringCostItem[] = [];
+    
+    // Process all selected options (dropdowns)
+    Object.entries(calculatorState.selectedOptions).forEach(([sectionKey, value]) => {
+      const isRecurring = serviceTable.metadata?.recurringCosts?.[sectionKey];
+      const section = serviceTable[sectionKey] as ServiceSection | undefined; // Assert type
+      
+      if (section && section.options && typeof section.options === 'object' && !Array.isArray(section.options) && section.options[value]) {
+        const option = section.options[value] as CalculatorOption; // Assert type
+        
+        if (option.cost) {
+          if (isRecurring) {
+            recurringCosts.push({
+              name: option.name,
+              period: isRecurring,
+              min: option.cost.min,
+              max: option.cost.max
+            });
+          } else {
+            oneTimeMin += option.cost.min;
+            oneTimeMax += option.cost.max;
+          }
+        }
+        
+        if (option.multiplier) {
+          multiplier *= option.multiplier.value;
+        }
+      }
+    });
+    
+    // Process multi-select options (features, addOns)
+    Object.entries(calculatorState.selectedMultiOptions).forEach(([sectionKey, selectedKeys]) => {
+      const isRecurring = serviceTable.metadata?.recurringCosts?.[sectionKey];
+      const section = serviceTable[sectionKey] as ServiceSection | undefined; // Assert type
+      
+      if (section && section.options && typeof section.options === 'object' && !Array.isArray(section.options)) {
+        const options = section.options as Record<string, CalculatorOption>;
+        selectedKeys.forEach(key => {
+          if (options[key]) {
+             const option = options[key]; // Use the 'options' variable here
+            if (option.cost) {
+                if (isRecurring) {
+                  recurringCosts.push({
+                    name: option.name,
+                    period: isRecurring,
+                    min: option.cost.min,
+                    max: option.cost.max
+                  });
+                } else {
+                  oneTimeMin += option.cost.min;
+                  oneTimeMax += option.cost.max;
+                }
+            }
+          }
+        });
+      }
+    });
+    
+    // If no base price is set, try to find a default from projectType
+    const projectTypeSection = serviceTable.projectType as ServiceSection | undefined;
+    if (oneTimeMin === 0 && oneTimeMax === 0 && projectTypeSection?.options && typeof projectTypeSection.options === 'object' && !Array.isArray(projectTypeSection.options)) {
+      // Check the first option with cost
+      const firstOption = Object.values(projectTypeSection.options)[0] as CalculatorOption | undefined;
+      if (firstOption && firstOption.cost) {
+        oneTimeMin = firstOption.cost.min;
+        oneTimeMax = firstOption.cost.max;
+      }
+    }
+    
+    // Apply multiplier to one-time costs
+    const finalOneTimeMin = Math.round(oneTimeMin * multiplier);
+    const finalOneTimeMax = Math.round(oneTimeMax * multiplier);
+    
+    return {
+      oneTime: { min: finalOneTimeMin, max: finalOneTimeMax },
+      recurring: recurringCosts,
+      multiplier
+    };
+  };
+
+  const costs = calculateCosts();
+
+  // Get all sections and organize them by category
+  const getOrganizedSections = () => {
+    if (!serviceTable) return {};
+    
+    // If there's metadata with categories, use it
+    if (serviceTable.metadata && serviceTable.metadata.categories) {
+      const categories: CategorizedSections = {};
+      
+      // Initialize categories
+      Object.keys(serviceTable.metadata.categories).forEach(category => {
+        categories[category] = [];
+      });
+      
+      // Populate categories with sections
+      Object.entries(serviceTable.metadata.categories).forEach(([category, sectionKeys]) => {
+        // Ensure sectionKeys is treated as an array of strings
+        (sectionKeys as string[]).forEach((sectionKey: string) => { 
+          const sectionValue = serviceTable[sectionKey];
+          if (sectionValue) {
+            // Ensure the pushed value matches the SectionEntryValue type
+            categories[category].push([sectionKey, sectionValue as SectionEntryValue]); 
+          }
+        });
+      });
+      
+      return categories;
+    }
+    
+    // Fallback for tables without metadata
+    const defaultCategories: CategorizedSections = {
+      'Project Details': [],
+      'Features': [],
+      'Support & Timeline': [],
+      'Additional Options': []
+    };
+    
+    Object.entries(serviceTable)
+      .filter(([key, value]) => 
+        typeof value === 'object' && 
+        key !== 'name' && 
+        key !== 'metadata' &&
+        key !== 'specialNotes' && 
+        key !== 'extraServices'
+      )
+      .forEach(([key, value]) => {
+        const sectionEntry: SectionEntry = [key, value as SectionEntryValue]; // Create typed entry
+        if (key === 'projectType' || key === 'integrationsRequired' || key === 'platformSpecifics' || key === 'computingEnvironment' || key === 'developmentFocus' || key === 'programmingLanguages') {
+          defaultCategories['Project Details'].push(sectionEntry);
+        }
+        else if (key === 'features') {
+          defaultCategories['Features'].push(sectionEntry);
+        }
+        else if (key === 'timeline' || key === 'documentation' || key === 'ongoingMaintenance') {
+          defaultCategories['Support & Timeline'].push(sectionEntry);
+        }
+        else {
+          defaultCategories['Additional Options'].push(sectionEntry);
+        }
+      });
+    
+    return defaultCategories;
+  };
+
+  // Determine how to render a section based on metadata or structure
+  const getSectionRenderType = (sectionKey: string, subsectionKey?: string): string => {
+    // If we have metadata with render types
+    if (serviceTable.metadata && serviceTable.metadata.renderTypes) {
+      const renderType = serviceTable.metadata.renderTypes[sectionKey];
+      
+      // If it's a nested structure with subsection render types
+      if (subsectionKey && typeof renderType === 'object') {
+        return renderType[subsectionKey] || 'dropdown';
+      }
+      
+      // Otherwise use the section render type
+      if (typeof renderType === 'string') {
+        return renderType;
+      }
+    }
+    
+    // Fallback based on section key or structure
+    if (sectionKey === 'features' || sectionKey === 'addOns') {
+      return 'multi-checkbox';
+    }
+    
+    if (sectionKey === 'timeline' || sectionKey === 'maintenance') {
+      return 'dropdown';
+    }
+    
+    if (sectionKey === 'specialNotes' || sectionKey === 'extraServices') {
+      return 'informational';
+    }
+    
+    // Default to dropdown for structured sections
+    return 'dropdown';
+  };
+
+  // Helper function to render a dropdown
+  const renderDropdown = (sectionKey: string, section: ServiceSection | undefined) => {
+    // Ensure section and its options are valid and structured as expected for dropdowns
+    if (!section || !section.options || typeof section.options !== 'object' || Array.isArray(section.options)) return null;
+    
+    const options = section.options as Record<string, CalculatorOption>; // Cast for safety
+    const selectedKey = calculatorState.selectedOptions[sectionKey] || '';
+    
+    return (
+      <div className="space-y-2 mb-6">
+        <div className="flex items-center space-x-2">
+          <Label className="text-gray-700 font-medium">{section.title}</Label>
+          {section.description && (
+            <TooltipProvider>
+              <Tooltip delayDuration={100}>
+                <TooltipTrigger>
+                  <Info className="h-4 w-4 text-gray-500" />
+                </TooltipTrigger>
+                <TooltipContent className="bg-white text-gray-800 border border-gray-200 p-2 rounded shadow-md">
+                  <p>{section.description}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
+        
+        <Select 
+          value={selectedKey}
+          onValueChange={(value) => handleOptionChange(sectionKey, value)}
+        >
+          <SelectTrigger className="w-full bg-white border-slate-200 text-slate-900">
+            <SelectValue placeholder="Select option" />
+          </SelectTrigger>
+          <SelectContent className="bg-white border border-slate-200">
+            {Object.entries(options).map(([key, option]: [string, CalculatorOption]) => (
+              <SelectItem key={key} value={key} className="text-slate-900">
+                {option.name}
+                {option.cost && ` ($${option.cost.min.toLocaleString()}–$${option.cost.max.toLocaleString()})`}
+                {option.multiplier && ` (${option.multiplier.value}x)`}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    );
+  };
+
+  // Helper function to render multi-select checkboxes
+  const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
+    // Ensure section and its options are valid and structured as expected for checkboxes
+     if (!section || !section.options || typeof section.options !== 'object' || Array.isArray(section.options)) return null;
+
+    const options = section.options as Record<string, CalculatorOption>; // Cast for safety
+    const selectedKeys = calculatorState.selectedMultiOptions[sectionKey] || [];
+    
+    return (
+      <div className="space-y-3 mb-6">
+        <div className="flex items-center space-x-2">
+          <Label className="text-gray-700 font-medium">{section.title}</Label>
+          {section.description && (
+            <TooltipProvider>
+              <Tooltip delayDuration={100}>
+                <TooltipTrigger>
+                  <Info className="h-4 w-4 text-gray-500" />
+                </TooltipTrigger>
+                <TooltipContent className="bg-white text-gray-800 border border-gray-200 p-2 rounded shadow-md max-w-xs">
+                  <p className="whitespace-normal">{section.description}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+          {Object.entries(options).map(([key, option]: [string, CalculatorOption]) => (
+            <div 
+              key={key} 
+              className="flex items-start space-x-2 border rounded p-3 bg-white hover:bg-slate-50 transition-colors cursor-pointer"
+              onClick={(e) => {
+                // Prevent double-triggering if clicking the checkbox directly
+                if (!(e.target as HTMLElement).closest('button')) {
+                  handleMultiOptionToggle(sectionKey, key);
+                }
+              }}
+            >
+              <Checkbox 
+                id={`${sectionKey}_${key}`} 
+                checked={selectedKeys.includes(key)}
+                onCheckedChange={() => handleMultiOptionToggle(sectionKey, key)}
+                className="mt-1 h-5 w-5 border-slate-300 text-blue-600"
+              />
+              <div className="flex-1">
+                <Label htmlFor={`${sectionKey}_${key}`} className="font-medium text-gray-700 cursor-pointer">
+                  {option.name}
+                </Label>
+                
+                {option.cost && (
+                  <div className="text-sm text-gray-600 mt-1">
+                    ${option.cost.min.toLocaleString()}–${option.cost.max.toLocaleString()}
+                  </div>
+                )}
+                
+                {option.description && (
+                  <p className="text-xs text-gray-500 mt-1">{option.description}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+// Helper function to render informational sections (like extraServices or specialNotes)
+const renderInformational = (sectionKey: string, sectionData: SectionEntryValue) => {
+  // Type guard to check if it's the specialNotes string array
+  if (Array.isArray(sectionData) && sectionData.every(item => typeof item === 'string')) {
+      return (
+          <div className="mb-6">
+               <p className="text-sm text-gray-600">
+                 <span className="text-md font-semibold text-gray-700">Note:</span> {(sectionData as string[]).join(' ')}
+               </p>
+          </div>
+      )
+  }
+
+  // Handle object structures (like extraServices or sections rendered as informational)
+  if (typeof sectionData === 'object' && sectionData !== null && !Array.isArray(sectionData)) {
+      const section = sectionData as { title?: string; description?: string; options?: (string | ExtraServiceOption)[] }; // More specific type assertion
+
+      return (
+        <div className="mb-6">
+          {section.title && <h4 className="text-md font-semibold text-gray-700 mb-2">{section.title}</h4>}
+          {section.description && <p className="text-sm text-gray-500 mb-3">{section.description}</p>}
+          
+          {section.options && Array.isArray(section.options) ? (
+            <div className="space-y-3">
+              {section.options.map((option: string | ExtraServiceOption, index: number) => {
+                // Check if option is an object with url property
+                if (typeof option === 'object' && option.url) {
+                  return (
+                    <a 
+                      key={index} 
+                      href={option.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-2"
+                    >
+                      {option.name}
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  );
+                }
+                
+                // Handle string options or simple name objects
+                return <p key={index} className="text-gray-700">{typeof option === 'string' ? option : option.name}</p>;
+              })}
+            </div>
+          ) : null}
+        </div>
+      );
+  }
+
+  return null; // Return null if sectionData format is unexpected
+};
+
+  // Render a section based on its type
+  const renderSection = (sectionKey: string, section: SectionEntryValue) => {
+    // Skip non-renderable types based on our logic
+    if (typeof section !== 'object' || section === null) {
+      return null;
+    }
+    
+    // Handle specialNotes array case directly if needed here, or rely on renderInformational
+    if (sectionKey === 'specialNotes' && Array.isArray(section)) {
+         return renderInformational(sectionKey, section);
+    }
+
+    // For object-based sections (ServiceSection or extraServices-like)
+    if (!Array.isArray(section)) {
+        const renderType = getSectionRenderType(sectionKey);
+        
+        // Render based on determined type
+        switch (renderType) {
+          case 'dropdown':
+            // Pass section directly, renderDropdown will handle type check
+            return renderDropdown(sectionKey, section as ServiceSection); 
+          case 'multi-checkbox':
+             // Pass section directly, renderMultiCheckbox will handle type check
+            return renderMultiCheckbox(sectionKey, section as ServiceSection);
+          case 'informational':
+             // Pass section directly, renderInformational will handle type check
+            return renderInformational(sectionKey, section); 
+          default:
+            console.warn(`Unknown render type "${renderType}" for section "${sectionKey}"`);
+            return null;
+        }
+    }
+    
+    return null; // Fallback if type is not handled
+  };
+
+  const organizedSections = getOrganizedSections();
+
+  return (
+    <Card className="w-full max-w-4xl mx-auto shadow-lg bg-white">
+      <CardHeader className="bg-slate-100 border-b">
+        <CardTitle className="text-2xl text-slate-900">Service Price Calculator</CardTitle>
+      </CardHeader>
+      <CardContent className="p-6 bg-white">
+        {/* Service Selection */}
+        <div className="mb-6">
+          <Label className="text-gray-700 font-medium mb-2 block">Select Service</Label>
+          <Select value={calculatorState.service} onValueChange={handleServiceChange}>
+            <SelectTrigger className="w-full bg-white border-slate-200 text-slate-900">
+              <SelectValue placeholder="Select a service" />
+            </SelectTrigger>
+            <SelectContent className="bg-white border border-slate-200">
+              <SelectItem value="webAppDevelopment" className="text-slate-900">Web & App Development</SelectItem>
+              <SelectItem value="customSoftwareSolutions" className="text-slate-900">Custom Software Solutions</SelectItem>
+              <SelectItem value="seoOnlineMarketing" className="text-slate-900">SEO & Online Marketing</SelectItem>
+              <SelectItem value="graphicDesignBranding" className="text-slate-900">Graphic Design & Branding</SelectItem>
+              <SelectItem value="dataAnalysis" className="text-slate-900">Data Analysis</SelectItem>
+              <SelectItem value="aiAutomation" className="text-slate-900">AI & Automation</SelectItem>
+              <SelectItem value="consultingTraining" className="text-slate-900">Consulting & Training</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <Separator className="my-6 bg-slate-200" />
+        
+        {/* Render organized sections */}
+        {Object.entries(organizedSections).map(([categoryName, sections]) => (
+          sections.length > 0 && (
+            <div key={categoryName} className="mb-8">
+              <h3 className="text-lg font-semibold mb-4 text-slate-900">{categoryName}</h3>
+              {sections.map(([sectionKey, section]: SectionEntry) => (
+                <div key={sectionKey}>
+                  {renderSection(sectionKey, section)}
+                </div>
+              ))}
+              <Separator className="my-6 bg-slate-200" />
+            </div>
+          )
+        ))}
+        
+        {/* Special Notes Section - Rendered via renderSection now */}
+        {/* {serviceTable.specialNotes && serviceTable.specialNotes.length > 0 && (
+          <div className="mb-6">
+            <p className="text-sm text-gray-600">
+              <span className="text-md font-semibold text-gray-700">Note:</span> {serviceTable.specialNotes.join(' ')}
+            </p>
+            <Separator className="my-6 bg-slate-200" />
+          </div>
+        )} */}
+        
+        {/* Price Summary */}
+        <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
+          <h2 className="text-xl font-bold mb-4 text-slate-900">Estimated Price Range</h2>
+          
+          {/* One-time costs */}
+          <div className="space-y-3 mb-4 mt-4 pt-4 border-t border-slate-200">
+            <div className="flex justify-between text-slate-900">
+              <span className="font-medium font-semibold">Project Cost:</span>
+              <span>${costs.oneTime.min.toLocaleString()} – ${costs.oneTime.max.toLocaleString()}</span>
+            </div>
+            
+            {/* Removed multiplier display */}
+            {/* {costs.multiplier !== 1.0 && (
+              <div className="flex justify-between text-slate-700 text-sm">
+                <span>Multiplier Applied:</span>
+                <span>{costs.multiplier.toFixed(2)}x</span>
+              </div>
+            )} */}
+          </div>
+          
+          {/* Recurring costs */}
+          {costs.recurring.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-slate-200">
+              <h4 className="mb-2 font-semibold text-slate-900">Other Costs:</h4>
+              <div className="space-y-2">
+                {costs.recurring.map((item, index) => (
+                  <div key={index} className="flex justify-between text-slate-900">
+                    <span>{item.name}:</span>
+                    <span>${item.min.toLocaleString()} – ${item.max.toLocaleString()}/{item.period}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          <p className="text-sm text-slate-600 mt-6">
+            This is an estimated price range. Contact us for a detailed quote tailored to your specific needs.
+          </p>
+        </div>
+        
+        {/* Contact Button */}
+        <div className="mt-6 text-center">
+          <Button size="lg" className="px-8 bg-blue-600 hover:bg-blue-700 text-white">
+            Request Detailed Quote
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default PriceCalculator;

@@ -1,8 +1,9 @@
+// BenefitsCard.tsx
+
 'use client';
 
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { ArrowRight } from 'lucide-react'; // If needed, else remove
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -32,22 +33,23 @@ const BenefitsCard: React.FC<BenefitsCardProps> = ({
   <motion.div
     variants={fadeInUp}
     className={`
-      flex flex-col items-center text-center p-6 
+      flex flex-col items-center text-center
       bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg 
-      rounded-xl shadow-md transition-all duration-300 
+      rounded-xl shadow-md p-6 
+      transition-all duration-500 ease-in-out
+      w-78 h-60
       ${
         isActive
-          ? 'shadow-lg border-2 border-blue-600'
-          : 'shadow-md border-2 border-transparent'
+          ? 'shadow-lg border-2 border-blue-600 z-10'
+          : 'shadow-md border-2 border-transparent blur-[1.5px] opacity-97'
       }
-      hover:shadow-lg
     `}
   >
-    <div className="p-3 rounded-full bg-blue-100 mb-4">
+    <div className="p-3 rounded-full bg-blue-100 mb-4 mt-2">
       <Icon className="h-6 w-6 text-blue-600" />
     </div>
-    <h4 className="text-lg font-semibold text-gray-900 mb-2">{title}</h4>
-    <p className="text-gray-800">{description}</p>
+    <h4 className="text-lg font-semibold text-gray-800 mb-2">{title}</h4>
+    <p className="text-gray-700">{description}</p>
   </motion.div>
 );
 

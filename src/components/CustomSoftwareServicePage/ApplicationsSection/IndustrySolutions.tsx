@@ -70,7 +70,7 @@ const IndustrySolutions: React.FC = () => {
         description="Drawing on our technical expertise across numerous sectors, we create customized solutions that meet the unique demands of your industry."
         cards={cards}
         background={
-          <Code2 className="text-blue-600" width={600} height={600} />
+          <Code2 className="text-blue-600" width={600} height={600} strokeWidth={1.5}/>
         }
         // No need to pass carouselParams unless you want to override defaults
       />

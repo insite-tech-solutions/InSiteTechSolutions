@@ -38,10 +38,6 @@ const ServiceScopeSection: React.FC = () => {
           variants={fadeInUp}
           className="mt-16 text-center"
         >
-          <button className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-colors">
-            Explore Our Services
-            <ArrowRight className="h-5 w-5" />
-          </button>
         </motion.div>
       </div>
     </section>

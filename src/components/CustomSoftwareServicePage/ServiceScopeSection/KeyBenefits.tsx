@@ -10,7 +10,6 @@ import {
   Code,
   Cloud,
   Shield,
-  SquareTerminal,
   MonitorCog,
 } from 'lucide-react';
 import CarouselSection from '@/components/CarouselSection';
@@ -23,35 +22,30 @@ const KeyBenefits: React.FC = () => {
       title: 'Improved Efficiency',
       description:
         'Streamlined processes that reduce manual effort and eliminate operational bottlenecks.',
-      isActive: true, // Example: Set to true if this benefit is active
     },
     {
       icon: Settings,
       title: 'Specialized Functionality',
       description:
         'Tailored features designed to address niche business needs, especially in research-focused environments.',
-      isActive: false,
     },
     {
       icon: Code,
       title: 'Scalable Solutions',
       description:
         'Custom software that evolves with your organization, ensuring long-term value and adaptability.',
-      isActive: false,
     },
     {
       icon: Cloud,
       title: 'Competitive Edge',
       description:
         'Unique tools that provide a significant advantage in your industry.',
-      isActive: false,
     },
     {
       icon: Shield,
       title: 'Enhanced Security',
       description:
         'Robust security measures to protect your data and operations.',
-      isActive: false,
     },
   ];
 
@@ -62,7 +56,6 @@ const KeyBenefits: React.FC = () => {
       icon={benefit.icon}
       title={benefit.title}
       description={benefit.description}
-      isActive={benefit.isActive}
     />
   ));
 
@@ -75,7 +68,7 @@ const KeyBenefits: React.FC = () => {
         background={
           // Optional: Add a background icon or image if desired
           // Example with an icon:
-          <MonitorCog className="text-blue-600" width={400} height={400} />
+          <MonitorCog className="text-blue-600" width={400} height={375} strokeWidth={1.5} />
         }
         // Optional: Pass additional carousel parameters if needed
         // carouselParams={{ /* your params here */ }}
