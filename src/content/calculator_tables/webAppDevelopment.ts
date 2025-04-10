@@ -10,7 +10,7 @@ export const webAppDevelopmentTable = {
     // Define which category each section belongs to
     categories: {
       "Project Details": ["pagesScreens", "interactivityLevel", "platformType", "targetDevices", "designApproach", "assetSourcing"],
-      "Features": ["features"],
+      "Features": ["featureImplementationType", "features"], // Added featureImplementationType before features
       "Support & Timeline": ["ongoingSupport", "timeline"],
       "Additional Options": ["addOns", "extraServices"]
     },
@@ -23,6 +23,7 @@ export const webAppDevelopmentTable = {
       "targetDevices": "dropdown",
       "designApproach": "dropdown",
       "assetSourcing": "dropdown",
+      "featureImplementationType": "radio", // Added with radio render type
       "features": "multi-checkbox",
       "ongoingSupport": "dropdown",
       "timeline": "dropdown",
@@ -164,6 +165,24 @@ export const webAppDevelopmentTable = {
       }
     }
   },
+
+  // Feature Types
+featureImplementationType: {
+  title: "Feature Implementation Type",
+  description: "Custom features are significantly more expensive as they need to be built from scratch",
+  options: {
+    thirdParty: { 
+      name: "3rd Party Integrations", 
+      multiplier: { value: 1.0 },
+      description: "Using existing third-party services and plugins" 
+    },
+    custom: { 
+      name: "Custom Development", 
+      multiplier: { value: 2.5 },
+      description: "Building custom features from scratch" 
+    }
+  }
+},
   
   // Features & Integrations
   features: {

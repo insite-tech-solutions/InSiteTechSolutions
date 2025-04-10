@@ -157,7 +157,11 @@ const PriceCalculator: React.FC = () => {
         if (renderType === "dropdown") {
           const options = Object.entries(section.options as Record<string, CalculatorOption>)
           if (options.length > 0) {
-            // Find base or standard option
+          // For featureImplementationType, default to "thirdParty"
+          if (sectionKey === "featureImplementationType") {
+            defaultOptions[sectionKey] = "thirdParty";
+          } else {
+            // Find base or standard option for other sections
             const defaultOption = options.find(
               ([key, opt]: [string, CalculatorOption]) =>
                 key === "standard" ||
@@ -165,18 +169,19 @@ const PriceCalculator: React.FC = () => {
                 (opt.multiplier && opt.multiplier.value === 1.0) ||
                 (opt.cost && opt.cost.min === 0 && opt.cost.max === 0) ||
                 (opt.description && opt.description?.includes("Base")),
-            )
+            );
 
             if (defaultOption) {
-              defaultOptions[sectionKey] = defaultOption[0]
+              defaultOptions[sectionKey] = defaultOption[0];
             } else {
               // Default to first option if no base found
-              defaultOptions[sectionKey] = options[0][0]
+              defaultOptions[sectionKey] = options[0][0];
             }
           }
         }
       }
-    })
+    }
+  });
 
     // Set default selections
     setCalculatorState((prev) => ({
@@ -223,101 +228,124 @@ const PriceCalculator: React.FC = () => {
   }
 
   // Calculate the one-time and recurring costs
-  const calculateCosts = () => {
-    let oneTimeMin = 0
-    let oneTimeMax = 0
-    let multiplier = 1.0
-    const recurringCosts: RecurringCostItem[] = []
+// Calculate the one-time and recurring costs
+const calculateCosts = () => {
+  let oneTimeMin = 0;
+  let oneTimeMax = 0;
+  let multiplier = 1.0;
+  const recurringCosts: RecurringCostItem[] = [];
 
-    // Process all selected options (dropdowns)
-    Object.entries(calculatorState.selectedOptions).forEach(([sectionKey, value]) => {
-      const isRecurring = serviceTable.metadata?.recurringCosts?.[sectionKey]
-      const section = serviceTable[sectionKey] as ServiceSection | undefined // Assert type
-
+  // Get features multiplier for webAppDevelopment
+  let featuresMultiplier = 1.0;
+  if (calculatorState.service === "webAppDevelopment") {
+    const featureImplementationTypeKey = calculatorState.selectedOptions["featureImplementationType"];
+    if (featureImplementationTypeKey) {
+      const featureImplementationTypeSection = serviceTable["featureImplementationType"] as ServiceSection | undefined;
+      
       if (
-        section &&
-        section.options &&
-        typeof section.options === "object" &&
-        !Array.isArray(section.options) &&
-        section.options[value]
+        featureImplementationTypeSection?.options && 
+        typeof featureImplementationTypeSection.options === "object" && 
+        !Array.isArray(featureImplementationTypeSection.options) && 
+        featureImplementationTypeSection.options[featureImplementationTypeKey]?.multiplier
       ) {
-        const option = section.options[value] as CalculatorOption // Assert type
+        featuresMultiplier = (featureImplementationTypeSection.options[featureImplementationTypeKey] as CalculatorOption).multiplier?.value || 1.0;
+      }
+    }
+  }
 
-        if (option.cost) {
-          if (isRecurring) {
-            recurringCosts.push({
-              name: option.name,
-              period: isRecurring,
-              min: option.cost.min,
-              max: option.cost.max,
-            })
-          } else {
-            oneTimeMin += option.cost.min
-            oneTimeMax += option.cost.max
-          }
-        }
+  // Process all selected options (dropdowns)
+  Object.entries(calculatorState.selectedOptions).forEach(([sectionKey, value]) => {
+    // Skip featureImplementationType as its multiplier is applied separately
+    if (sectionKey === "featureImplementationType") return;
+    
+    const isRecurring = serviceTable.metadata?.recurringCosts?.[sectionKey];
+    const section = serviceTable[sectionKey] as ServiceSection | undefined;
 
-        if (option.multiplier) {
-          multiplier *= option.multiplier.value
+    if (
+      section &&
+      section.options &&
+      typeof section.options === "object" &&
+      !Array.isArray(section.options) &&
+      section.options[value]
+    ) {
+      const option = section.options[value] as CalculatorOption;
+
+      if (option.cost) {
+        if (isRecurring) {
+          recurringCosts.push({
+            name: option.name,
+            period: isRecurring,
+            min: option.cost.min,
+            max: option.cost.max,
+          });
+        } else {
+          oneTimeMin += option.cost.min;
+          oneTimeMax += option.cost.max;
         }
       }
-    })
 
-    // Process multi-select options (features, addOns)
-    Object.entries(calculatorState.selectedMultiOptions).forEach(([sectionKey, selectedKeys]) => {
-      const isRecurring = serviceTable.metadata?.recurringCosts?.[sectionKey]
-      const section = serviceTable[sectionKey] as ServiceSection | undefined // Assert type
+      if (option.multiplier) {
+        multiplier *= option.multiplier.value;
+      }
+    }
+  });
 
-      if (section && section.options && typeof section.options === "object" && !Array.isArray(section.options)) {
-        const options = section.options as Record<string, CalculatorOption>
-        selectedKeys.forEach((key) => {
-          if (options[key]) {
-            const option = options[key] // Use the 'options' variable here
-            if (option.cost) {
+  // Process multi-select options (features, addOns)
+  Object.entries(calculatorState.selectedMultiOptions).forEach(([sectionKey, selectedKeys]) => {
+    const isRecurring = serviceTable.metadata?.recurringCosts?.[sectionKey];
+    const section = serviceTable[sectionKey] as ServiceSection | undefined;
+
+    if (section && section.options && typeof section.options === "object" && !Array.isArray(section.options)) {
+      const options = section.options as Record<string, CalculatorOption>;
+      selectedKeys.forEach((key) => {
+        if (options[key]) {
+          const option = options[key];
+          if (option.cost) {
+            // Apply featuresMultiplier only to the "features" section and only for webAppDevelopment
+            if (sectionKey === "features" && calculatorState.service === "webAppDevelopment") {
+              if (isRecurring) {
+                recurringCosts.push({
+                  name: option.name,
+                  period: isRecurring,
+                  min: option.cost.min * featuresMultiplier,
+                  max: option.cost.max * featuresMultiplier,
+                });
+              } else {
+                oneTimeMin += option.cost.min * featuresMultiplier;
+                oneTimeMax += option.cost.max * featuresMultiplier;
+              }
+            } else {
               if (isRecurring) {
                 recurringCosts.push({
                   name: option.name,
                   period: isRecurring,
                   min: option.cost.min,
                   max: option.cost.max,
-                })
+                });
               } else {
-                oneTimeMin += option.cost.min
-                oneTimeMax += option.cost.max
+                oneTimeMin += option.cost.min;
+                oneTimeMax += option.cost.max;
               }
             }
           }
-        })
-      }
-    })
-
-    // If no base price is set, try to find a default from projectType
-    const projectTypeSection = serviceTable.projectType as ServiceSection | undefined
-    if (
-      oneTimeMin === 0 &&
-      oneTimeMax === 0 &&
-      projectTypeSection?.options &&
-      typeof projectTypeSection.options === "object" &&
-      !Array.isArray(projectTypeSection.options)
-    ) {
-      // Check the first option with cost
-      const firstOption = Object.values(projectTypeSection.options)[0] as CalculatorOption | undefined
-      if (firstOption && firstOption.cost) {
-        oneTimeMin = firstOption.cost.min
-        oneTimeMax = firstOption.cost.max
-      }
+        }
+      });
     }
+  });
 
-    // Apply multiplier to one-time costs
-    const finalOneTimeMin = Math.round(oneTimeMin * multiplier)
-    const finalOneTimeMax = Math.round(oneTimeMax * multiplier)
+  // Rest of the function remains the same...
+  // ...
 
-    return {
-      oneTime: { min: finalOneTimeMin, max: finalOneTimeMax },
-      recurring: recurringCosts,
-      multiplier,
-    }
+  // Apply multiplier to one-time costs
+  const finalOneTimeMin = Math.round(oneTimeMin * multiplier);
+  const finalOneTimeMax = Math.round(oneTimeMax * multiplier);
+
+  return {
+    oneTime: { min: finalOneTimeMin, max: finalOneTimeMax },
+    recurring: recurringCosts,
+    multiplier,
   }
+}
 
   const costs = calculateCosts()
 
@@ -419,6 +447,10 @@ const PriceCalculator: React.FC = () => {
       return "informational"
     }
 
+    if (sectionKey === "featureImplementationType") {
+      return "radio";
+    }
+
     // Default to dropdown for structured sections
     return "dropdown"
   }
@@ -473,72 +505,105 @@ const PriceCalculator: React.FC = () => {
   }
 
   // Helper function to render multi-select checkboxes
-  const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
-    // Ensure section and its options are valid and structured as expected for checkboxes
-    if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
-      return null
+const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
+  // Ensure section and its options are valid and structured as expected for checkboxes
+  if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
+    return null;
 
-    const options = section.options as Record<string, CalculatorOption> // Cast for safety
-    const selectedKeys = calculatorState.selectedMultiOptions[sectionKey] || []
+  const options = section.options as Record<string, CalculatorOption>; // Cast for safety
+  const selectedKeys = calculatorState.selectedMultiOptions[sectionKey] || [];
 
-    return (
-      <div className="space-y-3 mb-6">
-        <div className="flex items-center space-x-2">
-          <Label className="text-gray-800 font-medium">{section.title}</Label>
-          {section.description && (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                  <Info className="h-4 w-4 text-blue-600 hover:text-blue-700 transition-colors" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
-                <p className="whitespace-normal">{section.description}</p>
-              </PopoverContent>
-            </Popover>
-          )}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
-          {Object.entries(options).map(([key, option]: [string, CalculatorOption]) => {
-            const isSelected = selectedKeys.includes(key)
-            return (
-              <div
-                key={key}
-                className={`flex items-start space-x-2 border rounded-lg p-3 ${isSelected ? "bg-gray-50 border-gray-400" : "bg-white border-gray-200"} hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
-                onClick={(e) => {
-                  // Prevent double-triggering if clicking the checkbox directly
-                  if (!(e.target as HTMLElement).closest("button")) {
-                    handleMultiOptionToggle(sectionKey, key)
-                  }
-                }}
-              >
-                <Checkbox
-                  id={`${sectionKey}_${key}`}
-                  checked={isSelected}
-                  onCheckedChange={() => handleMultiOptionToggle(sectionKey, key)}
-                  className="mt-1 h-5 w-5 border-gray-300 text-blue-600 rounded"
-                />
-                <div className="flex-1">
-                  <Label htmlFor={`${sectionKey}_${key}`} className="font-medium text-gray-800 cursor-pointer">
-                    {option.name}
-                  </Label>
-
-                  {option.cost && (
-                    <div className="text-sm text-gray-600 mt-1">
-                      ${option.cost.min.toLocaleString()}–${option.cost.max.toLocaleString()}
-                    </div>
-                  )}
-
-                  {option.description && <p className="text-xs text-gray-500 mt-1">{option.description}</p>}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    )
+  // Get features multiplier for webAppDevelopment
+  let featuresMultiplier = 1.0;
+  if (sectionKey === "features" && calculatorState.service === "webAppDevelopment") {
+    const featureImplementationTypeKey = calculatorState.selectedOptions["featureImplementationType"];
+    if (featureImplementationTypeKey) {
+      const featureImplementationTypeSection = serviceTable["featureImplementationType"] as ServiceSection | undefined;
+      
+      if (
+        featureImplementationTypeSection?.options && 
+        typeof featureImplementationTypeSection.options === "object" && 
+        !Array.isArray(featureImplementationTypeSection.options) && 
+        featureImplementationTypeSection.options[featureImplementationTypeKey]?.multiplier
+      ) {
+        featuresMultiplier = (featureImplementationTypeSection.options[featureImplementationTypeKey] as CalculatorOption).multiplier?.value || 1.0;
+      }
+    }
   }
+
+  return (
+    <div className="space-y-3 mb-6">
+      <div className="flex items-center space-x-2">
+        <Label className="text-gray-800 font-medium">{section.title}</Label>
+        {section.description && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
+                <Info className="h-4 w-4 text-blue-600 hover:text-blue-700 transition-colors" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
+              <p className="whitespace-normal">{section.description}</p>
+            </PopoverContent>
+          </Popover>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+        {Object.entries(options).map(([key, option]: [string, CalculatorOption]) => {
+          const isSelected = selectedKeys.includes(key);
+          
+          // Apply multiplier to costs if this is the features section in webAppDevelopment
+          const displayCost = 
+            option.cost && sectionKey === "features" && calculatorState.service === "webAppDevelopment"
+              ? {
+                  min: Math.round(option.cost.min * featuresMultiplier),
+                  max: Math.round(option.cost.max * featuresMultiplier),
+                }
+              : option.cost;
+          
+          return (
+            <div
+              key={key}
+              className={`flex items-start space-x-2 border rounded-lg p-3 ${isSelected ? "bg-gray-50 border-gray-400" : "bg-white border-gray-200"} hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
+              onClick={(e) => {
+                // Prevent double-triggering if clicking the checkbox directly
+                if (!(e.target as HTMLElement).closest("button")) {
+                  handleMultiOptionToggle(sectionKey, key);
+                }
+              }}
+            >
+              <Checkbox
+                id={`${sectionKey}_${key}`}
+                checked={isSelected}
+                onCheckedChange={() => handleMultiOptionToggle(sectionKey, key)}
+                className="mt-1 h-5 w-5 border-gray-300 text-blue-600 rounded"
+              />
+              <div className="flex-1">
+                <Label htmlFor={`${sectionKey}_${key}`} className="font-medium text-gray-800 cursor-pointer">
+                  {option.name}
+                </Label>
+
+                {displayCost && (
+                  <div className="text-sm text-gray-600 mt-1">
+                    ${displayCost.min.toLocaleString()}–${displayCost.max.toLocaleString()}
+                    {sectionKey === "features" && calculatorState.service === "webAppDevelopment" && featuresMultiplier > 1 && (
+                      <span className="ml-1 text-xs text-gray-500">
+                        (includes {featuresMultiplier}x multiplier)
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {option.description && <p className="text-xs text-gray-500 mt-1">{option.description}</p>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
   // Helper function to render informational sections (like extraServices or specialNotes)
   const renderInformational = (sectionKey: string, sectionData: SectionEntryValue) => {
@@ -597,6 +662,59 @@ const PriceCalculator: React.FC = () => {
     return null // Return null if sectionData format is unexpected
   }
 
+
+
+// Helper function to render radio buttons
+const renderRadio = (sectionKey: string, section: ServiceSection | undefined) => {
+  // Ensure section and its options are valid and structured as expected
+  if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
+    return null;
+
+  const options = section.options as Record<string, CalculatorOption>; // Cast for safety
+  const selectedKey = calculatorState.selectedOptions[sectionKey] || "";
+
+  return (
+    <div className="space-y-2 mb-6">
+      <div className="flex items-center space-x-2">
+        <Label className="text-gray-800 font-medium">{section.title}</Label>
+        {section.description && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
+                <Info className="h-4 w-4 text-blue-600 hover:text-blue-700 transition-colors" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
+              <p>{section.description}</p>
+            </PopoverContent>
+          </Popover>
+        )}
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        {Object.entries(options).map(([key, option]: [string, CalculatorOption]) => (
+          <div
+            key={key}
+            className={`flex items-center space-x-2 p-3 border rounded-lg ${
+              selectedKey === key ? "bg-blue-50 border-blue-300" : "bg-white border-gray-200"
+            } hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
+            onClick={() => handleOptionChange(sectionKey, key)}
+          >
+            <div className="h-4 w-4 rounded-full border border-gray-300 flex items-center justify-center">
+              {selectedKey === key && <div className="h-2 w-2 rounded-full bg-blue-600" />}
+            </div>
+            <Label className="font-medium text-gray-800 cursor-pointer flex-1">
+              {option.name}
+              {option.multiplier && <span className="ml-1 text-gray-600">({option.multiplier.value}x)</span>}
+            </Label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
   // Render a section based on its type
   const renderSection = (sectionKey: string, section: SectionEntryValue) => {
     // Skip non-renderable types based on our logic
@@ -624,6 +742,8 @@ const PriceCalculator: React.FC = () => {
         case "informational":
           // Pass section directly, renderInformational will handle type check
           return renderInformational(sectionKey, section)
+        case "radio":
+          return renderRadio(sectionKey, section as ServiceSection)
         default:
           console.warn(`Unknown render type "${renderType}" for section "${sectionKey}"`)
           return null
