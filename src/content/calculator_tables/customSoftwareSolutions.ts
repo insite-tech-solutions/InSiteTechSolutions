@@ -118,7 +118,7 @@ export const customSoftwareSolutionsTable = {
         description: "Base"
       },
       cloudBased: { 
-        name: "Cloud-Based", 
+        name: "Cloud-Based (e.g., AWS, Azure, etc. | Cloud services incur additional hosting costs)", 
         cost: { min: 1000, max: 3000 },
         description: "Plus potential hosting costs"
       },
@@ -166,7 +166,8 @@ export const customSoftwareSolutionsTable = {
         multiplier: { value: 1.5 }, 
         description: "Choosing a specific language or framework may require additional expertise and can affect pricing."
       }
-    }
+    }, 
+    description: "Choosing a specific language or framework may require additional expertise and can affect pricing."
   },
   
   // 4. Features & Integrations
@@ -175,7 +176,7 @@ export const customSoftwareSolutionsTable = {
     description: "These technical features may require custom code and extensive testing, increasing development time and costs.",
     options: {
       iotNetworking: { 
-        name: "Advanced IoT or Networking Integration", 
+        name: "Advanced IoT or Networking Integration (e.g. hardware and software which require a constant internet connection)", 
         cost: { min: 1000, max: 3000 } 
       },
       highPerformance: { 
@@ -215,7 +216,7 @@ export const customSoftwareSolutionsTable = {
   
   ongoingMaintenance: {
     title: "Ongoing Maintenance",
-    description: "Extra work beyond retainer is billed hourly. Expedited services and additional requests may incur extra fees.",
+    description: "Extra work beyond retainer is billed hourly; expedited services and additional requests may incur extra fees.",
     options: {
       none: { 
         name: "None", 
@@ -298,8 +299,7 @@ extraServices: {
   
   // Special notes
   specialNotes: [
-    "Discounts available for Open Source (OSS) projects.",
-    "Proprietary development and NDAs may incur additional costs."
+    "Discounts available for Open Source (OSS) projects. Proprietary development and NDAs may incur additional costs."
   ]
 };
 

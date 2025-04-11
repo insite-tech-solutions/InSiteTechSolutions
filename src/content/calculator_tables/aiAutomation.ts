@@ -76,6 +76,7 @@ export const aiAutomationTable = {
   // AI Data Provisions
   aiDataProvisions: {
     title: "AI Data Provisions",
+    description: "Half of the AI/ML model equation is data, therefore data quality and availability significantly impact model performance and development time/cost.",
     options: {
       none: { 
         name: "None", 
@@ -100,10 +101,11 @@ export const aiAutomationTable = {
   // Automation Platform
   automationPlatform: {
     title: "Automation Platform",
+    description: "Custom solutions offer more flexibility but require more development time and expertise.",
     options: {
       offTheShelf: { 
         name: "Off-the-Shelf Solutions (Zapier, Make, IFTTT)", 
-        multiplier: { value: 0.9 } 
+        multiplier: { value: 1.0 } 
       },
       customAutomation: { 
         name: "Custom Automation (tailored hardware/software integrations)", 
@@ -121,7 +123,7 @@ export const aiAutomationTable = {
         cost: { min: 1000, max: 3000 } 
       },
       logicBasedAutomation: { 
-        name: "Logic-Based Automation", 
+        name: "Logic-Based Automation (Arduino, Raspberry Pi, FPGAs, Ladder Logic, etc.)", 
         cost: { min: 800, max: 2500 } 
       },
       mlAiAutomation: { 
@@ -142,7 +144,7 @@ export const aiAutomationTable = {
   // Ongoing Support Options
   ongoingSupport: {
     title: "Ongoing Support Options",
-    description: "Extra work beyond retainer is billed hourly. Expedited services and additional requests may incur extra fees.",
+    description: "Extra work beyond retainer is billed hourly; expedited services and additional requests may incur extra fees.",
     options: {
       none: { 
         name: "None", 
@@ -183,7 +185,7 @@ export const aiAutomationTable = {
       documentation: { 
         name: "Standard Operating Procedures (SOP) Documentation & Process Optimization", 
         cost: { min: 500, max: 1500 }, 
-        description: "Standardization, optimization, and documentation of processes for better scalability and maintainability"
+        description: "Standardization, optimization, and documentation of processes for better scalability and efficiency"
       }
     }
   },

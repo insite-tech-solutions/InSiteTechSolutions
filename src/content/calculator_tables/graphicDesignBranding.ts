@@ -42,7 +42,7 @@ export const graphicDesignBrandingTable = {
         cost: { min: 200, max: 1500 } 
       },
       brandingPackage: { 
-        name: "Branding Package (logo + business card + social/web banner)", 
+        name: "Branding Package (e.g. logo + business card + social/web banner)", 
         cost: { min: 1500, max: 4000 } 
       },
       fullBrandDevelopment: { 
@@ -55,6 +55,7 @@ export const graphicDesignBrandingTable = {
   // Project Approach
   projectApproach: {
     title: "Project Approach",
+    description: "Rebranding often takes less time since there is already a starting point, however this varies on a case-by-case basis.",
     options: {
       newBrand: { 
         name: "New Brand Development", 
@@ -87,6 +88,7 @@ export const graphicDesignBrandingTable = {
   // Medium
   medium: {
     title: "Medium",
+    description: "Multimedia elements require additional production time and may incur licensing costs.",
     options: {
       textGraphics: { 
         name: "Text and Graphics", 
@@ -120,6 +122,7 @@ export const graphicDesignBrandingTable = {
   // Service Duration
   serviceDuration: {
     title: "Service Duration",
+    description: "Ongoing services ensure brand consistency and engaging updates.",
     options: {
       oneTime: { 
         name: "One-Time Design/Delivery", 

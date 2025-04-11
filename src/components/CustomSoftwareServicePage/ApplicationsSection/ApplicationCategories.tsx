@@ -2,7 +2,7 @@
 
 import { motion, useInView, useAnimation, Variants } from 'framer-motion'
 import { useEffect, useRef } from 'react'
-import { ArrowRight, Cog, Database } from 'lucide-react'
+import { ArrowRight, Cog, TestTube, Server } from 'lucide-react'
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -85,12 +85,22 @@ const ApplicationCategories: React.FC = () => {
     },
     {
       title: "Research & Development",
-      icon: Database,
+      icon: TestTube,
       items: [
         "Computational simulations and modeling",
         "Data analysis and visualization tools",
         "Research management systems",
         "Laboratory information systems"
+      ]
+    },
+    {
+      title: "Digital Infrastructure",
+      icon: Server,
+      items: [
+        "Legacy system modernization",
+        "Cloud migrations and system integrations",
+        "Digital workflow transformations",
+        "Internally managed software solutions"
       ]
     }
   ]

@@ -14,6 +14,8 @@ import {
   Gauge,
   Settings
 } from 'lucide-react'
+import PriceCalculator from '@/components/CustomSoftwareServicePage/PricingSection/PriceCalculator';
+
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -81,27 +83,6 @@ const PriceFactor: React.FC<PriceFactorProps> = ({ title, items, icon: Icon }) =
   )
 }
 
-// Placeholder Calculator Component
-const PriceCalculator: React.FC = () => (
-  <motion.div
-    variants={fadeInUp}
-    className="bg-white rounded-lg shadow-md border border-gray-200 p-8 text-center"
-  >
-    <div className="flex justify-center mb-6">
-      <Calculator className="h-12 w-12 text-blue-600" />
-    </div>
-    <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-      Project Cost Calculator
-    </h3>
-    <p className="text-gray-600 mb-6">
-      Our interactive calculator is coming soon! It will help you estimate project costs based on your specific requirements.
-    </p>
-    <button className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors">
-      Get a Custom Quote
-      <ArrowRight className="h-5 w-5" />
-    </button>
-  </motion.div>
-)
 
 const PriceSection: React.FC = () => {
   const priceFactors = [
@@ -134,7 +115,7 @@ const PriceSection: React.FC = () => {
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -168,7 +149,7 @@ const PriceSection: React.FC = () => {
 
           {/* Price Calculator */}
           <div className="max-w-4xl mx-auto mb-16">
-            <PriceCalculator />
+            <PriceCalculator fixedService="customSoftwareSolutions" />
           </div>
 
           {/* Long-term Value and True Cost */}

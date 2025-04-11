@@ -95,9 +95,9 @@ type SectionEntry = [string, SectionEntryValue]
 // Type for the categorized sections object
 type CategorizedSections = Record<string, SectionEntry[]>
 
-const PriceCalculator: React.FC = () => {
+const PriceCalculator: React.FC<{ fixedService?: string }> = ({ fixedService }) => {
   const [calculatorState, setCalculatorState] = useState<CalculatorState>({
-    service: "customSoftwareSolutions", // Default to our updated table
+    service: fixedService || "customSoftwareSolutions", // Use fixedService if provided, otherwise use default
     selectedOptions: {},
     selectedMultiOptions: {},
   })
@@ -191,14 +191,26 @@ const PriceCalculator: React.FC = () => {
     }))
   }, [serviceTable])
 
-  const handleServiceChange = (value: string) => {
-    // Reset the state when changing services
-    setCalculatorState({
-      service: value,
-      selectedOptions: {},
-      selectedMultiOptions: {},
-    })
-  }
+  // const handleServiceChange = (value: string) => {
+  //   // Reset the state when changing services
+  //   setCalculatorState({
+  //     service: value,
+  //     selectedOptions: {},
+  //     selectedMultiOptions: {},
+  //   })
+  // }
+
+    // Skip service change handling if fixedService is set
+    const handleServiceChange = (value: string) => {
+      if (fixedService) return; // Prevent changing service if fixedService is provided
+      
+      // Reset the state when changing services
+      setCalculatorState({
+        service: value,
+        selectedOptions: {},
+        selectedMultiOptions: {},
+      })
+    }
 
   // Handler for dropdown selections
   const handleOptionChange = (section: string, value: string) => {
@@ -565,7 +577,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
           return (
             <div
               key={key}
-              className={`flex items-start space-x-2 border rounded-lg p-3 ${isSelected ? "bg-gray-50 border-gray-400" : "bg-white border-gray-200"} hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
+              className={`flex items-start space-x-2 border rounded-lg p-3 ${isSelected ? "bg-blue-50 border-blue-400" : "bg-white border-gray-200"} hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
               onClick={(e) => {
                 // Prevent double-triggering if clicking the checkbox directly
                 if (!(e.target as HTMLElement).closest("button")) {
@@ -696,7 +708,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           <div
             key={key}
             className={`flex items-center space-x-2 p-3 border rounded-lg ${
-              selectedKey === key ? "bg-blue-50 border-blue-300" : "bg-white border-gray-200"
+              selectedKey === key ? "bg-blue-50 border-blue-400" : "bg-white border-gray-200"
             } hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
             onClick={() => handleOptionChange(sectionKey, key)}
           >
@@ -757,49 +769,52 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
 
   return (
     <Card className="m-10 w-full max-w-4xl mx-auto shadow-xl bg-white border-0 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-800 text-white border-b-0 pb-6">
+      <CardHeader className="bg-gradient-to-br from-blue-600 to-blue-800 text-white border-b-0 pb-6">
         <div className="flex items-center gap-3">
-          <Calculator className="h-6 w-6" />
+          <Calculator className="h-10 w-10" />
           <CardTitle className="text-2xl font-bold">Service Price Calculator</CardTitle>
         </div>
         <p className="text-blue-100 mt-2 text-sm">Configure your service options to get an instant price estimate</p>
       </CardHeader>
 
       <CardContent className="p-0">
-        <div className="bg-gray-50 p-6 border-b border-gray-200">
-          {/* Service Selection */}
-          <div className="mb-0">
-            <Label className="text-gray-800 font-medium mb-2 block">Select Service</Label>
-            <Select value={calculatorState.service} onValueChange={handleServiceChange}>
-              <SelectTrigger className="w-full bg-white border-gray-200 text-gray-800 hover:border-gray-300 transition-colors">
-                <SelectValue placeholder="Select a service" />
-              </SelectTrigger>
-              <SelectContent className="bg-white border border-gray-200">
-                <SelectItem value="webAppDevelopment" className="text-gray-800">
-                  Web & App Development
-                </SelectItem>
-                <SelectItem value="customSoftwareSolutions" className="text-gray-800">
-                  Custom Software Solutions
-                </SelectItem>
-                <SelectItem value="seoOnlineMarketing" className="text-gray-800">
-                  SEO & Online Marketing
-                </SelectItem>
-                <SelectItem value="graphicDesignBranding" className="text-gray-800">
-                  Graphic Design & Branding
-                </SelectItem>
-                <SelectItem value="dataAnalysis" className="text-gray-800">
-                  Data Analysis
-                </SelectItem>
-                <SelectItem value="aiAutomation" className="text-gray-800">
-                  AI & Automation
-                </SelectItem>
-                <SelectItem value="consultingTraining" className="text-gray-800">
-                  Consulting & Training
-                </SelectItem>
-              </SelectContent>
-            </Select>
+        {/* Only show service selection if fixedService is not provided */}
+        {!fixedService && (
+          <div className="bg-gray-200 p-6 border border-gray-300">
+            {/* Service Selection */}
+            <div className="mb-0">
+              <Label className="text-gray-800 font-medium mb-2 block">Select Service</Label>
+              <Select value={calculatorState.service} onValueChange={handleServiceChange}>
+                <SelectTrigger className="w-full bg-white border-gray-200 text-gray-800 hover:border-gray-300 transition-colors">
+                  <SelectValue placeholder="Select a service" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border border-gray-200">
+                  <SelectItem value="webAppDevelopment" className="text-gray-800">
+                    Web & App Development
+                  </SelectItem>
+                  <SelectItem value="customSoftwareSolutions" className="text-gray-800">
+                    Custom Software Solutions
+                  </SelectItem>
+                  <SelectItem value="seoOnlineMarketing" className="text-gray-800">
+                    SEO & Online Marketing
+                  </SelectItem>
+                  <SelectItem value="graphicDesignBranding" className="text-gray-800">
+                    Graphic Design & Branding
+                  </SelectItem>
+                  <SelectItem value="dataAnalysis" className="text-gray-800">
+                    Data Analysis
+                  </SelectItem>
+                  <SelectItem value="aiAutomation" className="text-gray-800">
+                    AI & Automation
+                  </SelectItem>
+                  <SelectItem value="consultingTraining" className="text-gray-800">
+                    Consulting & Training
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="p-6">
           {/* Render organized sections */}
@@ -857,7 +872,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
             )}
 
             <p className="text-sm text-gray-600 mt-6 italic">
-              This is an estimated price range. Contact us for a detailed quote tailored to your specific needs.
+              This is just an estimated price range. Contact us for a detailed estimate tailored to your specific needs.
             </p>
           </div>
         </div>
@@ -865,10 +880,10 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
 
       <CardFooter className="p-6 bg-white border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-gray-600 text-center sm:text-left">
-          Ready to get started? Request a detailed quote for your project.
+          Ready to get started? Request a detailed estimate and free consultation.
         </p>
         <Button size="lg" className="px-8 bg-blue-600 hover:bg-blue-700 text-white transition-colors w-full sm:w-auto">
-          Request Detailed Quote
+          Request Detailed Estimate
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </CardFooter>

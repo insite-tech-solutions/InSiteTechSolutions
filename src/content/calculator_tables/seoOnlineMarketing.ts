@@ -97,7 +97,7 @@ export const seoOnlineMarketingTable = {
         multiplier: { value: 1.5 } 
       }
     },
-    description: "Longer durations often result in higher cumulative costs and require sustained effort."
+    description: "Longer durations often result in higher cumulative costs and require sustained maintenance."
   },
   
   // Design Approach
@@ -160,7 +160,7 @@ export const seoOnlineMarketingTable = {
         cost: { min: 500, max: 3000 } 
       }
     },
-    description: "Custom content creation can be bundled with campaign management for added value."
+    description: "Custom content creation can be bundled with campaign management for added value. See Logos & Brand Identity in the Extra Services section for more information."
   },
   
   // SEO Services
@@ -242,7 +242,7 @@ export const seoOnlineMarketingTable = {
   // Ongoing Support Options
   ongoingSupport: {
     title: "Ongoing Support Options",
-    description: "Extra work beyond the retainer is billed hourly; expedited services may incur additional fees.",
+    description: "Extra work beyond retainer is billed hourly; expedited services and additional requests may incur extra fees.",
     options: {
       none: { 
         name: "None", 
@@ -274,7 +274,7 @@ export const seoOnlineMarketingTable = {
       customTools: { 
         name: "Custom SEO or Marketing Tools", 
         cost: { min: 500, max: 4000 }, 
-        description: "Tailored Dashboards, Specialized Plugins/Integrations, etc."
+        description: "Tailored Dashboards, Specialized Plugins/Integrations, and other custom tools to enhance InSites and effectiveness"
       },
       contentCreation: { 
         name: "Content Creation Services", 
@@ -287,7 +287,7 @@ export const seoOnlineMarketingTable = {
   // Timeline & Delivery
   timeline: {
     title: "Timeline & Delivery",
-    description: "Timeline multipliers reflect the need for rapid execution, which can increase costs.",
+    description: "Timeline adjustments affect resource allocation and overall project cost.",
     options: {
       noRush: { 
         name: "No-Rush Campaign Planning", 

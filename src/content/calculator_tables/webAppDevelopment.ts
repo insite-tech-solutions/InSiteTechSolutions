@@ -75,7 +75,7 @@ export const webAppDevelopmentTable = {
         multiplier: { value: 2.5 } 
       }
     },
-    description: "Interactivity features scale with project size, hence they serve as multipliers rather than simple cost ranges"
+    description: "Interactivity features scale with project size, hence they act as multipliers rather than simple cost ranges."
   },
   
   // Platform Type
@@ -115,9 +115,9 @@ export const webAppDevelopmentTable = {
         cost: { min: 3000, max: 5000 } 
       },
       crossPlatformApp: { 
-        name: "Cross-platform App", 
+        name: "Cross-platform App (e.g., React Native, Flutter, etc. | Often cheaper than separate native apps)", 
         cost: { min: 5000, max: 9000 }, 
-        description: "Cheaper than separate native apps" 
+        description: "Often cheaper than separate native apps" 
       }
     }
   },
@@ -132,7 +132,7 @@ export const webAppDevelopmentTable = {
         description: "Base" 
       },
       partiallyCustom: { 
-        name: "Partially Custom Elements", 
+        name: "Partially Custom Elements (Use of pre-made widgets and components in a bespoke design", 
         multiplier: { value: 1.25 }, 
         description: "Use of pre-made widgets and components in a bespoke design" 
       },
@@ -147,6 +147,7 @@ export const webAppDevelopmentTable = {
   // Asset Sourcing
   assetSourcing: {
     title: "Asset Sourcing",
+    description: "Custom content creation is offered as a separate service which can be bundled with web and app development. See Logos & Brand Identity in the Extra Services section for more information.",
     options: {
       clientProvided: { 
         name: "Client Provided", 
@@ -154,7 +155,7 @@ export const webAppDevelopmentTable = {
         description: "Base" 
       },
       stockAssets: { 
-        name: "Stock Assets", 
+        name: "Stock Assets (unless public domain, stock assets may incur licensing costs)", 
         cost: { min: 200, max: 900 }, 
         description: "Plus potential licensing costs" 
       },
@@ -169,7 +170,7 @@ export const webAppDevelopmentTable = {
   // Feature Types
 featureImplementationType: {
   title: "Feature Implementation Type",
-  description: "Custom features are significantly more expensive as they need to be built from scratch",
+  description: "Custom features are significantly more expensive as they need to be built from the ground up.",
   options: {
     thirdParty: { 
       name: "3rd Party Integrations", 
@@ -187,7 +188,7 @@ featureImplementationType: {
   // Features & Integrations
   features: {
     title: "Features & Integrations",
-    description: "These features can be very technical and difficult to implement from scratch, therefore custom coded solutions can significantly increase development time and cost",
+    description: "These features can be very technical and difficult to implement from scratch, therefore custom coded solutions can significantly increase development time and cost.",
     options: {
       ecommerce: { 
         name: "E-commerce / Online Store", 
@@ -207,7 +208,7 @@ featureImplementationType: {
       },
       advancedSecurity: { 
         name: "Advanced Security (e.g., 2FA, advanced encryption)", 
-        cost: { min: 500, max: 2500 } 
+        cost: { min: 500, max: 1800 } 
       },
       accessibility: { 
         name: "Multilingual Support / Light/Dark Mode (or other accessibility features)", 
@@ -219,7 +220,7 @@ featureImplementationType: {
   // Ongoing Support Options
   ongoingSupport: {
     title: "Ongoing Support Options",
-    description: "Extra work beyond retainer is billed hourly, expedited service and other circumstances may incur extra fees",
+    description: "Extra work beyond retainer is billed hourly; expedited services and additional requests may incur extra fees.",
     options: {
       none: { 
         name: "None", 

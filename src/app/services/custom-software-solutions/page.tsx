@@ -10,11 +10,10 @@ import ValuePropSection from '@/components/CustomSoftwareServicePage/ValuePropSe
 import ServiceScopeSection from '@/components/CustomSoftwareServicePage/ServiceScopeSection';
 import ApplicationsSection from '@/components/CustomSoftwareServicePage/ApplicationsSection';
 import ProcessOld from '@/components/CustomSoftwareServicePage/ProcessSection';
-import PriceSection from '@/components/CustomSoftwareServicePage/PriceSection';
+import PriceSection from '@/components/CustomSoftwareServicePage/PricingSection/PriceSection';
 import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InsiteAdvantageSection/InsiteAdvantageSection';
 import FAQSection from '@/components/CustomSoftwareServicePage/FAQSection';
 import { TracingBeam } from '@/components/CustomSoftwareServicePage/ProcessSection/TracingBeam';
-import PriceCalculator from '@/components/CustomSoftwareServicePage/PricingSection/PriceCalculator';
 
 import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
 
@@ -127,12 +126,6 @@ const CSSolPage = () => {
 
         {/* InSite Advantage Section */}
         <InSiteAdvantageSection />
-
-        {/* Price Calculator Section */}
-        <PriceCalculator />
-
-
-
 
 
         {/* FAQ Section */}

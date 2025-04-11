@@ -58,6 +58,7 @@ export const dataAnalysisTable = {
   // Industry/Application
   industryApplication: {
     title: "Industry/Application",
+    description: "Discounts available for academic research and non-profit projects.",
     options: {
       academic: { 
         name: "Academic", 
@@ -94,7 +95,8 @@ export const dataAnalysisTable = {
         multiplier: { value: 2.0 },
         description: "Custom software development is offered as a separate service, as is advanced Machine Learning and AI development"
       }
-    }
+    },
+    description: "Reusable deliverables carry premium value. Custom software and advanced Machine Learning and AI development are offered as a separate services depending on the scope of the project."
   },
   
   // Tools & Approaches
@@ -109,14 +111,16 @@ export const dataAnalysisTable = {
       customScripts: { 
         name: "Custom Scripts & Automated Pipelines (ETL, API integrations)", 
         cost: { min: 500, max: 5000 },
-        description: "Automation increases upfront cost but reduces long-term analysis cost."
+        description: "Automation increases upfront cost but reduces long-term analysis cost"
       }
-    }
+    },
+    description: "Automation increases upfront cost but reduces long-term analysis cost."
   },
   
   // Data Types
   dataTypes: {
     title: "Data Types",
+    description: "Larger and more complex data types require more resources and time to process, therefore incurring greater costs.",
     options: {
       numericText: { 
         name: "Numeric/Text", 
@@ -162,7 +166,7 @@ export const dataAnalysisTable = {
   // Features & Integrations
   features: {
     title: "Features & Integrations",
-    description: "Advanced integrations drive efficiency but add complexity.",
+    description: "Advanced integrations can drive efficiency but add to project complexity.",
     options: {
       dashboards: { 
         name: "Interactive Dashboards & Custom Visualizations", 
@@ -186,7 +190,7 @@ export const dataAnalysisTable = {
   // Ongoing Analysis Options
   ongoingAnalysis: {
     title: "Ongoing Analysis Options",
-    description: "Extra work beyond retainer is billed hourly. Expedited services and additional requests may incur extra fees.",
+    description: "Extra work beyond retainer is billed hourly; expedited services and additional requests may incur extra fees.",
     options: {
       none: { 
         name: "None", 

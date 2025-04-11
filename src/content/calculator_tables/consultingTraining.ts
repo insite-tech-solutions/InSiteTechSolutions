@@ -62,6 +62,7 @@ export const consultingTrainingTable = {
   // Client Size
   clientSize: {
     title: "Client Size",
+    description: "Larger organizations often require more complex solutions and broader implementation strategies.",
     options: {
       individual: { 
         name: "Individual", 
@@ -86,6 +87,7 @@ export const consultingTrainingTable = {
   // Delivery Format
   deliveryFormat: {
     title: "Delivery Format",
+    description: "On-Site sessions require additional travel and scheduling costs.",
     options: {
       remote: { 
         name: "Remote (virtual sessions, webinars, online resources)", 
@@ -102,6 +104,7 @@ export const consultingTrainingTable = {
   // Engagement Style
   engagementStyle: {
     title: "Engagement Style",
+    description: "Group sessions require additional materials and preparation time.",
     options: {
       oneOnOne: { 
         name: "One-on-One Sessions", 
@@ -138,6 +141,7 @@ export const consultingTrainingTable = {
   // Features & Integrations
   features: {
     title: "Features & Integrations",
+    description: "Each feature can be customized to match organizational needs and goals.",
     options: {
       workflowOptimization: { 
         name: "Workflow & Process Optimization", 
@@ -188,6 +192,7 @@ export const consultingTrainingTable = {
   // Ongoing Support Options
   ongoingSupport: {
     title: "Ongoing Support Options",
+    description: "Extra work beyond retainer is billed hourly; expedited services and additional requests may incur extra fees.",
     options: {
       none: { 
         name: "None", 
