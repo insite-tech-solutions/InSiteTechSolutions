@@ -17,6 +17,9 @@ import { TracingBeam } from '@/components/CustomSoftwareServicePage/ProcessSecti
 
 import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
 
+import FinalCTASection from '@/components/CustomSoftwareServicePage/CTAsection/ctaSection';
+
+import FooterSection from '@/components/CustomSoftwareServicePage/SiteFooter/FooterSection';
 
 
 const HeroSection: React.FC = () => {
@@ -64,30 +67,6 @@ const HeroSection: React.FC = () => {
   );
 };
 
-const FinalCTASection: React.FC = () => {
-  return (
-    <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-24 px-6 flex items-center justify-center">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-4 drop-shadow-lg">
-          Ready to Transform Your Business?
-        </h2>
-        <p className="text-xl md:text-2xl mb-8 drop-shadow-lg">
-          Let&apos;s discuss how custom software can streamline your operations and drive growth.
-        </p>
-        <Link
-          href="/contact"
-          className="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
-        >
-          Schedule Free Consultation
-        </Link>
-      </div>
-      {/* Decorative Background Shapes */}
-      {/* <div className="absolute top-0 left-0 w-full h-full opacity-20"> */}
-        {/* Add any decorative SVGs or shapes here for visual enhancement */}
-      {/* </div> */}
-    </section>
-  );
-};
 
 
 const CSSolPage = () => {
@@ -135,6 +114,7 @@ const CSSolPage = () => {
         <FinalCTASection />
 
 
+        <FooterSection />
 
         </div>
 

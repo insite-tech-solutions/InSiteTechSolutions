@@ -769,7 +769,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
 
   return (
     <Card className="m-10 w-full max-w-4xl mx-auto shadow-xl bg-white border-0 overflow-hidden">
-      <CardHeader className="bg-gradient-to-br from-blue-600 to-blue-800 text-white border-b-0 pb-6">
+      <CardHeader className="bg-gradient-to-br from-blue-600 to-blue-700 text-white border-b-0 pb-6">
         <div className="flex items-center gap-3">
           <Calculator className="h-10 w-10" />
           <CardTitle className="text-2xl font-bold">Service Price Calculator</CardTitle>

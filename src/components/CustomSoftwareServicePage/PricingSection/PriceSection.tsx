@@ -63,7 +63,7 @@ const PriceFactor: React.FC<PriceFactorProps> = ({ title, items, icon: Icon }) =
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-all"
+      className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg hover:border-blue-500 transition-all"
     >
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 rounded-lg bg-blue-100">
@@ -124,7 +124,7 @@ const PriceSection: React.FC = () => {
           variants={staggerChildren}
         >
           {/* Section Header */}
-          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
             <h2 className="text-4xl font-bold mb-6 text-gray-900">
               Determining Project Cost
             </h2>
