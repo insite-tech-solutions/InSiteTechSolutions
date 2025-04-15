@@ -73,9 +73,9 @@ const ProcessSection: React.FC = () => {
       const lis = liRefs.current[index];
       const timeline = timelineRefs.current[index];
 
-      if (icon) gsap.set(icon, { opacity: 0, scale: 0.8 });
+      if (icon) gsap.set(icon, { opacity: 0, scale: 0.75 });
       if (title) gsap.set(title, { opacity: 0, y: 20 });
-      if (divider) gsap.set(divider, { width: 0 });
+      if (divider) gsap.set(divider, { opacity: 0, width: 0 });
       if (desc) gsap.set(desc, { opacity: 0, y: 20 });
       if (list) gsap.set(list, { opacity: 0 });
       lis.forEach(li => {
@@ -112,6 +112,7 @@ const ProcessSection: React.FC = () => {
         height: () => cardDimensionsRef.current[index]?.height || '200px',
         borderRadius: '0.75rem',
         backgroundColor: 'rgba(255,255,255,0.8)',
+        backdropFilter: 'blur(8px)',
         duration: 0.3,
         transformOrigin: 'center center',
         y: (index, element) => {
@@ -126,7 +127,6 @@ const ProcessSection: React.FC = () => {
         boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
         onComplete: () => {
           gsap.set(circle, {
-            backdropFilter: 'blur(8px)',
             padding: '1.5rem'
           });
         },
@@ -143,32 +143,32 @@ const ProcessSection: React.FC = () => {
       const animationDelay = 0.1;
       tl.addLabel("startChildren", `+=${animationDelay}`)
         .to(icon,
-          { opacity: 1, scale: 1, duration: 0.4, ease: "power1.out" },
+          { opacity: 1, scale: 1, duration: 0.3, ease: "power1.out" },
           "startChildren"
         )
         .to(title,
-          { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" },
-          "<+0.1"
+          { opacity: 1, y: 0, duration: 0.3, ease: "power1.out" },
+          "<+0.05"
         )
         .to(divider,
-          { width: "calc(100% + 1.3rem)", duration: 0.7, ease: "power1.inOut" },
-          "<+0.1"
+          { opacity: 1, width: "calc(100% + 1.15rem)", duration: 0.6, ease: "power1.inOut" },
+          "<+0.05"
         )
         .to(desc,
-          { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" },
-          "<+0.2"
+          { opacity: 1, y: 0, duration: 0.3, ease: "power1.out" },
+          "<+0.15"
         )
         .to(list,
-          { opacity: 1, duration: 0.4, ease: "power1.out" },
-          "<+0.2"
+          { opacity: 1, duration: 0.3, ease: "power1.out" },
+          "<+0.15"
         )
         .to(lis,
           { opacity: 1, x: 0, duration: 0.3, ease: "power1.out", stagger: 0.1 },
           "<"
         )
         .to(timeline,
-          { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" },
-          "<+0.2"
+          { opacity: 1, y: 0, duration: 0.3, ease: "power1.out" },
+          "<+0.15"
         );
     });
 
@@ -351,11 +351,11 @@ const ProcessSection: React.FC = () => {
                 zIndex: 10
               }}
             >
-              <div className="container mx-auto px-6 lg:px-16 pb-16">
+              <div className="container mx-auto px-6 lg:px-16 pb-0 lg:pb-16">
                 <div
                   className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 max-w-4xl mx-auto shadow-md border border-blue-600"
                 >
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-200 mb-4">
                     We cannot provide exact timelines until we have a well-defined
                     project and plan. Projects can range from a few weeks to several
                     months; however, as a simple reference point, most small business
