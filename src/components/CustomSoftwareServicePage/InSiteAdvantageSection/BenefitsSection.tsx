@@ -29,7 +29,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
 export const BenefitsSection: React.FC = () => {
   return (
     <div className="container mx-auto">
-      <h1 className="text-black text-3xl font-bold text-center my-8">Competitive Advantages and Client Benefits</h1>
+      <h1 className="text-black text-3xl font-bold text-center my-2">Competitive Advantages and Client Benefits</h1>
       <Timeline items={timelineItems} />
     </div>
   );

@@ -5,9 +5,11 @@ import IndustrySolutions from '@/components/CustomSoftwareServicePage/Applicatio
 
 const ApplicationsSection: React.FC = () => {
   return (
-    <section className="py-24 bg-gray-50 relative overflow-hidden">
+    <section className="py-2 bg-gray-50 relative overflow-hidden">
       <ApplicationCategories />
-      <IndustrySolutions />
+      <div className="p-6 mt-4">
+        <IndustrySolutions />
+      </div>
     </section>
   )
 }

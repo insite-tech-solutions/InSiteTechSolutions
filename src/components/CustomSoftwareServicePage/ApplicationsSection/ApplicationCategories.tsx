@@ -114,17 +114,17 @@ const ApplicationCategories: React.FC = () => {
         variants={staggerChildren}
       >
         {/* Section Header */}
-        <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold mb-6 text-gray-50">
+        <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
+          <h2 className="text-4xl font-bold mt-6 mb-6 text-gray-50">
             Empowering Businesses Across Diverse Sectors
           </h2>
-          <p className="text-lg text-gray-100 leading-relaxed">
+          <p className="max-w-3xl mx-auto text-lg text-gray-100 leading-relaxed">
             Our custom software solutions cater to a wide range of industries, providing specialized tools that address unique challenges and drive innovation. Our digital strategies help clients by enhancing their:
           </p>
         </motion.div>
 
         {/* Core Services */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-8 mb-2">
           {solutions.map((solution, index) => (
             <SolutionCategory key={index} {...solution} />
           ))}

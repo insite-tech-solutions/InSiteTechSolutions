@@ -68,7 +68,7 @@ const KeyBenefits: React.FC = () => {
         background={
           // Optional: Add a background icon or image if desired
           // Example with an icon:
-          <MonitorCog className="text-blue-600" width={400} height={375} strokeWidth={1.5} />
+          <MonitorCog className="text-medium-blue-alt" width={400} height={375} strokeWidth={1.5} />
         }
         // Optional: Pass additional carousel parameters if needed
         // carouselParams={{ /* your params here */ }}
@@ -83,7 +83,7 @@ const KeyBenefits: React.FC = () => {
           duration: 0.6,
           ease: 'easeOut',
         }}
-        className="bg-blue-600 text-white rounded-xl p-8 text-center mt-12 shadow-lg"
+        className="bg-medium-blue-alt text-white rounded-xl p-8 text-center mt-12 shadow-lg"
       >
         <div className="flex items-center justify-center gap-2 mb-4">
           {/* You can choose an appropriate icon here */}
@@ -93,7 +93,7 @@ const KeyBenefits: React.FC = () => {
         <p className="mb-6 text-blue-100">
           Interested in more advantages? Contact us to discover how our solutions can further benefit your business.
         </p>
-        <button className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+        <button className="inline-flex items-center gap-2 bg-white text-medium-blue-alt px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
           Get in Touch
           {/* You can use any appropriate icon */}
           <Shield className="h-5 w-5" />

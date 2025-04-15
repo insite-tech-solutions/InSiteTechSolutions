@@ -32,7 +32,7 @@ const ServiceScopeSection: React.FC = () => {
     <section className="p-2 bg-gray-50">
 
       <CoreServices />
-      <div className="p-6">
+      <div className="p-6 mt-6">
         <KeyBenefits />
         <motion.div
           variants={fadeInUp}

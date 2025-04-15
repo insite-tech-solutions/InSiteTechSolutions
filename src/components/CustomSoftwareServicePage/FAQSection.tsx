@@ -126,15 +126,15 @@ const FAQSection: React.FC = () => {
   ]
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="pb-6 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerChildren}>
           {/* Section Header */}
-          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-block px-3 py-1 bg-blue-50 rounded-full text-blue-600 text-md font-medium mb-4">
+          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
+            <div className="inline-block px-3 py-1 bg-blue-50 rounded-full text-blue-600 text-md font-medium mb-6">
               Frequently Asked Questions (FAQs)
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Got Questions? We've Got Answers</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Got Questions? We've Got Answers</h2>
             <p className="text-lg text-gray-600">
               Find quick answers to commonly asked questions about our services and process.
             </p>

@@ -13,6 +13,8 @@ import {
   ChevronUp,
 } from 'lucide-react'
 
+import TailwindButton from '@/components/tailwindButton'
+
 // Types
 interface StatisticProps {
   value: number
@@ -91,7 +93,7 @@ const Statistic: React.FC<StatisticProps> = ({ value, suffix = '', prefix = '', 
       variants={fadeInUp}
       className="text-center"
     >
-      <div className="text-4xl font-bold text-blue-600">
+      <div className="text-4xl font-bold text-medium-blue-alt">
         {prefix}{count}{suffix}
       </div>
       <p className="mt-2 text-gray-600">{label}</p>
@@ -105,12 +107,12 @@ const TrendCard: React.FC<TrendCardProps> = ({ icon: Icon, title, description })
   return (
     <motion.div
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-blue-600 transition-all hover:shadow-lg p-4"
+      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-medium-blue-alt transition-all hover:shadow-lg p-4"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Icon className="h-6 w-6 text-blue-600" />
+          <Icon className="h-6 w-6 text-medium-blue-alt" />
           <h4 className="text-gray-700">{title}</h4>
         </div>
         {isOpen ? (
@@ -174,7 +176,7 @@ const InlineStat: React.FC<InlineStatProps> = ({ value, suffix = '', prefix = ''
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="text-2xl font-bold text-blue-600 inline-flex items-center"
+      className="text-2xl font-bold text-medium-blue-alt inline-flex items-center"
     >
       {prefix}{count}{suffix}
     </motion.span>
@@ -239,7 +241,7 @@ const MarketInsightCard: React.FC<MarketInsightCardProps> = ({ insights }) => (
           variants={fadeInUp}
           className="flex items-start gap-3"
         >
-          <CheckCircle className="h-5 w-5 text-blue-600 mt-2 flex-shrink-0" />
+          <CheckCircle className="h-5 w-5 text-medium-blue-alt mt-2 flex-shrink-0" />
           <span className="text-gray-700 text-lg">
             {item.content}
           </span>
@@ -274,7 +276,7 @@ const ValuePropSection: React.FC = () => {
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="mt-16 mb-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -284,7 +286,7 @@ const ValuePropSection: React.FC = () => {
         >
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl font-bold mb-8 text-center text-gray-900"
+            className="text-4xl font-bold mb-12 text-center text-gray-900"
           >
             How Custom Software Can Help You
           </motion.h2>
@@ -331,16 +333,13 @@ const ValuePropSection: React.FC = () => {
 
               <motion.div
                 variants={fadeInUp}
-                className="bg-blue-600 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                className="bg-gradient-to-br from-medium-blue-alt to-dark-blue-alt text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 <h3 className="text-2xl font-semibold mb-4">Ready to Optimize Your Operations?</h3>
                 <p className="mb-6">
                   Let&apos;s develop a custom software solution tailored to your unique business needs.
                 </p>
-                <button className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-                  Get Started
-                  <ArrowRight className="h-5 w-5" />
-                </button>
+                <TailwindButton href="/contact" className="bg-gray-50 rounded-lg shadow-md transition-all duration-200">Get Started</TailwindButton>
               </motion.div>
             </div>
           </div>

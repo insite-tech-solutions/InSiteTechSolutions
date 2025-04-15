@@ -484,7 +484,7 @@ const calculateCosts = () => {
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                  <Info className="h-4 w-4 text-blue-600 hover:text-blue-700 transition-colors" />
+                  <Info className="h-4 w-4 text-medium-blue-alt hover:text-blue-700 transition-colors" />
                 </Button>
               </PopoverTrigger>
               <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
@@ -551,7 +551,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                <Info className="h-4 w-4 text-blue-600 hover:text-blue-700 transition-colors" />
+                <Info className="h-4 w-4 text-medium-blue-alt hover:text-blue-700 transition-colors" />
               </Button>
             </PopoverTrigger>
             <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
@@ -589,7 +589,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
                 id={`${sectionKey}_${key}`}
                 checked={isSelected}
                 onCheckedChange={() => handleMultiOptionToggle(sectionKey, key)}
-                className="mt-1 h-5 w-5 border-gray-300 text-blue-600 rounded"
+                className="mt-1 h-5 w-5 border-gray-300 text-medium-blue-alt rounded"
               />
               <div className="flex-1">
                 <Label htmlFor={`${sectionKey}_${key}`} className="font-medium text-gray-800 cursor-pointer">
@@ -650,7 +650,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
                       href={option.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-2 transition-colors"
+                      className="text-sm text-medium-blue-alt hover:text-blue-800 flex items-center gap-2 transition-colors"
                     >
                       {option.name}
                       <ExternalLink className="h-4 w-4" />
@@ -693,7 +693,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                <Info className="h-4 w-4 text-blue-600 hover:text-blue-700 transition-colors" />
+                <Info className="h-4 w-4 text-medium-blue-alt hover:text-blue-700 transition-colors" />
               </Button>
             </PopoverTrigger>
             <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
@@ -713,7 +713,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
             onClick={() => handleOptionChange(sectionKey, key)}
           >
             <div className="h-4 w-4 rounded-full border border-gray-300 flex items-center justify-center">
-              {selectedKey === key && <div className="h-2 w-2 rounded-full bg-blue-600" />}
+              {selectedKey === key && <div className="h-2 w-2 rounded-full bg-medium-blue-alt" />}
             </div>
             <Label className="font-medium text-gray-800 cursor-pointer flex-1">
               {option.name}
@@ -768,126 +768,133 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
   const organizedSections = getOrganizedSections()
 
   return (
-    <Card className="m-10 w-full max-w-4xl mx-auto shadow-xl bg-white border-0 overflow-hidden">
-      <CardHeader className="bg-gradient-to-br from-blue-600 to-blue-700 text-white border-b-0 pb-6">
-        <div className="flex items-center gap-3">
-          <Calculator className="h-10 w-10" />
-          <CardTitle className="text-2xl font-bold">Service Price Calculator</CardTitle>
-        </div>
-        <p className="text-blue-100 mt-2 text-sm">Configure your service options to get an instant price estimate</p>
-      </CardHeader>
-
-      <CardContent className="p-0">
-        {/* Only show service selection if fixedService is not provided */}
-        {!fixedService && (
-          <div className="bg-gray-200 p-6 border border-gray-300">
-            {/* Service Selection */}
-            <div className="mb-0">
-              <Label className="text-gray-800 font-medium mb-2 block">Select Service</Label>
-              <Select value={calculatorState.service} onValueChange={handleServiceChange}>
-                <SelectTrigger className="w-full bg-white border-gray-200 text-gray-800 hover:border-gray-300 transition-colors">
-                  <SelectValue placeholder="Select a service" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border border-gray-200">
-                  <SelectItem value="webAppDevelopment" className="text-gray-800">
-                    Web & App Development
-                  </SelectItem>
-                  <SelectItem value="customSoftwareSolutions" className="text-gray-800">
-                    Custom Software Solutions
-                  </SelectItem>
-                  <SelectItem value="seoOnlineMarketing" className="text-gray-800">
-                    SEO & Online Marketing
-                  </SelectItem>
-                  <SelectItem value="graphicDesignBranding" className="text-gray-800">
-                    Graphic Design & Branding
-                  </SelectItem>
-                  <SelectItem value="dataAnalysis" className="text-gray-800">
-                    Data Analysis
-                  </SelectItem>
-                  <SelectItem value="aiAutomation" className="text-gray-800">
-                    AI & Automation
-                  </SelectItem>
-                  <SelectItem value="consultingTraining" className="text-gray-800">
-                    Consulting & Training
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+    <div className="space-y-6">
+      <div className="bg-blue-50 border border-blue-100 rounded-lg p-6 text-gray-700 text-sm leading-relaxed">
+        <p>
+          The interactive calculator below is not a formal quote and does not imply a commitment to accept any project. It&apos;s a helpful tool designed to provide transparency, set expectations, and give potential clients a general idea of their investment range. If you&apos;re unsure about your project or the estimated costs, feel free to reach out for a free consultation, as we will do our best to find a solution which meets your goals and budget. We offer various pricing models and payment options to best suit your needs.
+        </p>
+      </div>
+      <Card className="m-10 w-full max-w-4xl mx-auto shadow-xl bg-white border-0 overflow-hidden">
+        <CardHeader className="bg-gradient-to-br from-medium-blue to-blue-800 text-white border-b-0 pb-6">
+          <div className="flex items-center gap-3">
+            <Calculator className="h-10 w-10" />
+            <CardTitle className="text-2xl font-bold">Service Price Calculator</CardTitle>
           </div>
-        )}
+          <p className="text-blue-100 mt-2 text-sm">Configure your service options to get an instant price estimate</p>
+        </CardHeader>
 
-        <div className="p-6">
-          {/* Render organized sections */}
-          {Object.entries(organizedSections).map(
-            ([categoryName, sections]) =>
-              sections.length > 0 && (
-                <div key={categoryName} className="mb-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <h3 className="text-lg font-bold text-gray-900">{categoryName}</h3>
-                  </div>
-
-                  <div className="space-y-4">
-                    {sections.map(([sectionKey, section]: SectionEntry) => (
-                      <div key={sectionKey}>{renderSection(sectionKey, section)}</div>
-                    ))}
-                  </div>
-
-                  <Separator className="my-8 bg-gray-200" />
-                </div>
-              ),
+        <CardContent className="p-0">
+          {/* Only show service selection if fixedService is not provided */}
+          {!fixedService && (
+            <div className="bg-gray-200 p-6 border border-gray-300">
+              {/* Service Selection */}
+              <div className="mb-0">
+                <Label className="text-gray-800 font-medium mb-2 block">Select Service</Label>
+                <Select value={calculatorState.service} onValueChange={handleServiceChange}>
+                  <SelectTrigger className="w-full bg-white border-gray-200 text-gray-800 hover:border-gray-300 transition-colors">
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200">
+                    <SelectItem value="webAppDevelopment" className="text-gray-800">
+                      Web & App Development
+                    </SelectItem>
+                    <SelectItem value="customSoftwareSolutions" className="text-gray-800">
+                      Custom Software Solutions
+                    </SelectItem>
+                    <SelectItem value="seoOnlineMarketing" className="text-gray-800">
+                      SEO & Online Marketing
+                    </SelectItem>
+                    <SelectItem value="graphicDesignBranding" className="text-gray-800">
+                      Graphic Design & Branding
+                    </SelectItem>
+                    <SelectItem value="dataAnalysis" className="text-gray-800">
+                      Data Analysis
+                    </SelectItem>
+                    <SelectItem value="aiAutomation" className="text-gray-800">
+                      AI & Automation
+                    </SelectItem>
+                    <SelectItem value="consultingTraining" className="text-gray-800">
+                      Consulting & Training
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           )}
 
-          {/* Price Summary */}
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 shadow-sm">
-            <div className="flex items-center gap-2 mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Estimated Price Range</h2>
-              <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200 border-0">Based on your selections</Badge>
-            </div>
-
-            {/* One-time costs */}
-            <div className="space-y-3 mb-4 mt-4 pt-4 border-t border-gray-200">
-              <div className="flex justify-between text-gray-900">
-                <span className="font-medium font-semibold">Project Cost:</span>
-                <span className="font-bold text-lg">
-                  ${costs.oneTime.min.toLocaleString()} – ${costs.oneTime.max.toLocaleString()}
-                </span>
-              </div>
-            </div>
-
-            {/* Recurring costs */}
-            {costs.recurring.length > 0 && (
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <h4 className="mb-3 font-semibold text-gray-900">Other Costs:</h4>
-                <div className="space-y-2">
-                  {costs.recurring.map((item, index) => (
-                    <div key={index} className="flex justify-between text-gray-800">
-                      <span>{item.name}:</span>
-                      <span className="font-medium px-2">
-                        ${item.min.toLocaleString()} – ${item.max.toLocaleString()} /{item.period}
-                      </span>
+          <div className="p-6">
+            {/* Render organized sections */}
+            {Object.entries(organizedSections).map(
+              ([categoryName, sections]) =>
+                sections.length > 0 && (
+                  <div key={categoryName} className="mb-8">
+                    <div className="flex items-center gap-2 mb-4">
+                      <h3 className="text-lg font-bold text-gray-900">{categoryName}</h3>
                     </div>
-                  ))}
-                </div>
-              </div>
+
+                    <div className="space-y-4">
+                      {sections.map(([sectionKey, section]: SectionEntry) => (
+                        <div key={sectionKey}>{renderSection(sectionKey, section)}</div>
+                      ))}
+                    </div>
+
+                    <Separator className="my-8 bg-gray-200" />
+                  </div>
+                ),
             )}
 
-            <p className="text-sm text-gray-600 mt-6 italic">
-              This is just an estimated price range. Contact us for a detailed estimate tailored to your specific needs.
-            </p>
-          </div>
-        </div>
-      </CardContent>
+            {/* Price Summary */}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <h2 className="text-xl font-bold text-gray-900">Estimated Price Range</h2>
+                <Badge className="bg-blue-100 text-dark-blue-alt hover:bg-blue-200 border-0">Based on your selections</Badge>
+              </div>
 
-      <CardFooter className="p-6 bg-white border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-gray-600 text-center sm:text-left">
-          Ready to get started? Request a detailed estimate and free consultation.
-        </p>
-        <Button size="lg" className="px-8 bg-blue-600 hover:bg-blue-700 text-white transition-colors w-full sm:w-auto">
-          Request Detailed Estimate
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </CardFooter>
-    </Card>
+              {/* One-time costs */}
+              <div className="space-y-3 mb-4 mt-4 pt-4 border-t border-gray-200">
+                <div className="flex justify-between text-gray-900">
+                  <span className="font-medium font-semibold">Project Cost:</span>
+                  <span className="font-bold text-lg">
+                    ${costs.oneTime.min.toLocaleString()} – ${costs.oneTime.max.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
+              {/* Recurring costs */}
+              {costs.recurring.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <h4 className="mb-3 font-semibold text-gray-900">Other Costs:</h4>
+                  <div className="space-y-2">
+                    {costs.recurring.map((item, index) => (
+                      <div key={index} className="flex justify-between text-gray-800">
+                        <span>{item.name}:</span>
+                        <span className="font-medium px-2">
+                          ${item.min.toLocaleString()} – ${item.max.toLocaleString()} /{item.period}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <p className="text-sm text-gray-600 mt-6 italic">
+                This is just an estimated price range. Contact us for a detailed estimate tailored to your specific needs.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+
+        <CardFooter className="p-6 bg-white border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-600 text-center sm:text-left">
+            Ready to get started? Request a detailed estimate and free consultation.
+          </p>
+          <Button size="lg" className="px-8 bg-medium-blue-alt hover:bg-blue-700 text-white transition-colors w-full sm:w-auto">
+            Request Detailed Estimate
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }
 

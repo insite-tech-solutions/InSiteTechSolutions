@@ -39,6 +39,8 @@ const config: Config = {
         'dark-blue': '#1472bb',
         'medium-blue': '#2398ff',
         'light-blue': '#2bc0f8',
+        'dark-blue-alt': '#1764b8',
+        'medium-blue-alt': '#1d64cd',
       },
       fontFamily: {
         sans: ['var(--font-open-sans)', 'var(--font-noto-sans)', 'var(--font-lato)', 'var(--font-roboto)', 'sans-serif'],

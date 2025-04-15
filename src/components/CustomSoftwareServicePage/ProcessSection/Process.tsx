@@ -179,8 +179,8 @@ const ProcessSection: React.FC = () => {
 
   return (
     <div className="bg-gray-50">
-      <div className="text-center max-w-4xl mx-auto py-12">
-        <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
+      <div className="text-center max-w-4xl mx-auto py-16">
+        <h2 className="text-5xl font-extrabold text-gray-900 mb-8">
           Our Approach
         </h2>
         <p className="text-xl text-gray-700 leading-relaxed">

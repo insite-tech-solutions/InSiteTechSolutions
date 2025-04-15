@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react"
 
 const FinalCTASection: React.FC = () => {
   return (
-    <div className="bg-gray-50 pb-24">
+    <div className="bg-gray-50 pb-24 py-12">
       <section className="container mx-auto relative rounded-2xl p-6 overflow-hidden bg-gradient-to-br from-medium-blue to-blue-800 border-2 border-medium-blue shadow-lg text-white py-16 px-6">
         {/* Decorative Background Elements */}  
         <div className="absolute inset-0 overflow-hidden opacity-10">
@@ -44,7 +44,11 @@ const FinalCTASection: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <motion.div 
+                whileHover={{ scale: 1.03 }} 
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Link
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-white text-blue-700 font-medium py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"

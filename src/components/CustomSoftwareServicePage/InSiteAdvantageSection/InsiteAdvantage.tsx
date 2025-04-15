@@ -154,7 +154,7 @@ const InSiteAdvantageSection: React.FC = () => {
   ]
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section className="pt-12 pb-6 bg-gray-50">
       <div className="container rounded-xl mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600">
         <motion.div
           initial="hidden"
@@ -163,8 +163,8 @@ const InSiteAdvantageSection: React.FC = () => {
           variants={staggerChildren}
         >
           {/* Section Header */}
-          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-10">
-            <h2 className="text-4xl font-bold mb-6 text-gray-50">
+          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-4xl font-bold mt-6 mb-6 text-gray-50">
               The InSite Advantage
             </h2>
             <p className="text-lg text-gray-100 leading-relaxed">
@@ -175,12 +175,12 @@ const InSiteAdvantageSection: React.FC = () => {
           {/* What Sets Us Apart */}
           <motion.h3 
             variants={fadeInUp}
-            className="text-2xl font-semibold text-gray-100 text-center mb-8"
+            className="text-2xl font-semibold text-gray-100 text-center mb-6"
           >
             What Sets Us Apart
           </motion.h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-2">
             {advantages.map((advantage, index) => (
               <AdvantageCard key={index} {...advantage} />
             ))}
@@ -218,8 +218,9 @@ const InSiteAdvantageSection: React.FC = () => {
               </button>
             </motion.div>
           </div> */}
-
-          <BenefitsSection />
+          <div className="pt-4 mt-10">
+            <BenefitsSection />
+          </div>
         
       </div>
     </section>

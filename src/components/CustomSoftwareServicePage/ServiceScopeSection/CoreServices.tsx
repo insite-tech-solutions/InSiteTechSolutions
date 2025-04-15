@@ -26,8 +26,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all group">
       <div className="flex items-center gap-4 mb-4">
-        <div className="p-3 rounded-full bg-blue-100 group-hover:bg-blue-600 transition-colors">
-          <Icon className="h-6 w-6 text-blue-600 group-hover:text-white" />
+        <div className="p-3 rounded-full bg-blue-100 group-hover:bg-medium-blue-alt transition-colors">
+          <Icon className="h-6 w-6 text-medium-blue-alt group-hover:text-white" />
         </div>
         <h3 className="text-xl font-semibold text-gray-50">{title}</h3>
       </div>
@@ -35,7 +35,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       <ul className="space-y-2">
         {benefits.map((benefit, index) => (
           <li key={index} className="flex items-start gap-2">
-            <CheckCircle className="h-5 w-5 rounded-full bg-blue-100 text-blue-600 mt-1 flex-shrink-0" />
+            <CheckCircle className="h-5 w-5 rounded-full bg-blue-100 text-medium-blue-alt mt-1 flex-shrink-0" />
             <span className="text-gray-100">{benefit}</span>
           </li>
         ))}
@@ -163,7 +163,7 @@ const CoreServices: React.FC = () => {
           <div
             ref={pinnedRef}
             // We set a fixed height so it only shows ~1 translucent card by default
-            className="rounded-xl w-full mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600 
+            className="rounded-xl w-full mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-medium-blue-alt 
             shadow-2xl overflow-hidden flex flex-col lg:flex-row"
             style={{
               // Subtract hardcoded navbar height and padding (top+bottom) from viewport height

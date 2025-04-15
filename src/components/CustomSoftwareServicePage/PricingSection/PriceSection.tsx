@@ -8,11 +8,6 @@ import {
   Clock,
   ArrowRight,
   ExternalLink,
-  Calculator,
-  DollarSign,
-  ShieldCheck,
-  Gauge,
-  Settings
 } from 'lucide-react'
 import PriceCalculator from '@/components/CustomSoftwareServicePage/PricingSection/PriceCalculator';
 
@@ -93,7 +88,6 @@ const PriceSection: React.FC = () => {
         "Number of features and modules",
         "Level of customization required",
         "Integration with existing systems",
-        "Maintenance and update requirements"
       ]
     },
     {
@@ -101,7 +95,8 @@ const PriceSection: React.FC = () => {
       icon: Code,
       items: [
         "Choice of technology stack and platforms",
-        "Advanced functionalities and third-party integrations"
+        "Advanced functionalities and third-party integrations", 
+        "Performance specifications"
       ]
     },
     {
@@ -109,13 +104,14 @@ const PriceSection: React.FC = () => {
       icon: Clock,
       items: [
         "Project urgency and deadlines",
-        "Number of revisions and iterations"
+        "Number of revisions and iterations", 
+        "Maintenance and support requirements"
       ]
     }
   ]
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-8 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -155,42 +151,13 @@ const PriceSection: React.FC = () => {
           {/* Long-term Value and True Cost */}
           <motion.div 
             variants={fadeInUp}
-            className="bg-blue-50 rounded-lg p-8 max-w-4xl mx-auto"
+            className="bg-blue-50 border border-blue-100 rounded-lg p-8 max-w-4xl mx-auto"
           >
             <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-              Long-term Value
-            </h3>
-            <p className="text-gray-700 mb-4">
-              Investing in custom software offers substantial long-term benefits, including:
-            </p>
-            <ul className="space-y-2 mb-6">
-              <li className="flex items-start gap-2 text-gray-700">
-                <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
-                <span><strong>Reduced Operational Costs:</strong> Streamline processes and eliminate inefficiencies to lower costs.</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-700">
-                <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
-                <span><strong>Improved Efficiency:</strong> Automated workflows and optimized systems enhance productivity.</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-700">
-                <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
-                <span><strong>Competitive Advantage:</strong> Unique, tailored solutions give you an edge over competitors.</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-700">
-                <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
-                <span><strong>Scalability for Growth:</strong> Software that grows with your business, accommodating increasing demands and expanding functionalities.</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-700">
-                <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
-                <span><strong>Enhanced Data Security:</strong> Robust security measures protect your data and ensure compliance with industry standards.</span>
-              </li>
-            </ul>
-
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-              The True Cost of Custom Software
+              Long-Term Value
             </h3>
             <p className="text-gray-700 mb-6">
-              While initial development costs may seem higher compared to off-the-shelf solutions, the long-term savings and efficiency gains far outweigh the investment. Custom software eliminates the need for multiple subscriptions, reduces manual processes, and enhances overall productivity.
+            The true cost of custom software extends beyond development expenses. While initial development costs may seem higher compared to off-the-shelf solutions, the long-term savings and efficiency gains far outweigh the investment. Custom software eliminates the need for multiple subscriptions, reduces manual processes, and enhances overall productivity. It’s more than a one-time investment—it’s a foundation for long-term growth. By eliminating unnecessary subscriptions and automating key processes, custom solutions can significantly reduce operational costs over time while giving your business a competitive edge.
             </p>
             <a 
               href="/process"
