@@ -111,7 +111,7 @@ const PriceSection: React.FC = () => {
   ]
 
   return (
-    <section className="py-8 bg-gray-50">
+    <section className="py-8 mt-4 lg:mt-0 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"

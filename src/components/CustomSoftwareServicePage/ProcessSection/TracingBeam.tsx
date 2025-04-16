@@ -43,7 +43,7 @@ const TracingBeamComponent: React.FC<TracingBeamProps> = ({
 
   // Updated transforms to be [0,1] for simplicity and full sync with scroll
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [1, svgHeight]),
+    useTransform(scrollYProgress, [0, 1], [1, svgHeight + 50]),
     {
       stiffness: 1100,
       damping: 60,

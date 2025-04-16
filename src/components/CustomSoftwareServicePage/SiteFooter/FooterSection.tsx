@@ -59,10 +59,10 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 text-gray-300 w-full overflow-hidden">
       {/* Main Footer */}
-      <div className="container mx-auto px-6 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container mx-auto px-6 pt-16 pb-8 max-w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 w-full">
           {/* Company Info */}
           <motion.div
             initial="hidden"
@@ -151,23 +151,23 @@ const Footer: React.FC = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUpItem}
-            className="col-span-1 lg:col-span-1"
+            className="col-span-1 lg:col-span-1 w-full"
           >
             <h4 className="text-lg font-semibold text-white mb-6">Stay Updated</h4>
             <p className="mb-4 text-gray-400">
               Subscribe to our newsletter for the latest tech insights and company updates.
             </p>
-            <form className="mb-6">
-              <div className="flex flex-col sm:flex-row gap-2">
+            <form className="mb-6 w-full">
+              <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow"
+                  className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
                   required
                 />
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center justify-center"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center justify-center shrink-0"
                 >
                   Subscribe
                   <ArrowRight className="ml-2 h-4 w-4" />

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TracingBeam } from './TracingBeam';
@@ -8,6 +8,77 @@ import { processSteps } from './ProcessContent';
 import { Clock } from 'lucide-react';
 import { ExternalLink } from 'lucide-react';
 
+// Wrapper component that handles orientation changes
+const ProcessSectionWrapper: React.FC = () => {
+  const [orientationKey, setOrientationKey] = useState<string>(() => {
+    // Initialize with current orientation
+    return typeof window !== 'undefined' 
+      ? (window.innerWidth > window.innerHeight ? 'landscape' : 'portrait')
+      : 'portrait'; // Default for SSR
+  });
+  
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  
+  useEffect(() => {
+    // Function to detect orientation change
+    const handleOrientationChange = () => {
+      const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+      
+      if (newOrientation !== orientationKey) {
+        // Store scroll position
+        setScrollPosition(window.scrollY);
+        
+        // Change key to force remount
+        setOrientationKey(newOrientation);
+      }
+    };
+    
+    // Set up event listeners for orientation change detection
+    window.addEventListener('orientationchange', () => {
+      // Need a delay to get correct dimensions after orientation change
+      setTimeout(handleOrientationChange, 100);
+    });
+    
+    // Also handle regular resize that might be orientation changes
+    let prevWidth = window.innerWidth;
+    let prevHeight = window.innerHeight;
+    
+    const handleResize = () => {
+      // Only check on significant size changes
+      const widthChanged = Math.abs(window.innerWidth - prevWidth) > 100;
+      const heightChanged = Math.abs(window.innerHeight - prevHeight) > 100;
+      
+      if (widthChanged || heightChanged) {
+        prevWidth = window.innerWidth;
+        prevHeight = window.innerHeight;
+        handleOrientationChange();
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [orientationKey]); // Re-run if orientationKey changes
+  
+  // Restore scroll position after remount
+  useEffect(() => {
+    if (scrollPosition > 0) {
+      setTimeout(() => {
+        window.scrollTo(0, scrollPosition);
+      }, 50);
+    }
+  }, [orientationKey, scrollPosition]);
+  
+  return (
+    // Key change forces complete remount of ProcessSection
+    <ProcessSection key={orientationKey} />
+  );
+};
+
+// Original ProcessSection component with all GSAP animations
 const ProcessSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const measurementRef = useRef<HTMLDivElement>(null);
@@ -84,6 +155,9 @@ const ProcessSection: React.FC = () => {
       if (timeline) gsap.set(timeline, { opacity: 0, y: 20 });
     });
 
+    // Array to store all created timelines for cleanup
+    const timelines: gsap.core.Timeline[] = [];
+
     // Create scroll-triggered timelines
     processSteps.forEach((stepData, index) => {
       const circle = circleRefs.current[index];
@@ -101,27 +175,32 @@ const ProcessSection: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: circle,
-          start: 'center center',
+          start: 'center center+=48px', // Offset by half the header height (104px/2)
           toggleActions: 'play none reverse none',
         },
       });
+
+      timelines.push(tl); // Store the timeline for cleanup
 
       // Morph circle into card using measured dimensions for this step
       tl.to(circle, {
         width: () => cardDimensionsRef.current[index]?.width || '300px',
         height: () => cardDimensionsRef.current[index]?.height || '200px',
-        borderRadius: '0.75rem',
+        borderRadius: '0.75rem', // rounded-xl equivalent
         backgroundColor: 'rgba(255,255,255,0.8)',
         backdropFilter: 'blur(8px)',
-        duration: 0.3,
+        padding: '1rem', // p-4 equivalent - Apply padding during morph
+        duration: 0.3, // Slightly increased duration for smoother morph + padding
         transformOrigin: 'center center',
-        y: (index, element) => {
-          // Calculate offset to keep center position
+        y: (idx, element) => {
+          // Calculate vertical offset to keep the element centered during height change
           const finalHeight = parseFloat(cardDimensionsRef.current[index]?.height || '200');
           const initialHeight = element.offsetHeight;
-          return -((finalHeight - initialHeight) / 2) * 0.75;
+          // Offset is half the difference in height
+          return -((finalHeight - initialHeight) / 2) * 0.9;
         },
       })
+
       .to(circle, {
         border: '3px solid #2563eb',
         boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
@@ -174,6 +253,14 @@ const ProcessSection: React.FC = () => {
 
     return () => {
       resizeObserver.disconnect();
+      
+      // Kill all created timelines to prevent memory leaks
+      timelines.forEach(tl => tl.kill());
+      
+      // Kill all ScrollTriggers created by this component
+      ScrollTrigger.getAll().forEach(st => {
+        st.kill();
+      });
     };
   }, []);
 
@@ -189,20 +276,27 @@ const ProcessSection: React.FC = () => {
           flexibility for future growth:
         </p>
       </div>
-      <div ref={sectionRef} className="relative h-[400vh] md:h-[500vh]">
-        {/* Hidden measurement div with all steps */}
+      <div ref={sectionRef} className="relative h-[400vh] md:h-[450vh] pb-16">
+        {/*
+          Hidden measurement div:
+          - Contains clones of the final card state for each step.
+          - Used to accurately measure the required width/height for the morph animation *before* the animation runs.
+          - Uses styles that EXACTLY match the final animated state defined in the GSAP timeline below.
+          - opacity-0, pointer-events-none, absolute, -z-10 ensure it doesn't affect layout or interaction.
+        */}
         <div
           ref={measurementRef}
-          className="w-full md:w-1/2 mx-auto opacity-0 pointer-events-none absolute -z-10"
+          className="w-5/6 lg:w-1/2 mx-auto opacity-0 pointer-events-none absolute -z-10"
           aria-hidden="true"
         >
           {processSteps.map((step, index) => (
             <div
               key={index}
-              className="measurement-card relative bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg border-[3px] border-blue-600 mb-10"
+              className="measurement-card rounded-xl relative bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg border-[3px] border-blue-600 mb-10"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-900">
+                  {/* Placeholder for icon dimensions */}
                   <div className="h-7 w-7" />
                 </div>
                 <div>
@@ -342,42 +436,44 @@ const ProcessSection: React.FC = () => {
                 </div>
               );
             })}
-
-            <div 
-              className="absolute left-0 w-full bg-gray-50 flex flex-col justify-end"
-              style={{ 
-                top: `${((processSteps.length) / (processSteps.length + 1)) * 100}%`,
-                bottom: '0',
-                zIndex: 10
-              }}
-            >
-              <div className="container mx-auto px-6 lg:px-16 pb-0 lg:pb-16">
-                <div
-                  className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 max-w-4xl mx-auto shadow-md border border-blue-600"
-                >
-                  <p className="text-gray-200 mb-4">
-                    We cannot provide exact timelines until we have a well-defined
-                    project and plan. Projects can range from a few weeks to several
-                    months; however, as a simple reference point, most small business
-                    software projects are completed in 6–8 weeks, while larger, more
-                    complex solutions can range from 8–16+ weeks, depending on the
-                    complexity.
-                  </p>
-                  <a
-                    href="/about/process"
-                    className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium"
-                  >
-                    Learn more about our process
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </TracingBeam>
+
+        {/* Background element extending from last step to end - restoring the gray-50 background */}
+        <div
+          className="absolute left-0 w-full bg-gray-50 flex flex-col justify-end pb-16"
+          style={{ 
+            top: `${((processSteps.length) / (processSteps.length + 1)) * 99}%`,
+            bottom: '0',
+            zIndex: 15
+          }}
+        >
+          <div className="container mx-auto px-6 pt-8 mb-[-2.5rem] lg:pb-24">
+            <div
+              className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 max-w-4xl mx-auto shadow-md border border-blue-600"
+            >
+              <p className="text-gray-200 mb-4">
+                We cannot provide exact timelines until we have a well-defined
+                project and plan. Projects can range from a few weeks to several
+                months; however, as a simple reference point, most small business
+                software projects are completed in 6–8 weeks, while larger, more
+                complex solutions can range from 8–16+ weeks, depending on the
+                complexity.
+              </p>
+              <a
+                href="/about/process"
+                className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-400 font-medium"
+              >
+                Learn more about our process
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProcessSection;
+// Export the wrapper instead of the base component
+export default ProcessSectionWrapper;
