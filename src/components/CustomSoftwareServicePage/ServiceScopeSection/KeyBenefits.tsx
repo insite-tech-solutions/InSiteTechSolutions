@@ -12,8 +12,8 @@ import {
   Shield,
   MonitorCog,
 } from 'lucide-react';
-import CarouselSection from '@/components/CarouselSection';
-import BenefitsCard from '@/components/BenefitsCard';
+import CarouselSection from '@/components/reusable-components/carousel-section';
+import BenefitsCard from '@/components/reusable-components/benefits-card';
 
 const KeyBenefits: React.FC = () => {
   const benefits = [

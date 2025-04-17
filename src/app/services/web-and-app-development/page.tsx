@@ -4,7 +4,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import Header from '@/components/Header/Header';
+import Header from '@/components/site-header/header';
 import ValuePropSection from '@/components/WebAppServicePage/ValuePropSection';
 import ServiceScopeSection from '@/components/WebAppServicePage/ServiceScopeSection';
 import ApplicationsSection from '@/components/WebAppServicePage/ApplicationsSection';

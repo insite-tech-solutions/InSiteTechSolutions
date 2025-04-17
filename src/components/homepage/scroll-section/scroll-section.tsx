@@ -6,7 +6,6 @@ import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { getHeaderHeight } from '@/lib/utils';
 
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -179,22 +178,32 @@ const ScrollAnimationSection: React.FC = () => {
               </div>
             ))}
             {/* Left Image Wrapper */}
-            <Image
-              ref={imageRefLeft}
-              src="/Magnifying glass left.svg"
-              alt="Magnifying glass left"
-              width={275}
-              height={275}
+            <div 
+              className="absolute"
               style={{
-                width: 'clamp(115px, 25vw, 275px)', // Responsive width
-                height: 'auto',                      // Maintain aspect ratio
-                objectFit: 'contain',
                 top: '50%',
-                right: 0, // Align to the right
-                transform: 'translateY(-44%)',
+                right: 0,
+                transform: 'translateY(-50%)',
+                width: 'clamp(115px, 25vw, 275px)',
+                height: 'clamp(115px, 25vw, 275px)',
               }}
-              className="absolute z-5 drop-shadow-lg"
-            />
+            >
+              <Image
+                ref={imageRefLeft}
+                src="/Magnifying glass left.svg"
+                alt="Magnifying glass left"
+                width={275}
+                height={275}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain',
+                  position: 'relative',
+                  top: '-36%', // Fine-tune the vertical alignment within the wrapper
+                }}
+                className="drop-shadow-lg"
+              />
+            </div>
           </div>
           {/* Right box covering the right half */}
           <div className="absolute right-0 top-0 h-full w-1/2 bg-white overflow-hidden">
@@ -217,22 +226,32 @@ const ScrollAnimationSection: React.FC = () => {
               </div>
             ))}
             {/* Right Image Wrapper */}
-            <Image
-              ref={imageRefRight}
-              src="/Magnifying glass right.svg"
-              alt="Magnifying glass right"
-              width={275}
-              height={275}
+            <div 
+              className="absolute"
               style={{
-                width: 'clamp(115px, 25vw, 275px)', // Responsive width
-                height: 'auto',                      // Maintain aspect ratio
-                objectFit: 'contain',
                 top: '50%',
-                left: 0, // Start at 0
-                transform: 'translateY(-44%)',
+                left: 0,
+                transform: 'translateY(-50%)',
+                width: 'clamp(115px, 25vw, 275px)',
+                height: 'clamp(115px, 25vw, 275px)',
               }}
-              className="absolute drop-shadow-lg"
-            />
+            >
+              <Image
+                ref={imageRefRight}
+                src="/Magnifying glass right.svg"
+                alt="Magnifying glass right"
+                width={275}
+                height={275}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain',
+                  position: 'relative',
+                  top: '-36%', // Fine-tune the vertical alignment within the wrapper
+                }}
+                className="drop-shadow-lg"
+              />
+            </div>
           </div>
             {/* White Circle to cover the dividing line between left and right sections */}
           <div

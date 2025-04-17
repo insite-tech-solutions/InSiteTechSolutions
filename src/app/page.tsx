@@ -5,10 +5,10 @@ import Link from 'next/link'
 
 
 //import HeroSection from '../components/HomepageHeroSec';
-import HeroSection from '@/components/HomepageHero/HeroSection';
-import Header from '@/components/Header/Header';
-import ScrollAnimationSection from '@/components/ScrollAnimatedSection';
-import ServiceSection from '@/components/ServicesSection';
+import HeroSection from '@/components/homepage/hero-section/hero-section';
+import Header from '@/components/site-header/header';
+import ScrollAnimationSection from '@/components/homepage/scroll-section/scroll-section';
+import ServiceSection from '@/components/homepage/services-section/services-section';
 
 
 export default function Home() {

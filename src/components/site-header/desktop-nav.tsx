@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import { DesktopNavProps, MenuItem } from './types'
-import DropdownMenu from './DropdownMenu'
+import DropdownMenu from './dropdown-menu'
 
 /**
  * DesktopNav component displays the main navigation menu for desktop view.

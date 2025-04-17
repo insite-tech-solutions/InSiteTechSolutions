@@ -1,0 +1,26 @@
+/* CodeWebPage.module.css */
+
+
+.codeWebPage {
+    position: absolute;
+    inset: 0;
+    background-color: #1a1a1a;
+    color: #d4d4d4;
+    font-family: monospace;
+    font-size: 0.875rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    z-index: 50;
+    clip-path: circle(40.5px at var(--cursor-x) var(--cursor-y));
+    transform: translate(calc(-1 * var(--cursor-x)), calc(-1 * var(--cursor-y)));
+    width: 200%;
+    height: 200%;
+    will-change: clip-path, transform;
+  }
+  
+  .codeContent {
+    white-space: pre-wrap;
+    padding: 1rem;
+  }
+

@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { Settings, CodeXml } from 'lucide-react';
-import TailwindHeroBackground from '@/components/TailwindHeroBackground';
-import TailwindButton from '@/components/tailwindButton';
+import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
+import TailwindButton from '@/components/reusable-components/tailwind-button';
 
 // Define decorative elements for the background
 const decorElements = [

@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
-import { menuItems } from './MenuItems'
-import DesktopNav from './DesktopNav'
-import MobileMenu from './MobileNav'
-import SearchButton from './SearchButton'
+import { menuItems } from './menu-items'
+import DesktopNav from './desktop-nav'
+import MobileMenu from './mobile-nav'
+import SearchButton from './search-button'
 
 /**
  * Header component that combines all navigation elements.

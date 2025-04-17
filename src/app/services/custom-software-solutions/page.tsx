@@ -2,17 +2,17 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Header from '@/components/Header/Header';
-import ValuePropSection from '@/components/CustomSoftwareServicePage/ValuePropSection';
+import Header from '@/components/site-header/header';
+import ValuePropSection from '@/components/CustomSoftwareServicePage/ValueSection/ValuePropSection';
 import ServiceScopeSection from '@/components/CustomSoftwareServicePage/ServiceScopeSection';
 import ApplicationsSection from '@/components/CustomSoftwareServicePage/ApplicationsSection';
 import PriceSection from '@/components/CustomSoftwareServicePage/PricingSection/PriceSection';
 import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InSiteAdvantageSection/InsiteAdvantage';
-import FAQSection from '@/components/CustomSoftwareServicePage/FAQSection';
+import FAQSection from '@/components/CustomSoftwareServicePage/FAQsection/FAQSection';
 import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
 import FinalCTASection from '@/components/CustomSoftwareServicePage/CTAsection/ctaSection';
-import FooterSection from '@/components/CustomSoftwareServicePage/SiteFooter/FooterSection';
-import HeroSection from '@/components/CustomSoftwareServicePage/heroSection';
+import FooterSection from '@/components/site-footer/footer';
+import HeroSection from '@/components/CustomSoftwareServicePage/HeroSection/heroSection';
 
 const CSSolPage = () => {
     return (

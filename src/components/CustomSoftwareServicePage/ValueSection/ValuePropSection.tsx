@@ -13,6 +13,8 @@ import {
   ChevronUp,
 } from 'lucide-react'
 
+import TailwindButton from '@/components/reusable-components/tailwind-button'
+
 // Types
 interface StatisticProps {
   value: number
@@ -91,7 +93,7 @@ const Statistic: React.FC<StatisticProps> = ({ value, suffix = '', prefix = '', 
       variants={fadeInUp}
       className="text-center"
     >
-      <div className="text-4xl font-bold text-blue-600">
+      <div className="text-4xl font-bold text-medium-blue-alt">
         {prefix}{count}{suffix}
       </div>
       <p className="mt-2 text-gray-600">{label}</p>
@@ -105,12 +107,12 @@ const TrendCard: React.FC<TrendCardProps> = ({ icon: Icon, title, description })
   return (
     <motion.div
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-blue-600 transition-all hover:shadow-lg p-4"
+      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-medium-blue-alt transition-all hover:shadow-lg p-4"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Icon className="h-6 w-6 text-blue-600" />
+          <Icon className="h-6 w-6 text-medium-blue-alt" />
           <h4 className="text-gray-700">{title}</h4>
         </div>
         {isOpen ? (
@@ -133,7 +135,97 @@ const TrendCard: React.FC<TrendCardProps> = ({ icon: Icon, title, description })
   )
 }
 
-const MarketInsightCard: React.FC<{ insights: MarketInsight[] }> = ({ insights }) => (
+// Add a new component for inline animated numbers
+interface InlineStatProps {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+}
+
+const InlineStat: React.FC<InlineStatProps> = ({ value, suffix = '', prefix = '' }) => {
+  const [count, setCount] = useState(0)
+  const controls = useAnimation()
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible")
+      const duration = 2000
+      const steps = 60
+      const increment = value / steps
+      let current = 0
+
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= value) {
+          setCount(value)
+          clearInterval(timer)
+        } else {
+          setCount(Math.floor(current))
+        }
+      }, duration / steps)
+
+      return () => clearInterval(timer)
+    }
+  }, [isInView, value, controls])
+
+  return (
+    <motion.span
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={fadeInUp}
+      className="text-2xl font-bold text-medium-blue-alt inline-flex items-center"
+    >
+      {prefix}{count}{suffix}
+    </motion.span>
+  )
+}
+
+// Update the market insights to use inline stats
+const marketInsights = [
+  {
+    id: "1",
+    content: <>
+      <InlineStat value={78} suffix="%" /> of businesses report improved efficiency after implementing custom software solutions.
+    </>
+  },
+  {
+    id: "2",
+    content: <>
+      Organizations save an average of <InlineStat value={27.3} suffix="h" /> per employee monthly through process automation.
+    </>
+  },
+  {
+    id: "3",
+    content: <>
+      <InlineStat value={89} suffix="%" /> of companies cite custom software as a key factor in maintaining competitive advantage.
+    </>
+  },
+  {
+    id: "4",
+    content: <>
+      Custom solutions reduce operational costs by an average of <InlineStat value={22} suffix="%" /> over 3 years.
+    </>
+  },
+  {
+    id: "5",
+    content: <>
+      Companies report an average <InlineStat value={143} suffix="%" /> return on investment within 5 years of custom software implementation.
+    </>
+  }
+]
+
+// Update the MarketInsightCard component
+interface MarketInsightCardProps {
+  insights: {
+    id: string;
+    content: React.ReactNode;
+  }[];
+}
+
+const MarketInsightCard: React.FC<MarketInsightCardProps> = ({ insights }) => (
   <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
     <h3 className="text-2xl font-semibold mb-4 text-gray-800">Key Market Insights</h3>
     <motion.ul
@@ -141,7 +233,7 @@ const MarketInsightCard: React.FC<{ insights: MarketInsight[] }> = ({ insights }
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="space-y-4"
+      className="space-y-6"
     >
       {insights.map((item) => (
         <motion.li
@@ -149,8 +241,10 @@ const MarketInsightCard: React.FC<{ insights: MarketInsight[] }> = ({ insights }
           variants={fadeInUp}
           className="flex items-start gap-3"
         >
-          <CheckCircle className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
-          <span className="text-gray-700">{item.insight}</span>
+          <CheckCircle className="h-5 w-5 text-medium-blue-alt mt-2 flex-shrink-0" />
+          <span className="text-gray-700 text-lg">
+            {item.content}
+          </span>
         </motion.li>
       ))}
     </motion.ul>
@@ -181,27 +275,8 @@ const ValuePropSection: React.FC = () => {
     }
   ]
 
-  const marketInsights = [
-    {
-      id: "1",
-      insight: "78% of businesses report improved efficiency after implementing custom software solutions."
-    },
-    {
-      id: "2",
-      insight: "Organizations save an average of 27.3 hours per employee monthly through process automation."
-    },
-    {
-      id: "3",
-      insight: "89% of companies cite custom software as a key factor in maintaining competitive advantage."
-    },
-    {
-      id: "4",
-      insight: "Custom solutions reduce operational costs by an average of 22% over 3 years."
-    }
-  ]
-
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="mt-16 mb-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -211,7 +286,7 @@ const ValuePropSection: React.FC = () => {
         >
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl font-bold mb-8 text-center text-gray-900"
+            className="text-4xl font-bold mb-12 text-center text-gray-900"
           >
             How Custom Software Can Help You
           </motion.h2>
@@ -225,37 +300,6 @@ const ValuePropSection: React.FC = () => {
               >
                 Many businesses, labs, and organizations face niche challenges that off-the-shelf software forces them to adapt their processes to rather than the other way around. Custom solutions flip this dynamic, creating systems that work exactly how your business needs them to. By developing software that aligns perfectly with your specific objectives eliminate inefficiencies, reduce manual work, and provide a competitive advantage through optimized workflows, unlocking new opportunities for innovation.
               </motion.p>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-                  <Statistic 
-                    value={78}
-                    suffix="%"
-                    label="businesses report improved efficiency after implementing custom software solutions"
-                  />
-                </div>
-                <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-                  <Statistic 
-                    value={27.3}
-                    suffix="h"
-                    label="hours saved per employee monthly through process automation"
-                  />
-                </div>
-                <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-                  <Statistic 
-                    value={89}
-                    suffix="%"
-                    label="companies cite custom software as a key factor in maintaining competitive advantage"
-                  />
-                </div>
-                <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-                  <Statistic 
-                    value={22}
-                    suffix="%"
-                    label="operational costs reduced on average over 3 years with custom solutions"
-                  />
-                </div>
-              </div>
 
               <MarketInsightCard insights={marketInsights} />
 
@@ -289,16 +333,13 @@ const ValuePropSection: React.FC = () => {
 
               <motion.div
                 variants={fadeInUp}
-                className="bg-blue-600 text-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                className="bg-gradient-to-br from-medium-blue-alt to-dark-blue-alt text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 <h3 className="text-2xl font-semibold mb-4">Ready to Optimize Your Operations?</h3>
                 <p className="mb-6">
                   Let&apos;s develop a custom software solution tailored to your unique business needs.
                 </p>
-                <button className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-                  Get Started
-                  <ArrowRight className="h-5 w-5" />
-                </button>
+                <TailwindButton href="/contact" className="bg-gray-50 rounded-lg shadow-md transition-all duration-200">Get Started</TailwindButton>
               </motion.div>
             </div>
           </div>

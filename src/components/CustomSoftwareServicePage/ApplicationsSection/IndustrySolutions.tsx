@@ -13,8 +13,8 @@ import {
   Truck,
   Code2,
 } from 'lucide-react';
-import CarouselSection from '@/components/CarouselSection';
-import IndustryCard from '@/components/IndustryCard';
+import CarouselSection from '@/components/reusable-components/carousel-section';
+import IndustryCard from '@/components/reusable-components/industry-card';
 
 const IndustrySolutions: React.FC = () => {
   const industries = [

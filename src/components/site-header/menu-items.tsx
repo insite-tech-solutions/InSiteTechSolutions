@@ -31,11 +31,11 @@ export const menuItems: MenuItem[] = [
     ],
   },
   {
-    name: 'InSights',
-    href: '/insights',
+    name: 'InSites',
+    href: '/insites',
     submenu: [
-      { name: 'FAQ', href: '/insights/faq' },
-      { name: 'Blog', href: '/insights/blog' },
+      { name: 'FAQ', href: '/insites/faq' },
+      { name: 'Blog', href: '/insites/blog' },
     ],
   },
   { name: 'Contact', href: '/contact' },
