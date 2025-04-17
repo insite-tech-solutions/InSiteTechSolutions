@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { CursorPosition } from './types';
-import styles from './MagnifyingGlass.module.css';
+import styles from './magnifying-glass.module.css';
 
 /**
  * Props interface for the MagnifyingGlass component.

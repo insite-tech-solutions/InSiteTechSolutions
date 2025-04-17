@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import CarouselSection from '@/components/reusable-components/carousel-section';
 import IndustryCard from '@/components/reusable-components/industry-card';
+import TailwindButton from '@/components/reusable-components/tailwind-button';
+
 
 const IndustrySolutions: React.FC = () => {
   const industries = [
@@ -83,20 +85,16 @@ const IndustrySolutions: React.FC = () => {
           duration: 0.6,
           ease: 'easeOut',
         }}
-        className="bg-blue-600 text-white rounded-xl p-8 text-center mt-12 shadow-lg"
+        className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white rounded-xl p-8 text-center mt-12 shadow-md hover:shadow-lg transition-all duration-200"
       >
         <div className="flex items-center justify-center gap-2 mb-4">
-          <Plus className="h-6 w-6" />
           <h4 className="text-2xl font-semibold">And Many More!</h4>
         </div>
         <p className="mb-6 text-blue-100">
           Don&apos;t see your industry listed? Contact us to discuss your
           specific needs.
         </p>
-        <button className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-          Get in Touch
-          <ArrowRight className="h-5 w-5" />
-        </button>
+        <TailwindButton href="/contact" className="bg-white rounded-lg font-semibold shadow-md transition-all duration-200">Get in Touch</TailwindButton>
       </motion.div>
     </div>
   );

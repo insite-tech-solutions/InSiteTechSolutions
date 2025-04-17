@@ -59,14 +59,14 @@ const HeroSection: React.FC = () => {
 
             {/* Button - Now outside the text content div */}
             <div className="order-3 md:hidden px-6 pb-6">
-              <TailwindButton href="/contact" className="bg-gray-50 w-full">
+              <TailwindButton href="/contact" className="bg-gray-50 font-semibold w-full">
                 Start Your Project Today
               </TailwindButton>
             </div>
 
             {/* Desktop Button - Hidden on mobile */}
             <div className="hidden md:block order-1 md:order-none px-6 pb-6">
-              <TailwindButton href="/contact" className="bg-gray-50">
+              <TailwindButton href="/contact" className="bg-gray-50 font-semibold">
                 Start Your Project Today
               </TailwindButton>
             </div>

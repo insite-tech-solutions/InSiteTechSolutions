@@ -3,12 +3,12 @@
 "use client";
 
 import React from 'react';
-import MiniWebPage from './MiniWebPage';
-import CodeWebPage from './CodeWebPage';
-import MagnifyingGlass from './MagnifyingGlass';
+import MiniWebPage from './mini-webpage';
+import CodeWebPage from './code-webpage';
+import MagnifyingGlass from './magnifying-glass';
 import { useInteraction } from './useInteraction';
 import { useRevealEffect } from './useRevealEffect';
-import styles from './HeroSection.module.css';
+import styles from './hero-section.module.css';
 
 /**
  * Represents the main hero section of the homepage,

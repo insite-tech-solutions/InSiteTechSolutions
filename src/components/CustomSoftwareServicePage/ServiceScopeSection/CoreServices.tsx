@@ -1,11 +1,85 @@
 // CoreServices.tsx
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Code, Cog, Cpu, Shield, Layers, CheckCircle } from 'lucide-react'
 
+// Simple debounce function
+const debounce = <F extends (...args: unknown[]) => unknown>(
+  func: F,
+  wait: number
+) => {
+  let timeout: NodeJS.Timeout;
+  return function executedFunction(...args: Parameters<F>): void {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+// *** Wrapper Component for Orientation Change Handling ***
+const CoreServicesWrapper: React.FC = () => {
+  const [orientationKey, setOrientationKey] = useState<string>(() => {
+    // Initialize with current orientation or default
+    return typeof window !== 'undefined'
+      ? (window.innerWidth > window.innerHeight ? 'landscape' : 'portrait')
+      : 'portrait';
+  });
+
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  useEffect(() => {
+    const currentOrientation = orientationKey;
+
+    const handleOrientationOrResize = () => {
+      const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+
+      if (newOrientation !== currentOrientation) {
+        // Store scroll position before remount
+        setScrollPosition(window.scrollY);
+        // Update key to trigger remount
+        setOrientationKey(newOrientation); // This also updates currentOrientation via state
+      }
+    };
+
+    // Debounced handler for resize events
+    const debouncedResizeHandler = debounce(() => {
+        handleOrientationOrResize();
+    }, 200); // Use debounce to avoid excessive checks during resize drag
+
+    // Add listeners
+    window.addEventListener('resize', debouncedResizeHandler);
+    // Use orientationchange for direct detection on mobile
+    window.addEventListener('orientationchange', handleOrientationOrResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', debouncedResizeHandler);
+      window.removeEventListener('orientationchange', handleOrientationOrResize);
+    };
+  }, [orientationKey]); // Rerun effect if orientationKey changes (to update currentOrientation)
+
+  // Effect to restore scroll position after remount
+  useEffect(() => {
+    if (scrollPosition > 0) {
+      // Use a short timeout to allow the layout to settle after remount
+      const timer = setTimeout(() => {
+        window.scrollTo({ top: scrollPosition, behavior: 'instant' });
+        // Reset scroll position state after restoring
+        setScrollPosition(0);
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [orientationKey, scrollPosition]); // Depend on key change and stored position
+
+  // Render the main component with a key that changes on orientation
+  return <CoreServices key={orientationKey} />;
+};
 
 /**
  * ServiceCard: A single translucent "white" card
@@ -45,8 +119,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 }
 
 /**
- * CoreServices: The pinned blue card with text on left, translucent cards on right.
- * The pinned container unpins once the final translucent card has fully scrolled into view.
+ * CoreServices: The main component with the GSAP animation. pinned blue card with text on left, translucent cards on right
+ * Handles standard resize events internally.
+ * Remounted by CoreServicesWrapper on orientation change.
  */
 const CoreServices: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)  // Section wrapping everything
@@ -121,63 +196,71 @@ const CoreServices: React.FC = () => {
     gsap.registerPlugin(ScrollTrigger)
 
     const ctx = gsap.context(() => {
-      // Get the height of the cards container
-      const cardsHeight = cardsRef.current?.getBoundingClientRect().height || 0;
-      // Get the height of the pinned container (blue card)
-      const pinnedHeight = pinnedRef.current?.getBoundingClientRect().height || 0;
-      
-      // Calculate the distance we need to scroll
-      // This will be the total height of cards minus the visible height of the pinned container
-      // Plus any padding you want at the bottom (matching the top padding)
-      const scrollDistance = window.innerWidth < 768 // Tailwind's md breakpoint
+      // Simplified function to calculate the required scroll distance
+      const calculateScrollDistance = () => {
+        const cardsHeight = cardsRef.current?.offsetHeight || 0;
+        const pinnedHeight = pinnedRef.current?.offsetHeight || 0;
+        // Basic distance is the difference in heights
+        const distance = window.innerWidth < 1024 // Tailwind's lg breakpoint
         ? cardsHeight - pinnedHeight + 48 + 236 // Increase scroll distance for mobile
         : cardsHeight - pinnedHeight + 48; // Default for larger screens
+        // Ensure distance is not negative
+        return Math.max(0, distance);
+      };
 
-      const tl = gsap.timeline({
+      gsap.to(cardsRef.current, {
+        y: () => -calculateScrollDistance(), // Animate y based on dynamic calculation
+        ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: () => `top 128px`, // 104px is the navbar height, 24px is the padding
-          end: `+=${scrollDistance}`,
+          start: 'top 128px', // 104px is the navbar height, 24px is the padding
+          end: () => `+=${calculateScrollDistance()}`, // End based on dynamic calculation
           pin: pinnedRef.current,
           pinSpacing: true,
           scrub: true,
-          markers: true,
+          markers: true, // Keep markers for debugging
+          invalidateOnRefresh: true, // Essential for re-calculating dynamic values
         },
-      })
+      });
 
-      // Move the cards container upward by the calculated scroll distance
-      tl.to(cardsRef.current, { 
-        y: -scrollDistance,
-        ease: 'none'
-      })
-    }, containerRef)
+      // Debounced resize handler *within* CoreServices for standard resize
+      const handleResize = debounce(() => {
+        // Refresh ScrollTrigger; true forces re-evaluation of function-based values
+        ScrollTrigger.refresh(true);
+      }, 150);
 
-    return () => ctx.revert()
-  }, [])
+      window.addEventListener('resize', handleResize);
+
+      // Cleanup function for this component's listeners
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []) // Empty dependency array ensures this runs only once on mount
 
   return (
     <div className="container mx-auto bg-gray-50">
       <section ref={containerRef} className="relative">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
           {/* SINGLE BLUE CARD (Pinned) */}
           <div
             ref={pinnedRef}
             // We set a fixed height so it only shows ~1 translucent card by default
-            className="rounded-xl w-full mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-medium-blue-alt 
+            className="rounded-xl w-full mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-medium-blue-alt
             shadow-2xl overflow-hidden flex flex-col lg:flex-row"
             style={{
-              // Subtract hardcoded navbar height and padding (top+bottom) from viewport height
-              height: `calc(100vh - 104px - 3rem)`,
-              minHeight: 0,
-              overflow: 'hidden'
+              height: `calc(100vh - 104px - 3rem)`, // Subtract navbar height and padding (top+bottom) from viewport height
+              minHeight: 0, // Prevent intrinsic height issues
             }}
           >
             {/* LEFT SIDE: Title & Description */}
             <div className="lg:w-1/2 lg:pr-6 flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-50 text-center md:text-left">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-50 text-center lg:text-left">
                 Specialized Custom Software Development
               </h2>
-              <p className="text-base md:text-lg text-gray-50 mb-3 leading-relaxed text-center md:text-left">
+              <p className="text-base lg:text-lg text-gray-50 mb-3 leading-relaxed text-center lg:text-left">
                 We develop custom software that addresses your specific business
                 or research objectives, whether that&apos;s automating workflows,
                 integrating systems, or solving complex computational problems.
@@ -192,14 +275,15 @@ const CoreServices: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* SPACER to allow enough scroll for unpinning */}
-          {/* <div className="h-[100vh]" /> */}
+            {/* SPACER to allow enough scroll for unpinning */}
+           {/* <div className="h-[100vh]" /> */}
+          </div>
         </div>
       </section>
     </div>
   )
 }
 
-export default CoreServices
+// Export the wrapper component as the default
+export default CoreServicesWrapper

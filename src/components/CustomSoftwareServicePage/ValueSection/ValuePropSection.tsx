@@ -333,13 +333,13 @@ const ValuePropSection: React.FC = () => {
 
               <motion.div
                 variants={fadeInUp}
-                className="bg-gradient-to-br from-medium-blue-alt to-dark-blue-alt text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 <h3 className="text-2xl font-semibold mb-4">Ready to Optimize Your Operations?</h3>
                 <p className="mb-6">
                   Let&apos;s develop a custom software solution tailored to your unique business needs.
                 </p>
-                <TailwindButton href="/contact" className="bg-gray-50 rounded-lg shadow-md transition-all duration-200">Get Started</TailwindButton>
+                <TailwindButton href="/contact" className="bg-gray-50 rounded-lg font-semibold shadow-md transition-all duration-200">Get Started</TailwindButton>
               </motion.div>
             </div>
           </div>

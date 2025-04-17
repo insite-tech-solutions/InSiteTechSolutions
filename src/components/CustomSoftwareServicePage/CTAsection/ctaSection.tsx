@@ -5,6 +5,7 @@ import type React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import TailwindButton from '@/components/reusable-components/tailwind-button';
 
 const FinalCTASection: React.FC = () => {
   return (
@@ -44,19 +45,8 @@ const FinalCTASection: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.div 
-                whileHover={{ scale: 1.03 }} 
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-blue-700 font-medium py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Schedule Free Consultation
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
+            <TailwindButton href="/contact" className="bg-white rounded-full font-medium shadow-md transition-all duration-200">Schedule free Consultation</TailwindButton>
+
 
               <Link
                 href="/case-studies"

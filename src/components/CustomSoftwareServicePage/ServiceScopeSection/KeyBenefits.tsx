@@ -76,7 +76,7 @@ const KeyBenefits: React.FC = () => {
 
       {/* Optional: Additional Content Below Carousel */}
       {/* Example: A call-to-action card similar to IndustrySolutions */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -85,20 +85,20 @@ const KeyBenefits: React.FC = () => {
         }}
         className="bg-medium-blue-alt text-white rounded-xl p-8 text-center mt-12 shadow-lg"
       >
-        <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="flex items-center justify-center gap-2 mb-4"> */}
           {/* You can choose an appropriate icon here */}
-          <Shield className="h-6 w-6" />
+          {/* <Shield className="h-6 w-6" />
           <h4 className="text-2xl font-semibold">Explore More Benefits!</h4>
         </div>
         <p className="mb-6 text-blue-100">
           Interested in more advantages? Contact us to discover how our solutions can further benefit your business.
         </p>
         <button className="inline-flex items-center gap-2 bg-white text-medium-blue-alt px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
-          Get in Touch
+          Get in Touch */}
           {/* You can use any appropriate icon */}
-          <Shield className="h-5 w-5" />
+          {/* <Shield className="h-5 w-5" />
         </button>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 };
