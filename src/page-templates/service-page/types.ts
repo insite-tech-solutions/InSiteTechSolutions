@@ -1,7 +1,6 @@
 // src/page-templates/service-page/types.ts
 
 import { CSSProperties, ReactNode } from 'react';
-import { LucideIcon } from 'lucide-react';
 
 /**
  * Base types for decorative elements used in hero backgrounds
@@ -12,7 +11,7 @@ export interface DecorElement {
   type: 'icon' | 'circle' | 'square';
   className?: string;
   style?: CSSProperties;
-  icon?: IconName | LucideIcon;
+  icon?: IconName;
   size?: number;
 }
 
@@ -45,7 +44,7 @@ export interface Statistic {
  * Types for industry trends in value prop section
  */
 export interface IndustryTrend {
-  icon: IconName | LucideIcon;
+  icon: IconName;
   title: string;
   description: string;
 }
@@ -66,6 +65,7 @@ export interface CallToAction {
   description: string;
   buttonText: string;
   buttonLink: string;
+  buttonIcon?: IconName;
 }
 
 /**
@@ -86,22 +86,50 @@ export interface ValuePropContent {
 }
 
 /**
+ * Service item for the service scope section
+ */
+export interface ServiceItem {
+  icon: IconName;
+  title: string;
+  description: string;
+  benefits: string[];
+}
+
+/**
+ * Benefit item for the service scope section
+ */
+export interface BenefitItem {
+  icon: IconName;
+  title: string;
+  description: string;
+}
+
+/**
  * Service scope section content
  */
 export interface ServiceScopeContent {
   title: string;
   description: string;
-  services: {
-    icon: IconName | LucideIcon;
-    title: string;
-    description: string;
-    benefits: string[];
-  }[];
-  benefits?: {
-    icon: IconName | LucideIcon;
-    title: string;
-    description: string;
-  }[];
+  services: ServiceItem[];
+  benefits?: BenefitItem[];
+}
+
+/**
+ * Category for applications section
+ */
+export interface ApplicationCategory {
+  title: string;
+  icon: IconName;
+  items: string[];
+}
+
+/**
+ * Industry item for applications section
+ */
+export interface IndustryItem {
+  title: string;
+  icon: IconName;
+  items: string[];
 }
 
 /**
@@ -110,16 +138,20 @@ export interface ServiceScopeContent {
 export interface ApplicationsContent {
   title: string;
   description: string;
-  categories: {
-    title: string;
-    icon: IconName | LucideIcon;
-    items: string[];
-  }[];
-  industries: {
-    title: string;
-    icon: IconName | LucideIcon;
-    items: string[];
-  }[];
+  categories: ApplicationCategory[];
+  industries: IndustryItem[];
+}
+
+/**
+ * Process step for the process section
+ */
+export interface ProcessStep {
+  step: number;
+  title: string;
+  description: string;
+  items: string[];
+  timeline: string;
+  icon: IconName;
 }
 
 /**
@@ -128,15 +160,17 @@ export interface ApplicationsContent {
 export interface ProcessContent {
   title: string;
   description: string;
-  steps: {
-    step: number;
-    title: string;
-    description: string;
-    items: string[];
-    timeline: string;
-    icon: IconName | LucideIcon;
-  }[];
+  steps: ProcessStep[];
   note?: string;
+}
+
+/**
+ * Price factor for pricing section
+ */
+export interface PriceFactor {
+  title: string;
+  icon: IconName;
+  items: string[];
 }
 
 /**
@@ -145,11 +179,7 @@ export interface ProcessContent {
 export interface PricingContent {
   title: string;
   description: string;
-  factors: {
-    title: string;
-    icon: IconName | LucideIcon;
-    items: string[];
-  }[];
+  factors: PriceFactor[];
   longTermValue: {
     title: string;
     description: string;
@@ -161,15 +191,29 @@ export interface PricingContent {
 }
 
 /**
+ * Benefit item for the benefits section
+ */
+export interface BenefitContent {
+  title: string;
+  description: string;
+}
+
+/**
  * Benefits section content
  */
 export interface BenefitsContent {
   title: string;
   description: string;
-  items: {
-    title: string;
-    description: string;
-  }[];
+  items: BenefitContent[];
+}
+
+/**
+ * FAQ item for the FAQ section
+ */
+export interface FAQItem {
+  question: string;
+  answer: string;
+  icon: IconName;
 }
 
 /**
@@ -178,11 +222,7 @@ export interface BenefitsContent {
 export interface FAQContent {
   title: string;
   description: string;
-  items: {
-    question: string;
-    answer: string;
-    icon: IconName | LucideIcon;
-  }[];
+  items: FAQItem[];
   moreLink?: {
     text: string;
     url: string;
@@ -201,23 +241,12 @@ export interface CTAContent {
 }
 
 /**
- * Complete service content structure
+ * Service metadata
  */
-export interface ServiceContent {
-  metadata: {
-    title: string;
-    description: string;
-    slug: string;
-  };
-  hero: HeroSectionContent;
-  valueProp: ValuePropContent;
-  serviceScope: ServiceScopeContent;
-  applications: ApplicationsContent;
-  process: ProcessContent;
-  pricing: PricingContent;
-  benefits: BenefitsContent;
-  faq: FAQContent;
-  cta: CTAContent;
+export interface ServiceMetadata {
+  title: string;
+  description: string;
+  slug: string;
 }
 
 /**
@@ -225,6 +254,15 @@ export interface ServiceContent {
  */
 export interface ServicePageTemplateOptions {
   skipSections?: ('hero' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'benefits' | 'faq' | 'cta')[];
-  addSections?: Record<string, ReactNode>;
+  addSections?: {
+    beforeValueProp?: ReactNode;
+    afterValueProp?: ReactNode;
+    afterServiceScope?: ReactNode;
+    afterApplications?: ReactNode;
+    afterProcess?: ReactNode;
+    afterPricing?: ReactNode;
+    afterBenefits?: ReactNode;
+    afterFAQ?: ReactNode;
+  };
   layoutVariant?: 'default' | 'compact' | 'expanded';
 }

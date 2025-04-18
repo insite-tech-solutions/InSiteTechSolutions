@@ -1,4 +1,4 @@
-// src/templates/service-page/sections/hero-section.tsx
+// src/templates/service-page/sections/hero/hero-section.tsx
 
 import React from 'react';
 import Image from 'next/image';

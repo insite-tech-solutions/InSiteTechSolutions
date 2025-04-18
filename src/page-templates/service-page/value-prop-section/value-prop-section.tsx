@@ -1,10 +1,15 @@
-// src/templates/service-page/sections/value-prop-section.tsx
+// src/templates/service-page/sections/value-prop/value-prop-section.tsx
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useAnimation, Variants } from 'framer-motion';
-import { ValuePropContent } from '../types';
-import TailwindButton from '@/components/reusable-components/tailwind-button';
 import * as LucideIcons from 'lucide-react';
+import TailwindButton from '@/components/reusable-components/tailwind-button';
+import { 
+  ValuePropContent, 
+  IndustryTrend, 
+  MarketInsight, 
+  Statistic as StatisticType 
+} from '../types';
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -30,9 +35,9 @@ const staggerChildren: Variants = {
 };
 
 /**
- * Component for displaying statistics
+ * Component for displaying animated inline statistics
  */
-function Statistic({ value, suffix = '', prefix = '', description }) {
+function InlineStat({ value, suffix = '', prefix = '' }: { value: number, suffix?: string, prefix?: string }) {
   const [count, setCount] = useState(0);
   const controls = useAnimation();
   const ref = useRef(null);
@@ -61,27 +66,22 @@ function Statistic({ value, suffix = '', prefix = '', description }) {
   }, [isInView, value, controls]);
 
   return (
-    <motion.div
+    <motion.span
       ref={ref}
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="text-center"
+      className="text-2xl font-bold text-medium-blue-alt inline-flex items-center"
     >
-      <div className="text-4xl font-bold text-medium-blue-alt">
-        {prefix}{count}{suffix}
-      </div>
-      <p className="mt-2 text-gray-600">
-        {typeof description === 'string' ? description : description}
-      </p>
-    </motion.div>
+      {prefix}{count}{suffix}
+    </motion.span>
   );
 }
 
 /**
- * Component for industry trends
+ * Component for displaying industry trends with expandable descriptions
  */
-function TrendCard({ trend }) {
+function TrendCard({ trend }: { trend: IndustryTrend }) {
   const [isOpen, setIsOpen] = useState(false);
   const { title, description } = trend;
   
@@ -122,9 +122,9 @@ function TrendCard({ trend }) {
 }
 
 /**
- * Component for market insights
+ * Component for displaying market insights with inline animated stats
  */
-function MarketInsightCard({ insights }) {
+function MarketInsightCard({ insights }: { insights: MarketInsight[] }) {
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
       <h3 className="text-2xl font-semibold mb-4 text-gray-800">Key Market Insights</h3>
@@ -155,35 +155,37 @@ function MarketInsightCard({ insights }) {
 /**
  * Value Proposition Section for Service Pages
  * 
- * Displays the value proposition with statistics, industry trends, and market insights.
+ * Displays the value proposition with industry trends and market insights.
  * Supports additional custom content at various points in the layout.
  * 
  * @param content - Configuration object for the value prop section
+ * @param layoutVariant - Optional layout variant (default, compact, expanded)
  * @returns JSX.Element
  */
 export default function ValuePropSection({
-  content
+  content,
+  layoutVariant = 'default'
 }: {
-  content: ValuePropContent
+  content: ValuePropContent,
+  layoutVariant?: 'default' | 'compact' | 'expanded'
 }) {
   const {
     title,
     description,
-    statistics,
     industryTrends,
     marketInsights,
     callToAction,
     additionalContent
   } = content;
   
-  // Get the icon for the CTA button from lucide icons
-  const CtaIcon = typeof callToAction.buttonIcon === 'string'
-    ? LucideIcons[callToAction.buttonIcon as keyof typeof LucideIcons] || LucideIcons.ArrowRight
+  // Get the icon for the CTA button
+  const CtaIcon = callToAction.buttonIcon 
+    ? LucideIcons[callToAction.buttonIcon as keyof typeof LucideIcons] 
     : LucideIcons.ArrowRight;
 
   return (
     <section className="mt-16 mb-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className={`container mx-auto px-4 ${layoutVariant === 'compact' ? 'max-w-5xl' : ''}`}>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -207,17 +209,6 @@ export default function ValuePropSection({
                 {description}
               </motion.p>
 
-              {/* Render statistics if provided */}
-              {statistics && statistics.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-6">
-                  {statistics.map((stat, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-                      <Statistic {...stat} />
-                    </div>
-                  ))}
-                </div>
-              )}
-
               {/* Add additional content before trends if provided */}
               {additionalContent?.beforeTrends && (
                 <motion.div variants={fadeInUp}>
@@ -233,7 +224,7 @@ export default function ValuePropSection({
               <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800">Current Industry Trends</h3>
                 <p className="text-gray-700 mb-6">
-                  As businesses face increasing pressure to digitize and automate operations, custom software has become essential for staying competitive.
+                As businesses face increasing pressure to digitize and automate operations, custom software has become essential for staying competitive. Integrated systems that utilize 3rd party APIs and cloud computing have become a necessity for increasing efficiency and scalability.
                 </p>
                 <motion.div
                   variants={staggerChildren}

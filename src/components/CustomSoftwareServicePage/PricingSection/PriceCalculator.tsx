@@ -13,13 +13,13 @@ import { Badge } from "@/components/ui/badge"
 import { Info, ExternalLink, Calculator, ArrowRight } from "lucide-react"
 
 // Import service tables
-import webAppDevelopmentTable from "@/content/calculator_tables/webAppDevelopment"
-import customSoftwareSolutionsTable from "@/content/calculator_tables/customSoftwareSolutions"
-import seoOnlineMarketingTable from "@/content/calculator_tables/seoOnlineMarketing"
-import graphicDesignBrandingTable from "@/content/calculator_tables/graphicDesignBranding"
-import dataAnalysisTable from "@/content/calculator_tables/dataAnalysis"
-import aiAutomationTable from "@/content/calculator_tables/aiAutomation"
-import consultingTrainingTable from "@/content/calculator_tables/consultingTraining"
+import webAppDevelopmentTable from "@/content/calculator-tables/web-app-development"
+import customSoftwareSolutionsTable from "@/content/calculator-tables/custom-software-solutions"
+import seoOnlineMarketingTable from "@/content/calculator-tables/seo-online-marketing"
+import graphicDesignBrandingTable from "@/content/calculator-tables/graphic-design-branding"
+import dataAnalysisTable from "@/content/calculator-tables/data-analysis"
+import aiAutomationTable from "@/content/calculator-tables/ai-automation"
+import consultingTrainingTable from "@/content/calculator-tables/consulting-training"
 
 // Type definitions
 interface CostRange {
