@@ -1,52 +1,76 @@
-// src/templates/service-page/service-page-template.tsx
+// src/page-templates/service-page/service-temp-2.tsx
 
 import React from 'react';
 import HeroSection from './hero-section/hero-section';
 import ValuePropSection from './value-prop-section/value-prop-section';
-import { ServicePageTemplateOptions } from './types';
+import ServiceScopeSection from './service-scope-section';
+import ApplicationsSection from './applications-section';
+import ProcessSection from './process-section';
+import { 
+  HeroSectionContent, 
+  ValuePropContent, 
+  ServiceScopeContent, 
+  ApplicationsContent,
+  ProcessContent
+} from './types';
+
+interface ServicePageTemplateProps {
+  heroContent: HeroSectionContent;
+  valuePropContent: ValuePropContent;
+  serviceScopeContent?: ServiceScopeContent;
+  applicationsContent?: ApplicationsContent;
+  processContent?: ProcessContent;
+}
 
 /**
- * Service Page Template 
+ * Service Page Template Component
  * 
- * A reusable template for service pages that renders configurable sections.
- * Currently includes hero and value prop sections for testing.
+ * A flexible template for service pages that includes configurable sections:
+ * - Hero section with background and CTA
+ * - Value proposition section with market insights and industry trends
+ * - Service scope section with core services and key benefits
+ * - Applications section with application categories and industry solutions
+ * - Process section with animated timeline showing the development approach
  * 
- * @param heroContent - Content for the hero section
- * @param valuePropContent - Content for the value proposition section
- * @param options - Optional configuration for the template
- * @returns JSX.Element
+ * @param heroContent - Configuration for the hero section
+ * @param valuePropContent - Configuration for the value proposition section
+ * @param serviceScopeContent - Optional configuration for the service scope section
+ * @param applicationsContent - Optional configuration for the applications section
+ * @param processContent - Optional configuration for the process section
  */
-export default function ServicePageTemplate({
+const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   heroContent,
   valuePropContent,
-  options = {}
-}: {
-  heroContent: any,
-  valuePropContent: any,
-  options?: ServicePageTemplateOptions
-}) {
-  const {
-    skipSections = [],
-    layoutVariant = 'default'
-  } = options;
-  
-  // Helper to check if a section should be rendered
-  const shouldRenderSection = (sectionName: string) => !skipSections.includes(sectionName as any);
-  
+  serviceScopeContent,
+  applicationsContent,
+  processContent
+}) => {
   return (
-    <div className="bg-gray-50">
+    <main>
       {/* Hero Section */}
-      {shouldRenderSection('hero') && (
-        <HeroSection content={heroContent} />
-      )}
+      <HeroSection content={heroContent} />
       
       {/* Value Proposition Section */}
-      {shouldRenderSection('valueProp') && (
-        <ValuePropSection 
-          content={valuePropContent}
-          layoutVariant={layoutVariant}
-        />
+      <ValuePropSection content={valuePropContent} />
+      
+      {/* Service Scope Section (if provided) */}
+      {serviceScopeContent && (
+        <ServiceScopeSection content={serviceScopeContent} />
       )}
-    </div>
+      
+      {/* Applications Section (if provided) */}
+      {applicationsContent && (
+        <ApplicationsSection content={applicationsContent} />
+      )}
+      
+      {/* Process Section (if provided) */}
+      {processContent && (
+        <ProcessSection content={processContent} />
+      )}
+      
+      {/* Additional sections can be added here */}
+    </main>
   );
-}
+};
+
+export default ServicePageTemplate;

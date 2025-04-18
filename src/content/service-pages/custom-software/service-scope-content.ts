@@ -1,0 +1,100 @@
+// src/content/service-pages/custom-software/service-scope-content.ts
+
+import { ServiceScopeContent } from '@/page-templates/service-page/types';
+
+/**
+ * Service scope content for the Custom Software Solutions service page.
+ */
+const customSoftwareServiceScope: ServiceScopeContent = {
+  title: "Specialized Custom Software Development",
+  description: "We develop custom software that addresses your specific business or research objectives, whether that's automating workflows, integrating systems, or solving complex computational problems.",
+  
+  services: [
+    {
+      icon: "Code",
+      title: "Bespoke Software & Desktop Application Development",
+      description: "We develop custom software that addresses your specific business or research objectives, whether that's automating workflows, integrating systems, or solving complex computational problems.",
+      benefits: [
+        "Custom desktop and server applications",
+        "Industry-specific tools and utilities",
+        "Data processing and analytics platforms",
+        "Enterprise Resource Planning (ERP) systems"
+      ]
+    },
+    {
+      icon: "Cog",
+      title: "System Integration & API Development",
+      description: "Seamlessly connect disparate systems and ensure smooth data flow across your organization.",
+      benefits: [
+        "Seamless connection of disparate systems",
+        "Custom API design and implementation",
+        "Legacy system integration",
+        "Cloud service integration"
+      ]
+    },
+    {
+      icon: "Cpu",
+      title: "Computational Science & Simulations",
+      description: "Harness the power of computational science to drive innovation and research.",
+      benefits: [
+        "Scientific computing solutions",
+        "Process simulation and modeling",
+        "Data analysis and visualization tools",
+        "Research and development tools"
+      ]
+    },
+    {
+      icon: "Shield",
+      title: "Legacy Software Modernization",
+      description: "Upgrade and enhance your existing software to meet current standards and performance requirements.",
+      benefits: [
+        "Codebase modernization",
+        "Platform migration",
+        "Performance optimization",
+        "Security updates and improvements"
+      ]
+    },
+    {
+      icon: "Layers",
+      title: "Inverse Design & Process Optimization",
+      description: "Optimize your design processes and operations through advanced algorithms and machine learning.",
+      benefits: [
+        "Automated design optimization",
+        "Machine learning integration",
+        "Performance modeling",
+        "Predictive analytics"
+      ]
+    }
+  ],
+  
+  benefits: [
+    {
+      icon: "TrendingUp",
+      title: "Improved Efficiency",
+      description: "Streamlined processes that reduce manual effort and eliminate operational bottlenecks."
+    },
+    {
+      icon: "Settings",
+      title: "Specialized Functionality",
+      description: "Tailored features designed to address niche business needs, especially in research-focused environments."
+    },
+    {
+      icon: "Code",
+      title: "Scalable Solutions",
+      description: "Custom software that evolves with your organization, ensuring long-term value and adaptability."
+    },
+    {
+      icon: "Cloud",
+      title: "Competitive Edge",
+      description: "Unique tools that provide a significant advantage in your industry."
+    },
+    {
+      icon: "Shield",
+      title: "Enhanced Security",
+      description: "Robust security measures to protect your data and operations."
+    }
+  ],
+  backgroundIcon: "MonitorCog"
+};
+
+export default customSoftwareServiceScope;

@@ -1,4 +1,4 @@
-// src/app/services/custom-software-solutions/page.tsx
+// src/app/services/data-analysis/page.tsx
 
 'use client';
 
@@ -8,12 +8,10 @@ import Footer from '@/components/site-footer/footer';
 import ServicePageTemplate from '@/page-templates/service-page/service-temp-2';
 import customSoftwareHero from '@/content/service-pages/custom-software/hero-content';
 import customSoftwareValueProp from '@/content/service-pages/custom-software/value-prop-content';
-/**
- * Custom Software Solutions Page (Test Version)
- * 
- * This page uses the ServicePageTemplate to render the hero section
- * with content from the custom software hero content file.
- */
+import customSoftwareServiceScope from '@/content/service-pages/custom-software/service-scope-content';
+import customSoftwareApplications from '@/content/service-pages/custom-software/applications-content';
+import customSoftwareProcess from '@/content/service-pages/custom-software/process-content';
+
 export default function CustomSoftwareSolutionsPage() {
   return (
     <div className='bg-gray-50'>
@@ -22,6 +20,9 @@ export default function CustomSoftwareSolutionsPage() {
       <ServicePageTemplate 
         heroContent={customSoftwareHero}
         valuePropContent={customSoftwareValueProp}
+        serviceScopeContent={customSoftwareServiceScope}
+        applicationsContent={customSoftwareApplications}
+        processContent={customSoftwareProcess}
       />
       
       <Footer />

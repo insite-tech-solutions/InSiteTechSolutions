@@ -112,6 +112,7 @@ export interface ServiceScopeContent {
   description: string;
   services: ServiceItem[];
   benefits?: BenefitItem[];
+  backgroundIcon?: string;
 }
 
 /**
