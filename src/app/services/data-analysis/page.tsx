@@ -7,7 +7,7 @@ import Header from '@/components/site-header/header';
 import Footer from '@/components/site-footer/footer';
 import ServicePageTemplate from '@/page-templates/service-page/service-temp-2';
 import customSoftwareHero from '@/content/service-pages/custom-software/hero-content';
-import customSoftwareValueProp from '@/content/service-pages/custom-software/value-prop-section';
+import customSoftwareValueProp from '@/content/service-pages/custom-software/value-prop-content';
 /**
  * Custom Software Solutions Page (Test Version)
  * 
