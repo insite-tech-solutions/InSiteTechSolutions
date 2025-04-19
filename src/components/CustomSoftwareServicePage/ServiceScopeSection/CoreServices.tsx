@@ -218,7 +218,7 @@ const CoreServices: React.FC = () => {
           pin: pinnedRef.current,
           pinSpacing: true,
           scrub: true,
-          markers: true, // Keep markers for debugging
+          markers: false, // Keep markers for debugging
           invalidateOnRefresh: true, // Essential for re-calculating dynamic values
         },
       });

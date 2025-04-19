@@ -158,15 +158,10 @@ export interface ProcessStep {
 /**
  * Process section content
  */
-export interface ProcessContent {
+export interface ProcessSectionContent {
   title: string;
   description: string;
-  steps: ProcessStep[];
-  note?: string;
-  link?: {
-    text: string;
-    url: string;
-  };
+  note: string;
 }
 
 /**

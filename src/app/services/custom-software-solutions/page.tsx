@@ -9,7 +9,7 @@ import ApplicationsSection from '@/components/CustomSoftwareServicePage/Applicat
 import PriceSection from '@/components/CustomSoftwareServicePage/PricingSection/PriceSection';
 import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InSiteAdvantageSection/InsiteAdvantage';
 import FAQSection from '@/components/CustomSoftwareServicePage/FAQsection/FAQSection';
-import ProcessSection from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
+import ProcessSectionWrapper from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
 import FinalCTASection from '@/components/CustomSoftwareServicePage/CTAsection/ctaSection';
 import FooterSection from '@/components/site-footer/footer';
 import HeroSection from '@/components/CustomSoftwareServicePage/HeroSection/heroSection';
@@ -40,7 +40,7 @@ const CSSolPage = () => {
         <ApplicationsSection />
 
         {/* Process Section */}
-        <ProcessSection />
+        <ProcessSectionWrapper />
 
         {/* Price Section */}
         <PriceSection />

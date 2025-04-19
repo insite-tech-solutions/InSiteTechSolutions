@@ -3,13 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TracingBeam } from './TracingBeam';
-import { processSteps } from './ProcessContent';
-import { Clock } from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import { TracingBeam } from './tracing-beam';
+import { processSteps, processSectionContent, ProcessSectionContent } from '@/content/service-pages/custom-software/process-content';
+import { Clock, ExternalLink } from 'lucide-react';
 
 // Wrapper component that handles orientation changes
-const ProcessSectionWrapper: React.FC = () => {
+const ProcessSectionWrapper: React.FC<{content?: ProcessSectionContent}> = ({ content = processSectionContent }) => {
   const [orientationKey, setOrientationKey] = useState<string>(() => {
     // Initialize with current orientation
     return typeof window !== 'undefined' 
@@ -74,14 +73,16 @@ const ProcessSectionWrapper: React.FC = () => {
   
   return (
     // Key change forces complete remount of ProcessSection
-    <ProcessSection key={orientationKey} />
+    <ProcessSection key={orientationKey} content={content} />
   );
 };
 
 // Original ProcessSection component with all GSAP animations
-const ProcessSection: React.FC = () => {
+const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const measurementRef = useRef<HTMLDivElement>(null);
+
+  const isInitializedRef = useRef(false);
 
   // Store dimensions for each card
   const cardDimensionsRef = useRef<{ width: string; height: string }[]>([]);
@@ -116,23 +117,41 @@ const ProcessSection: React.FC = () => {
   };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    // Initial measurement
-    measureCardDimensions();
-
-    // Set up resize observer
-    const resizeObserver = new ResizeObserver(() => {
-      measureCardDimensions();
-      ScrollTrigger.refresh();
-    });
-
-    if (measurementRef.current) {
-      resizeObserver.observe(measurementRef.current);
+    console.log("Process Section mounting");
+    console.log("Section ref:", sectionRef.current);
+    console.log("Circle refs:", circleRefs.current);
+    
+    // Prevent double initialization
+    if (isInitializedRef.current) {
+      console.log("Animation already initialized, skipping");
+      return;
     }
+    
+    gsap.registerPlugin(ScrollTrigger);
+  
+    // Add a delay to ensure proper layout calculation
+    const initAnimations = () => {
+      console.log("Initializing animations after delay");
+      
+      const section = sectionRef.current;
+      if (!section) return;
+      
+      // Force a layout calculation
+      section.getBoundingClientRect();
+      
+      // Rest of your existing animation code follows:
+      // Measurement
+      measureCardDimensions();
+  
+      // Set up resize observer
+      const resizeObserver = new ResizeObserver(() => {
+        measureCardDimensions();
+        ScrollTrigger.refresh();
+      });
+  
+      if (measurementRef.current) {
+        resizeObserver.observe(measurementRef.current);
+      }
 
     // Set initial "hidden" states for content
     processSteps.forEach((_, index) => {
@@ -252,30 +271,52 @@ const ProcessSection: React.FC = () => {
         );
     });
 
-    return () => {
-      resizeObserver.disconnect();
+        // Mark as initialized after setup is complete
+        isInitializedRef.current = true;
+
+        return () => {
+          resizeObserver.disconnect();
+          
+          // Kill all created timelines to prevent memory leaks
+          timelines.forEach(tl => tl.kill());
+          
+          // Kill all ScrollTriggers created by this component
+          ScrollTrigger.getAll().forEach(st => {
+            st.kill();
+          });
+        };
+      };
+    
+      // Use setTimeout to delay initialization
+      const timer = setTimeout(initAnimations, 500);
       
-      // Kill all created timelines to prevent memory leaks
-      timelines.forEach(tl => tl.kill());
+      return () => {
+        clearTimeout(timer);
+      };
+    }, []);
+
+    useEffect(() => {
+      const handleResize = () => {
+        console.log("Window resized, refreshing ScrollTrigger");
+        ScrollTrigger.refresh(true); // true forces a full refresh
+      };
       
-      // Kill all ScrollTriggers created by this component
-      ScrollTrigger.getAll().forEach(st => {
-        st.kill();
-      });
-    };
-  }, []);
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
 
   return (
     <div className="bg-gray-50">
       <div className="text-center max-w-4xl mx-auto py-16">
-        <h2 className="text-5xl font-extrabold text-gray-900 mb-8">
-          Our Approach
-        </h2>
-        <p className="text-xl text-gray-700 leading-relaxed">
-          We follow a systematic, collaborative approach to ensure your
-          custom software solution meets all requirements while maintaining
-          flexibility for future growth:
-        </p>
+      <h2 className="text-5xl font-extrabold text-gray-900 mb-8">
+        {content.title}
+      </h2>
+      <p className="text-xl text-gray-700 leading-relaxed">
+        {content.description}
+      </p>
       </div>
       <div ref={sectionRef} className="relative h-[400vh] md:h-[450vh] pb-16">
         {/*
@@ -453,14 +494,9 @@ const ProcessSection: React.FC = () => {
             <div
               className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 max-w-4xl mx-auto shadow-md border border-blue-600"
             >
-              <p className="text-gray-200 mb-4">
-                We cannot provide exact timelines until we have a well-defined
-                project and plan. Projects can range from a few weeks to several
-                months; however, as a simple reference point, most small business
-                software projects are completed in 6–8 weeks, while larger, more
-                complex solutions can range from 8–16+ weeks, depending on the
-                complexity.
-              </p>
+            <p className="text-gray-200 mb-4">
+              {content.note}
+            </p>
               <a
                 href="/about/process"
                 className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-400 font-medium"

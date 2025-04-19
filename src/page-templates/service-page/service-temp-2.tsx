@@ -5,13 +5,13 @@ import HeroSection from './hero-section/hero-section';
 import ValuePropSection from './value-prop-section/value-prop-section';
 import ServiceScopeSection from './service-scope-section';
 import ApplicationsSection from './applications-section';
-import ProcessSection from './process-section';
+import ProcessSectionWrapper from './process-section/process-section';
 import { 
   HeroSectionContent, 
   ValuePropContent, 
   ServiceScopeContent, 
   ApplicationsContent,
-  ProcessContent
+  ProcessSectionContent
 } from './types';
 
 interface ServicePageTemplateProps {
@@ -19,7 +19,7 @@ interface ServicePageTemplateProps {
   valuePropContent: ValuePropContent;
   serviceScopeContent?: ServiceScopeContent;
   applicationsContent?: ApplicationsContent;
-  processContent?: ProcessContent;
+  processContent?: ProcessSectionContent;
 }
 
 /**
@@ -65,7 +65,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
       
       {/* Process Section (if provided) */}
       {processContent && (
-        <ProcessSection content={processContent} />
+        <ProcessSectionWrapper content={processContent} />
       )}
       
       {/* Additional sections can be added here */}
