@@ -152,7 +152,7 @@ export interface ProcessStep {
   description: string;
   items: string[];
   timeline: string;
-  icon: IconName;
+  icon: any; // This allows for direct component import as was done in the original
 }
 
 /**
@@ -163,6 +163,10 @@ export interface ProcessContent {
   description: string;
   steps: ProcessStep[];
   note?: string;
+  link?: {
+    text: string;
+    url: string;
+  };
 }
 
 /**

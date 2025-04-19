@@ -1,16 +1,13 @@
-// src/content/service-pages/custom-software/process-content.ts
-
+// src/content/services/custom-software/process-content.ts
 import { ProcessContent } from '@/page-templates/service-page/types';
-// Import Lucide icons directly
 import { Search, ClipboardList, Paintbrush, Code, Rocket } from 'lucide-react';
 
 /**
- * Process content for the Custom Software Solutions service page.
+ * Content configuration for the Process section of the Custom Software Solutions page
  */
-const customSoftwareProcess: ProcessContent = {
-  title: "Our Approach",
-  description: "We follow a systematic, collaborative approach to ensure your custom software solution meets all requirements while maintaining flexibility for future growth:",
-  
+const processContent: ProcessContent = {
+  title: 'Our Approach',
+  description: 'We follow a systematic, collaborative approach to ensure your custom software solution meets all requirements while maintaining flexibility for future growth:',
   steps: [
     {
       step: 1,
@@ -73,12 +70,11 @@ const customSoftwareProcess: ProcessContent = {
       icon: Rocket
     }
   ],
-  
-  note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months; however, as a simple reference point, most small business software projects are completed in 6–8 weeks, while larger, more complex solutions can range from 8–16+ weeks, depending on the complexity.",
+  note: 'We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months; however, as a simple reference point, most small business software projects are completed in 6–8 weeks, while larger, more complex solutions can range from 8–16+ weeks, depending on the complexity.',
   link: {
-    text: "Learn more about our process",
-    url: "/about/process" 
+    text: 'Learn more about our process',
+    url: '/about/process'
   }
 };
 
-export default customSoftwareProcess;
+export default processContent;
