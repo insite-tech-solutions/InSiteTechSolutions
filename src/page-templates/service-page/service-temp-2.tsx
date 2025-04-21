@@ -11,7 +11,7 @@ import {
   ValuePropContent, 
   ServiceScopeContent, 
   ApplicationsContent,
-  ProcessSectionContent
+  ProcessContent
 } from './types';
 
 interface ServicePageTemplateProps {
@@ -19,7 +19,7 @@ interface ServicePageTemplateProps {
   valuePropContent: ValuePropContent;
   serviceScopeContent?: ServiceScopeContent;
   applicationsContent?: ApplicationsContent;
-  processContent?: ProcessSectionContent;
+  processContent?: ProcessContent;
 }
 
 /**

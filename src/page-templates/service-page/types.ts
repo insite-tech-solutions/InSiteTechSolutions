@@ -1,6 +1,7 @@
 // src/page-templates/service-page/types.ts
 
 import { CSSProperties, ReactNode } from 'react';
+import { LucideIcon } from 'lucide-react';
 
 /**
  * Base types for decorative elements used in hero backgrounds
@@ -152,16 +153,19 @@ export interface ProcessStep {
   description: string;
   items: string[];
   timeline: string;
-  icon: any; // This allows for direct component import as was done in the original
+  icon: LucideIcon;
 }
 
 /**
  * Process section content
  */
-export interface ProcessSectionContent {
+export interface ProcessContent {
   title: string;
   description: string;
+  steps: ProcessStep[];
   note: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 
 /**

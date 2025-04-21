@@ -127,7 +127,7 @@ function TrendCard({ trend }: { trend: IndustryTrend }) {
 function MarketInsightCard({ insights }: { insights: MarketInsight[] }) {
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-      <h3 className="text-2xl font-semibold mb-4 text-gray-800">Key Market Insights</h3>
+      <h3 className="text-2xl font-semibold mb-4 text-gray-800">Key Market InSites</h3>
       <motion.ul
         variants={staggerChildren}
         initial="hidden"

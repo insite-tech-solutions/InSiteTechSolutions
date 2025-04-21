@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TracingBeam } from './tracing-beam';
-import { processSteps, processSectionContent, ProcessSectionContent } from '@/content/service-pages/custom-software/process-content';
+import { ProcessContent } from '@/page-templates/service-page/types';
 import { Clock, ExternalLink } from 'lucide-react';
 
 // Wrapper component that handles orientation changes
-const ProcessSectionWrapper: React.FC<{content?: ProcessSectionContent}> = ({ content = processSectionContent }) => {
+const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content }) => {
   const [orientationKey, setOrientationKey] = useState<string>(() => {
     // Initialize with current orientation
     return typeof window !== 'undefined' 
@@ -78,7 +78,7 @@ const ProcessSectionWrapper: React.FC<{content?: ProcessSectionContent}> = ({ co
 };
 
 // Original ProcessSection component with all GSAP animations
-const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content }) => {
+const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const measurementRef = useRef<HTMLDivElement>(null);
 
@@ -98,7 +98,7 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
   const timelineRefs = useRef<HTMLDivElement[]>([]);
   const stepNumberRefs = useRef<HTMLSpanElement[]>([]);
 
-  liRefs.current = processSteps.map(() => []);
+  liRefs.current = content.steps.map(() => []);
 
   // Function to measure card dimensions for each step
   const measureCardDimensions = () => {
@@ -154,7 +154,7 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
       }
 
     // Set initial "hidden" states for content
-    processSteps.forEach((_, index) => {
+    content.steps.forEach((_, index) => {
       const icon = iconRefs.current[index];
       const title = titleRefs.current[index];
       const divider = dividerRefs.current[index];
@@ -178,7 +178,7 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
     const timelines: gsap.core.Timeline[] = [];
 
     // Create scroll-triggered timelines
-    processSteps.forEach((stepData, index) => {
+    content.steps.forEach((stepData, index) => {
       const circle = circleRefs.current[index];
       const icon = iconRefs.current[index];
       const title = titleRefs.current[index];
@@ -293,7 +293,7 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
       return () => {
         clearTimeout(timer);
       };
-    }, []);
+    }, [content]);
 
     useEffect(() => {
       const handleResize = () => {
@@ -331,7 +331,7 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
           className="w-5/6 lg:w-1/2 mx-auto opacity-0 pointer-events-none absolute -z-10"
           aria-hidden="true"
         >
-          {processSteps.map((step, index) => (
+          {content.steps.map((step, index) => (
             <div
               key={index}
               className="measurement-card rounded-xl relative bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg border-[3px] border-blue-600 mb-10"
@@ -366,8 +366,8 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
 
         <TracingBeam>
           <div className="relative h-full">
-            {processSteps.map((step, index) => {
-              const topPercent = ((index + 1) / (processSteps.length + 1)) * 100;
+            {content.steps.map((step, index) => {
+              const topPercent = ((index + 1) / (content.steps.length + 1)) * 100;
               return (
                 <div
                   key={index}
@@ -485,16 +485,16 @@ const ProcessSection: React.FC<{content: ProcessSectionContent}> = ({ content })
         <div
           className="absolute left-0 w-full bg-gray-50 flex flex-col justify-end pb-16"
           style={{ 
-            top: `${((processSteps.length) / (processSteps.length + 1)) * 99}%`,
+            top: `${((content.steps.length) / (content.steps.length + 1)) * 99}%`,
             bottom: '0',
             zIndex: 15
           }}
         >
           <div className="container mx-auto px-6 pt-8 mb-[-2.5rem] lg:pb-24">
             <div
-              className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 max-w-4xl mx-auto shadow-md border border-blue-600"
+              className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue rounded-xl p-6 max-w-4xl mx-auto shadow-md"
             >
-            <p className="text-gray-200 mb-4">
+            <p className="text-gray-50 mb-4">
               {content.note}
             </p>
               <a
