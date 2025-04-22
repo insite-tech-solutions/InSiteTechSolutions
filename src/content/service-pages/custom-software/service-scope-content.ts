@@ -67,6 +67,9 @@ const customSoftwareServiceScope: ServiceScopeContent = {
     }
   ],
   
+  keyBenefitsTitle: "Key Benefits",
+  keyBenefitsDescription: "Our custom software solutions provide measurable improvements to your business operations and research capabilities.",
+
   benefits: [
     {
       icon: "TrendingUp",

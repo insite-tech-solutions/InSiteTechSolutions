@@ -1,12 +1,10 @@
-// src/page-templates/service-page/applications-section/application-categories.tsx
-
 'use client'
 
-import React from 'react'
+import React, { useMemo, memo } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { ApplicationCategory } from '../types'
-import dynamic from 'next/dynamic'
+import { getIcon } from '@/utils/icon-registry';
 
 interface ApplicationCategoriesProps {
   title: string
@@ -44,13 +42,10 @@ const CategoryCard: React.FC<{
   category: ApplicationCategory
 }> = ({ category }) => {
   // Dynamically import the icon
-  const IconComponent = dynamic(
-    () => import('lucide-react').then((mod) => mod[category.icon]),
-    { ssr: false, loading: () => <div className="w-6 h-6 bg-blue-100 rounded-full animate-pulse" /> }
-  );
+  const IconComponent = getIcon(category.icon);
 
   return (
-    <motion.div
+    <motion.article
       variants={fadeInUp}
       className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all"
     >
@@ -68,20 +63,29 @@ const CategoryCard: React.FC<{
           </li>
         ))}
       </ul>
-    </motion.div>
+    </motion.article>
   )
 }
+const MemoizedCategoryCard = memo(CategoryCard)
 
 /**
- * ApplicationCategories component displays categories in a blue gradient container
+ * A memoized component that displays application categories
+ * in a responsive grid, each with its icon and item list,
+ * with entry animations.
  */
 const ApplicationCategories: React.FC<ApplicationCategoriesProps> = ({
   title,
   description,
   categories
 }) => {
+  const categoryCards = useMemo(() => {
+    return categories.map((category) => (
+      <MemoizedCategoryCard key={category.title} category={category} />
+    ));
+  }, [categories]);
+
   return (
-    <div className="container mx-auto relative rounded-xl p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600 shadow-xl">
+    <section className="container mx-auto relative rounded-xl p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600 shadow-xl">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -89,24 +93,22 @@ const ApplicationCategories: React.FC<ApplicationCategoriesProps> = ({
         variants={staggerChildren}
       >
         {/* Section Header */}
-        <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
+        <motion.header variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
           <h2 className="text-4xl font-bold mt-6 mb-6 text-gray-50">
             {title}
           </h2>
           <p className="max-w-3xl mx-auto text-lg text-gray-100 leading-relaxed">
             {description}
           </p>
-        </motion.div>
+        </motion.header>
 
         {/* Core Services */}
         <div className="grid lg:grid-cols-3 gap-8 mb-2">
-          {categories.map((category, index) => (
-            <CategoryCard key={index} category={category} />
-          ))}
+          {categoryCards}
         </div>
       </motion.div>
-    </div>
+    </section>
   )
 }
 
-export default ApplicationCategories
+export default memo(ApplicationCategories)

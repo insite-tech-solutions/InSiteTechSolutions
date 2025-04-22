@@ -19,7 +19,7 @@ interface ApplicationsSectionProps {
  */
 const ApplicationsSection: React.FC<ApplicationsSectionProps> = ({ content }) => {
   return (
-    <section className="py-2 bg-gray-50 relative overflow-hidden">
+    <section className="py-2 relative overflow-hidden">
       {/* Application Categories with blue gradient background */}
       <ApplicationCategories 
         title={content.title}
@@ -28,13 +28,16 @@ const ApplicationsSection: React.FC<ApplicationsSectionProps> = ({ content }) =>
       />
       
       {/* Industry Solutions displayed as a carousel */}
-      <div className="p-6 mt-4">
+      <div className="p-1 mt-4">
         <IndustrySolutions 
           industries={content.industries}
+          backgroundIcon={content.backgroundIcon || 'CodeXml'}
+          industrySolutionsTitle={content.industrySolutionsTitle || content.title}
+          industrySolutionsDescription={content.industrySolutionsDescription || content.description}
         />
       </div>
     </section>
   )
 }
 
-export default ApplicationsSection
+export default React.memo(ApplicationsSection);

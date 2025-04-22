@@ -12,6 +12,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-coverflow'
 
+
 // Initialize Swiper modules
 SwiperCore.use([Autoplay, Navigation, Pagination, EffectCoverflow]);
 
@@ -43,6 +44,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
   carouselParams = {},
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
 
   // Default Swiper parameters
   const defaultSwiperParams: SwiperProps = {
@@ -96,13 +98,13 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
   };
 
   return (
-    <div className="container mx-auto relative rounded-xl">
+    <div className="container px-2 mx-auto relative rounded-xl">
       {/* Section Title and Description */}
       <motion.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
-        className="text-center max-w-3xl mx-auto mb-16"
+        className="text-center max-w-3xl mx-auto mb-12 mt-2"
       >
         <h3 className="text-3xl font-bold mt-6 mb-6 text-gray-900">
           {title}
@@ -112,11 +114,14 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
 
       <div className="relative overflow-hidden rounded-xl">
         {/* Background Icon/Image */}
+        <div className="absolute inset-0 flex justify-center items-center">
+        {/* Background Icon/Image */}
         {background && (
           <div className="absolute inset-0 flex justify-center items-center">
             {background}
           </div>
         )}
+        </div>
 
         {/* Carousel */}
         <Swiper

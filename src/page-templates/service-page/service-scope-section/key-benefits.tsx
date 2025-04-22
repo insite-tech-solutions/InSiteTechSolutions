@@ -2,69 +2,70 @@
 
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BenefitItem } from '../types';
-import dynamic from 'next/dynamic';
+import { getIcon } from '@/utils/icon-registry';
+import BenefitsCard from '@/components/reusable-components/benefits-card';
+import CarouselSection from '@/components/reusable-components/carousel-section';
 
 interface KeyBenefitsProps {
   benefits: BenefitItem[];
-  backgroundIcon?: string; // Optional icon name for background
+  backgroundIcon?: string;
+  keyBenefitsTitle: string;
+  keyBenefitsDescription: string;
 }
 
+/**
+ * A memoized component that displays key benefits in a carousel
+ * with optional background icon for visual emphasis.
+ */
 /**
  * KeyBenefits component that displays benefits in a carousel
  * 
  * @param benefits - Array of benefit items to display
  * @param backgroundIcon - Optional icon name for background
+ * @param keyBenefitsTitle - Title for the key benefits section
+ * @param keyBenefitsDescription - Description for the key benefits section
  */
-const KeyBenefits: React.FC<KeyBenefitsProps> = ({ benefits, backgroundIcon }) => {
-  // Use dynamic import for the benefit cards
-  const BenefitsCard = dynamic(() => import('@/components/reusable-components/benefits-card'), {
-    ssr: false,
-    loading: () => <div className="w-full h-60 bg-gray-100 rounded-xl animate-pulse" />
-  });
-  
-  // Use dynamic import for the carousel section
-  const CarouselSection = dynamic(() => import('@/components/reusable-components/carousel-section'), {
-    ssr: false,
-    loading: () => <div className="w-full h-80 bg-gray-100 rounded-xl animate-pulse" />
-  });
-  
+const KeyBenefits: React.FC<KeyBenefitsProps> = ({ 
+  benefits, 
+  backgroundIcon,
+  keyBenefitsTitle,
+  keyBenefitsDescription
+}) => {
   // Generate BenefitsCard components
-  const cards = benefits.map((benefit, index) => {
-    // For the BenefitsCard, we need to dynamically import the icon at render time
-    const IconComponent = dynamic(
-      () => import('lucide-react').then((mod) => mod[benefit.icon]),
-      { ssr: false, loading: () => null }
-    );
-    
-    return (
+  const cards = useMemo(() => {
+    return benefits.map((benefit) => (
       <BenefitsCard
-        key={index}
-        icon={IconComponent}
+        key={benefit.title}
+        icon={benefit.icon}
         title={benefit.title}
         description={benefit.description}
       />
-    );
-  });
+    ));
+  }, [benefits]);
 
-  // Always use dynamic import for the background icon if provided
-  const BackgroundIcon = backgroundIcon
-    ? dynamic(() => import('lucide-react').then((mod) => mod[backgroundIcon]), { ssr: false, loading: () => null })
-    : null;
+  const IconComponent = useMemo(() => {
+    return backgroundIcon ? getIcon(backgroundIcon) : getIcon('CodeXml');
+  }, [backgroundIcon]);
+  
+  const backgroundElement = useMemo(() => (
+    <IconComponent
+      className="text-medium-blue-alt"
+      width={400}
+      height={375}
+      strokeWidth={1.5}
+    />
+  ), [IconComponent]);
 
   return (
     <CarouselSection
-      title="Key Benefits"
-      description="Our custom software solutions provide measurable improvements to your business operations and research capabilities."
+      title={keyBenefitsTitle}
+      description={keyBenefitsDescription}
       cards={cards}
-      background={
-        BackgroundIcon ? (
-          <BackgroundIcon className="text-medium-blue-alt" width={400} height={375} strokeWidth={1.5} />
-        ) : null
-      }
+      background={backgroundElement}
     />
   );
 };
 
-export default KeyBenefits;
+export default React.memo(KeyBenefits);

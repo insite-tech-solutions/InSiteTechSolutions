@@ -1,13 +1,11 @@
-// src/page-templates/service-page/service-scope-section/core-services.tsx
-
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ServiceItem } from '../types'
 import { CheckCircle } from 'lucide-react'
-import dynamic from 'next/dynamic'
+import { getIcon } from '@/utils/icon-registry'
 
 // Simple debounce function
 const debounce = <F extends (...args: unknown[]) => unknown>(
@@ -32,19 +30,17 @@ interface CoreServicesProps {
 }
 
 /**
- * ServiceCard: A single translucent card for displaying a service
+ * A memoized card component displaying a single service item
+ * with icon, title, description, and benefits.
  */
 const ServiceCard: React.FC<{
   service: ServiceItem
 }> = ({ service }) => {
-  // Dynamically import the icon
-  const IconComponent = dynamic(
-    () => import('lucide-react').then((mod) => mod[service.icon]),
-    { ssr: false, loading: () => <div className="w-6 h-6 bg-blue-100 rounded-full animate-pulse" /> }
-  );
+  // Get the icon using our registry
+  const IconComponent = getIcon(service.icon);
 
   return (
-    <div className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all group">
+    <article className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all group">
       <div className="flex items-center gap-4 mb-4">
         <div className="p-3 rounded-full bg-blue-100 group-hover:bg-medium-blue-alt transition-colors">
           <IconComponent className="h-6 w-6 text-medium-blue-alt group-hover:text-white" />
@@ -60,11 +56,17 @@ const ServiceCard: React.FC<{
           </li>
         ))}
       </ul>
-    </div>
+    </article>
   )
 }
 
+const MemoizedServiceCard = React.memo(ServiceCard)
+
 // Wrapper component for orientation change handling
+/**
+ * CoreServicesWrapper handles orientation changes and scroll position
+ * restoration to remount CoreServicesMain when device orientation changes.
+ */
 const CoreServicesWrapper: React.FC<CoreServicesProps> = (props) => {
   const [orientationKey, setOrientationKey] = useState<string>(() => {
     // Initialize with current orientation or default
@@ -75,25 +77,18 @@ const CoreServicesWrapper: React.FC<CoreServicesProps> = (props) => {
 
   const [scrollPosition, setScrollPosition] = useState<number>(0);
 
+  const handleOrientationOrResize = useCallback(() => {
+    if (typeof window === 'undefined') return
+    const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+    if (newOrientation !== orientationKey) {
+      setScrollPosition(window.scrollY)
+      setOrientationKey(newOrientation)
+    }
+  }, [orientationKey])
+
+  const debouncedResizeHandler = useMemo(() => debounce(handleOrientationOrResize, 200), [handleOrientationOrResize])
+
   useEffect(() => {
-    const currentOrientation = orientationKey;
-
-    const handleOrientationOrResize = () => {
-      const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-
-      if (newOrientation !== currentOrientation) {
-        // Store scroll position before remount
-        setScrollPosition(window.scrollY);
-        // Update key to trigger remount
-        setOrientationKey(newOrientation);
-      }
-    };
-
-    // Debounced handler for resize events
-    const debouncedResizeHandler = debounce(() => {
-        handleOrientationOrResize();
-    }, 200);
-
     // Add listeners
     window.addEventListener('resize', debouncedResizeHandler);
     window.addEventListener('orientationchange', handleOrientationOrResize);
@@ -103,7 +98,7 @@ const CoreServicesWrapper: React.FC<CoreServicesProps> = (props) => {
       window.removeEventListener('resize', debouncedResizeHandler);
       window.removeEventListener('orientationchange', handleOrientationOrResize);
     };
-  }, [orientationKey]);
+  }, [debouncedResizeHandler, handleOrientationOrResize]);
 
   // Effect to restore scroll position after remount
   useEffect(() => {
@@ -121,7 +116,8 @@ const CoreServicesWrapper: React.FC<CoreServicesProps> = (props) => {
 };
 
 /**
- * CoreServicesMain: The main component with GSAP animations
+ * CoreServicesMain renders the main section and sets up a GSAP
+ * ScrollTrigger animation to pin the heading and scroll the service cards.
  */
 const CoreServicesMain: React.FC<CoreServicesProps> = ({ title, description, services }) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -137,9 +133,10 @@ const CoreServicesMain: React.FC<CoreServicesProps> = ({ title, description, ser
         const cardsHeight = cardsRef.current?.offsetHeight || 0;
         const pinnedHeight = pinnedRef.current?.offsetHeight || 0;
         // Basic distance is the difference in heights
-        const distance = window.innerWidth < 1024 // Tailwind's lg breakpoint
-        ? cardsHeight - pinnedHeight + 48 + 236 // Increase scroll distance for mobile
-        : cardsHeight - pinnedHeight + 48; // Default for larger screens
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
+        const distance = isMobile
+          ? cardsHeight - pinnedHeight + 48 + 236
+          : cardsHeight - pinnedHeight + 48
         // Ensure distance is not negative
         return Math.max(0, distance);
       };
@@ -173,13 +170,16 @@ const CoreServicesMain: React.FC<CoreServicesProps> = ({ title, description, ser
       };
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert()
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
   }, []);
 
   return (
-    <div className="container mx-auto bg-gray-50">
+    <main className="container mx-auto">
       <section ref={containerRef} className="relative">
-        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="w-full">
           {/* SINGLE BLUE CARD (Pinned) */}
           <div
             ref={pinnedRef}
@@ -191,27 +191,27 @@ const CoreServicesMain: React.FC<CoreServicesProps> = ({ title, description, ser
             }}
           >
             {/* LEFT SIDE: Title & Description */}
-            <div className="lg:w-1/2 lg:pr-6 flex flex-col justify-center">
+            <header className="lg:w-1/2 lg:pr-6 flex flex-col justify-center">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-50 text-center lg:text-left">
                 {title}
               </h2>
               <p className="text-base lg:text-lg text-gray-50 mb-3 leading-relaxed text-center lg:text-left">
                 {description}
               </p>
-            </div>
+            </header>
 
             {/* RIGHT SIDE: Translucent Cards (Column) */}
             <div className="lg:w-1/2">
-              <div ref={cardsRef} className="space-y-6">
-                {services.map((service, index) => (
-                  <ServiceCard key={index} service={service} />
+              <div ref={cardsRef} className="space-y-6 will-change-transform">
+                {services.map((service) => (
+                  <MemoizedServiceCard key={service.title} service={service} />
                 ))}
               </div>
             </div>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
 

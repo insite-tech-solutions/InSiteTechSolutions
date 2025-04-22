@@ -1,11 +1,12 @@
 // src/page-templates/service-page/service-temp-2.tsx
 
 import React from 'react';
-import HeroSection from './hero-section/hero-section';
-import ValuePropSection from './value-prop-section/value-prop-section';
+import HeroSection from './hero-section';
+import ValuePropSection from './value-prop-section';
 import ServiceScopeSection from './service-scope-section';
 import ApplicationsSection from './applications-section';
-import ProcessSectionWrapper from './process-section/process-section';
+import ProcessSection from './process-section';
+import Layout from '@/components/reusable-components/layout';
 import { 
   HeroSectionContent, 
   ValuePropContent, 
@@ -49,9 +50,13 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
     <main>
       {/* Hero Section */}
       <HeroSection content={heroContent} />
+
+    <Layout>
       
       {/* Value Proposition Section */}
-      <ValuePropSection content={valuePropContent} />
+      {valuePropContent && (
+        <ValuePropSection content={valuePropContent} />
+      )}
       
       {/* Service Scope Section (if provided) */}
       {serviceScopeContent && (
@@ -63,11 +68,15 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         <ApplicationsSection content={applicationsContent} />
       )}
       
+    </Layout>
+
+      <div className="min-h-screen bg-gray-500 text-gray-900 max-w-7xl mx-auto ">
       {/* Process Section (if provided) */}
       {processContent && (
-        <ProcessSectionWrapper content={processContent} />
+        <ProcessSection content={processContent} />
       )}
-      
+      </div>
+
       {/* Additional sections can be added here */}
     </main>
   );

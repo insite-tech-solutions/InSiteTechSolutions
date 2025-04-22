@@ -12,7 +12,7 @@ export interface DecorElement {
   type: 'icon' | 'circle' | 'square';
   className?: string;
   style?: CSSProperties;
-  icon?: IconName;
+  icon?: LucideIcon | IconName;
   size?: number;
 }
 
@@ -42,6 +42,15 @@ export interface Statistic {
 }
 
 /**
+ * Data structure for inline statistics
+ */
+export interface StatData {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+}
+
+/**
  * Types for industry trends in value prop section
  */
 export interface IndustryTrend {
@@ -55,7 +64,7 @@ export interface IndustryTrend {
  */
 export interface MarketInsight {
   id: string;
-  content: string | ReactNode; // Allow for rich content including inline stats
+  parts: (string | StatData)[]; // Structured content with interleaved text and stats
 }
 
 /**
@@ -77,6 +86,7 @@ export interface ValuePropContent {
   description: string;
   statistics?: Statistic[];
   industryTrends: IndustryTrend[];
+  industryTrendsDescription?: string;
   marketInsights: MarketInsight[];
   callToAction: CallToAction;
   additionalContent?: {
@@ -114,6 +124,8 @@ export interface ServiceScopeContent {
   services: ServiceItem[];
   benefits?: BenefitItem[];
   backgroundIcon?: string;
+  keyBenefitsTitle?: string;
+  keyBenefitsDescription?: string;
 }
 
 /**
@@ -132,6 +144,7 @@ export interface IndustryItem {
   title: string;
   icon: IconName;
   items: string[];
+  backgroundIcon?: string;
 }
 
 /**
@@ -142,6 +155,9 @@ export interface ApplicationsContent {
   description: string;
   categories: ApplicationCategory[];
   industries: IndustryItem[];
+  backgroundIcon?: string;
+  industrySolutionsTitle?: string;
+  industrySolutionsDescription?: string;
 }
 
 /**
@@ -153,7 +169,7 @@ export interface ProcessStep {
   description: string;
   items: string[];
   timeline: string;
-  icon: LucideIcon;
+  icon: IconName;
 }
 
 /**

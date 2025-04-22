@@ -2,100 +2,85 @@
 
 'use client'
 
-import React from 'react'
+import React, { useMemo, memo } from 'react'
 import { motion } from 'framer-motion'
-import { Plus } from 'lucide-react'
 import { IndustryItem } from '../types'
-import dynamic from 'next/dynamic'
+import { getIcon } from '@/utils/icon-registry';
+import IndustryCard from '@/components/reusable-components/industry-card';
+import CarouselSection from '@/components/reusable-components/carousel-section';
+import TailwindButton from '@/components/reusable-components/tailwind-button';
 
 interface IndustrySolutionsProps {
   industries: IndustryItem[]
-}
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeOut',
-    }
-  }
+  backgroundIcon?: string;
+  industrySolutionsTitle: string;
+  industrySolutionsDescription: string;
 }
 
 /**
  * IndustrySolutions component displays industries in a carousel
+ * 
+ * @param industries - Array of industry items to display
+ * @param backgroundIcon - Optional icon name for background
+ * @param industrySolutionsTitle - Title for the industry solutions section
+ * @param industrySolutionsDescription - Description for the industry solutions section
  */
-const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ industries }) => {
-  // Use dynamic import for the IndustryCard component
-  const IndustryCard = dynamic(
-    () => import('@/components/reusable-components/industry-card'),
-    { ssr: false, loading: () => <div className="w-full h-60 bg-gray-100 rounded-xl animate-pulse" /> }
-  );
-  
-  // Use dynamic import for the CarouselSection component
-  const CarouselSection = dynamic(
-    () => import('@/components/reusable-components/carousel-section'),
-    { ssr: false, loading: () => <div className="w-full h-80 bg-gray-100 rounded-xl animate-pulse" /> }
-  );
-  
+
+/**
+ * A memoized component that displays industry solutions in a carousel
+ * with an optional background icon and a CTA card for additional inquiries.
+ */
+const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ 
+  industries, 
+  backgroundIcon,
+  industrySolutionsTitle,
+  industrySolutionsDescription
+}) => {
   // Generate IndustryCard components
-  const cards = industries.map((industry, index) => {
-    // Dynamically import the icon
-    const IconComponent = dynamic(
-      () => import('lucide-react').then((mod) => mod[industry.icon]),
-      { ssr: false, loading: () => null }
-    );
-    
-    return (
+  const cards = useMemo(() => {
+    return industries.map((industry) => (
       <IndustryCard
-        key={index}
-        icon={IconComponent}
+        key={industry.title}
+        icon={industry.icon}
         title={industry.title}
         items={industry.items}
       />
-    );
-  });
+    ));
+  }, [industries]);
 
-  // Use Code2 as background icon (common in original)
-  const BackgroundIcon = dynamic(
-    () => import('lucide-react').then((mod) => mod['Code2']),
-    { ssr: false, loading: () => null }
-  );
-  
-  // Import TailwindButton for the CTA
-  const TailwindButton = dynamic(
-    () => import('@/components/reusable-components/tailwind-button'),
-    { ssr: false, loading: () => <div className="w-32 h-10 bg-white rounded-full animate-pulse" /> }
-  );
+  const IconComponent = useMemo(() => {
+    return backgroundIcon ? getIcon(backgroundIcon) : getIcon('CodeXml');
+  }, [backgroundIcon]);
+
+  const backgroundElement = useMemo(() => (
+    <IconComponent className="text-blue-600" width={600} height={600} strokeWidth={1.5} />
+  ), [IconComponent]);
 
   return (
     <>
       {/* Display industries in a carousel */}
       <CarouselSection
-        title="Industry-Specific Solutions"
-        description="Drawing on our technical expertise across numerous sectors, we create customized solutions that meet the unique demands of your industry."
+        title={industrySolutionsTitle}
+        description={industrySolutionsDescription}
         cards={cards}
-        background={<BackgroundIcon className="text-blue-600" width={600} height={600} strokeWidth={1.5} />}
+        background={backgroundElement}
       />
 
       {/* And Many More! Card */}
-      <motion.div
+      <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: 0.6,
           ease: 'easeOut',
         }}
-        className="container mx-auto bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white rounded-xl p-8 text-center mt-12 shadow-md hover:shadow-lg transition-all duration-200"
+        className="container mx-auto bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white rounded-xl p-8 text-center mt-6 md:mt-12 shadow-md hover:shadow-lg transition-all duration-200"
       >
         <div className="flex items-center justify-center gap-2 mb-4">
           <h4 className="text-2xl font-semibold">And Many More!</h4>
         </div>
         <p className="mb-6 text-blue-100">
-          Don't see your industry listed? Contact us to discuss your
+          Don&apos;t see your industry listed? Contact us to discuss your
           specific needs.
         </p>
         <TailwindButton 
@@ -104,9 +89,9 @@ const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ industries }) => 
         >
           Get in Touch
         </TailwindButton>
-      </motion.div>
+      </motion.section>
     </>
   )
 }
 
-export default IndustrySolutions
+export default memo(IndustrySolutions)

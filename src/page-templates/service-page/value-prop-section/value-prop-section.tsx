@@ -1,14 +1,16 @@
 // src/templates/service-page/sections/value-prop/value-prop-section.tsx
 
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useAnimation, Variants } from 'framer-motion';
-import * as LucideIcons from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { motion, Variants } from 'framer-motion';
+import { getIcon } from '@/utils/icon-registry';
+import { ChevronUp, ChevronDown, CheckCircle } from 'lucide-react';
+import { InlineStat } from './inline-stat';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import { 
   ValuePropContent, 
   IndustryTrend, 
-  MarketInsight, 
-  Statistic as StatisticType 
+  MarketInsight as MarketInsightType,
+  StatData
 } from '../types';
 
 // Animation variants
@@ -29,84 +31,41 @@ const staggerChildren: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.15
     }
   }
 };
 
 /**
- * Component for displaying animated inline statistics
- */
-function InlineStat({ value, suffix = '', prefix = '' }: { value: number, suffix?: string, prefix?: string }) {
-  const [count, setCount] = useState(0);
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-      const duration = 2000;
-      const steps = 60;
-      const increment = value / steps;
-      let current = 0;
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setCount(value);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
-
-      return () => clearInterval(timer);
-    }
-  }, [isInView, value, controls]);
-
-  return (
-    <motion.span
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={fadeInUp}
-      className="text-2xl font-bold text-medium-blue-alt inline-flex items-center"
-    >
-      {prefix}{count}{suffix}
-    </motion.span>
-  );
-}
-
-/**
  * Component for displaying industry trends with expandable descriptions
+ * @param {Object} props - Component props
+ * @param {IndustryTrend} props.trend - The industry trend data to display
+ * @returns {JSX.Element} A memoized trend card component
  */
-function TrendCard({ trend }: { trend: IndustryTrend }) {
+const TrendCard = React.memo(function TrendCard({ trend }: { trend: IndustryTrend }) {
   const [isOpen, setIsOpen] = useState(false);
   const { title, description } = trend;
   
-  // Get the icon component from the trend
-  const IconComponent = typeof trend.icon === 'string' 
-    ? LucideIcons[trend.icon as keyof typeof LucideIcons] || LucideIcons.Code
-    : trend.icon;
+  // Get the icon component using our utility
+  const IconComponent = getIcon(trend.icon || 'Code');
 
   return (
-    <motion.div
+    <motion.article
       variants={fadeInUp}
       className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-medium-blue-alt transition-all hover:shadow-lg p-4"
       onClick={() => setIsOpen(!isOpen)}
     >
-      <div className="flex items-center justify-between">
+      <header className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <IconComponent className="h-6 w-6 text-medium-blue-alt" />
           <h4 className="text-gray-700">{title}</h4>
         </div>
         {isOpen ? (
-          <LucideIcons.ChevronUp className="h-5 w-5 text-gray-500" />
+          <ChevronUp className="h-5 w-5 text-gray-500" />
         ) : (
-          <LucideIcons.ChevronDown className="h-5 w-5 text-gray-500" />
+          <ChevronDown className="h-5 w-5 text-gray-500" />
         )}
-      </div>
+      </header>
       <motion.div
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
@@ -117,40 +76,64 @@ function TrendCard({ trend }: { trend: IndustryTrend }) {
           {description}
         </p>
       </motion.div>
-    </motion.div>
+    </motion.article>
   );
-}
+});
 
 /**
  * Component for displaying market insights with inline animated stats
+ * @param {Object} props - Component props
+ * @param {MarketInsightType[]} props.insights - Array of market insights to display
+ * @returns {JSX.Element} A memoized market insight card component
  */
-function MarketInsightCard({ insights }: { insights: MarketInsight[] }) {
+const MarketInsightCard = React.memo(function MarketInsightCard({ insights }: { insights: MarketInsightType[] }) {
+  // Helper to check if an object is StatData
+  const isStatData = (part: string | StatData): part is StatData => {
+    return typeof part === 'object' && part !== null && 'value' in part;
+  };
+
+  // Memoize the rendered insights list
+  const renderedInsights = useMemo(() => (
+    <motion.ul
+      variants={staggerChildren}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="space-y-6"
+    >
+      {insights.map((item) => (
+        <motion.li
+          key={item.id}
+          variants={fadeInUp}
+          className="flex items-start gap-3"
+        >
+          <CheckCircle className="h-5 w-5 text-medium-blue-alt mt-2 flex-shrink-0" />
+          <span className="text-gray-700 text-lg">
+            {item.parts.map((part, index) =>
+              isStatData(part) ? (
+                <InlineStat
+                  key={`${item.id}-stat-${index}`}
+                  value={part.value}
+                  prefix={part.prefix}
+                  suffix={part.suffix}
+                />
+              ) : (
+                <React.Fragment key={`${item.id}-text-${index}`}>{part}</React.Fragment>
+              )
+            )}
+          </span>
+        </motion.li>
+      ))}
+    </motion.ul>
+  ), [insights]);
+
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+    <article className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
       <h3 className="text-2xl font-semibold mb-4 text-gray-800">Key Market InSites</h3>
-      <motion.ul
-        variants={staggerChildren}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="space-y-6"
-      >
-        {insights.map((item) => (
-          <motion.li
-            key={item.id}
-            variants={fadeInUp}
-            className="flex items-start gap-3"
-          >
-            <LucideIcons.CheckCircle className="h-5 w-5 text-medium-blue-alt mt-2 flex-shrink-0" />
-            <span className="text-gray-700 text-lg">
-              {typeof item.content === 'string' ? item.content : item.content}
-            </span>
-          </motion.li>
-        ))}
-      </motion.ul>
-    </div>
+      {renderedInsights}
+    </article>
   );
-}
+});
 
 /**
  * Value Proposition Section for Service Pages
@@ -158,11 +141,12 @@ function MarketInsightCard({ insights }: { insights: MarketInsight[] }) {
  * Displays the value proposition with industry trends and market insights.
  * Supports additional custom content at various points in the layout.
  * 
- * @param content - Configuration object for the value prop section
- * @param layoutVariant - Optional layout variant (default, compact, expanded)
- * @returns JSX.Element
+ * @param {Object} props - Component props
+ * @param {ValuePropContent} props.content - Configuration object for the value prop section
+ * @param {'default' | 'compact' | 'expanded'} [props.layoutVariant='default'] - Optional layout variant
+ * @returns {JSX.Element} A memoized value proposition section component
  */
-export default function ValuePropSection({
+const ValuePropSectionWrapper = React.memo(function ValuePropSection({
   content,
   layoutVariant = 'default'
 }: {
@@ -173,19 +157,30 @@ export default function ValuePropSection({
     title,
     description,
     industryTrends,
+    industryTrendsDescription,
     marketInsights,
     callToAction,
     additionalContent
   } = content;
-  
-  // Get the icon for the CTA button
-  const CtaIcon = callToAction.buttonIcon 
-    ? LucideIcons[callToAction.buttonIcon as keyof typeof LucideIcons] 
-    : LucideIcons.ArrowRight;
+
+  // Memoize the rendered trends list
+  const renderedTrends = useMemo(() => (
+    <motion.div
+      variants={staggerChildren}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="grid gap-4"
+    >
+      {industryTrends.map((trend, index) => (
+        <TrendCard key={index} trend={trend} />
+      ))}
+    </motion.div>
+  ), [industryTrends]);
 
   return (
-    <section className="mt-16 mb-20 bg-gray-50">
-      <div className={`container mx-auto px-4 ${layoutVariant === 'compact' ? 'max-w-5xl' : ''}`}>
+    <section className="pt-16 mb-16 lg:mb-20">
+      <div className={`container mx-auto ${layoutVariant === 'compact' ? 'max-w-7xl' : ''}`}>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -204,7 +199,7 @@ export default function ValuePropSection({
             <div className="space-y-8">
               <motion.p 
                 variants={fadeInUp}
-                className="text-lg text-gray-700 leading-relaxed"
+                className="text-lg px-2 text-gray-700 leading-relaxed"
               >
                 {description}
               </motion.p>
@@ -221,23 +216,15 @@ export default function ValuePropSection({
 
             {/* Right Column */}
             <div className="space-y-8">
-              <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+              <article className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800">Current Industry Trends</h3>
-                <p className="text-gray-700 mb-6">
-                As businesses face increasing pressure to digitize and automate operations, custom software has become essential for staying competitive. Integrated systems that utilize 3rd party APIs and cloud computing have become a necessity for increasing efficiency and scalability.
-                </p>
-                <motion.div
-                  variants={staggerChildren}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="grid gap-4"
-                >
-                  {industryTrends.map((trend, index) => (
-                    <TrendCard key={index} trend={trend} />
-                  ))}
-                </motion.div>
-              </div>
+                {industryTrendsDescription && (
+                  <p className="text-gray-700 mb-6">
+                    {industryTrendsDescription}
+                  </p>
+                )}
+                {renderedTrends}
+              </article>
               
               {/* Add additional content after trends if provided */}
               {additionalContent?.afterTrends && (
@@ -253,7 +240,7 @@ export default function ValuePropSection({
                 </motion.div>
               )}
 
-              <motion.div
+              <motion.aside
                 variants={fadeInUp}
                 className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               >
@@ -267,11 +254,13 @@ export default function ValuePropSection({
                 >
                   {callToAction.buttonText}
                 </TailwindButton>
-              </motion.div>
+              </motion.aside>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
   );
-}
+});
+
+export default ValuePropSectionWrapper;

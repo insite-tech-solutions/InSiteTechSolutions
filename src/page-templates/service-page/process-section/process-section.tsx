@@ -1,68 +1,121 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback, memo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TracingBeam } from './tracing-beam';
 import { ProcessContent } from '@/page-templates/service-page/types';
 import { Clock, ExternalLink } from 'lucide-react';
+import { getIcon } from '@/utils/icon-registry';
 
-// Wrapper component that handles orientation changes
+/**
+ * ProcessSectionWrapper Component
+ * 
+ * Wrapper component that handles orientation changes and scroll position preservation.
+ * This ensures smooth transitions when the device orientation changes and maintains
+ * the user's scroll position.
+ * 
+ * @param {Object} props - Component props
+ * @param {ProcessContent} props.content - The content to display in the process section
+ * @returns {React.ReactElement} The wrapped ProcessSection component
+ */
 const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content }) => {
+  /**
+   * Tracks the current orientation of the device (landscape/portrait)
+   * Initialized based on window dimensions
+   */
   const [orientationKey, setOrientationKey] = useState<string>(() => {
     // Initialize with current orientation
-    return typeof window !== 'undefined' 
+    return typeof window !== 'undefined'
       ? (window.innerWidth > window.innerHeight ? 'landscape' : 'portrait')
       : 'portrait'; // Default for SSR
   });
-  
+
+  /**
+   * Stores the scroll position before orientation change
+   * Used to restore scroll position after remount
+   */
   const [scrollPosition, setScrollPosition] = useState<number>(0);
-  
+
+  /**
+   * Stores previous window dimensions for comparison
+   * Used to detect significant size changes
+   */
+  const prevDims = useRef<{ width: number; height: number }>({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
+
+  /**
+   * Handles orientation changes and triggers necessary updates
+   * - Updates orientation state
+   * - Saves scroll position
+   * - Refreshes ScrollTrigger for proper animation handling
+   */
+  const handleOrientationChange = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    
+    // Add debounce to prevent rapid changes
+    const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+    if (newOrientation !== orientationKey) {
+      setScrollPosition(window.scrollY);
+      setOrientationKey(newOrientation);
+      
+      // Force a ScrollTrigger refresh after orientation change
+      setTimeout(() => {
+        ScrollTrigger.refresh(true);
+      }, 50);
+    }
+  }, [orientationKey]);
+
+  /**
+   * Debounced handler for orientation changes
+   * Prevents rapid state updates during device rotation
+   */
+  const orientationChangeHandler = useCallback(() => {
+    setTimeout(handleOrientationChange, 100);
+  }, [handleOrientationChange]);
+
+  /**
+   * Handles window resize events
+   * - Updates previous dimensions
+   * - Triggers orientation check if significant size change detected
+   */
+  const handleResize = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    
+    // Reduce threshold to be more responsive
+    const widthChanged = Math.abs(window.innerWidth - prevDims.current.width) > 50;
+    const heightChanged = Math.abs(window.innerHeight - prevDims.current.height) > 50;
+    
+    // Always update previous dimensions
+    prevDims.current = { width: window.innerWidth, height: window.innerHeight };
+    
+    // If significant change, trigger orientation check
+    if (widthChanged || heightChanged) {
+      handleOrientationChange();
+    }
+  }, [handleOrientationChange]);
+
+  /**
+   * Sets up event listeners for orientation and resize events
+   * - Handles orientation changes with debouncing
+   * - Manages window resize events
+   * - Cleans up listeners on unmount
+   */
   useEffect(() => {
-    // Function to detect orientation change
-    const handleOrientationChange = () => {
-      const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-      
-      if (newOrientation !== orientationKey) {
-        // Store scroll position
-        setScrollPosition(window.scrollY);
-        
-        // Change key to force remount
-        setOrientationKey(newOrientation);
-      }
-    };
-    
-    // Set up event listeners for orientation change detection
-    window.addEventListener('orientationchange', () => {
-      // Need a delay to get correct dimensions after orientation change
-      setTimeout(handleOrientationChange, 100);
-    });
-    
-    // Also handle regular resize that might be orientation changes
-    let prevWidth = window.innerWidth;
-    let prevHeight = window.innerHeight;
-    
-    const handleResize = () => {
-      // Only check on significant size changes
-      const widthChanged = Math.abs(window.innerWidth - prevWidth) > 100;
-      const heightChanged = Math.abs(window.innerHeight - prevHeight) > 100;
-      
-      if (widthChanged || heightChanged) {
-        prevWidth = window.innerWidth;
-        prevHeight = window.innerHeight;
-        handleOrientationChange();
-      }
-    };
-    
+    window.addEventListener('orientationchange', orientationChangeHandler);
     window.addEventListener('resize', handleResize);
-    
     return () => {
-      window.removeEventListener('orientationchange', handleOrientationChange);
+      window.removeEventListener('orientationchange', orientationChangeHandler);
       window.removeEventListener('resize', handleResize);
     };
-  }, [orientationKey]); // Re-run if orientationKey changes
-  
-  // Restore scroll position after remount
+  }, [orientationChangeHandler, handleResize]);
+
+  /**
+   * Restores scroll position after orientation change
+   * Uses setTimeout to ensure proper layout calculation
+   */
   useEffect(() => {
     if (scrollPosition > 0) {
       setTimeout(() => {
@@ -70,24 +123,40 @@ const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content })
       }, 50);
     }
   }, [orientationKey, scrollPosition]);
-  
+
   return (
     // Key change forces complete remount of ProcessSection
     <ProcessSection key={orientationKey} content={content} />
   );
 };
 
-// Original ProcessSection component with all GSAP animations
+/**
+ * ProcessSection Component
+ * 
+ * Main component that renders the process timeline with animated steps.
+ * Each step morphs from a circle into a detailed card when scrolled into view.
+ * 
+ * @param {Object} props - Component props
+ * @param {ProcessContent} props.content - The content to display in the process section
+ * @returns {React.ReactElement} The process section with animated steps
+ */
 const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
+  // Main container reference for the process section
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Reference for measuring card dimensions
   const measurementRef = useRef<HTMLDivElement>(null);
 
+  // Prevents double initialization of animations
   const isInitializedRef = useRef(false);
 
   // Store dimensions for each card
   const cardDimensionsRef = useRef<{ width: string; height: string }[]>([]);
 
-  // Refs for each step
+  /**
+   * Array of refs for each step's elements
+   * Used to target specific elements for animations
+   */
   const circleRefs = useRef<HTMLDivElement[]>([]);
   const iconRefs = useRef<HTMLDivElement[]>([]);
   const titleRefs = useRef<HTMLHeadingElement[]>([]);
@@ -100,7 +169,10 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
 
   liRefs.current = content.steps.map(() => []);
 
-  // Function to measure card dimensions for each step
+  /**
+   * Measures and stores the dimensions of each card
+   * Called during initialization and on resize
+   */
   const measureCardDimensions = () => {
     if (!measurementRef.current) return;
 
@@ -116,6 +188,14 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
     });
   };
 
+  /**
+   * Initializes GSAP animations and sets up scroll triggers
+   * - Registers ScrollTrigger plugin
+   * - Measures card dimensions
+   * - Sets up resize observer
+   * - Creates animation timelines for each step
+   * - Sets initial states for content elements
+   */
   useEffect(() => {
     console.log("Process Section mounting");
     console.log("Section ref:", sectionRef.current);
@@ -271,8 +351,8 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         );
     });
 
-        // Mark as initialized after setup is complete
-        isInitializedRef.current = true;
+      // Mark as initialized after setup is complete
+      isInitializedRef.current = true;
 
         return () => {
           resizeObserver.disconnect();
@@ -287,29 +367,33 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         };
       };
     
-      // Use setTimeout to delay initialization
-      const timer = setTimeout(initAnimations, 500);
-      
-      return () => {
-        clearTimeout(timer);
-      };
-    }, [content]);
+    // Use setTimeout to delay initialization
+    const timer = setTimeout(initAnimations, 500);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [content]);
 
-    useEffect(() => {
-      const handleResize = () => {
-        console.log("Window resized, refreshing ScrollTrigger");
-        ScrollTrigger.refresh(true); // true forces a full refresh
-      };
-      
-      window.addEventListener('resize', handleResize);
-      
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+  /**
+   * Handles window resize events
+   * Refreshes ScrollTrigger to ensure proper animation behavior
+   */
+  useEffect(() => {
+    const handleResize = () => {
+      console.log("Window resized, refreshing ScrollTrigger");
+      ScrollTrigger.refresh(true); // true forces a full refresh
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className="bg-gray-50">
+    <div className="w-full">
       <div className="text-center max-w-4xl mx-auto py-16">
       <h2 className="text-5xl font-extrabold text-gray-900 mb-8">
         {content.title}
@@ -405,7 +489,10 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
                           style={{ pointerEvents: 'auto' }}
                           aria-hidden="true"
                         >
-                          <step.icon className="h-7 w-7 text-white" />
+                          {(() => {
+                            const IconComponent = getIcon(step.icon);
+                            return <IconComponent className="h-7 w-7 text-white" />;
+                          })()}
                         </div>
                         <div>
                           <h3
@@ -481,7 +568,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
           </div>
         </TracingBeam>
 
-        {/* Background element extending from last step to end - restoring the gray-50 background */}
+        {/* Background element extending from last step to end */}
         <div
           className="absolute left-0 w-full bg-gray-50 flex flex-col justify-end pb-16"
           style={{ 
@@ -513,4 +600,4 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
 };
 
 // Export the wrapper instead of the base component
-export default ProcessSectionWrapper;
+export default memo(ProcessSectionWrapper);

@@ -18,7 +18,7 @@ interface ServiceScopeSectionProps {
  */
 const ServiceScopeSection: React.FC<ServiceScopeSectionProps> = ({ content }) => {
   return (
-    <section className="p-2 bg-gray-50">
+    <section className="w-full">
       {/* Core Services with GSAP animations */}
       <CoreServices 
         title={content.title}
@@ -27,14 +27,16 @@ const ServiceScopeSection: React.FC<ServiceScopeSectionProps> = ({ content }) =>
       />
       
       {/* Key Benefits displayed as a carousel */}
-      <div className="p-6 mt-6">
+      <div className="p-2 mt-4 mb-10">
         <KeyBenefits 
           benefits={content.benefits || []}
-          backgroundIcon={content.backgroundIcon || ''}
+          backgroundIcon={content.backgroundIcon || 'CodeXml'}
+          keyBenefitsTitle={content.keyBenefitsTitle || content.title}
+          keyBenefitsDescription={content.keyBenefitsDescription || content.description}
         />
       </div>
     </section>
   )
 }
 
-export default ServiceScopeSection
+export default React.memo(ServiceScopeSection);

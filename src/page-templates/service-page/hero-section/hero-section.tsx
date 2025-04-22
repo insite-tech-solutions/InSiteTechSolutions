@@ -1,11 +1,11 @@
 // src/templates/service-page/sections/hero/hero-section.tsx
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { HeroSectionContent } from '../types';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
-import * as LucideIcons from 'lucide-react';
+import { getIcon } from '@/utils/icon-registry';
 
 /**
  * Hero Section for Service Pages
@@ -15,7 +15,7 @@ import * as LucideIcons from 'lucide-react';
  * @param content - Configuration object for the hero section
  * @returns JSX.Element
  */
-export default function HeroSection({
+const HeroSectionWrapper = React.memo(function HeroSection({
   content
 }: {
   content: HeroSectionContent
@@ -32,21 +32,25 @@ export default function HeroSection({
     customElements
   } = content;
 
-  // Process decorative elements to convert string icon names to actual components
-  const processedDecorElements = decorElements.map(element => {
-    if (element.type === 'icon' && typeof element.icon === 'string') {
-      // Get the icon component from Lucide based on its name
-      const IconComponent = LucideIcons[element.icon as keyof typeof LucideIcons];
-      return {
-        ...element,
-        icon: IconComponent || LucideIcons.Code // Fallback icon
-      };
-    }
-    return element;
-  });
+  // Memoize processing of decorative elements to avoid reprocessing on every render
+  const processedDecorElements = useMemo(() => {
+    return decorElements.map(element => {
+      if (element.type === 'icon' && typeof element.icon === 'string') {
+        const IconComponent = getIcon(element.icon);
+        return {
+          ...element,
+          icon: IconComponent || getIcon('Code'),
+        };
+      }
+      return element;
+    });
+  }, [decorElements]);
 
   return (
-    <section className="relative text-white mt-[104px]">
+    <section
+      className="relative text-white mt-[104px]"
+      aria-labelledby="hero-title"
+    >
       <TailwindHeroBackground 
         className={bgClassName}
         decorElements={processedDecorElements}
@@ -55,7 +59,10 @@ export default function HeroSection({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Text Content */}
             <div className="order-1 md:order-none text-left px-6 pt-6">
-              <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+              <h1
+                id="hero-title"
+                className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg"
+              >
                 {title}
               </h1>
               <p className="text-xl md:text-2xl mb-6 drop-shadow-lg">
@@ -67,22 +74,29 @@ export default function HeroSection({
             </div>
             
             {/* Image */}
-            <div className="order-2 md:order-none flex justify-center md:justify-end">
-              <Image
-                src={image}
-                alt={title}
-                width={600}
-                height={400}
-                className="rounded-lg"
-                priority
-              />
+            <div className="order-2 md:order-none flex items-center justify-center md:justify-end h-full min-h-[400px]">
+              {image && (
+                <>
+                  {/* Optimize image loading: full width on small screens, half width on larger */}
+                  <Image
+                    src={image}
+                    alt={title}
+                    width={600}
+                    height={400}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="rounded-lg"
+                    priority
+                    aria-label={title}
+                  />
+                </>
+              )}
             </div>
 
             {/* Mobile Button */}
-            <div className="order-3 md:hidden px-6 pb-6">
+            <div className="order-3 md:hidden px-6 pb-6 flex items-center justify-center">
               <TailwindButton 
                 href={ctaLink} 
-                className="bg-gray-50 font-semibold w-full"
+                className="bg-gray-50 font-semibold w-1/2 mx-auto"
               >
                 {ctaText}
               </TailwindButton>
@@ -109,4 +123,6 @@ export default function HeroSection({
       </TailwindHeroBackground>
     </section>
   );
-}
+});
+
+export default HeroSectionWrapper;

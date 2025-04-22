@@ -1,6 +1,5 @@
 // src/app/services/custom-software/process-content.ts
 import { ProcessContent } from '@/page-templates/service-page/types';
-import { Search, ClipboardList, Paintbrush, Code, Rocket } from 'lucide-react';
 
 export const customSoftwareProcess: ProcessContent = {
   title: "Our Approach",
@@ -16,7 +15,7 @@ export const customSoftwareProcess: ProcessContent = {
         'Determine project scope, budget, and timeline'
       ],
       timeline: '1 week',
-      icon: Search
+      icon: 'Search'
     },
     {
       step: 2,
@@ -28,7 +27,7 @@ export const customSoftwareProcess: ProcessContent = {
         'Establish success criteria and key milestones'
       ],
       timeline: '1-2 weeks',
-      icon: ClipboardList
+      icon: 'ClipboardList'
     },
     {
       step: 3,
@@ -40,7 +39,7 @@ export const customSoftwareProcess: ProcessContent = {
         'Incorporate iterative feedback and refinements'
       ],
       timeline: '2-4 weeks',
-      icon: Paintbrush
+      icon: 'Paintbrush'
     },
     {
       step: 4,
@@ -52,7 +51,7 @@ export const customSoftwareProcess: ProcessContent = {
         'Generate unit tests and documentation for long-term maintainability'
       ],
       timeline: '4-16 weeks (project dependent)',
-      icon: Code
+      icon: 'Code'
     },
     {
       step: 5,
@@ -64,7 +63,7 @@ export const customSoftwareProcess: ProcessContent = {
         'Launch the software with post-launch support and training'
       ],
       timeline: '2-4 weeks',
-      icon: Rocket
+      icon: 'Rocket'
     }
   ],
   note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months; however, as a simple reference point, most small business software projects are completed in 6–8 weeks, while larger, more complex solutions can range from 8–16+ weeks, depending on the complexity.",

@@ -1,7 +1,7 @@
 // components/TailwindHeroBackground.tsx
 "use client";
 import React, { ReactNode } from 'react';
-import { LucideIcon } from 'lucide-react';
+import { DecorElement } from '@/page-templates/service-page/types';
 
 // Simple utility function to combine class names
 const cn = (...classes: string[]) => {
@@ -18,13 +18,7 @@ interface TailwindHeroBackgroundProps {
   /** Additional Tailwind classes for the section element */
   className?: string;
   /** Decorative elements to render in the background */
-  decorElements?: {
-    type: 'circle' | 'square' | 'icon';
-    className?: string;
-    style?: React.CSSProperties;
-    icon?: LucideIcon;
-    size?: number;
-  }[];
+  decorElements?: DecorElement[];
 }
 
 const TailwindHeroBackground = ({

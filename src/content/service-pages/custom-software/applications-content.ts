@@ -8,6 +8,8 @@ import { ApplicationsContent } from '@/page-templates/service-page/types';
 const customSoftwareApplications: ApplicationsContent = {
   title: "Empowering Businesses Across Diverse Sectors",
   description: "Our custom software solutions cater to a wide range of industries, providing specialized tools that address unique challenges and drive innovation. Our digital strategies help clients by enhancing their:",
+  industrySolutionsTitle: "Industry-Specific Solutions",
+  industrySolutionsDescription: "Drawing on our technical expertise across numerous sectors, we create customized solutions that meet the unique demands of your industry.",
   
   categories: [
     {
@@ -82,7 +84,8 @@ const customSoftwareApplications: ApplicationsContent = {
         "Supply chain optimization tools"
       ]
     }
-  ]
+  ], 
+  backgroundIcon: "Code2"
 };
 
 export default customSoftwareApplications;

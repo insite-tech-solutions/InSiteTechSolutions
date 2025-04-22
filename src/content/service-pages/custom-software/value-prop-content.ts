@@ -1,8 +1,6 @@
-// src/content/services/custom-software/value-prop-content.tsx
+// src/content/services/custom-software/value-prop-content.ts
 
 import { ValuePropContent } from '@/page-templates/service-page/types';
-import React from 'react';
-import { InlineStat } from '@/page-templates/service-page/value-prop-section/inline-stat';
 
 /**
  * Value proposition content for the Custom Software Solutions service page.
@@ -35,47 +33,48 @@ const customSoftwareValueProp: ValuePropContent = {
     }
   ],
   
+  // Description for the industry trends section
+  industryTrendsDescription: "As businesses face increasing pressure to digitize and automate operations, custom software has become essential for staying competitive. Integrated systems that utilize 3rd party APIs and cloud computing have become a necessity for increasing efficiency and scalability.",
+  
   // Market insights with inline animated stats
   marketInsights: [
     {
       id: "1",
-      content: (
-        <>
-          <InlineStat value={78} suffix="%" /> of businesses report improved efficiency after implementing custom software solutions.
-        </>
-      )
+      parts: [
+        { value: 78, suffix: "%" },
+        " of businesses report improved efficiency after implementing custom software solutions."
+      ]
     },
     {
       id: "2",
-      content: (
-        <>
-          Organizations save an average of <InlineStat value={27.3} suffix="h" /> per employee monthly through process automation.
-        </>
-      )
+      parts: [
+        "Organizations save an average of ",
+        { value: 27.3, suffix: "h" },
+        " per employee monthly through process automation."
+      ]
     },
     {
       id: "3",
-      content: (
-        <>
-          <InlineStat value={89} suffix="%" /> of companies cite custom software as a key factor in maintaining competitive advantage.
-        </>
-      )
+      parts: [
+        { value: 89, suffix: "%" },
+        " of companies cite custom software as a key factor in maintaining competitive advantage."
+      ]
     },
     {
       id: "4",
-      content: (
-        <>
-          Custom solutions reduce operational costs by an average of <InlineStat value={22} suffix="%" /> over 3 years.
-        </>
-      )
+      parts: [
+        "Custom solutions reduce operational costs by an average of ",
+        { value: 22, suffix: "%" },
+        " over 3 years."
+      ]
     },
     {
       id: "5",
-      content: (
-        <>
-          Companies report an average <InlineStat value={143} suffix="%" /> return on investment within 5 years of custom software implementation.
-        </>
-      )
+      parts: [
+        "Companies report an average ",
+        { value: 143, suffix: "%" },
+        " return on investment within 5 years of custom software implementation."
+      ]
     }
   ],
   

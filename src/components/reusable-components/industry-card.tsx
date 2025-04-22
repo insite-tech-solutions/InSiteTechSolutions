@@ -5,6 +5,8 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { getIcon } from '@/utils/icon-registry';
+
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -21,24 +23,27 @@ const fadeInUp: Variants = {
 interface IndustryCardProps {
   title: string;
   items: string[];
-  icon: React.ElementType;
+  icon: string;
   isActive?: boolean;
 }
 
 const IndustryCard: React.FC<IndustryCardProps> = ({
   title,
   items,
-  icon: Icon,
+  icon,
   isActive = false,
-}) => (
-  <motion.div
+}) => {
+
+  const IconComponent = getIcon(icon);
+  return (
+    <motion.div
     variants={fadeInUp}
     className={`
       relative
       bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg 
       rounded-xl shadow-md p-6 
       transition-all duration-500 ease-in-out
-      w-80 h-[17rem] 
+      w-79 md:w-80 min-h-[17rem] h-auto 
       ${
         isActive
           ? 'shadow-lg border-2 border-blue-600 z-10'
@@ -48,7 +53,7 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
   >
     <div className="flex items-center gap-3 mb-4">
       <div className="p-2 rounded-full bg-blue-100">
-        <Icon className="h-6 w-6 text-blue-600" />
+        <IconComponent className="h-6 w-6 text-blue-600" />
       </div>
       <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
     </div>
@@ -60,8 +65,8 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
         </li>
       ))}
     </ul>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 export default IndustryCard;
-
