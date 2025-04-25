@@ -4,6 +4,15 @@ import { ValuePropContent } from '@/page-templates/service-page/types';
 
 /**
  * Value proposition content for the Custom Software Solutions service page.
+ * This object includes key benefits, market trends, animated insights, and a final call to action.
+ * 
+ * @type {ValuePropContent}
+ * @property {string} title - The title of the value proposition section.
+ * @property {string} description - A description of how custom software can address niche challenges faced by businesses.
+ * @property {Array} industryTrends - An array of industry trends, each containing an icon, title, and description.
+ * @property {string} industryTrendsDescription - A description of the industry trends section.
+ * @property {Array} marketInsights - An array of market insights, each containing an id and parts for animated stats.
+ * @property {Object} callToAction - An object containing the call to action details, including title, description, button text, link, and icon.
  */
 const customSoftwareValueProp: ValuePropContent = {
   title: "How Custom Software Can Help You",
@@ -84,7 +93,7 @@ const customSoftwareValueProp: ValuePropContent = {
     description: "Let's develop a custom software solution tailored to your unique business needs.",
     buttonText: "Get Started",
     buttonLink: "/contact",
-    buttonIcon: "ArrowRight"
+    buttonIcon: "ArrowRight",
   },
   
   // Additional content that can be placed at different points in the layout

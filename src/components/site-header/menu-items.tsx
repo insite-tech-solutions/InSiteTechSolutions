@@ -23,11 +23,11 @@ export const menuItems: MenuItem[] = [
     submenu: [
       { name: 'Web & App Development', href: '/services/web-and-app-development' },
       { name: 'Custom Software Solutions', href: '/services/custom-software-solutions' },
-      { name: 'SEO & Online Marketing', href: '/services/seo-marketing' },
-      { name: 'Graphic Design & Branding', href: '/services/design-branding' },
+      { name: 'SEO & Online Marketing', href: '/services/seo-and-online-marketing' },
+      { name: 'Graphic Design & Branding', href: '/services/graphic-design-and-branding' },
       { name: 'Data Analysis', href: '/services/data-analysis' },
-      { name: 'AI & Automation', href: '/services/ai-automation' },
-      { name: 'Consulting & Training', href: '/services/consulting-training' },
+      { name: 'AI & Automation', href: '/services/ai-and-automation' },
+      { name: 'Consulting & Training', href: '/services/consulting-and-training' },
     ],
   },
   {

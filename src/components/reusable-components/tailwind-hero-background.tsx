@@ -1,6 +1,9 @@
-// components/TailwindHeroBackground.tsx
+/**
+ * @fileoverview TailwindHeroBackground is a flexible hero wrapper with a gradient background
+ * and optional decorative elements like icons, circles, and squares.
+ */
 "use client";
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { DecorElement } from '@/page-templates/service-page/types';
 
 // Simple utility function to combine class names
@@ -9,8 +12,7 @@ const cn = (...classes: string[]) => {
 };
 
 /**
- * A flexible Tailwind-based hero background component that can be easily reused
- * across different pages with customizable colors and decorative elements.
+ * Props for the TailwindHeroBackground component.
  */
 interface TailwindHeroBackgroundProps {
   /** Content to render inside the hero section */
@@ -21,11 +23,56 @@ interface TailwindHeroBackgroundProps {
   decorElements?: DecorElement[];
 }
 
+/**
+ * TailwindHeroBackground component provides a customizable hero section with a gradient background
+ * and optional decorative elements.
+ * 
+ * @param {TailwindHeroBackgroundProps} props - Component props
+ * @param {ReactNode} props.children - Content to render inside the hero section
+ * @param {string} [props.className=""] - Additional Tailwind classes for the section element
+ * @param {DecorElement[]} [props.decorElements=[]] - Decorative elements to render in the background
+ * @returns {JSX.Element} Rendered hero background component
+ */
 const TailwindHeroBackground = ({
   children,
   className = "",
   decorElements = [],
 }: TailwindHeroBackgroundProps) => {
+  const renderedDecorElements = useMemo(() => {
+    return decorElements.map((element, index) => {
+      const { type, className: elementClass = "", style = {}, icon: Icon, size = 48 } = element;
+
+      if (type === 'circle') {
+        return (
+          <div
+            key={`decor-${index}`}
+            className={cn('rounded-full absolute', elementClass)}
+            style={style}
+          />
+        );
+      } else if (type === 'square') {
+        return (
+          <div
+            key={`decor-${index}`}
+            className={cn('rounded-lg absolute', elementClass)}
+            style={style}
+          />
+        );
+      } else if (type === 'icon' && Icon) {
+        return (
+          <div
+            key={`decor-${index}`}
+            className={cn('absolute', elementClass)}
+            style={style}
+          >
+            <Icon size={size} />
+          </div>
+        );
+      }
+      return null;
+    });
+  }, [decorElements]);
+
   return (
     <section className={cn(
       'relative overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-700',
@@ -36,38 +83,7 @@ const TailwindHeroBackground = ({
       {/* Decorative elements */}
       {decorElements.length > 0 && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {decorElements.map((element, index) => {
-            const { type, className: elementClass = "", style = {}, icon: Icon, size = 48 } = element;
-            
-            if (type === 'circle') {
-              return (
-                <div
-                  key={`decor-${index}`}
-                  className={cn('rounded-full absolute', elementClass)}
-                  style={style}
-                />
-              );
-            } else if (type === 'square') {
-              return (
-                <div
-                  key={`decor-${index}`}
-                  className={cn('rounded-lg absolute', elementClass)}
-                  style={style}
-                />
-              );
-            } else if (type === 'icon' && Icon) {
-              return (
-                <div
-                  key={`decor-${index}`}
-                  className={cn('absolute', elementClass)}
-                  style={style}
-                >
-                  <Icon size={size} />
-                </div>
-              );
-            }
-            return null;
-          })}
+          {renderedDecorElements}
         </div>
       )}
       

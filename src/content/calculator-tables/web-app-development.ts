@@ -1,3 +1,24 @@
+/**
+ * Pricing and configuration table for Web & App Development services.
+ * Covers detailed project scope including pages, interactivity, platform types,
+ * target devices, features, support tiers, and bundled services for the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} pagesScreens - Number of pages/screens options with costs.
+ * @property {Object} interactivityLevel - Interactivity level options with multipliers.
+ * @property {Object} platformType - Platform type options with multipliers.
+ * @property {Object} targetDevices - Target devices options with costs.
+ * @property {Object} designApproach - Design approach options with multipliers.
+ * @property {Object} assetSourcing - Asset sourcing options with costs.
+ * @property {Object} featureImplementationType - Feature implementation type options with multipliers.
+ * @property {Object} features - Features and integrations options with costs.
+ * @property {Object} ongoingSupport - Ongoing support options with descriptions and costs.
+ * @property {Object} addOns - Optional add-ons with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ */
 // content/calculator_tables/webAppDevelopment.ts
 
 //import { CostRange, Multiplier } from './types';
@@ -301,7 +322,7 @@ featureImplementationType: {
       },
       { 
         name: "Consulting and Training",
-        url: "/services/consulting-and-training"
+        url: "/services/consulting-and-training",
       }
     ]
   }

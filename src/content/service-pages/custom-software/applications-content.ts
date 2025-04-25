@@ -3,7 +3,17 @@
 import { ApplicationsContent } from '@/page-templates/service-page/types';
 
 /**
- * Applications content for the Custom Software Solutions service page.
+ * Content configuration for the Custom Software Solutions service page.
+ * This includes industry solutions, categories, and related descriptions/icons.
+ * 
+ * @type {ApplicationsContent}
+ * @property {string} title - The main title for the applications section.
+ * @property {string} description - A brief description of the custom software solutions offered.
+ * @property {string} industrySolutionsTitle - Title for the industry-specific solutions carousel.
+ * @property {string} industrySolutionsDescription - Description for the industry-specific solutions carousel.
+ * @property {Array} categories - An array of categories, each containing a title, icon, and items.
+ * @property {Array} industries - An array of industries, each containing a title, icon, and items (carousel cards).
+ * @property {string} backgroundIcon - Icon used as a background for the section.
  */
 const customSoftwareApplications: ApplicationsContent = {
   title: "Empowering Businesses Across Diverse Sectors",
@@ -19,8 +29,8 @@ const customSoftwareApplications: ApplicationsContent = {
         "Custom management applications",
         "Inventory and supply chain management systems",
         "Workflow automation tools",
-        "Analytics and reporting dashboards"
-      ]
+        "Analytics and reporting dashboards",
+      ],
     },
     {
       title: "Research & Development",
@@ -29,8 +39,8 @@ const customSoftwareApplications: ApplicationsContent = {
         "Computational simulations and modeling",
         "Data analysis and visualization tools",
         "Research management systems",
-        "Laboratory information systems"
-      ]
+        "Laboratory information systems",
+      ],
     },
     {
       title: "Digital Infrastructure",
@@ -39,9 +49,9 @@ const customSoftwareApplications: ApplicationsContent = {
         "Legacy system modernization",
         "Cloud migrations and system integrations",
         "Digital workflow transformations",
-        "Internally managed software solutions"
-      ]
-    }
+        "Internally managed software solutions",
+      ],
+    },
   ],
   
   industries: [
@@ -52,8 +62,8 @@ const customSoftwareApplications: ApplicationsContent = {
         "Process control systems",
         "Quality assurance software",
         "Equipment monitoring",
-        "Production planning tools"
-      ]
+        "Production planning tools",
+      ],
     },
     {
       title: "Retail & E-commerce",
@@ -62,8 +72,8 @@ const customSoftwareApplications: ApplicationsContent = {
         "Custom POS systems",
         "Product customization tools",
         "Inventory management solutions",
-        "Interactive product catalogs"
-      ]
+        "Interactive product catalogs",
+      ],
     },
     {
       title: "Professional Services",
@@ -72,8 +82,8 @@ const customSoftwareApplications: ApplicationsContent = {
         "Client management portals",
         "Service tracking platforms",
         "Resource scheduling systems",
-        "Reporting and analytics tools"
-      ]
+        "Reporting and analytics tools",
+      ],
     },
     {
       title: "Logistics & Supply Chain",
@@ -81,11 +91,11 @@ const customSoftwareApplications: ApplicationsContent = {
       items: [
         "Transportation management systems",
         "Warehouse management software",
-        "Supply chain optimization tools"
-      ]
-    }
+        "Supply chain optimization tools",
+      ],
+    },
   ], 
-  backgroundIcon: "Code2"
+  backgroundIcon: "Code2",
 };
 
 export default customSoftwareApplications;

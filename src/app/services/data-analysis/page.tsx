@@ -11,8 +11,10 @@ import customSoftwareValueProp from '@/content/service-pages/custom-software/val
 import customSoftwareServiceScope from '@/content/service-pages/custom-software/service-scope-content';
 import customSoftwareApplications from '@/content/service-pages/custom-software/applications-content';
 import customSoftwareProcess from '@/content/service-pages/custom-software/process-content';
-import PriceSection from '@/components/CustomSoftwareServicePage/PricingSection/PriceSection';
-
+import customSoftwarePricing from '@/content/service-pages/custom-software/pricing-content';
+import customSoftwareInSiteAdvantage from '@/content/service-pages/custom-software/insite-advantage-content';
+import customSoftwareFAQ from '@/content/service-pages/custom-software/faq-content';
+import customSoftwareCTA from '@/content/service-pages/custom-software/cta-content';
 
 export default function CustomSoftwareSolutionsPage() {
   return (
@@ -25,9 +27,12 @@ export default function CustomSoftwareSolutionsPage() {
         serviceScopeContent={customSoftwareServiceScope}
         applicationsContent={customSoftwareApplications}
         processContent={customSoftwareProcess}
+        pricingContent={customSoftwarePricing}
+        insiteAdvantageContent={customSoftwareInSiteAdvantage}
+        faqContent={customSoftwareFAQ}
+        ctaContent={customSoftwareCTA}
       />
-      <PriceSection />
-      
+
       <Footer />
     </div>
   );

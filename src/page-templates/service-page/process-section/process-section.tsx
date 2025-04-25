@@ -62,11 +62,13 @@ const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content })
       setOrientationKey(newOrientation);
       
       // Force a ScrollTrigger refresh after orientation change
-      setTimeout(() => {
-        ScrollTrigger.refresh(true);
-      }, 50);
+      if (typeof ScrollTrigger !== 'undefined') {
+        setTimeout(() => {
+          ScrollTrigger.refresh(true);
+        }, 50);
+      }
     }
-  }, [orientationKey]);
+  }, [orientationKey, setScrollPosition]);
 
   /**
    * Debounced handler for orientation changes
@@ -197,22 +199,16 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
    * - Sets initial states for content elements
    */
   useEffect(() => {
-    console.log("Process Section mounting");
-    console.log("Section ref:", sectionRef.current);
-    console.log("Circle refs:", circleRefs.current);
     
     // Prevent double initialization
     if (isInitializedRef.current) {
-      console.log("Animation already initialized, skipping");
       return;
     }
     
     gsap.registerPlugin(ScrollTrigger);
   
     // Add a delay to ensure proper layout calculation
-    const initAnimations = () => {
-      console.log("Initializing animations after delay");
-      
+    const initAnimations = () => {      
       const section = sectionRef.current;
       if (!section) return;
       
@@ -272,11 +268,13 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
       if (!circle) return;
 
       const tl = gsap.timeline({
+        force3D: true, // Add this for better GPU handling
+        willChange: 'transform', // Add this to hint the browser about upcoming changes
         scrollTrigger: {
           trigger: circle,
           start: 'center center+=48px', // Offset by half the header height (104px/2)
           toggleActions: 'play none reverse none',
-          markers: true,
+          markers: false,
         },
       });
 
@@ -381,7 +379,6 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
    */
   useEffect(() => {
     const handleResize = () => {
-      console.log("Window resized, refreshing ScrollTrigger");
       ScrollTrigger.refresh(true); // true forces a full refresh
     };
     
@@ -402,7 +399,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         {content.description}
       </p>
       </div>
-      <div ref={sectionRef} className="relative h-[400vh] md:h-[450vh] pb-16">
+      <div ref={sectionRef} className="relative h-[400vh] md:h-[435vh] pb-12 lg:pb-0">
         {/*
           Hidden measurement div:
           - Contains clones of the final card state for each step.
@@ -412,7 +409,8 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         */}
         <div
           ref={measurementRef}
-          className="w-5/6 lg:w-1/2 mx-auto opacity-0 pointer-events-none absolute -z-10"
+          // Use inset-x-0 to define bounds respecting padding, then apply width/centering
+          className="absolute inset-x-0 lg:w-3/5 max-w-3xl mx-auto opacity-0 pointer-events-none -z-10"
           aria-hidden="true"
         >
           {content.steps.map((step, index) => (
@@ -570,14 +568,14 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
 
         {/* Background element extending from last step to end */}
         <div
-          className="absolute left-0 w-full bg-gray-50 flex flex-col justify-end pb-16"
+          className="absolute left-0 w-full bg-gray-50 flex flex-col justify-end pb-6 lg:pb-8"
           style={{ 
-            top: `${((content.steps.length) / (content.steps.length + 1)) * 99}%`,
+            top: `${((content.steps.length) / (content.steps.length + 1)) * 100}%`,
             bottom: '0',
             zIndex: 15
           }}
         >
-          <div className="container mx-auto px-6 pt-8 mb-[-2.5rem] lg:pb-24">
+          <div className="container mx-auto lg:px-4 lg:pb-4">
             <div
               className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue rounded-xl p-6 max-w-4xl mx-auto shadow-md"
             >

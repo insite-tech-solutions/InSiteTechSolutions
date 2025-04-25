@@ -1,3 +1,24 @@
+/**
+ * Pricing and configuration table for Data Analysis services.
+ * Covers cost structures for complexity, tools, data types, support options,
+ * and related services for use in the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} analysisComplexity - Complexity of analysis options with costs.
+ * @property {Object} industryApplication - Industry/application options with multipliers.
+ * @property {Object} projectType - Project type options with multipliers.
+ * @property {Object} toolsApproaches - Tools and approaches options with costs.
+ * @property {Object} dataTypes - Data types options with costs.
+ * @property {Object} datasetSize - Dataset size options with costs.
+ * @property {Object} features - Features and integrations options with costs.
+ * @property {Object} ongoingAnalysis - Ongoing analysis options with descriptions and costs.
+ * @property {Object} addOns - Optional add-ons with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ * @property {Array} specialNotes - Special notes regarding the data analysis services.
+ */
 // content/calculator_tables/dataAnalysis.ts
 
 //import { CostRange, Multiplier } from './types';
@@ -96,7 +117,7 @@ export const dataAnalysisTable = {
         description: "Custom software development is offered as a separate service, as is advanced Machine Learning and AI development"
       }
     },
-    description: "Reusable deliverables carry premium value. Custom software and advanced Machine Learning and AI development are offered as a separate services depending on the scope of the project."
+    description: "Reusable deliverables carry premium value. Custom software and advanced Machine Learning and AI development are offered as separate services depending on the scope of the project."
   },
   
   // Tools & Approaches
@@ -266,7 +287,7 @@ export const dataAnalysisTable = {
         },
         { 
           name: "Consulting and Training",
-          url: "/services/consulting-and-training"
+          url: "/services/consulting-and-training",
         }
       ]
     }

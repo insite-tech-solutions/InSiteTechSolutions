@@ -6,13 +6,21 @@ import ValuePropSection from './value-prop-section';
 import ServiceScopeSection from './service-scope-section';
 import ApplicationsSection from './applications-section';
 import ProcessSection from './process-section';
+import PriceSection from './price-section';
+import InSiteAdvantageSection from './insite-advantage-section';
+import FAQSection from './faq-section';
+import CTASection from './cta-section';
 import Layout from '@/components/reusable-components/layout';
 import { 
   HeroSectionContent, 
   ValuePropContent, 
   ServiceScopeContent, 
   ApplicationsContent,
-  ProcessContent
+  ProcessContent,
+  PricingContent, 
+  InSiteAdvantageContent,
+  FAQContent,
+  CTAContent
 } from './types';
 
 interface ServicePageTemplateProps {
@@ -21,6 +29,10 @@ interface ServicePageTemplateProps {
   serviceScopeContent?: ServiceScopeContent;
   applicationsContent?: ApplicationsContent;
   processContent?: ProcessContent;
+  pricingContent?: PricingContent;
+  insiteAdvantageContent?: InSiteAdvantageContent;
+  faqContent?: FAQContent;
+  ctaContent?: CTAContent;
 }
 
 /**
@@ -44,7 +56,11 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   valuePropContent,
   serviceScopeContent,
   applicationsContent,
-  processContent
+  processContent,
+  pricingContent,
+  insiteAdvantageContent,
+  faqContent,
+  ctaContent
 }) => {
   return (
     <main>
@@ -67,15 +83,32 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
       {applicationsContent && (
         <ApplicationsSection content={applicationsContent} />
       )}
-      
-    </Layout>
 
-      <div className="min-h-screen bg-gray-500 text-gray-900 max-w-7xl mx-auto ">
       {/* Process Section (if provided) */}
       {processContent && (
         <ProcessSection content={processContent} />
       )}
-      </div>
+      
+      {/* Price Section */}
+      {pricingContent && (
+        <PriceSection content={pricingContent} />
+      )}
+
+      {/* InSite Advantage Section */}
+      {insiteAdvantageContent && (
+        <InSiteAdvantageSection content={insiteAdvantageContent} />
+      )}
+
+      {/* FAQ Section */}
+      {faqContent && (
+        <FAQSection content={faqContent} />
+      )}
+    
+      {/* CTA Section */}
+      {ctaContent && (
+        <CTASection content={ctaContent} />
+      )}
+      </Layout>
 
       {/* Additional sections can be added here */}
     </main>

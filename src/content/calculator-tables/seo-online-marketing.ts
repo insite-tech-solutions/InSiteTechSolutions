@@ -1,3 +1,25 @@
+/**
+ * Pricing and configuration table for SEO & Online Marketing services.
+ * Defines all configurable campaign parameters, service tiers, media types,
+ * support levels, analytics, and cross-service integrations for the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} serviceModel - Service model options with costs.
+ * @property {Object} geographicalScope - Geographical scope options with multipliers.
+ * @property {Object} campaignDuration - Campaign duration options with multipliers.
+ * @property {Object} designApproach - Design approach options with multipliers.
+ * @property {Object} campaignMedium - Campaign medium options with costs.
+ * @property {Object} assetSourcing - Asset sourcing options with costs.
+ * @property {Object} seoServices - SEO services options with costs.
+ * @property {Object} marketingServices - Marketing services options with costs.
+ * @property {Object} analytics - Analytics options with costs.
+ * @property {Object} ongoingSupport - Ongoing support options with descriptions and costs.
+ * @property {Object} addOns - Optional add-ons with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ */
 // content/calculator_tables/seoOnlineMarketing.ts
 
 //import { CostRange, Multiplier } from './types';
@@ -319,7 +341,7 @@ export const seoOnlineMarketingTable = {
         },
         { 
           name: "Consulting and Training",
-          url: "/services/consulting-and-training"
+          url: "/services/consulting-and-training",
         }
       ]
     }

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview TailwindButton is a reusable button component styled with Tailwind CSS.
+ * It supports navigation via a link and can include an optional icon.
+ */
+
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -16,6 +21,16 @@ interface TailwindButtonProps {
   iconClassName?: string;
 }
 
+/**
+ * TailwindButton component renders a styled button that navigates to a specified URL.
+ * 
+ * @param {TailwindButtonProps} props - Component props
+ * @param {string} [props.href="/contact"] - URL destination for the button
+ * @param {React.ReactNode} [props.children="Button Text"] - Content inside the button
+ * @param {string} [props.className=""] - Additional Tailwind classes for button styling
+ * @param {string} [props.iconClassName=""] - Additional Tailwind classes for the arrow icon
+ * @returns {JSX.Element} Rendered Tailwind button component
+ */
 export default function TailwindButton({
   href = "/contact",
   children = "Button Text",

@@ -58,7 +58,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Text Content */}
-            <div className="order-1 md:order-none text-left px-6 pt-6">
+            <div className="order-1 md:order-none text-left px-3 lg:px-6 pt-4">
               <h1
                 id="hero-title"
                 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg"
@@ -68,7 +68,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
               <p className="text-xl md:text-2xl mb-6 drop-shadow-lg">
                 {subtitle}
               </p>
-              <p className="mb-0 text-lg md:text-xl drop-shadow-lg">
+              <p className="text-lg md:text-xl drop-shadow-lg">
                 {description}
               </p>
             </div>

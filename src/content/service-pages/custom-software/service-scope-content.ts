@@ -4,6 +4,16 @@ import { ServiceScopeContent } from '@/page-templates/service-page/types';
 
 /**
  * Service scope content for the Custom Software Solutions service page.
+ * This object includes a detailed breakdown of service offerings and the key benefits they provide.
+ * 
+ * @type {ServiceScopeContent}
+ * @property {string} title - The title of the service scope section.
+ * @property {string} description - A description of the custom software development services offered.
+ * @property {Array} services - An array of services provided, each containing an icon, title, description, and benefits.
+ * @property {string} keyBenefitsTitle - The title for the key benefits section.
+ * @property {string} keyBenefitsDescription - A description of the key benefits provided by the custom software solutions.
+ * @property {Array} benefits - An array of key benefits, each containing an icon, title, and description.
+ * @property {string} backgroundIcon - The icon used for the background of the service scope section.
  */
 const customSoftwareServiceScope: ServiceScopeContent = {
   title: "Specialized Custom Software Development",
@@ -97,7 +107,7 @@ const customSoftwareServiceScope: ServiceScopeContent = {
       description: "Robust security measures to protect your data and operations."
     }
   ],
-  backgroundIcon: "MonitorCog"
+  backgroundIcon: "MonitorCog",
 };
 
 export default customSoftwareServiceScope;

@@ -1,8 +1,10 @@
-// IndustryCard.tsx
-
+/**
+ * @fileoverview IndustryCard displays a themed card with a title, icon, and list of items.
+ * This component is commonly used in the Industry Solutions section.
+ */
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { getIcon } from '@/utils/icon-registry';
@@ -20,6 +22,9 @@ const fadeInUp: Variants = {
   },
 };
 
+/**
+ * Props for the IndustryCard component.
+ */
 interface IndustryCardProps {
   title: string;
   items: string[];
@@ -27,46 +32,59 @@ interface IndustryCardProps {
   isActive?: boolean;
 }
 
-const IndustryCard: React.FC<IndustryCardProps> = ({
+/**
+ * IndustryCardComponent displays a themed card with a title, icon, and list of items.
+ * 
+ * @param {IndustryCardProps} props - Component props
+ * @param {string} props.title - Title of the industry
+ * @param {string[]} props.items - List of items related to the industry
+ * @param {string} props.icon - Icon identifier for the card
+ * @param {boolean} [props.isActive=false] - Indicates if the card is currently active
+ * @returns {JSX.Element} Rendered industry card component
+ */
+const IndustryCardComponent: React.FC<IndustryCardProps> = ({
   title,
   items,
   icon,
   isActive = false,
 }) => {
+  const IconComponent = useMemo(() => getIcon(icon), [icon]);
 
-  const IconComponent = getIcon(icon);
   return (
     <motion.div
-    variants={fadeInUp}
-    className={`
-      relative
-      bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg 
-      rounded-xl shadow-md p-6 
-      transition-all duration-500 ease-in-out
-      w-79 md:w-80 min-h-[17rem] h-auto 
-      ${
-        isActive
-          ? 'shadow-lg border-2 border-blue-600 z-10'
-          : 'shadow-md border-2 border-transparent filter blur-[1.5px] opacity-97'
-      }
-    `}
-  >
-    <div className="flex items-center gap-3 mb-4">
-      <div className="p-2 rounded-full bg-blue-100">
-        <IconComponent className="h-6 w-6 text-blue-600" />
+      variants={fadeInUp}
+      className={`
+        relative
+        bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg 
+        rounded-xl shadow-md p-6 
+        transition-all duration-500 ease-in-out
+        w-79 md:w-80 min-h-[17rem] h-auto 
+        ${
+          isActive
+            ? 'shadow-lg border-2 border-blue-600 z-10'
+            : 'shadow-md border-2 border-transparent filter blur-[1.5px] opacity-97'
+        }
+      `}
+    >
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 rounded-full bg-blue-100">
+          <IconComponent className="h-6 w-6 text-blue-600" />
+        </div>
+        <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
       </div>
-      <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
-    </div>
-    <ul className="space-y-2">
-      {items.map((item, index) => (
-        <li key={index} className="flex items-start gap-2">
-          <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
-          <span className="text-gray-700">{item}</span>
-        </li>
-      ))}
-    </ul>
+      <ul className="space-y-2">
+        {items.map((item, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
+            <span className="text-gray-700">{item}</span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 };
+
+// Memoized version of IndustryCardComponent for performance optimization
+const IndustryCard = React.memo(IndustryCardComponent);
 
 export default IndustryCard;

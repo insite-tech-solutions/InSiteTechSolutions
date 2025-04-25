@@ -1,3 +1,21 @@
+/**
+ * Pricing and configuration table for Graphic Design & Branding services.
+ * Includes project types, media formats, branding strategy, timelines, and optional add-ons
+ * used for estimating cost in the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} serviceType - Types of graphic design services with options and costs.
+ * @property {Object} projectApproach - Project approach options with multipliers.
+ * @property {Object} mediaFormats - Media formats options with costs.
+ * @property {Object} medium - Medium options with costs.
+ * @property {Object} numberOfVariations - Number of variations options with costs.
+ * @property {Object} serviceDuration - Service duration options with costs.
+ * @property {Object} addOns - Optional add-ons with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ */
 // content/calculator_tables/graphicDesignBranding.ts
 
 //import { CostRange, Multiplier } from './types';
@@ -184,7 +202,7 @@ export const graphicDesignBrandingTable = {
         },
         { 
           name: "Consulting and Training",
-          url: "/services/consulting-and-training"
+          url: "/services/consulting-and-training",
         }
       ]
     }

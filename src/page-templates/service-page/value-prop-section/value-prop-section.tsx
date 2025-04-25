@@ -179,7 +179,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
   ), [industryTrends]);
 
   return (
-    <section className="pt-16 mb-16 lg:mb-20">
+    <section className="pt-12 pb-12">
       <div className={`container mx-auto ${layoutVariant === 'compact' ? 'max-w-7xl' : ''}`}>
         <motion.div
           initial="hidden"
@@ -189,12 +189,12 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
         >
           <motion.h2 
             variants={fadeInUp}
-            className="text-4xl font-bold mb-12 text-center text-gray-900"
+            className="text-4xl font-bold pb-8 text-center text-gray-900"
           >
             {title}
           </motion.h2>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Left Column */}
             <div className="space-y-8">
               <motion.p 

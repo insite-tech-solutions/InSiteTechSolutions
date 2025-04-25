@@ -1,3 +1,25 @@
+/**
+ * Pricing and configuration table for Custom Software Solutions services.
+ * Defines all configurable service attributes, rendering types, category organization,
+ * and associated cost ranges or multipliers used by the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} projectType - Types of projects with options and costs.
+ * @property {Object} integrationsRequired - Integration requirements with options and multipliers.
+ * @property {Object} platformSpecifics - Platform specifics with options and multipliers.
+ * @property {Object} computingEnvironment - Computing environment options with costs.
+ * @property {Object} developmentFocus - Development focus options with multipliers.
+ * @property {Object} programmingLanguages - Programming languages/frameworks options with multipliers.
+ * @property {Object} features - Features and integrations with options and costs.
+ * @property {Object} documentation - Documentation options with costs.
+ * @property {Object} ongoingMaintenance - Ongoing maintenance options with descriptions and costs.
+ * @property {Object} addOns - Optional add-ons with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ * @property {Array} specialNotes - Special notes regarding the custom software solutions.
+ */
 // content/calculator_tables/customSoftwareSolutions.ts
 
 //import { CostRange, Multiplier } from './types';
@@ -299,7 +321,7 @@ extraServices: {
   
   // Special notes
   specialNotes: [
-    "Discounts available for Open Source (OSS) projects. Proprietary development and NDAs may incur additional costs."
+    "Discounts available for Open Source (OSS) projects. Proprietary development and NDAs may incur additional costs.",
   ]
 };
 

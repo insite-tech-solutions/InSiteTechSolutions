@@ -1,4 +1,21 @@
-// content/calculator_tables/aiAutomation.ts
+/**
+ * Pricing and configuration table for AI & Automation services.
+ * Defines cost categories, complexity levels, integrations, support options,
+ * and additional features for the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} scopeSize - Scope/Size categories with options and costs.
+ * @property {Object} complexityLevels - Complexity levels with options and multipliers.
+ * @property {Object} aiDataProvisions - AI data provisions with options and multipliers.
+ * @property {Object} automationPlatform - Automation platform options with descriptions and multipliers.
+ * @property {Object} features - Features and integrations with options and costs.
+ * @property {Object} ongoingSupport - Ongoing support options with descriptions and costs.
+ * @property {Object} addOns - Optional add-ons with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ */
 
 //import { CostRange, Multiplier } from './types';
 
@@ -228,7 +245,8 @@ export const aiAutomationTable = {
           url: "/services/consulting-and-training"
         }
       ]
-    }
+    },
+  
 };
 
 export default aiAutomationTable;

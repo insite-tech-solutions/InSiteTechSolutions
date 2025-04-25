@@ -1,3 +1,23 @@
+/**
+ * Pricing and configuration table for Consulting & Training services.
+ * Defines categories, rendering types, recurring cost types, and detailed options
+ * with associated cost ranges or multipliers for the pricing calculator.
+ * 
+ * @type {Object}
+ * @property {string} name - The name of the service category.
+ * @property {Object} metadata - Metadata structure for rendering and organization.
+ * @property {Object} consultingType - Types of consulting services with options and costs.
+ * @property {Object} clientSize - Client size categories with multipliers.
+ * @property {Object} deliveryFormat - Delivery format options with multipliers.
+ * @property {Object} engagementStyle - Engagement style options with costs.
+ * @property {Object} expertiseLevel - Expertise level options with multipliers.
+ * @property {Object} features - Features and integrations with options and costs.
+ * @property {Object} customizationDocs - Customization and documentation options with costs.
+ * @property {Object} ongoingSupport - Ongoing support options with descriptions and costs.
+ * @property {Object} timeline - Project timeline options with multipliers.
+ * @property {Object} extraServices - Extra services and customizations available for bundling.
+ * @property {Array} specialNotes - Special notes regarding the consulting services.
+ */
 // content/calculator_tables/consultingTraining.ts
 
 //import { CostRange, Multiplier } from './types';
@@ -236,31 +256,30 @@ export const consultingTrainingTable = {
     }
   },
 
-
-    // Extra Services & Customizations
-    extraServices: {
-      title: "Extra Services & Customizations",
-      description: "Available as separate services that can be bundled with Consulting & Training.",
-      options: [
-        { 
-          name: "Marketing & SEO",
-          url: "/services/seo-and-online-marketing"
-        },
-        { 
-          name: "Logos & Brand Identity",
-          url: "/services/graphic-design-and-branding"
-        },
-        { 
-          name: "AI & Automation",
-          url: "/services/ai-and-automation"
-        }
-      ]
-    },
+  // Extra Services & Customizations
+  extraServices: {
+    title: "Extra Services & Customizations",
+    description: "Available as separate services that can be bundled with Consulting & Training.",
+    options: [
+      { 
+        name: "Marketing & SEO",
+        url: "/services/seo-and-online-marketing"
+      },
+      { 
+        name: "Logos & Brand Identity",
+        url: "/services/graphic-design-and-branding"
+      },
+      { 
+        name: "AI & Automation",
+        url: "/services/ai-and-automation"
+      }
+    ]
+  },
   
   // Special notes
   specialNotes: [
     "This \"catch-all\" service covers everything from simple tech support to in-depth strategic consulting. If you don't see your specific need listed, reach out — we'll tailor a solution to fit your unique requirements. Remember, for all your tech related needs, InSite Tech."
-  ]
+  ],
 };
 
 export default consultingTrainingTable;

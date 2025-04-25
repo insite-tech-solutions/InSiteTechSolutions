@@ -5,6 +5,22 @@ import React from 'react';
 
 /**
  * Hero section content for the Custom Software Solutions service page.
+ * This includes title, subtitle, description, background styling, CTA, and decorative elements.
+ * 
+ * @type {HeroSectionContent}
+ * @property {string} title - The main title for the hero section.
+ * @property {string} subtitle - A brief subtitle that complements the title.
+ * @property {string} description - A detailed description of the services offered.
+ * @property {string} image - URL of the image to be displayed in the hero section.
+ * @property {string} ctaText - Text for the call-to-action button.
+ * @property {string} ctaLink - URL for the call-to-action button's link.
+ * @property {Array} decorElements - An array of decorative elements to render in the background.
+ * @property {Object} decorElements[].type - Type of the decorative element (e.g., 'icon').
+ * @property {string} decorElements[].className - Additional Tailwind classes for styling the element.
+ * @property {Object} decorElements[].style - Inline styles for positioning the element.
+ * @property {string} decorElements[].icon - Icon identifier for the decorative element.
+ * @property {number} decorElements[].size - Size of the decorative icon.
+ * @property {string} bgClassName - Optional custom background class for styling.
  */
 const customSoftwareHero: HeroSectionContent = {
   title: "Custom Software Solutions",
@@ -29,7 +45,7 @@ const customSoftwareHero: HeroSectionContent = {
       size: 450,
     },
   ],
-  bgClassName: "bg-gradient-to-br from-dark-blue to-blue-800 p-6"
+  bgClassName: "bg-gradient-to-br from-dark-blue to-blue-800 p-6",
 };
 
 export default customSoftwareHero;

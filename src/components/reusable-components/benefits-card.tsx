@@ -1,8 +1,10 @@
-// BenefitsCard.tsx
-
+/**
+ * @fileoverview A reusable card component that displays an icon, title, and description.
+ * This component is used in benefits sections or feature lists and supports animations.
+ */
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { getIcon } from '@/utils/icon-registry';
 
@@ -19,6 +21,9 @@ const fadeInUp: Variants = {
   },
 };
 
+/**
+ * Props for the BenefitsCard component.
+ */
 interface BenefitsCardProps {
   icon: string;
   title: string;
@@ -26,14 +31,23 @@ interface BenefitsCardProps {
   isActive?: boolean;
 }
 
-const BenefitsCard: React.FC<BenefitsCardProps> = ({
+/**
+ * BenefitsCard component displays an icon, title, and description in a card format.
+ * 
+ * @param {BenefitsCardProps} props - Component props
+ * @param {string} props.icon - Icon identifier for the card
+ * @param {string} props.title - Title of the benefit
+ * @param {string} props.description - Description of the benefit
+ * @param {boolean} [props.isActive=false] - Indicates if the card is currently active
+ * @returns {JSX.Element} Rendered benefits card component
+ */
+const BenefitsCardComponent: React.FC<BenefitsCardProps> = ({
   icon,
   title,
   description,
   isActive = false,
 }) => {
-
-  const IconComponent = getIcon(icon);
+  const IconComponent = useMemo(() => getIcon(icon), [icon]);
 
   return (
     <motion.div
@@ -50,14 +64,17 @@ const BenefitsCard: React.FC<BenefitsCardProps> = ({
           : 'shadow-md border-2 border-transparent blur-[1.5px] opacity-97'
       }
     `}
-  >
-    <div className="p-2 rounded-full bg-blue-100 mb-4 mt-2">
-      <IconComponent className="h-6 w-6 text-blue-600" />
-    </div>
-    <h4 className="text-lg font-semibold text-gray-800 mb-2">{title}</h4>
+    >
+      <div className="p-2 rounded-full bg-blue-100 mb-4 mt-2">
+        <IconComponent className="h-6 w-6 text-blue-600" />
+      </div>
+      <h4 className="text-lg font-semibold text-gray-800 mb-2">{title}</h4>
       <p className="text-gray-700">{description}</p>
     </motion.div>
   );
 };
+
+// Memoized version of BenefitsCardComponent for performance optimization
+const BenefitsCard = React.memo(BenefitsCardComponent);
 
 export default BenefitsCard;

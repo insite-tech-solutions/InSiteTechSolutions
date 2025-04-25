@@ -7,6 +7,10 @@ import { ServiceItem } from '../types'
 import { CheckCircle } from 'lucide-react'
 import { getIcon } from '@/utils/icon-registry'
 
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
 // Simple debounce function
 const debounce = <F extends (...args: unknown[]) => unknown>(
   func: F,
@@ -84,7 +88,7 @@ const CoreServicesWrapper: React.FC<CoreServicesProps> = (props) => {
       setScrollPosition(window.scrollY)
       setOrientationKey(newOrientation)
     }
-  }, [orientationKey])
+  }, [orientationKey, setScrollPosition])
 
   const debouncedResizeHandler = useMemo(() => debounce(handleOrientationOrResize, 200), [handleOrientationOrResize])
 
@@ -125,7 +129,6 @@ const CoreServicesMain: React.FC<CoreServicesProps> = ({ title, description, ser
   const cardsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
 
     const ctx = gsap.context(() => {
       // Calculate the required scroll distance
@@ -144,6 +147,8 @@ const CoreServicesMain: React.FC<CoreServicesProps> = ({ title, description, ser
       gsap.to(cardsRef.current, {
         y: () => -calculateScrollDistance(), // Animate y based on dynamic calculation
         ease: 'none',
+        force3D: true, // Add this for better GPU handling
+        willChange: 'transform', // Add this to hint the browser about upcoming changes
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 128px', // 104px is the navbar height, 24px is the padding
