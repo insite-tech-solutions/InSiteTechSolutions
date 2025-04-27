@@ -256,25 +256,25 @@ export const consultingTrainingTable = {
     }
   },
 
-  // Extra Services & Customizations
-  extraServices: {
-    title: "Extra Services & Customizations",
-    description: "Available as separate services that can be bundled with Consulting & Training.",
-    options: [
-      { 
-        name: "Marketing & SEO",
-        url: "/services/seo-and-online-marketing"
-      },
-      { 
-        name: "Logos & Brand Identity",
-        url: "/services/graphic-design-and-branding"
-      },
-      { 
-        name: "AI & Automation",
-        url: "/services/ai-and-automation"
-      }
-    ]
-  },
+    // Extra Services & Customizations
+    extraServices: {
+      title: "Extra Services & Customizations",
+      description: "Available as separate services that can be bundled with Consulting & Training.",
+      options: [
+        { 
+          name: "Marketing & SEO",
+          url: "/services/seo-and-online-marketing"
+        },
+        { 
+          name: "Logos & Brand Identity",
+          url: "/services/graphic-design-and-branding"
+        },
+        { 
+          name: "AI & Automation",
+          url: "/services/ai-and-automation"
+        }
+      ]
+    },
   
   // Special notes
   specialNotes: [

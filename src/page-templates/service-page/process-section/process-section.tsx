@@ -399,7 +399,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         {content.description}
       </p>
       </div>
-      <div ref={sectionRef} className="relative h-[400vh] md:h-[435vh] pb-12 lg:pb-0">
+      <div ref={sectionRef} className="relative h-[400vh] md:h-[420vh] pb-12 lg:pb-0">
         {/*
           Hidden measurement div:
           - Contains clones of the final card state for each step.

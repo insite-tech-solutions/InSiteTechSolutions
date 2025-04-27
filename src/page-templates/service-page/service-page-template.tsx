@@ -15,13 +15,13 @@ import HeroSection from './hero-section';
 import ValuePropSection from './value-prop-section';
 
 // Dynamic imports for below-the-fold content
-const ServiceScopeSection = dynamic(() => import('./service-scope-section'));
-const ApplicationsSection = dynamic(() => import('./applications-section'));
-const ProcessSection = dynamic(() => import('./process-section'));
-const PricingSection = dynamic(() => import('./price-section'));
-const InSiteAdvantageSection = dynamic(() => import('./insite-advantage-section'));
-const FAQSection = dynamic(() => import('./faq-section'));
-const CTASection = dynamic(() => import('./cta-section'));
+const ServiceScopeSection = dynamic(() => import('./service-scope-section'), { ssr: false });
+const ApplicationsSection = dynamic(() => import('./applications-section'), { ssr: false });
+const ProcessSection = dynamic(() => import('./process-section'), { ssr: false });
+const PricingSection = dynamic(() => import('./price-section'), { ssr: false });
+const InSiteAdvantageSection = dynamic(() => import('./insite-advantage-section'), { ssr: false });
+const FAQSection = dynamic(() => import('./faq-section'), { ssr: false });
+const CTASection = dynamic(() => import('./cta-section'), { ssr: false });
 
 import { 
   HeroSectionContent, 

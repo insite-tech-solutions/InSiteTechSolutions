@@ -78,7 +78,10 @@ const TailwindHeroBackground = ({
       'relative overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-700',
       className
     )}
-    style={{ minHeight: `calc(100vh - 104px)` }}
+    style={{ 
+      minHeight: `calc(100vh - 104px)`,
+      maxHeight: '1024px'
+    }}
     >
       {/* Decorative elements */}
       {decorElements.length > 0 && (

@@ -1,9 +1,9 @@
-// src/content/services/custom-software/hero-content.ts
+// src/content/services/web-app-development/hero-content.ts
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 
 /**
- * Hero section content for the Custom Software Solutions service page.
+ * Hero section content for the Web & App Development service page.
  * This includes title, subtitle, description, background styling, CTA, and decorative elements.
  * 
  * @type {HeroSectionContent}
@@ -21,11 +21,11 @@ import { HeroSectionContent } from '@/page-templates/service-page/types';
  * @property {number} decorElements[].size - Size of the decorative icon.
  * @property {string} bgClassName - Optional custom background class for styling.
  */
-const customSoftwareHero: HeroSectionContent = {
-  title: "Custom Software Solutions",
-  subtitle: "Turn your technical challenges into opportunities with tailored software",
-  description: "From streamlining operations to solving complex computational problems, we create custom software that perfectly aligns with your business processes or research goals. Our solutions combine innovative technology with practical business sense to deliver measurable results.",
-  image: "/CustomSoftwareGraphic.svg",
+const webAppDevelopmentHero: HeroSectionContent = {
+  title: "Web & App Development",
+  subtitle: "Transform your ideas into powerful digital solutions",
+  description: "From responsive websites to powerful applications, we create digital solutions that drive real business results. Our development services combine modern technology with practical business sense to deliver exactly what your organization needs.",
+  image: "/graphics/responsive-design.gif",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [
@@ -38,7 +38,7 @@ const customSoftwareHero: HeroSectionContent = {
         color: 'rgba(255, 255, 255, 0.1)',
         transform: 'rotate(12deg)'
       },
-      icon: 'Settings',
+      icon: 'Code',
       size: 400,
     },
     {
@@ -50,11 +50,11 @@ const customSoftwareHero: HeroSectionContent = {
         color: 'rgba(255, 255, 255, 0.1)',
         transform: 'rotate(-15deg)'
       },
-      icon: 'CodeXml',
+      icon: 'Smartphone',
       size: 450,
     },
   ],
-  bgClassName: "bg-gradient-to-br from-dark-blue to-blue-800 p-6",
+  bgClassName: "bg-gradient-to-r from-blue-600 to-purple-600 p-6",
 };
 
-export default customSoftwareHero;
+export default webAppDevelopmentHero;

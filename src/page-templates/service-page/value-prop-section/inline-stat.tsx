@@ -1,5 +1,7 @@
 // src/templates/service-page/sections/value-prop/inline-stat.tsx
 
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useAnimation, Variants } from 'framer-motion';
 

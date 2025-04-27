@@ -136,6 +136,60 @@ const MarketInsightCard = React.memo(function MarketInsightCard({ insights }: { 
 });
 
 /**
+ * Component for displaying a comparison table
+ * @param {Object} props - Component props
+ * @param {Object} props.tableData - The table data to display
+ * @param {string} props.tableData.title - The title of the comparison table
+ * @param {string[]} props.tableData.headers - The headers for the comparison table
+ * @param {Array<{feature: string, digital: string, traditional: string}>} props.tableData.rows - The rows for the comparison table
+ * @returns {JSX.Element} A memoized comparison table component
+ */
+const ComparisonTable = React.memo(function ComparisonTable({ 
+  tableData 
+}: { 
+  tableData: {
+    title: string;
+    headers: string[];
+    rows: {
+      feature: string;
+      digital: string;
+      traditional: string;
+    }[];
+  }
+}) {
+  return (
+    <div className="overflow-x-auto mt-8">
+      <motion.div
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="w-full rounded-lg shadow-md overflow-hidden"
+      >
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-blue-600 text-white">
+              {tableData.headers.map((header: string, index: number) => (
+                <th key={index} className="p-4 text-left">{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.rows.map((row, index: number) => (
+              <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                <td className="p-4 border-b border-gray-200 font-medium text-gray-800">{row.feature}</td>
+                <td className="p-4 border-b border-gray-200 text-gray-700">{row.digital}</td>
+                <td className="p-4 border-b border-gray-200 text-gray-600">{row.traditional}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </motion.div>
+    </div>
+  );
+});
+
+/**
  * Value Proposition Section for Service Pages
  * 
  * Displays the value proposition with industry trends and market insights.
@@ -204,14 +258,19 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
                 {description}
               </motion.p>
 
+              <MarketInsightCard insights={marketInsights} />
+
+              {/* Add Comparison Table if provided */}
+              {content.comparisonTable && (
+                <ComparisonTable tableData={content.comparisonTable} />
+              )}
+
               {/* Add additional content before trends if provided */}
               {additionalContent?.beforeTrends && (
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={fadeInUp} className="text-lg px-2 text-gray-700 leading-relaxed">
                   {additionalContent.beforeTrends}
                 </motion.div>
               )}
-
-              <MarketInsightCard insights={marketInsights} />
             </div>
 
             {/* Right Column */}
@@ -228,14 +287,14 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
               
               {/* Add additional content after trends if provided */}
               {additionalContent?.afterTrends && (
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={fadeInUp} className="text-lg px-2 text-gray-700 leading-relaxed">
                   {additionalContent.afterTrends}
                 </motion.div>
               )}
 
               {/* Add additional content before CTA if provided */}
               {additionalContent?.beforeCta && (
-                <motion.div variants={fadeInUp}>
+                <motion.div variants={fadeInUp} className="text-lg px-2 text-gray-700 leading-relaxed">
                   {additionalContent.beforeCta}
                 </motion.div>
               )}

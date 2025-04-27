@@ -1,62 +1,27 @@
-'use client';
+/**
+ * Page component for the Custom Software Solutions service.
+ * Using Next.js App Router's built-in support for metadata.
+ */
 
-import React from 'react';
-import Head from 'next/head';
-import Header from '@/components/site-header/header';
-import ValuePropSection from '@/components/CustomSoftwareServicePage/ValueSection/ValuePropSection';
-import ServiceScopeSection from '@/components/CustomSoftwareServicePage/ServiceScopeSection';
-import ApplicationsSection from '@/components/CustomSoftwareServicePage/ApplicationsSection';
-import PriceSection from '@/components/CustomSoftwareServicePage/PricingSection/PriceSection';
-import InSiteAdvantageSection from '@/components/CustomSoftwareServicePage/InSiteAdvantageSection/InsiteAdvantage';
-import FAQSection from '@/components/CustomSoftwareServicePage/FAQsection/FAQSection';
-import ProcessSectionWrapper from '@/components/CustomSoftwareServicePage/ProcessSection/Process';
-import FinalCTASection from '@/components/CustomSoftwareServicePage/CTAsection/ctaSection';
-import FooterSection from '@/components/site-footer/footer';
-import HeroSection from '@/components/CustomSoftwareServicePage/HeroSection/heroSection';
+import { Metadata } from 'next';
+import CustomSoftwarePage from '@/components/service-pages/custom-software-page';
+import customSoftwareContent from '@/content/service-pages/custom-software';
 
-const CSSolPage = () => {
-    return (
-      <div className='bg-gray-50'>
-        <Head>
-          <title>Custom Software Solutions | InSite Tech</title>
-          <meta
-            name="description"
-            content="Transform your ideas into powerful digital solutions with our software development services. Start your project today!"
-          />
-        </Head>
-  
-        <Header />
-
-        {/* Hero Section */}
-        <HeroSection />
-
-        {/* Value Proposition Section */}
-        <ValuePropSection />
-
-        {/* Service Scope Section */}
-        <ServiceScopeSection />
-
-        {/* Applications Section */}
-        <ApplicationsSection />
-
-        {/* Process Section */}
-        <ProcessSectionWrapper />
-
-        {/* Price Section */}
-        <PriceSection />
-
-        {/* InSite Advantage Section */}
-        <InSiteAdvantageSection />
-
-        {/* FAQ Section */}
-        <FAQSection />
-
-        {/* Final CTA Section */}
-        <FinalCTASection />
-
-        <FooterSection />
-      </div>
-    );
+/**
+ * Metadata configuration for the Custom Software Solutions service page.
+ * 
+ * @type {Metadata}
+ */
+export const metadata: Metadata = {
+  title: customSoftwareContent.metadata.title + ' | InSite Tech',
+  description: customSoftwareContent.metadata.description,
 };
 
-export default CSSolPage;
+/**
+ * Server component that renders the Custom Software Solutions service page.
+ * 
+ * @returns {JSX.Element} The rendered Custom Software Solutions page
+ */
+export default function Page() {
+  return <CustomSoftwarePage />;
+}

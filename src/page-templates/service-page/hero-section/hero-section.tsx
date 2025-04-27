@@ -55,7 +55,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
         className={bgClassName}
         decorElements={processedDecorElements}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Text Content */}
             <div className="order-1 md:order-none text-left px-3 lg:px-6 pt-4">

@@ -1,39 +1,26 @@
-// src/app/services/data-analysis/page.tsx
+/**
+ * Page component for the Web & App Development service.
+ * Using Next.js App Router's built-in support for metadata.
+ */
+import { Metadata } from 'next';
+import WebAppDevelopmentPage from '@/components/service-pages/web-app-development-page';
+import webAppDevelopmentContent from '@/content/service-pages/web-app-dev';
 
-'use client';
+/**
+ * Metadata configuration for the Web & App Development service page.
+ * 
+ * @type {Metadata}
+ */
+export const metadata: Metadata = {
+  title: webAppDevelopmentContent.metadata.title + ' | InSite Tech',
+  description: webAppDevelopmentContent.metadata.description,
+};
 
-import React from 'react';
-import Header from '@/components/site-header/header';
-import Footer from '@/components/site-footer/footer';
-import ServicePageTemplate from '@/page-templates/service-page/service-temp-2';
-import customSoftwareHero from '@/content/service-pages/custom-software/hero-content';
-import customSoftwareValueProp from '@/content/service-pages/custom-software/value-prop-content';
-import customSoftwareServiceScope from '@/content/service-pages/custom-software/service-scope-content';
-import customSoftwareApplications from '@/content/service-pages/custom-software/applications-content';
-import customSoftwareProcess from '@/content/service-pages/custom-software/process-content';
-import customSoftwarePricing from '@/content/service-pages/custom-software/pricing-content';
-import customSoftwareInSiteAdvantage from '@/content/service-pages/custom-software/insite-advantage-content';
-import customSoftwareFAQ from '@/content/service-pages/custom-software/faq-content';
-import customSoftwareCTA from '@/content/service-pages/custom-software/cta-content';
-
-export default function CustomSoftwareSolutionsPage() {
-  return (
-    <div className='bg-gray-50'>
-      <Header />
-      
-      <ServicePageTemplate 
-        heroContent={customSoftwareHero}
-        valuePropContent={customSoftwareValueProp}
-        serviceScopeContent={customSoftwareServiceScope}
-        applicationsContent={customSoftwareApplications}
-        processContent={customSoftwareProcess}
-        pricingContent={customSoftwarePricing}
-        insiteAdvantageContent={customSoftwareInSiteAdvantage}
-        faqContent={customSoftwareFAQ}
-        ctaContent={customSoftwareCTA}
-      />
-
-      <Footer />
-    </div>
-  );
+/**
+ * Server component that renders the Web & App Development service page.
+ * 
+ * @returns {JSX.Element} The rendered Web & App Development page
+ */
+export default function Page() {
+  return <WebAppDevelopmentPage />;
 }

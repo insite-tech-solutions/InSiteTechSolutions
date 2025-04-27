@@ -138,6 +138,13 @@ export interface CallToAction {
  * @property {string} [industryTrendsDescription] - Optional description for the industry trends section.
  * @property {MarketInsight[]} marketInsights - An array of market insights.
  * @property {CallToAction} callToAction - The call to action for the value proposition.
+ * @property {Object} comparisonTable - Optional comparison table for the value proposition.
+ * @property {string} [comparisonTable.title] - Optional title for the comparison table.
+ * @property {string[]} [comparisonTable.headers] - Optional headers for the comparison table.
+ * @property {Object[]} [comparisonTable.rows] - Optional rows for the comparison table.
+ * @property {string} [comparisonTable.rows.feature] - Optional feature column for the comparison table.
+ * @property {string} [comparisonTable.rows.digital] - Optional digital column for the comparison table.
+ * @property {string} [comparisonTable.rows.traditional] - Optional traditional column for the comparison table.
  * @property {{ beforeTrends?: ReactNode; afterTrends?: ReactNode; beforeCta?: ReactNode; }} [additionalContent] - Optional additional content for the section.
  */
 export interface ValuePropContent {
@@ -148,6 +155,15 @@ export interface ValuePropContent {
   industryTrendsDescription?: string;
   marketInsights: MarketInsight[];
   callToAction: CallToAction;
+  comparisonTable?: {
+    title: string;
+    headers: string[];
+    rows: {
+      feature: string;
+      digital: string;
+      traditional: string;
+    }[];
+  };
   additionalContent?: {
     beforeTrends?: ReactNode;
     afterTrends?: ReactNode;

@@ -13,8 +13,8 @@
 export interface CostRange {
     min: number;
     max: number;
-}
-
+  }
+  
 /**
  * Represents a multiplier with an optional description.
  * 
@@ -22,11 +22,11 @@ export interface CostRange {
  * @property {number} value - The multiplier value.
  * @property {string} [description] - An optional description of the multiplier.
  */
-export interface Multiplier {
+  export interface Multiplier {
     value: number;
     description?: string;
-}
-
+  }
+  
 /**
  * Represents an option for a feature with associated cost and optional description.
  * 
@@ -35,12 +35,12 @@ export interface Multiplier {
  * @property {CostRange} cost - The cost range for the feature option.
  * @property {string} [description] - An optional description of the feature option.
  */
-export interface FeatureOption {
+  export interface FeatureOption {
     name: string;
     cost: CostRange;
     description?: string;
-}
-
+  }
+  
 /**
  * Represents an option for support with associated cost and optional description.
  * 
@@ -49,8 +49,8 @@ export interface FeatureOption {
  * @property {CostRange} cost - The cost range for the support option.
  * @property {string} [description] - An optional description of the support option.
  */
-export interface SupportOption {
+  export interface SupportOption {
     name: string;
     cost: CostRange;
     description?: string;
-}
+  }
