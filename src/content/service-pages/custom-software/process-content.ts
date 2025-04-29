@@ -8,12 +8,14 @@
  * @property {string} description - A description of the overall approach to software development.
  * @property {Array} steps - An array of steps in the process, each containing a step number, title, description, items, timeline, and icon.
  * @property {string} note - A note regarding project timelines and variability.
+ * @property {string} linkText - The text of the link to the process page.
+ * @property {string} linkUrl - The URL of the process page.
  */
 import { ProcessContent } from '@/page-templates/service-page/types';
 
 export const customSoftwareProcess: ProcessContent = {
   title: "Our Approach",
-  description: "We follow a systematic, collaborative approach to ensure your custom software solution meets all requirements while maintaining flexibility for future growth.",
+  description: "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure your custom software solution meets all requirements while maintaining flexibility for future growth.",
   steps: [
     {
       step: 1,
@@ -29,11 +31,11 @@ export const customSoftwareProcess: ProcessContent = {
     },
     {
       step: 2,
-      title: 'Planning',
-      description: 'We develop a detailed roadmap to ensure project success.',
+      title: 'Definition',
+      description: 'We define a detailed roadmap and requirements to ensure project success.',
       items: [
         'Develop a detailed project roadmap',
-        'Identify necessary third-party integrations',
+        'Define integration points and dependencies',
         'Establish success criteria and key milestones',
       ],
       timeline: '1-2 weeks',
@@ -42,7 +44,7 @@ export const customSoftwareProcess: ProcessContent = {
     {
       step: 3,
       title: 'Design',
-      description: 'We create a robust system architecture and incorporate iterative feedback.',
+      description: 'We design a robust system architecture and incorporate iterative feedback.',
       items: [
         'Create system architecture design',
         'Develop algorithmic flowcharts',
@@ -54,7 +56,7 @@ export const customSoftwareProcess: ProcessContent = {
     {
       step: 4,
       title: 'Development',
-      description: 'We build your solution with regular updates and maintain alignment with your goals.',
+      description: 'We develop your tailored solution, keeping you informed and engaged.',
       items: [
         'Execute development sprints with regular progress updates',
         'Integrate continuous feedback to ensure alignment with goals',
@@ -65,8 +67,8 @@ export const customSoftwareProcess: ProcessContent = {
     },
     {
       step: 5,
-      title: 'Testing & Launch',
-      description: 'We ensure everything works perfectly before going live.',
+      title: 'Deployment',
+      description: 'We ensure everything works perfectly before deploying your software.',
       items: [
         'Perform comprehensive testing to identify and fix issues',
         'Optimize system integration and performance',

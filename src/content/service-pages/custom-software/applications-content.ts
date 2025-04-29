@@ -96,6 +96,8 @@ const customSoftwareApplications: ApplicationsContent = {
     },
   ], 
   backgroundIcon: "Code2",
+  backgroundIconWidth: 500,
+  backgroundIconHeight: 500,
 };
 
 export default customSoftwareApplications;

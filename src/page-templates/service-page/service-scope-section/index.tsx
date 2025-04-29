@@ -31,6 +31,8 @@ const ServiceScopeSection: React.FC<ServiceScopeSectionProps> = ({ content }) =>
         <KeyBenefits 
           benefits={content.benefits || []}
           backgroundIcon={content.backgroundIcon || 'CodeXml'}
+          backgroundIconWidth={content.backgroundIconWidth}
+          backgroundIconHeight={content.backgroundIconHeight}
           keyBenefitsTitle={content.keyBenefitsTitle || content.title}
           keyBenefitsDescription={content.keyBenefitsDescription || content.description}
         />

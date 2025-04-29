@@ -32,6 +32,8 @@ const ApplicationsSection: React.FC<ApplicationsSectionProps> = ({ content }) =>
         <IndustrySolutions 
           industries={content.industries}
           backgroundIcon={content.backgroundIcon || 'CodeXml'}
+          backgroundIconWidth={content.backgroundIconWidth}
+          backgroundIconHeight={content.backgroundIconHeight}
           industrySolutionsTitle={content.industrySolutionsTitle || content.title}
           industrySolutionsDescription={content.industrySolutionsDescription || content.description}
         />

@@ -1,4 +1,4 @@
-// src/content/services/web-app-development/hero-content.ts
+// src/content/services/seo-marketing/hero-content.ts
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 
@@ -21,10 +21,10 @@ import { HeroSectionContent } from '@/page-templates/service-page/types';
  * @property {number} decorElements[].size - Size of the decorative icon.
  * @property {string} bgClassName - Optional custom background class for styling.
  */
-const webAppDevelopmentHero: HeroSectionContent = {
-  title: "Web & App Development",
-  subtitle: "Transform your ideas into powerful digital solutions",
-  description: "From responsive websites to powerful applications, we create digital solutions that drive real business results. Our development services combine modern technology with practical business sense to deliver exactly what your organization needs.",
+const seoMarketingHero: HeroSectionContent = {
+  title: "SEO & Online Marketing",
+  subtitle: "Boost visibility, drive engagement, and grow your business online",
+  description: "Transform your online presence into a powerful revenue generator with strategic SEO and marketing solutions. We blend data-driven techniques with creative marketing to ensure your business stands out in a crowded digital landscape.",
   image: "/graphics/responsive-design.gif",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
@@ -38,7 +38,7 @@ const webAppDevelopmentHero: HeroSectionContent = {
         color: 'rgba(255, 255, 255, 0.1)',
         transform: 'rotate(12deg)'
       },
-      icon: 'Code',
+      icon: 'Search',
       size: 400,
     },
     {
@@ -50,11 +50,11 @@ const webAppDevelopmentHero: HeroSectionContent = {
         color: 'rgba(255, 255, 255, 0.1)',
         transform: 'rotate(-15deg)'
       },
-      icon: 'Smartphone',
+      icon: 'Globe',
       size: 450,
     },
   ],
   bgClassName: "bg-gradient-to-br from-dark-blue to-blue-800 p-6",
 };
 
-export default webAppDevelopmentHero;
+export default seoMarketingHero;

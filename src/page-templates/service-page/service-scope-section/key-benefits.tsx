@@ -11,6 +11,8 @@ import CarouselSection from '@/components/reusable-components/carousel-section';
 interface KeyBenefitsProps {
   benefits: BenefitItem[];
   backgroundIcon?: string;
+  backgroundIconWidth?: number;
+  backgroundIconHeight?: number;
   keyBenefitsTitle: string;
   keyBenefitsDescription: string;
 }
@@ -24,12 +26,16 @@ interface KeyBenefitsProps {
  * 
  * @param benefits - Array of benefit items to display
  * @param backgroundIcon - Optional icon name for background
+ * @param backgroundIconWidth - Optional width for background icon
+ * @param backgroundIconHeight - Optional height for background icon
  * @param keyBenefitsTitle - Title for the key benefits section
  * @param keyBenefitsDescription - Description for the key benefits section
  */
 const KeyBenefits: React.FC<KeyBenefitsProps> = ({ 
   benefits, 
   backgroundIcon,
+  backgroundIconWidth,
+  backgroundIconHeight,
   keyBenefitsTitle,
   keyBenefitsDescription
 }) => {
@@ -52,11 +58,11 @@ const KeyBenefits: React.FC<KeyBenefitsProps> = ({
   const backgroundElement = useMemo(() => (
     <IconComponent
       className="text-medium-blue-alt"
-      width={400}
-      height={375}
+      width={backgroundIconWidth || 425}
+      height={backgroundIconHeight || 425}
       strokeWidth={1.5}
     />
-  ), [IconComponent]);
+  ), [IconComponent, backgroundIconWidth, backgroundIconHeight]);
 
   return (
     <CarouselSection

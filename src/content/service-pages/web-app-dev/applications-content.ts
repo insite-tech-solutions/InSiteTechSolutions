@@ -93,6 +93,8 @@ const webAppDevelopmentApplications: ApplicationsContent = {
     },
   ], 
   backgroundIcon: "Layout",
+  backgroundIconWidth: 400,
+  backgroundIconHeight: 400,
 };
 
 export default webAppDevelopmentApplications;

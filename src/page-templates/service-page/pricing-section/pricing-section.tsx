@@ -163,7 +163,7 @@ const PriceSectionWrapper: React.FC<PriceSectionProps> = ({ content }) => {
 
           {/* Interactive Price Calculator */}
           <div className="max-w-5xl mx-auto lg:px-6 mb-12">
-            <PriceCalculator fixedService="customSoftwareSolutions" />
+            <PriceCalculator fixedService={content.serviceType} />
           </div>
 
           {/* Long-term Value Proposition Section */}

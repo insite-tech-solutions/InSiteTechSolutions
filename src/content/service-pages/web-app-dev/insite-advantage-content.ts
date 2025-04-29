@@ -65,6 +65,10 @@ const webAppDevelopmentAdvantageContent: InSiteAdvantageContent = {
     {
       title: "Flexibility and Transparency",
       description: "Count on flexibility and transparency in all stages of the project, ensuring we deliver exactly what you envisioned."
+    }, 
+    {
+      title: "Scalable Solutions",
+      description: "We build systems that grow and adapt with your business needs, ensuring your digital assets remain relevant and effective over time."
     }
   ],
 };

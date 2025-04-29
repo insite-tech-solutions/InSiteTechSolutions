@@ -159,9 +159,7 @@ export interface ValuePropContent {
     title: string;
     headers: string[];
     rows: {
-      feature: string;
-      digital: string;
-      traditional: string;
+      [key: string]: string; // Dynamic column values
     }[];
   };
   additionalContent?: {
@@ -212,6 +210,8 @@ export interface BenefitItem {
  * @property {string} [backgroundIcon] - Optional background icon for the section.
  * @property {string} [keyBenefitsTitle] - Optional title for the key benefits section.
  * @property {string} [keyBenefitsDescription] - Optional description for the key benefits section.
+ * @property {string} [backgroundIconWidth] - Optional width for background icon
+ * @property {string} [backgroundIconHeight] - Optional height for background icon
  */
 export interface ServiceScopeContent {
   title: string;
@@ -219,6 +219,8 @@ export interface ServiceScopeContent {
   services: ServiceItem[];
   benefits?: BenefitItem[];
   backgroundIcon?: string;
+  backgroundIconWidth?: number; // Optional width for background icon
+  backgroundIconHeight?: number; // Optional height for background icon
   keyBenefitsTitle?: string;
   keyBenefitsDescription?: string;
 }
@@ -264,6 +266,8 @@ export interface IndustryItem {
  * @property {string} [backgroundIcon] - Optional background icon for the section.
  * @property {string} [industrySolutionsTitle] - Optional title for the industry solutions section.
  * @property {string} [industrySolutionsDescription] - Optional description for the industry solutions section.
+ * @property {string} [backgroundIconWidth] - Optional width for background icon
+ * @property {string} [backgroundIconHeight] - Optional height for background icon
  */
 export interface ApplicationsContent {
   title: string;
@@ -271,6 +275,8 @@ export interface ApplicationsContent {
   categories: ApplicationCategory[];
   industries: IndustryItem[];
   backgroundIcon?: string;
+  backgroundIconWidth?: number; // Optional width for background icon
+  backgroundIconHeight?: number; // Optional height for background icon
   industrySolutionsTitle?: string;
   industrySolutionsDescription?: string;
 }
@@ -342,6 +348,7 @@ export interface PriceFactor {
  * @property {Object} [longTermValue.link] - Optional link for more information.
  * @property {string} longTermValue.link.text - The text for the link.
  * @property {string} longTermValue.link.url - The URL for the link.
+ * @property {string} serviceType - The type of service for the price calculator
  */
 export interface PricingContent {
   title: string;
@@ -355,6 +362,7 @@ export interface PricingContent {
       url: string;
     };
   };
+  serviceType: string;
 }
 
 /**

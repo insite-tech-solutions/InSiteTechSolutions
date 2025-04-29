@@ -81,22 +81,27 @@ const webAppDevelopmentValueProp: ValuePropContent = {
   // Custom comparison table data
   comparisonTable: {
     title: "Digital vs. Traditional Marketing",
-    headers: ["Feature", "Digital Marketing", "Traditional Marketing"],
+    headers: ["Marketing Method", "Est. Initial Cost", "Est. Ongoing Cost"],
     rows: [
       {
-        feature: "Cost Efficiency",
-        digital: "Lower long-term costs, scalable",
-        traditional: "Higher ongoing costs"
+        "marketing method": "Website",
+        "est. initial cost": "$1,000 - $10,000 (development)",
+        "est. ongoing cost": "$10 - $50/month (hosting/maintenance)",
       },
       {
-        feature: "Reach",
-        digital: "Global, 24/7 availability",
-        traditional: "Limited by geography"
+        "marketing method": "Yard Signs",
+        "est. initial cost": "$100 - $1,000 (design)",
+        "est. ongoing cost": "$10 - $25 per sign (printing)",
       },
       {
-        feature: "Measurability",
-        digital: "Precise analytics and tracking",
-        traditional: "Limited measurement options"
+        "marketing method": "TV/Radio",
+        "est. initial cost": "$1,000 - $10,000 (production)",
+        "est. ongoing cost": "$100 - $1,500/month (airtime)",
+      }, 
+      {
+        "marketing method": "Billboards",
+        "est. initial cost": "$1,000 - $3,000 (design)",
+        "est. ongoing cost": "$1,000 - $5,000/month (placement/rent)",
       }
     ]
   },

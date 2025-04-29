@@ -102,7 +102,9 @@ const webAppDevelopmentServiceScope: ServiceScopeContent = {
       description: "Systems that grow and adapt with your business needs."
     }
   ],
-  backgroundIcon: "LayoutGrid",
+  backgroundIcon: "FileJson2",
+  backgroundIconWidth: 425,
+  backgroundIconHeight: 375,
 };
 
 export default webAppDevelopmentServiceScope;

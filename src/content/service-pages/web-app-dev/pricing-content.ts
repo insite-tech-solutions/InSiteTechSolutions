@@ -15,6 +15,7 @@ import { PricingContent } from '@/page-templates/service-page/types';
 const webAppDevelopmentPricingContent: PricingContent = {
   title: "Determining Project Cost",
   description: "Our pricing is tailored to the scope and complexity of each project, with flexible options to suit your budget. Whether that be a simple Wordpress site or a highly integrated mobile app, we will do our best to find the strategy that meets your needs and budget.",
+  serviceType: "webAppDevelopment",
   
   // Factors that affect pricing
   factors: [

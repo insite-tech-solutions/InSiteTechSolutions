@@ -18,7 +18,7 @@ import ValuePropSection from './value-prop-section';
 const ServiceScopeSection = dynamic(() => import('./service-scope-section'), { ssr: false });
 const ApplicationsSection = dynamic(() => import('./applications-section'), { ssr: false });
 const ProcessSection = dynamic(() => import('./process-section'), { ssr: false });
-const PricingSection = dynamic(() => import('./price-section'), { ssr: false });
+const PricingSection = dynamic(() => import('./pricing-section'), { ssr: false });
 const InSiteAdvantageSection = dynamic(() => import('./insite-advantage-section'), { ssr: false });
 const FAQSection = dynamic(() => import('./faq-section'), { ssr: false });
 const CTASection = dynamic(() => import('./cta-section'), { ssr: false });

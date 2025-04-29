@@ -13,6 +13,8 @@ import TailwindButton from '@/components/reusable-components/tailwind-button';
 interface IndustrySolutionsProps {
   industries: IndustryItem[]
   backgroundIcon?: string;
+  backgroundIconWidth?: number;
+  backgroundIconHeight?: number;
   industrySolutionsTitle: string;
   industrySolutionsDescription: string;
 }
@@ -22,6 +24,8 @@ interface IndustrySolutionsProps {
  * 
  * @param industries - Array of industry items to display
  * @param backgroundIcon - Optional icon name for background
+ * @param backgroundIconWidth - Optional width for background icon
+ * @param backgroundIconHeight - Optional height for background icon
  * @param industrySolutionsTitle - Title for the industry solutions section
  * @param industrySolutionsDescription - Description for the industry solutions section
  */
@@ -33,6 +37,8 @@ interface IndustrySolutionsProps {
 const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ 
   industries, 
   backgroundIcon,
+  backgroundIconWidth,
+  backgroundIconHeight,
   industrySolutionsTitle,
   industrySolutionsDescription
 }) => {
@@ -53,8 +59,13 @@ const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({
   }, [backgroundIcon]);
 
   const backgroundElement = useMemo(() => (
-    <IconComponent className="text-blue-600" width={600} height={600} strokeWidth={1.5} />
-  ), [IconComponent]);
+    <IconComponent 
+      className="text-blue-600" 
+      width={backgroundIconWidth || 425}
+      height={backgroundIconHeight || 425}
+      strokeWidth={1.5} 
+    />
+  ), [IconComponent, backgroundIconWidth, backgroundIconHeight]);
 
   return (
     <>

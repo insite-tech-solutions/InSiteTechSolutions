@@ -1,7 +1,7 @@
 // src/templates/service-page/sections/value-prop/value-prop-section.tsx
 
 import React, { useState, useMemo } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { getIcon } from '@/utils/icon-registry';
 import { ChevronUp, ChevronDown, CheckCircle } from 'lucide-react';
 import { InlineStat } from './inline-stat';
@@ -40,10 +40,19 @@ const staggerChildren: Variants = {
  * Component for displaying industry trends with expandable descriptions
  * @param {Object} props - Component props
  * @param {IndustryTrend} props.trend - The industry trend data to display
+ * @param {boolean} props.isOpen - Whether the trend is currently open
+ * @param {function} props.onToggle - Function to toggle the open state of the trend
  * @returns {JSX.Element} A memoized trend card component
  */
-const TrendCard = React.memo(function TrendCard({ trend }: { trend: IndustryTrend }) {
-  const [isOpen, setIsOpen] = useState(false);
+const TrendCard = React.memo(function TrendCard({ 
+  trend,
+  isOpen,
+  onToggle 
+}: { 
+  trend: IndustryTrend;
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
   const { title, description } = trend;
   
   // Get the icon component using our utility
@@ -53,7 +62,7 @@ const TrendCard = React.memo(function TrendCard({ trend }: { trend: IndustryTren
     <motion.article
       variants={fadeInUp}
       className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-medium-blue-alt transition-all hover:shadow-lg p-4"
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={onToggle}
     >
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -66,16 +75,21 @@ const TrendCard = React.memo(function TrendCard({ trend }: { trend: IndustryTren
           <ChevronDown className="h-5 w-5 text-gray-500" />
         )}
       </header>
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden"
-      >
-        <p className="mt-4 text-gray-700">
-          {description}
-        </p>
-      </motion.div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <p className="mt-4 text-gray-700">
+              {description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.article>
   );
 });
@@ -151,9 +165,7 @@ const ComparisonTable = React.memo(function ComparisonTable({
     title: string;
     headers: string[];
     rows: {
-      feature: string;
-      digital: string;
-      traditional: string;
+      [key: string]: string;
     }[];
   }
 }) {
@@ -164,11 +176,11 @@ const ComparisonTable = React.memo(function ComparisonTable({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full rounded-lg shadow-md overflow-hidden"
+        className="w-full rounded-lg shadow-lg overflow-hidden"
       >
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-blue-600 text-white">
+            <tr className="bg-gradient-to-br from-medium-blue to-blue-800 text-white">
               {tableData.headers.map((header: string, index: number) => (
                 <th key={index} className="p-4 text-left">{header}</th>
               ))}
@@ -177,9 +189,11 @@ const ComparisonTable = React.memo(function ComparisonTable({
           <tbody>
             {tableData.rows.map((row, index: number) => (
               <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                <td className="p-4 border-b border-gray-200 font-medium text-gray-800">{row.feature}</td>
-                <td className="p-4 border-b border-gray-200 text-gray-700">{row.digital}</td>
-                <td className="p-4 border-b border-gray-200 text-gray-600">{row.traditional}</td>
+                {tableData.headers.map((header: string, colIndex: number) => (
+                  <td key={colIndex} className="p-4 border-b border-gray-200 text-gray-700">
+                    {row[header.toLowerCase()] || ''}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
@@ -217,6 +231,8 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
     additionalContent
   } = content;
 
+  const [openTrendIndex, setOpenTrendIndex] = useState<number | null>(null);
+
   // Memoize the rendered trends list
   const renderedTrends = useMemo(() => (
     <motion.div
@@ -227,10 +243,15 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
       className="grid gap-4"
     >
       {industryTrends.map((trend, index) => (
-        <TrendCard key={index} trend={trend} />
+        <TrendCard 
+          key={index} 
+          trend={trend} 
+          isOpen={openTrendIndex === index}
+          onToggle={() => setOpenTrendIndex(openTrendIndex === index ? null : index)}
+        />
       ))}
     </motion.div>
-  ), [industryTrends]);
+  ), [industryTrends, openTrendIndex]);
 
   return (
     <section className="pt-12 pb-12">

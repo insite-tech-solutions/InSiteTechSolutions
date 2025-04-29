@@ -108,6 +108,8 @@ const customSoftwareServiceScope: ServiceScopeContent = {
     }
   ],
   backgroundIcon: "MonitorCog",
+  backgroundIconWidth: 425,
+  backgroundIconHeight: 400,
 };
 
 export default customSoftwareServiceScope;

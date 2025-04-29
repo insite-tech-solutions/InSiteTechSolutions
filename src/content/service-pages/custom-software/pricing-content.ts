@@ -15,7 +15,8 @@ import { PricingContent } from '@/page-templates/service-page/types';
 const customSoftwarePricingContent: PricingContent = {
   title: "Determining Project Cost",
   description: "Our pricing is tailored to match the scope and complexity of each project, offering flexible options to fit your budget. Whether it's a short Python script or a sophisticated desktop application, we strive to find the best approach to meet your needs and financial plan.",
-  
+  serviceType: "customSoftwareSolutions",
+
   // Factors that affect pricing
   factors: [
     {
@@ -52,7 +53,7 @@ const customSoftwarePricingContent: PricingContent = {
     title: "Long-Term Value",
     description: "The true cost of custom software extends beyond development expenses. While initial development costs may seem higher compared to off-the-shelf solutions, the long-term savings and efficiency gains far outweigh the investment. Custom software eliminates the need for multiple subscriptions, reduces manual processes, and enhances overall productivity. It's more than a one-time investment—it's a foundation for long-term growth. By eliminating unnecessary subscriptions and automating key processes, custom solutions can significantly reduce operational costs over time while giving your business a competitive edge.",
     link: {
-      text: "Learn more about our process",
+      text: "View detailed pricing",
       url: "/process",
     },
   },
