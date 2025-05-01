@@ -48,7 +48,7 @@ const seoMarketingServiceScope: ServiceScopeContent = {
     },
     {
       icon: "FileText",
-      title: "Content Marketing Strategies",
+      title: "Content Marketing Strategies & Market Analysis",
       description: "Create and distribute valuable, relevant content to attract and engage your target audience.",
       benefits: [
         "Content strategy development",
