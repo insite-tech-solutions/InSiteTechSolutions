@@ -35,6 +35,30 @@ const consultingTrainingServiceScope: ServiceScopeContent = {
       ]
     },
     {
+      icon: "GraduationCap",
+      title: "Technical Training & Consulting",
+      description: "Build your team's capabilities through customized training programs and expert guidance on specific technologies and methodologies.",
+      benefits: [
+        "Custom training program development",
+        "Hands-on technical workshops",
+        "Knowledge transfer sessions",
+        "Best practices implementation",
+        "Team capability assessments"
+      ]
+    },
+    {
+      icon: "FileText",
+      title: "Official Documentation & Report Copywriting Services",
+      description: "Create clear, comprehensive documentation and reports that capture technical knowledge and support effective decision-making.",
+      benefits: [
+        "Standard Operating Procedures (SOPs) and process documentation",
+        "Technical and official documentation templates",
+        "User manuals and guides",
+        "Implementation and architecture reports",
+        "Business and technical analysis documents"
+      ]
+    },
+    {
       icon: "Headphones",
       title: "Implementation, Maintenance, Support & Advisory Services",
       description: "Get expert guidance and hands-on support throughout the technology lifecycle, from initial implementation to ongoing optimization.",
@@ -58,30 +82,6 @@ const consultingTrainingServiceScope: ServiceScopeContent = {
         "Technical debt reduction frameworks"
       ]
     },
-    {
-      icon: "GraduationCap",
-      title: "Technical Training & Consulting",
-      description: "Build your team's capabilities through customized training programs and expert guidance on specific technologies and methodologies.",
-      benefits: [
-        "Custom training program development",
-        "Hands-on technical workshops",
-        "Knowledge transfer sessions",
-        "Best practices implementation",
-        "Team capability assessments"
-      ]
-    },
-    {
-      icon: "FileText",
-      title: "Official Documentation & Report Copywriting Services",
-      description: "Create clear, comprehensive documentation and reports that capture technical knowledge and support effective decision-making.",
-      benefits: [
-        "System and process documentation",
-        "Technical specifications and requirements",
-        "User manuals and guides",
-        "Implementation and architecture reports",
-        "Business and technical analysis documents"
-      ]
-    }
   ],
   
   keyBenefitsTitle: "Key Benefits",

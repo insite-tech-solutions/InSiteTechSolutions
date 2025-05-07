@@ -62,7 +62,7 @@ export const customSoftwareProcess: ProcessContent = {
         'Integrate continuous feedback to ensure alignment with goals',
         'Generate unit tests and documentation for long-term maintainability',
       ],
-      timeline: '4-16 weeks (project dependent)',
+      timeline: '4-16+ weeks (project dependent)',
       icon: 'Code',
     },
     {
@@ -78,7 +78,7 @@ export const customSoftwareProcess: ProcessContent = {
       icon: 'Rocket',
     },
   ],
-  note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months; however, as a simple reference point, most small business software projects are completed in 6–8 weeks, while larger, more complex solutions can range from 8–16+ weeks, depending on the complexity.",
+  note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months; however, as a simple reference point, a short notebook or script can be completed in a week, small business software projects can be completed in 6–8 weeks, while larger, more complex solutions can range from 8–16+ weeks, depending on the complexity.",
 };
 
 export default customSoftwareProcess;

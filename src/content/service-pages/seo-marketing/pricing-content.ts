@@ -14,7 +14,7 @@ import { PricingContent } from '@/page-templates/service-page/types';
  */
 const seoMarketingPricingContent: PricingContent = {
   title: "Determining Project Cost",
-  description: "Our services are designed to deliver maximum value within your budget. We offer flexible pricing models to accommodate businesses and projects of all sizes, ensuring you receive the best possible return on your investment.",
+  description: "Our services are designed to deliver maximum value within your budget. We offer flexible pricing and payment models to accommodate businesses and projects of all sizes, ensuring our solutions meet your needs and budget.",
   serviceType: "seoOnlineMarketing",
 
   // Factors that affect pricing

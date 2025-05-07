@@ -12,6 +12,7 @@ import Layout from '@/components/reusable-components/layout';
 
 // Direct imports for critical above-the-fold content
 import HeroSection from './hero-section';
+import ServiceOverviewSection from './overview-section';
 import ValuePropSection from './value-prop-section';
 
 // Dynamic imports for below-the-fold content
@@ -25,6 +26,7 @@ const CTASection = dynamic(() => import('./cta-section'), { ssr: false });
 
 import { 
   HeroSectionContent, 
+  ServiceOverviewContent,
   ValuePropContent, 
   ServiceScopeContent, 
   ApplicationsContent,
@@ -41,6 +43,7 @@ import {
  * 
  * @interface ServicePageTemplateProps
  * @property {HeroSectionContent} heroContent - Configuration for the hero section
+ * @property {ServiceOverviewContent} [serviceOverviewContent] - Optional configuration for the service overview section
  * @property {ValuePropContent} valuePropContent - Configuration for the value proposition section
  * @property {ServiceScopeContent} [serviceScopeContent] - Optional configuration for the service scope section
  * @property {ApplicationsContent} [applicationsContent] - Optional configuration for the applications section
@@ -53,6 +56,7 @@ import {
  */
 interface ServicePageTemplateProps {
   heroContent: HeroSectionContent;
+  serviceOverviewContent?: ServiceOverviewContent;
   valuePropContent: ValuePropContent;
   serviceScopeContent?: ServiceScopeContent;
   applicationsContent?: ApplicationsContent;
@@ -81,6 +85,7 @@ interface ServicePageTemplateProps {
  */
 const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   heroContent,
+  serviceOverviewContent,
   valuePropContent,
   serviceScopeContent,
   applicationsContent,
@@ -100,6 +105,7 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   // Helper to check if a section should be rendered
   type SectionName = 
     | 'hero' 
+    | 'serviceOverview'
     | 'valueProp' 
     | 'serviceScope' 
     | 'applications' 
@@ -113,6 +119,8 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   const shouldRenderSection = (sectionName: SectionName) => !skipSections.includes(sectionName);
   
   // Define insertion points for custom sections
+  const customSectionsBeforeServiceOverview = addSections.beforeServiceOverview || null;
+  const customSectionsAfterServiceOverview = addSections.afterServiceOverview || null;
   const customSectionsBeforeValueProp = addSections.beforeValueProp || null;
   const customSectionsAfterValueProp = addSections.afterValueProp || null;
   const customSectionsAfterServiceScope = addSections.afterServiceScope || null;
@@ -129,16 +137,30 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         <HeroSection content={heroContent} />
       )}
 
+
       <Layout>
-        {/* Custom section injection after Hero */}
+        {/* Custom section injection before Service Overview */}
+        {customSectionsBeforeServiceOverview}
+
+        {/* Service Overview Section */}
+        {shouldRenderSection('serviceOverview') && serviceOverviewContent && (
+          <ServiceOverviewSection content={serviceOverviewContent} />
+        )}
+
+        {/* Custom section injection after Service Overview */}
+        {customSectionsAfterServiceOverview}
+        
+        {/* Custom section injection before Value Prop (original position for this) */}
         {customSectionsBeforeValueProp}
         
         {/* Value Proposition Section */}
         {shouldRenderSection('valueProp') && (
-          <ValuePropSection 
-            content={valuePropContent} 
-            layoutVariant={layoutVariant} 
-          />
+          <div id="value-prop">
+            <ValuePropSection 
+              content={valuePropContent} 
+              layoutVariant={layoutVariant} 
+            />
+          </div>
         )}
         
         {/* Custom section injection after Value Prop */}
@@ -146,7 +168,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* Service Scope Section */}
         {shouldRenderSection('serviceScope') && serviceScopeContent && (
-          <ServiceScopeSection content={serviceScopeContent} />
+          <div id="service-scope">
+            <ServiceScopeSection content={serviceScopeContent} />
+          </div>
         )}
         
         {/* Custom section injection after Service Scope */}
@@ -154,7 +178,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* Applications Section */}
         {shouldRenderSection('applications') && applicationsContent && (
-          <ApplicationsSection content={applicationsContent} />
+          <div id="applications">
+            <ApplicationsSection content={applicationsContent} />
+          </div>
         )}
         
         {/* Custom section injection after Applications */}
@@ -162,7 +188,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* Process Section */}
         {shouldRenderSection('process') && processContent && (
-          <ProcessSection content={processContent} />
+          <div id="process">
+            <ProcessSection content={processContent} />
+          </div>
         )}
         
         {/* Custom section injection after Process */}
@@ -170,7 +198,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* Pricing Section */}
         {shouldRenderSection('pricing') && pricingContent && (
-          <PricingSection content={pricingContent} />
+          <div id="pricing">
+            <PricingSection content={pricingContent} />
+          </div>
         )}
         
         {/* Custom section injection after Pricing */}
@@ -178,7 +208,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* Benefits/InSite Advantage Section */}
         {shouldRenderSection('insiteAdvantage') && insiteAdvantageContent && (
-          <InSiteAdvantageSection content={insiteAdvantageContent} />
+          <div id="insite-advantage">
+            <InSiteAdvantageSection content={insiteAdvantageContent} />
+          </div>
         )}
         
         {/* Custom section injection after Benefits */}
@@ -186,7 +218,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* FAQ Section */}
         {shouldRenderSection('faq') && faqContent && (
-          <FAQSection content={faqContent} />
+          <div id="faq">
+            <FAQSection content={faqContent} />
+          </div>
         )}
         
         {/* Custom section injection after FAQ */}
@@ -194,7 +228,9 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         
         {/* CTA Section */}
         {shouldRenderSection('cta') && ctaContent && (
-          <CTASection content={ctaContent} />
+          <div id="cta">
+            <CTASection content={ctaContent} />
+          </div>
         )}
       </Layout>
     </main>

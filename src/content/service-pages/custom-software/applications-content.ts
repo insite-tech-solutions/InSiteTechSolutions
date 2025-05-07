@@ -56,6 +56,16 @@ const customSoftwareApplications: ApplicationsContent = {
   
   industries: [
     {
+      title: "Research & Academia",
+      icon: "FlaskConical",
+      items: [
+        "Scientific workflow automation",
+        "Scalable and reusable analysis pipelines",
+        "Resource management systems",
+        "Data visualization dashboards",
+      ],
+    },
+    {
       title: "Manufacturing & Engineering",
       icon: "Settings",
       items: [

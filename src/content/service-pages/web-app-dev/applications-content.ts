@@ -33,7 +33,7 @@ const webAppDevelopmentApplications: ApplicationsContent = {
       ],
     },
     {
-      title: "e-Commerce & Customer Engagement",
+      title: "E-commerce & Customer Engagement",
       icon: "ShoppingCart",
       items: [
         "Full-featured e-commerce platforms",

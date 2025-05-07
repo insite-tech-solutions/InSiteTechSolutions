@@ -26,6 +26,7 @@ export default function SEOMarketingPage() {
       <Header />
       <ServicePageTemplate
         heroContent={seoMarketingContent.hero}
+        serviceOverviewContent={seoMarketingContent.overview}
         valuePropContent={seoMarketingContent.valueProp}
         serviceScopeContent={seoMarketingContent.serviceScope}
         applicationsContent={seoMarketingContent.applications}

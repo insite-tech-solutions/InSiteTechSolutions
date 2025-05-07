@@ -25,19 +25,17 @@ const consultingTrainingPricingContent: PricingContent = {
       items: [
         "Depth and breadth of consulting requirements",
         "Number of training sessions and participants",
-        "Complexity of subject matter",
-        "Custom content development needs",
+        "One-time engagement vs. ongoing support",
         "Implementation support requirements"
       ],
     },
     {
-      title: "Delivery Format",
+      title: "Technical Complexity",
       icon: "Presentation",
       items: [
+        "Complexity of subject matter",
         "On-site vs. remote delivery",
-        "One-time engagement vs. ongoing support",
-        "Group vs. individual training",
-        "Hands-on workshops vs. advisory sessions",
+        "Custom content development needs",
         "Documentation and resource development"
       ],
     },
@@ -46,7 +44,6 @@ const consultingTrainingPricingContent: PricingContent = {
       icon: "Clock",
       items: [
         "Project urgency and delivery schedule",
-        "Duration of engagement",
         "Frequency of sessions",
         "Follow-up support requirements",
         "Implementation timeframe"
@@ -57,7 +54,7 @@ const consultingTrainingPricingContent: PricingContent = {
   // Long-term value proposition
   longTermValue: {
     title: "Long-Term Value",
-    description: "Investment in consulting and training delivers returns that extend far beyond the initial engagement. Unlike physical assets that depreciate over time, knowledge and expertise appreciate as they are applied and shared throughout your organization. Our services create lasting value through enhanced team capabilities, improved decision-making processes, and optimized technology implementation. Organizations typically see both immediate benefits through faster project implementation and long-term advantages through reduced operational costs, higher team productivity, and greater adaptability to change. Additionally, by developing internal expertise, you reduce dependency on external resources for ongoing support, creating sustainable cost savings and competitive advantages.",
+    description: "Investment in consulting and training delivers returns that extend far beyond the initial engagement. Unlike physical assets that depreciate over time, knowledge and expertise appreciate as they are applied and shared throughout your organization. Our services create lasting value through enhanced team capabilities, improved decision-making processes, and optimized technology implementation. Organizations typically see both immediate benefits through faster project implementation and long-term advantages through reduced operational costs, higher team productivity, and greater adaptability to change.",
     link: {
       text: "View detailed pricing",
       url: "/pricing",

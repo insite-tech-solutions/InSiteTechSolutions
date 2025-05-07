@@ -178,7 +178,7 @@ const ComparisonTable = React.memo(function ComparisonTable({
         viewport={{ once: true }}
         className="w-full rounded-lg shadow-lg overflow-hidden"
       >
-        <table className="w-full border-collapse">
+        <table className="w-full border-collapse table-fixed">
           <thead>
             <tr className="bg-gradient-to-br from-medium-blue to-blue-800 text-white">
               {tableData.headers.map((header: string, index: number) => (
@@ -190,7 +190,7 @@ const ComparisonTable = React.memo(function ComparisonTable({
             {tableData.rows.map((row, index: number) => (
               <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                 {tableData.headers.map((header: string, colIndex: number) => (
-                  <td key={colIndex} className="p-4 border-b border-gray-200 text-gray-700">
+                  <td key={colIndex} className="p-4 border-b border-gray-200 text-gray-700 break-words">
                     {row[header.toLowerCase()] || ''}
                   </td>
                 ))}
@@ -254,7 +254,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
   ), [industryTrends, openTrendIndex]);
 
   return (
-    <section className="pt-12 pb-12">
+    <section className="pt-8 pb-12">
       <div className={`container mx-auto ${layoutVariant === 'compact' ? 'max-w-7xl' : ''}`}>
         <motion.div
           initial="hidden"

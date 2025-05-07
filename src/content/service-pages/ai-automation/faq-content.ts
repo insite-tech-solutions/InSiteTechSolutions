@@ -19,20 +19,25 @@ const aiAutomationFAQContent: FAQContent = {
   description: "Find answers to commonly asked questions about our AI and automation services.",
   
   items: [
+    { 
+      icon: "MessageCircleQuestion",
+      question: "What's the difference between basic automation and AI solutions?",
+      answer: "Basic automation uses tools like Zapier, Make, or IFTTT to automate routine tasks and workflows. AI solutions involve more sophisticated technologies like machine learning and natural language processing. We help you choose the right approach based on your needs, budget, and goals."
+    },
+    {
+      icon: "Settings",
+      question: "Can I start with basic automation and upgrade to AI later?",
+      answer: "Absolutely. Many clients begin with simple automation using tools like Zapier or Make, then gradually incorporate AI capabilities as their needs evolve. We design solutions that can scale with your business, ensuring your investment grows with your requirements."
+    },
     {
       icon: "HelpCircle",
       question: "Do I need specialized infrastructure to implement AI solutions?",
       answer: "Not necessarily. While some advanced AI applications require robust computing resources, many solutions can be deployed using cloud services or integrated with your existing infrastructure. We assess your specific needs and recommend the most cost-effective approach."
     },
     {
-      icon: "Database",
-      question: "How much data do I need to get started with AI?",
-      answer: "The data requirements vary depending on the specific solution. Some AI applications can work with relatively small datasets, while others benefit from larger volumes of data. We can help you assess your current data assets and implement strategies to gradually build your data resources if needed."
-    },
-    {
       icon: "Clock",
       question: "How long does it take to implement an AI or automation solution?",
-      answer: "Implementation timelines vary based on complexity and scope. Simple automation projects may be completed in 4-6 weeks, while more comprehensive AI solutions typically require 8-16 weeks. Our phased approach allows you to see incremental value throughout the implementation process."
+      answer: "Implementation timelines vary based on complexity and scope. Simple automation projects may be completed in 2-4 weeks, while more comprehensive AI solutions typically require 8-16+ weeks. Our phased approach allows you to see incremental value throughout the implementation process."
     },
     {
       icon: "Users",

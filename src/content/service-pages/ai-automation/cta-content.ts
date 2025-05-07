@@ -16,7 +16,7 @@ import { CTAContent } from '@/page-templates/service-page/types';
  * @property {string} bgClassName - Optional custom background class for styling.
  */
 const aiAutomationCTAContent: CTAContent = {
-  title: "Ready to Transform Your Business with AI?",
+  title: "Ready to Leverage the Power of AI and Automation?",
   description: "Let's discuss how AI and automation can streamline your operations, enhance decision-making, and create new opportunities for growth.",
   primaryButtonText: "Schedule Free Consultation",
   primaryButtonLink: "/contact",

@@ -26,9 +26,9 @@ const webAppDevelopmentServiceScope: ServiceScopeContent = {
       description: "Custom websites that are fast, responsive, and tailored to your brand.",
       benefits: [
         "Optimized for all devices and screen sizes",
-        "Fast loading speeds and performance",
-        "SEO-friendly architecture",
-        "Custom branding and design"
+        "Custom branding and design",
+        "SEO-friendly content management",
+        "Scalable and maintainable architecture"
       ]
     },
     {
@@ -36,10 +36,10 @@ const webAppDevelopmentServiceScope: ServiceScopeContent = {
       title: "Full-Stack App Development",
       description: "End-to-end development for mobile, desktop, and web applications.",
       benefits: [
-        "Native iOS and Android development",
-        "Cross-platform compatibility",
-        "Seamless user experience",
-        "Robust backend systems"
+        "Engaging UI/UX design",
+        "Backend processing and data storage",
+        "Scalable unified architecture",
+        "Cost-effective development"
       ]
     },
     {
@@ -47,9 +47,9 @@ const webAppDevelopmentServiceScope: ServiceScopeContent = {
       title: "Cross-Platform Development",
       description: "Unified experiences across devices to ensure consistency for users.",
       benefits: [
-        "Consistent brand experience",
+        "Native iOS and Android development",
+        "Cross-platform compatible frameworks (React Native, Flutter, etc.)",
         "Synchronized data across platforms",
-        "Reduced development time",
         "Cost-effective maintenance"
       ]
     },

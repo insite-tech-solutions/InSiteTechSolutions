@@ -19,7 +19,7 @@ import { ServiceScopeContent } from '@/page-templates/service-page/types';
  */
 const graphicDesignServiceScope: ServiceScopeContent = {
   title: "Comprehensive Visual Design Solutions",
-  description: "We offer a full range of design services to help businesses establish a cohesive visual identity that resonates with their target audience. From initial concept to final execution, we create memorable brand experiences across all touchpoints.",
+  description: "We offer a full range of design services to help businesses establish a cohesive visual identity that resonates with their target audience. From initial concept to final execution, we create memorable brand experiences across all platforms.",
   
   services: [
     {

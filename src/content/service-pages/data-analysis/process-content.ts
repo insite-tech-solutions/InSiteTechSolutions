@@ -15,7 +15,7 @@ import { ProcessContent } from '@/page-templates/service-page/types';
 
 export const dataAnalysisProcess: ProcessContent = {
   title: "Our Approach",
-  description: "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Data Preparation, Development, and Delivery—to ensure that every analysis project delivers clear, actionable insights aligned with your business objectives.",
+  description: "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Delivery—to ensure that every analysis project delivers clear, actionable insights aligned with your business objectives.",
   steps: [
     {
       step: 1,
@@ -43,8 +43,8 @@ export const dataAnalysisProcess: ProcessContent = {
     },
     {
       step: 3,
-      title: 'Data Preparation',
-      description: 'We collect, clean, and structure data to create a reliable foundation for analysis.',
+      title: 'Design',
+      description: 'We design an analysis pipeline to collect, clean, and structure data to create a reliable foundation for analysis.',
       items: [
         'Data collection and integration from multiple sources',
         'Data cleaning, normalization, and validation',
@@ -62,7 +62,7 @@ export const dataAnalysisProcess: ProcessContent = {
         'Statistical testing and model development',
         'Results validation and refinement',
       ],
-      timeline: '2-6 weeks',
+      timeline: '2-8+ weeks (project dependent)',
       icon: 'LineChart',
     },
     {

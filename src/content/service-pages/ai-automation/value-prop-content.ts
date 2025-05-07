@@ -15,20 +15,20 @@ import { ValuePropContent } from '@/page-templates/service-page/types';
  * @property {Object} callToAction - An object containing the call to action details, including title, description, button text, link, and icon.
  */
 const aiAutomationValueProp: ValuePropContent = {
-  title: "Why AI & Automation Matter",
+  title: "How AI & Automation Can Help You",
   description: "In today's competitive business landscape, operational efficiency and intelligent decision-making are critical for success. While many organizations understand the potential of AI and automation, few have the expertise to implement these technologies effectively. Our solutions bridge this gap, transforming manual, time-consuming processes into streamlined, intelligent workflows that save time, reduce costs, and create new opportunities for growth. By strategically applying AI and automation, businesses can not only optimize current operations but also unlock innovative capabilities that provide lasting competitive advantages.",
   
   // Industry trends that appear in expandable cards
   industryTrends: [
     {
+      icon: "Workflow",
+      title: "No-Code Automation",
+      description: "Leveraging tools like Zapier, Make, and IFTTT to quickly automate routine tasks and workflows without complex development."
+    },
+    {
       icon: "Brain",
       title: "Generative AI Integration",
       description: "Leveraging large language models and generative AI to enhance content creation, customer service, and decision support systems."
-    },
-    {
-      icon: "Bot",
-      title: "Hyperautomation",
-      description: "Combining multiple technologies like RPA, AI, and machine learning to automate complex business processes end-to-end."
     },
     {
       icon: "MessageSquare",
@@ -42,8 +42,8 @@ const aiAutomationValueProp: ValuePropContent = {
     },
     {
       icon: "Shield",
-      title: "Responsible AI",
-      description: "Developing ethical frameworks and governance structures to ensure AI systems are transparent, fair, and accountable."
+      title: "Responsible Implementation",
+      description: "Developing ethical frameworks and governance structures to ensure automation and AI systems are transparent, fair, and accountable."
     }
   ],
   
@@ -94,29 +94,6 @@ const aiAutomationValueProp: ValuePropContent = {
     }
   ],
   
-  // Custom comparison table data
-  comparisonTable: {
-    title: "Traditional Operations vs. AI-Enhanced Operations",
-    headers: ["Aspect", "Traditional Approach", "AI-Enhanced Approach"],
-    rows: [
-      {
-        "aspect": "Efficiency",
-        "traditional approach": "Manual processes with high labor costs",
-        "ai-enhanced approach": "Automated workflows with minimal human intervention"
-      },
-      {
-        "aspect": "Decision Making",
-        "traditional approach": "Based on limited data and human intuition",
-        "ai-enhanced approach": "Powered by comprehensive data analysis and predictive models"
-      },
-      {
-        "aspect": "Scalability",
-        "traditional approach": "Requires proportional staffing increases",
-        "ai-enhanced approach": "Systems scale efficiently with minimal additional resources"
-      }
-    ]
-  },
-  
   // Call to action displayed at the bottom of the right column
   callToAction: {
     title: "Ready to Transform Your Operations?",
@@ -125,11 +102,7 @@ const aiAutomationValueProp: ValuePropContent = {
     buttonLink: "/contact",
     buttonIcon: "ArrowRight",
   },
-  
-  // Additional content for various sections
-  additionalContent: {
-    beforeCta: "AI and automation technologies offer exceptional ROI by reducing operational costs, minimizing errors, and freeing human talent for higher-value work. Unlike traditional IT investments, AI solutions continuously improve over time as they learn from new data and interactions. Organizations that strategically implement these technologies not only achieve immediate efficiency gains but also develop adaptable capabilities that provide lasting competitive advantages in rapidly evolving markets."
-  },
+
 };
 
 export default aiAutomationValueProp;

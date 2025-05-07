@@ -34,9 +34,9 @@ export const graphicDesignProcess: ProcessContent = {
       title: 'Definition',
       description: 'We establish clear design goals, creative direction, and project parameters.',
       items: [
-        'Define creative brief and project scope',
-        'Establish brand voice and messaging strategy',
-        'Create mood boards and visual direction concepts',
+        'Define project scope and deliverables',
+        'Establish brand voice and messaging',
+        'Create initial design concepts',
       ],
       timeline: '1-2 weeks',
       icon: 'ClipboardList',
@@ -46,9 +46,9 @@ export const graphicDesignProcess: ProcessContent = {
       title: 'Design',
       description: 'We create concepts and refine them through collaborative feedback to capture your vision.',
       items: [
-        'Develop multiple design concepts and directions',
-        'Present initial designs with rationale and strategy',
-        'Incorporate feedback and refine selected concept',
+        'Develop design concepts',
+        'Present initial designs with rationale',
+        'Incorporate feedback and refine',
       ],
       timeline: '2-4 weeks',
       icon: 'Paintbrush',
@@ -62,7 +62,7 @@ export const graphicDesignProcess: ProcessContent = {
         'Create complete brand package with all deliverables',
         'Develop brand guidelines and usage standards',
       ],
-      timeline: '2-4 weeks',
+      timeline: '2-4+ weeks (project dependent)',
       icon: 'PenTool',
     },
     {
@@ -78,7 +78,7 @@ export const graphicDesignProcess: ProcessContent = {
       icon: 'Package',
     },
   ],
-  note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months depending on scope and complexity. As a simple reference point, logo and basic brand identity projects typically take 4-6 weeks, while comprehensive branding systems with extensive applications can require 8-12+ weeks.",
+  note: "We cannot provide exact timelines until we have a well-defined project and plan. Timelines may vary based on project scope and complexity. A basic logo or graphic design can typically be done in 1-2 weeks, while a complete branding package may require 4-6+ weeks.",
   linkText: "Learn more about our process",
   linkUrl: "/process",
 };

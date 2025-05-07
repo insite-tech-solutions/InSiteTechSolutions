@@ -27,6 +27,7 @@ export default function AIAutomationPage() {
       <Header />
       <ServicePageTemplate
         heroContent={aiAutomationContent.hero}
+        serviceOverviewContent={aiAutomationContent.overview}
         valuePropContent={aiAutomationContent.valueProp}
         serviceScopeContent={aiAutomationContent.serviceScope}
         applicationsContent={aiAutomationContent.applications}

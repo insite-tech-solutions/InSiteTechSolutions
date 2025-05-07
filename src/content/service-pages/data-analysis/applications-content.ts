@@ -19,20 +19,31 @@ import { ApplicationsContent } from '@/page-templates/service-page/types';
  */
 const dataAnalysisApplications: ApplicationsContent = {
   title: "Data-Driven Solutions Across Industries",
-  description: "Our analytical expertise spans numerous industries and business functions, helping organizations extract maximum value from their data assets. Our data-driven strategies empower businesses by enhancing their:",
+  description: "Our analytical expertise spans a wide range of industries and academic research areas, helping organizations extract maximum value from their data assets. Our data-driven strategies empower businesses by enhancing their:",
   industrySolutionsTitle: "Industry-Specific Solutions",
   industrySolutionsDescription: "We tailor our analytical approaches to address the unique challenges and opportunities in different sectors, delivering insights that drive specific industry outcomes.",
   
   categories: [
     {
-      title: "Strategic Decision Support",
-      icon: "Compass",
+      title: "Research & Statistical Analysis",
+      icon: "FlaskConical",
       items: [
+        "Experimental data analysis",
+        "Statistical hypothesis testing",
+        "Research methodology design",
+        "Publication-quality visualizations",
+        "Data validation and quality control"
+      ],
+    },
+    {
+      title: "Customer & Market Understanding",
+      icon: "Users",
+      items: [
+        "Customer segmentation and profiling",
         "Market opportunity analysis",
-        "Competitive intelligence",
         "Strategic planning and forecasting",
         "Risk assessment and management",
-        "Investment and resource allocation optimization"
+        "Customer satisfaction and feedback analysis",
       ],
     },
     {
@@ -44,17 +55,6 @@ const dataAnalysisApplications: ApplicationsContent = {
         "Quality control analytics",
         "Resource utilization assessment",
         "Bottleneck identification and resolution"
-      ],
-    },
-    {
-      title: "Customer Intelligence",
-      icon: "Users",
-      items: [
-        "Customer segmentation and profiling",
-        "Customer journey mapping",
-        "Churn prediction and prevention",
-        "Lifetime value analysis",
-        "Customer satisfaction and feedback analysis"
       ],
     },
   ],
@@ -72,14 +72,14 @@ const dataAnalysisApplications: ApplicationsContent = {
       ],
     },
     {
-      title: "Healthcare & Life Sciences",
-      icon: "Stethoscope",
+      title: "Academic & Scientific Research",
+      icon: "Book",
       items: [
-        "Clinical trial data analysis",
-        "Patient outcome prediction",
-        "Healthcare operations optimization",
-        "Medical device performance analysis",
-        "Population health analytics"
+        "Experimental data analysis",
+        "Statistical hypothesis testing",
+        "Research methodology design",
+        "Publication-quality visualizations",
+        "Data validation and quality control"
       ],
     },
     {

@@ -24,7 +24,6 @@ const aiAutomationPricingContent: PricingContent = {
       icon: "Layout",
       items: [
         "Number and complexity of processes to automate",
-        "AI model sophistication requirements",
         "Integration complexity with existing systems",
         "Custom development vs. platform configuration",
         "Data preparation and training requirements"
@@ -37,7 +36,6 @@ const aiAutomationPricingContent: PricingContent = {
         "Algorithm complexity and model type",
         "Data volume and processing requirements",
         "Infrastructure and deployment needs",
-        "Security and compliance considerations",
         "Performance and scalability requirements"
       ],
     },
@@ -47,7 +45,6 @@ const aiAutomationPricingContent: PricingContent = {
       items: [
         "Project urgency and deployment schedule",
         "Model training and optimization time",
-        "Phased implementation approach",
         "Ongoing support and maintenance needs",
         "Model retraining and improvement frequency"
       ],
@@ -57,7 +54,7 @@ const aiAutomationPricingContent: PricingContent = {
   // Long-term value proposition
   longTermValue: {
     title: "Long-Term Value",
-    description: "Investment in AI and automation delivers exceptional returns that compound over time. Organizations typically see ROI within 3-9 months through cost reductions, productivity improvements, and enhanced decision quality. Unlike traditional technology investments, AI systems continue to learn and improve with use, creating increasing value through progressively better predictions and recommendations. Beyond the immediate operational benefits, AI and automation enable business model innovation and new capabilities that provide sustainable competitive advantages. As your AI maturity grows, you'll develop institutional knowledge and data assets that further accelerate your return on investment and create barriers to competition.",
+    description: "Investment in AI and automation delivers exceptional returns that compound over time. Organizations typically see ROI within 3-9 months through cost reductions, productivity improvements, and enhanced decision quality. Unlike traditional technology investments, AI systems continue to learn and improve with use, creating increasing value through progressively better predictions and recommendations. Beyond the immediate operational benefits, AI and automation enable business model innovation and new capabilities that provide sustainable competitive advantages.",
     link: {
       text: "View detailed pricing",
       url: "/pricing",

@@ -19,7 +19,7 @@ import { ServiceScopeContent } from '@/page-templates/service-page/types';
  */
 const aiAutomationServiceScope: ServiceScopeContent = {
   title: "Comprehensive AI & Automation Solutions",
-  description: "We harness the power of artificial intelligence and automation technologies to streamline operations, enhance decision-making, and create intelligent systems that adapt to your business needs. Our solutions combine cutting-edge technology with practical implementation strategies to deliver tangible business results.",
+  description: "We harness the power of artificial intelligence and automation technologies to streamline operations, enhance decision-making, and create intelligent systems that adapt to your needs. Our solutions combine cutting-edge technology with practical implementation strategies to deliver tangible results.",
   
   services: [
     {
@@ -39,11 +39,11 @@ const aiAutomationServiceScope: ServiceScopeContent = {
       title: "Process Standardization & Task Automation",
       description: "Transform manual, time-consuming tasks into streamlined, automated workflows that improve efficiency and reduce errors.",
       benefits: [
+        "Process evaluation and audit",
         "Business process automation",
-        "Robotic process automation (RPA)",
         "Workflow optimization and standardization",
         "Document processing and data extraction",
-        "Integration with existing business systems"
+        "Integration with existing systems"
       ]
     },
     {
@@ -79,7 +79,7 @@ const aiAutomationServiceScope: ServiceScopeContent = {
         "Prompt engineering and optimization",
         "AI integration with existing workflows",
         "Large language model implementations",
-        "Responsible AI governance frameworks"
+        "AI tool usage via Model Context Protocol (MCP)"
       ]
     }
   ],

@@ -50,7 +50,7 @@ export const webAppDevelopmentProcess: ProcessContent = {
         'UI/UX design and branding strategy',
         'Iterative feedback loops for continuous improvement',
       ],
-      timeline: '1-3 weeks',
+      timeline: '2-4 weeks',
       icon: 'Paintbrush',
     },
     {
@@ -62,7 +62,7 @@ export const webAppDevelopmentProcess: ProcessContent = {
         'Continuous client feedback and adjustments',
         'Thorough documentation and code reviews for maintainability',
       ],
-      timeline: '2-12 weeks (project dependent)',
+      timeline: '2-12+ weeks (project dependent)',
       icon: 'Code',
     },
     {
@@ -78,7 +78,7 @@ export const webAppDevelopmentProcess: ProcessContent = {
       icon: 'Rocket',
     },
   ],
-  note: "We cannot provide exact timelines until we have a well defined project and plan. Projects can range from a few weeks to several months; however, a simple reference point is most small business website projects are completed in 6–8 weeks, while app development can range from 8–16+ weeks, depending on the complexity.",
+  note: "We cannot provide exact timelines until we have a well defined project and plan. Projects can range from a few weeks to several months; however, a simple reference point is most small business website projects are completed in 6–8 weeks, while larger sites and app development can range from 8–16+ weeks, depending on the complexity.",
   linkText: "Learn more about our process",
   linkUrl: "/process",
 };

@@ -77,7 +77,7 @@ const seoMarketingValueProp: ValuePropContent = {
       id: "4",
       parts: [
         { value: 61, suffix: "%" },
-        " of marketers say improving SEO and growing organic presence is their top inbound marketing priority."
+        " of small businesses say improving SEO and growing organic presence is their top marketing priority."
       ]
     },
     {

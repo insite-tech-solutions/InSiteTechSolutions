@@ -32,15 +32,13 @@ const consultingTrainingApplications: ApplicationsContent = {
         "Implementation planning and oversight",
         "Change management strategies",
         "Digital transformation roadmaps",
-        "Project management frameworks"
       ],
     },
     {
-      title: "Team Development",
+      title: "Knowledge Transfer",
       icon: "Users",
       items: [
         "Technical skills training programs",
-        "Leadership development for IT teams",
         "User adoption strategies",
         "Cross-functional collaboration models",
         "Knowledge management systems"
@@ -48,27 +46,25 @@ const consultingTrainingApplications: ApplicationsContent = {
     },
     {
       title: "Operational Excellence",
-      icon: "Settings",
+      icon: "FileText",
       items: [
-        "Process optimization frameworks",
+        "Standard operating procedures",
+        "Technical documentation",
         "Technology integration strategies",
-        "Performance monitoring systems",
         "Workflow automation consulting",
-        "System documentation and knowledge bases"
       ],
     },
   ],
   
   industries: [
     {
-      title: "Technology & SaaS",
-      icon: "Code",
+      title: "Academic & Research",
+      icon: "GraduationCap",
       items: [
-        "DevOps implementation consulting",
-        "Product development methodologies",
-        "Technology stack optimization",
-        "Scalability planning",
-        "Technical team training"
+        "Research methodology consulting",
+        "Data analysis training",
+        "Technical documentation",
+        "Lab workflow optimization",
       ],
     },
     {
@@ -78,41 +74,27 @@ const consultingTrainingApplications: ApplicationsContent = {
         "Client management systems",
         "Service delivery optimization",
         "Knowledge management frameworks",
-        "Collaboration tools implementation",
         "Project management methodologies"
       ],
     },
     {
-      title: "Healthcare & Life Sciences",
-      icon: "Stethoscope",
+      title: "Business Optimization & Technical Consulting",
+      icon: "Code",
       items: [
-        "Healthcare IT implementation",
-        "Compliance training",
-        "Patient data management systems",
-        "Telemedicine adoption strategies",
-        "Clinical workflow optimization"
+        "Route optimization for service businesses",
+        "Technical documentation and SOP templates",
+        "Physics and scientific consulting",
+        "Business process automation"
       ],
     },
-    {
-      title: "Manufacturing & Engineering",
-      icon: "Factory",
-      items: [
-        "Industry 4.0 transformation",
-        "Production system optimization",
-        "Supply chain technology integration",
-        "Quality management systems",
-        "Technical documentation development"
-      ],
-    },
-    {
+    {      
       title: "Education & Non-Profit",
       icon: "BookOpen",
       items: [
         "Educational technology implementation",
         "Digital learning platforms",
-        "Donor management systems",
-        "Grant management optimization",
-        "Staff technology training"
+        "Research methodology consulting",
+        "Knowledge management systems",
       ],
     },
   ], 

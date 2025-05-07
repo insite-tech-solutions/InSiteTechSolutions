@@ -479,11 +479,39 @@ export interface ServiceMetadata {
 }
 
 /**
+ * Represents a Table of Contents item.
+ *
+ * @interface TOCItem
+ * @property {string} title - The display text for the TOC link.
+ * @property {string} anchor - The anchor ID (#section-id) to link to.
+ */
+export interface TOCItem {
+  title: string;
+  anchor: string;
+}
+
+/**
+ * Represents the content of the Service Overview section.
+ *
+ * @interface ServiceOverviewContent
+ * @property {string} markdownText - The main content in Markdown format.
+ * @property {TOCItem[]} tocItems - An array of TOC items.
+ */
+export interface ServiceOverviewContent {
+  markdownText: string;
+  tocItems: TOCItem[];
+}
+
+/**
  * Represents options for service page templates.
  * 
  * @interface ServicePageTemplateOptions
- * @property {('hero' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'insiteAdvantage' | 'faq' | 'cta')[]} [skipSections] - Sections to skip in the template.
+ * @property {('hero' | 'serviceOverview' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'insiteAdvantage' | 'faq' | 'cta')[]} [skipSections] - Sections to skip in the template.
  * @property {Object} [addSections] - Sections to add to the template.
+ * @property {ReactNode} [addSections.beforeHero] - Content to add before the hero section.
+ * @property {ReactNode} [addSections.afterHero] - Content to add after the hero section.
+ * @property {ReactNode} [addSections.beforeServiceOverview] - Content to add before the service overview section.
+ * @property {ReactNode} [addSections.afterServiceOverview] - Content to add after the service overview section.
  * @property {ReactNode} [addSections.beforeValueProp] - Content to add before the value proposition section.
  * @property {ReactNode} [addSections.afterValueProp] - Content to add after the value proposition section.
  * @property {ReactNode} [addSections.afterServiceScope] - Content to add after the service scope section.
@@ -495,8 +523,12 @@ export interface ServiceMetadata {
  * @property {'default' | 'compact' | 'expanded'} [layoutVariant] - The layout variant for the service page.
  */
 export interface ServicePageTemplateOptions {
-  skipSections?: ('hero' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'insiteAdvantage' | 'faq' | 'cta')[];
+  skipSections?: ('hero' | 'serviceOverview' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'insiteAdvantage' | 'faq' | 'cta')[];
   addSections?: {
+    beforeHero?: ReactNode;
+    afterHero?: ReactNode;
+    beforeServiceOverview?: ReactNode;
+    afterServiceOverview?: ReactNode;
     beforeValueProp?: ReactNode;
     afterValueProp?: ReactNode;
     afterServiceScope?: ReactNode;

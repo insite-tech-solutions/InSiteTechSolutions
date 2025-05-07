@@ -23,7 +23,7 @@ import { HeroSectionContent } from '@/page-templates/service-page/types';
  */
 const customSoftwareHero: HeroSectionContent = {
   title: "Custom Software Solutions",
-  subtitle: "Turn your technical challenges into opportunities with tailored software",
+  subtitle: "Turn your technical challenges into opportunities with custom software",
   description: "From streamlining operations to solving complex computational problems, we create custom software that perfectly aligns with your business processes or research goals. Our solutions combine innovative technology with practical business sense to deliver measurable results.",
   image: "/CustomSoftwareGraphic.svg",
   ctaText: "Start Your Project Today",

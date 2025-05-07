@@ -27,6 +27,7 @@ export default function DataAnalysisPage() {
       <Header />
       <ServicePageTemplate
         heroContent={dataAnalysisContent.hero}
+        serviceOverviewContent={dataAnalysisContent.overview}
         valuePropContent={dataAnalysisContent.valueProp}
         serviceScopeContent={dataAnalysisContent.serviceScope}
         applicationsContent={dataAnalysisContent.applications}

@@ -18,7 +18,7 @@ import { ApplicationsContent } from '@/page-templates/service-page/types';
  * @property {number} backgroundIconHeight - Height of the background icon.
  */
 const graphicDesignApplications: ApplicationsContent = {
-  title: "Design Solutions for Every Business Need",
+  title: "Design Solutions for Every Need",
   description: "Our graphic design and branding expertise spans across numerous industries and business requirements. Our creative strategies help organizations strengthen their market presence by enhancing their:",
   industrySolutionsTitle: "Industry-Specific Solutions",
   industrySolutionsDescription: "Drawing on our extensive design experience across various sectors, we create tailored visual solutions that address the unique requirements of your industry.",
@@ -64,7 +64,6 @@ const graphicDesignApplications: ApplicationsContent = {
       title: "Retail & E-commerce",
       icon: "ShoppingBag",
       items: [
-        "Product packaging design",
         "E-commerce website design",
         "Product photography enhancement",
         "Seasonal campaign visuals",
@@ -78,7 +77,6 @@ const graphicDesignApplications: ApplicationsContent = {
         "Corporate identity systems",
         "Proposal and pitch deck templates",
         "Client-facing document design",
-        "Professional portraits and team photos",
         "Conference and event materials"
       ],
     },
@@ -88,7 +86,6 @@ const graphicDesignApplications: ApplicationsContent = {
       items: [
         "Menu design and food photography",
         "Environmental graphics and signage",
-        "Interior design collaboration",
         "Promotional materials",
         "Digital presence design"
       ],
@@ -98,10 +95,19 @@ const graphicDesignApplications: ApplicationsContent = {
       icon: "Heart",
       items: [
         "Patient education materials",
-        "Facility signage and wayfinding",
         "Health campaign visuals",
         "Digital health app interfaces",
         "Medical infographics"
+      ],
+    },
+    {
+      title: "Research & Academia",
+      icon: "Microscope",
+      items: [
+        "Scientific and technical illustrations",
+        "Publication graphics design",
+        "Research proposal design", 
+        "Research group brand development"
       ],
     },
     {
@@ -110,10 +116,28 @@ const graphicDesignApplications: ApplicationsContent = {
       items: [
         "Educational materials and infographics",
         "Fundraising campaign visuals",
-        "Annual report design",
         "Community outreach materials",
         "Event promotion graphics"
       ],
+    },
+    {
+      title: "Musicians & Artists",
+      icon: "Music",
+      items: [
+        "Album cover design",
+        "Music video editing",
+        "Logos and promotional materials",
+        "Artist brand development"
+      ]
+    },
+    {      title: "Local Business",
+      icon: "Store",
+      items: [
+        "Storefront and window displays",
+        "Local marketing materials",
+        "Community event graphics",
+        "Neighborhood-focused branding",
+      ], 
     },
   ], 
   backgroundIcon: "PenTool",

@@ -27,6 +27,7 @@ export default function ConsultingTrainingPage() {
       <Header />
       <ServicePageTemplate
         heroContent={consultingTrainingContent.hero}
+        serviceOverviewContent={consultingTrainingContent.overview}
         valuePropContent={consultingTrainingContent.valueProp}
         serviceScopeContent={consultingTrainingContent.serviceScope}
         applicationsContent={consultingTrainingContent.applications}

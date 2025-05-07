@@ -18,7 +18,7 @@ import { ApplicationsContent } from '@/page-templates/service-page/types';
  * @property {number} backgroundIconHeight - Height of the background icon.
  */
 const aiAutomationApplications: ApplicationsContent = {
-  title: "AI-Powered Solutions Across Industries",
+  title: "Empowering Businesses with AI & Automation",
   description: "Our AI and automation expertise spans numerous sectors and business functions, helping organizations transform operations and create new capabilities. Our intelligent systems empower businesses by enhancing their:",
   industrySolutionsTitle: "Industry-Specific Solutions",
   industrySolutionsDescription: "We tailor our AI and automation approaches to address the unique challenges and opportunities in different sectors, delivering solutions that drive specific industry outcomes.",
@@ -61,6 +61,16 @@ const aiAutomationApplications: ApplicationsContent = {
   
   industries: [
     {
+      title: "Academic & Scientific Research",
+      icon: "FlaskConical",
+      items: [
+        "Machine learning model development",
+        "AI-powered data analysis",
+        "System modeling and simulation",
+        "Lab operations optimization"
+      ],
+    },
+    {
       title: "Manufacturing & Engineering",
       icon: "Factory",
       items: [
@@ -68,18 +78,6 @@ const aiAutomationApplications: ApplicationsContent = {
         "Quality control automation",
         "Production optimization",
         "Supply chain intelligence",
-        "Digital twin implementation"
-      ],
-    },
-    {
-      title: "Healthcare & Life Sciences",
-      icon: "Stethoscope",
-      items: [
-        "Diagnostic assistance systems",
-        "Treatment recommendation engines",
-        "Patient engagement automation",
-        "Administrative workflow optimization",
-        "Research data analysis"
       ],
     },
     {
@@ -88,9 +86,8 @@ const aiAutomationApplications: ApplicationsContent = {
       items: [
         "Fraud detection and prevention",
         "Automated compliance monitoring",
-        "Algorithmic trading systems",
-        "Credit risk assessment",
-        "Customer service automation"
+        "Customer service automation",
+        "Risk assessment and management"
       ],
     },
     {
@@ -101,7 +98,6 @@ const aiAutomationApplications: ApplicationsContent = {
         "Inventory optimization",
         "Personalized shopping experiences",
         "Visual search capabilities",
-        "Dynamic pricing models"
       ],
     },
     {
@@ -111,7 +107,6 @@ const aiAutomationApplications: ApplicationsContent = {
         "Document analysis and processing",
         "Contract review automation",
         "Research assistance tools",
-        "Knowledge management systems",
         "Resource scheduling optimization"
       ],
     },

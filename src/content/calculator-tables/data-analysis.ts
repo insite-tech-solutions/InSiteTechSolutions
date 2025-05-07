@@ -267,7 +267,7 @@ export const dataAnalysisTable = {
       },
       expedited: { 
         name: "Expedited/Rush Analysis", 
-        multiplier: { value: 1.25 } 
+        multiplier: { value: 1.5 } 
       }
     }
   },

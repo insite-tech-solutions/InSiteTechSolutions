@@ -22,7 +22,7 @@ const seoMarketingFAQContent: FAQContent = {
     {
       icon: "Clock",
       question: "How long does it take to see results from SEO and online marketing?",
-      answer: "SEO typically shows noticeable results within 3-6 months, depending on competition and current website status. Online marketing results, such as PPC, can be seen almost immediately once campaigns are launched."
+      answer: "SEO typically shows noticeable results within 3-6 months, depending on competition and current website status. Paid advertising results can be seen almost immediately once campaigns are launched. We provide regular progress reports so you can track improvements along the way."
     },
     {
       icon: "Package",

@@ -24,7 +24,7 @@ import { HeroSectionContent } from '@/page-templates/service-page/types';
 const consultingTrainingHero: HeroSectionContent = {
   title: "Consulting & Training",
   subtitle: "Empower your team with expert guidance and the knowledge to succeed",
-  description: "From digital transformation strategies to hands-on technical training, we help organizations navigate complex technological challenges and build internal capabilities. Our consulting and training services combine industry expertise with practical implementation support to ensure your team can effectively leverage technology for business success.",
+  description: "From basic tech help to complex consultation and training services, we help organizations and individuals navigate technological challenges. Our consulting and training services combine technical expertise with practical implementation support to ensure you can effectively leverage technology to achieve your goals.",
   image: "/graphics/consulting-training.gif",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",

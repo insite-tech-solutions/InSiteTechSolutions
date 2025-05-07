@@ -86,7 +86,7 @@ const webAppDevelopmentValueProp: ValuePropContent = {
       {
         "marketing method": "Website",
         "est. initial cost": "$1,000 - $10,000 (development)",
-        "est. ongoing cost": "$10 - $50/month (hosting/maintenance)",
+        "est. ongoing cost": "$10 - $50 per month (hosting / maintenance)",
       },
       {
         "marketing method": "Yard Signs",
@@ -96,12 +96,12 @@ const webAppDevelopmentValueProp: ValuePropContent = {
       {
         "marketing method": "TV/Radio",
         "est. initial cost": "$1,000 - $10,000 (production)",
-        "est. ongoing cost": "$100 - $1,500/month (airtime)",
+        "est. ongoing cost": "$100 - $1,500 per month (airtime)",
       }, 
       {
         "marketing method": "Billboards",
         "est. initial cost": "$1,000 - $3,000 (design)",
-        "est. ongoing cost": "$1,000 - $5,000/month (placement/rent)",
+        "est. ongoing cost": "$1,000 - $5,000 per month (placement / rent)",
       }
     ]
   },
@@ -109,7 +109,7 @@ const webAppDevelopmentValueProp: ValuePropContent = {
   // Call to action displayed at the bottom of the right column
   callToAction: {
     title: "Ready to Boost Your Digital Presence?",
-    description: "Let's create a powerful online strategy tailored to your business needs.",
+    description: "Let's create a powerful online strategy tailored to your needs.",
     buttonText: "Get Started",
     buttonLink: "/contact",
     buttonIcon: "ArrowRight",

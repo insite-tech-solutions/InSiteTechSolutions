@@ -22,8 +22,8 @@ export const aiAutomationProcess: ProcessContent = {
       title: 'Discovery',
       description: 'We assess your current processes, identify automation opportunities, and establish clear value metrics.',
       items: [
-        'Understand your business processes and pain points',
-        'Identify high-value automation and AI opportunities',
+        'Understand your business processes',
+        'Identify high-value automation opportunities',
         'Assess data quality, availability, and infrastructure',
       ],
       timeline: '1-2 weeks',
@@ -47,8 +47,8 @@ export const aiAutomationProcess: ProcessContent = {
       description: 'We design intelligent systems and automation workflows tailored to your specific requirements.',
       items: [
         'Design AI models and automation workflows',
-        'Create user experience plans for human-AI interaction',
-        'Develop architecture for seamless integration',
+        'Create user experience plans',
+        'Plan architecture for seamless integration',
       ],
       timeline: '2-4 weeks',
       icon: 'Paintbrush',
@@ -56,19 +56,19 @@ export const aiAutomationProcess: ProcessContent = {
     {
       step: 4,
       title: 'Development',
-      description: 'We build, train, and refine AI models and automation solutions through iterative development.',
+      description: 'We build and refine AI and automation solutions through iterative development.',
       items: [
         'Develop and train AI models and automation systems',
         'Conduct iterative testing and refinement',
         'Integrate with existing systems and workflows',
       ],
-      timeline: '4-12 weeks',
+      timeline: '4-12+ weeks (project dependent)',
       icon: 'Code',
     },
     {
       step: 5,
       title: 'Deployment',
-      description: 'We implement, monitor, and optimize AI and automation solutions for maximum business impact.',
+      description: 'We implement, monitor, and optimize solutions for maximum business impact.',
       items: [
         'Deploy solutions with minimal disruption',
         'Monitor performance and implement feedback loops',
@@ -78,7 +78,7 @@ export const aiAutomationProcess: ProcessContent = {
       icon: 'Rocket',
     },
   ],
-  note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months depending on complexity and scope. As a simple reference point, targeted automation projects typically take 6-8 weeks, while comprehensive AI implementations with multiple components may require 12-16+ weeks. For most AI systems, an ongoing optimization phase follows initial deployment to continuously improve performance.",
+  note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months depending on complexity and scope. As a simple reference point, targeted automation projects typically take 4-6 weeks, while comprehensive AI implementations with multiple components may require 12-16+ weeks. For most AI systems, an ongoing optimization phase follows initial deployment to continuously improve performance.",
   linkText: "Learn more about our process",
   linkUrl: "/process",
 };

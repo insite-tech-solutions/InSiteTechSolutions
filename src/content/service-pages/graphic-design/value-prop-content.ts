@@ -16,7 +16,7 @@ import { ValuePropContent } from '@/page-templates/service-page/types';
  */
 const graphicDesignValueProp: ValuePropContent = {
   title: "Why Visual Identity Matters",
-  description: "In today's visually-driven marketplace, a strong brand identity isn't just a luxury—it's essential for business success. Your visual identity is often the first point of contact with potential customers and sets immediate expectations about your brand quality and values. While many businesses underestimate the impact of professional design, research consistently shows that strategic branding directly influences consumer trust, recognition, and purchasing decisions. Well-crafted visual elements communicate your brand story effectively and create emotional connections that drive customer loyalty and business growth.",
+  description: "Your visual identity is often the first point of contact with potential customers and sets immediate expectations about your brand quality and values. While many businesses underestimate the impact of professional design, research consistently shows that strategic branding directly influences consumer trust, recognition, and purchasing decisions. The right visual identity doesn't just make your business look good—it communicates your values, builds emotional connections with customers, and creates a foundation for sustainable growth.",
   
   // Industry trends that appear in expandable cards
   industryTrends: [
@@ -34,11 +34,6 @@ const graphicDesignValueProp: ValuePropContent = {
       icon: "Palette",
       title: "Custom Illustration",
       description: "Moving away from stock imagery toward unique, brand-specific visual assets."
-    },
-    {
-      icon: "Zap",
-      title: "Animation & Motion",
-      description: "Incorporating subtle movement to enhance engagement and user experience."
     },
     {
       icon: "Users",
@@ -91,29 +86,6 @@ const graphicDesignValueProp: ValuePropContent = {
     }
   ],
   
-  // Custom comparison table data
-  comparisonTable: {
-    title: "Professional vs. DIY Design",
-    headers: ["Aspect", "Professional Design", "DIY Solutions"],
-    rows: [
-      {
-        "aspect": "Brand Consistency",
-        "professional design": "Cohesive identity across all touchpoints",
-        "diy solutions": "Often inconsistent and fragmented"
-      },
-      {
-        "aspect": "Market Perception",
-        "professional design": "Projects credibility and professionalism",
-        "diy solutions": "May appear amateurish or temporary"
-      },
-      {
-        "aspect": "Long-term Value",
-        "professional design": "Adaptable assets with lasting relevance",
-        "diy solutions": "Often requires frequent redesigns"
-      }
-    ]
-  },
-  
   // Call to action displayed at the bottom of the right column
   callToAction: {
     title: "Ready to Transform Your Brand?",
@@ -123,10 +95,6 @@ const graphicDesignValueProp: ValuePropContent = {
     buttonIcon: "ArrowRight",
   },
   
-  // Additional content for various sections
-  additionalContent: {
-    beforeCta: "Professional design is an investment that pays dividends through enhanced brand recognition, customer trust, and market differentiation. The right visual identity doesn't just make your business look good—it communicates your values, builds emotional connections with customers, and creates a foundation for sustainable growth. In today's competitive marketplace, strategic design gives businesses a measurable advantage in both customer acquisition and retention."
-  },
 };
 
 export default graphicDesignValueProp;

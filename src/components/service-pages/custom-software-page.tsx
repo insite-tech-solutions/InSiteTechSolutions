@@ -27,6 +27,7 @@ export default function CustomSoftwarePage() {
       <Header />
       <ServicePageTemplate
         heroContent={customSoftwareContent.hero}
+        serviceOverviewContent={customSoftwareContent.overview}
         valuePropContent={customSoftwareContent.valueProp}
         serviceScopeContent={customSoftwareContent.serviceScope}
         applicationsContent={customSoftwareContent.applications}

@@ -62,7 +62,7 @@ export const seoMarketingProcess: ProcessContent = {
         'Execute on-page SEO implementation',
         'Set up PPC campaigns and social media initiatives',
       ],
-      timeline: '2-4 weeks',
+      timeline: '2-4+ weeks (project dependent)',
       icon: 'Code',
     },
     {
@@ -78,7 +78,7 @@ export const seoMarketingProcess: ProcessContent = {
       icon: 'Rocket',
     },
   ],
-  note: "We cannot provide exact timelines until we have a well defined project and plan. Projects can range from a few weeks to several months; however, while initial setup typically takes 4-8 weeks, digital marketing is an ongoing process that delivers increasing value over time. SEO typically shows noticeable results within 3-6 months, while paid campaigns can generate immediate visibility.",
+  note: "We cannot provide exact timelines until we have a well defined project and plan. Projects can range from a few weeks to several months; however, while initial setup typically takes 4-8 weeks, digital marketing is an ongoing process that delivers increasing value over time. SEO typically shows noticeable results within 3-6 months, while paid campaigns can generate more immediate visibility.",
   linkText: "Learn more about our process",
   linkUrl: "/process",
 };

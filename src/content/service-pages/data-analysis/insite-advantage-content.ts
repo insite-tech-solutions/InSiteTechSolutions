@@ -14,12 +14,12 @@ import { InSiteAdvantageContent } from '@/page-templates/service-page/types';
  */
 const dataAnalysisAdvantageContent: InSiteAdvantageContent = {
   title: "The InSite Advantage",
-  description: "At InSite Tech, we bridge the gap between complex data science and practical business applications. Our advantage lies in our ability to translate sophisticated analytical techniques into clear, actionable insights that drive tangible business results. We don't just analyze data – we help you use data to solve real business challenges and create sustainable competitive advantages.",
+  description: "At InSite Tech, we bridge the gap between complex data science and practical applications. Our advantage lies in our ability to translate sophisticated analytical techniques into clear, actionable insights that drive research advancement and business results. We don't just analyze data – we help you use data to solve real challenges and create sustainable value, whether in academic research or business applications.",
   
   advantages: [
     {
-      title: "Business-First Approach",
-      description: "We start with your business objectives, not just the data, ensuring insights directly address your most important challenges.",
+      title: "Client-First Approach",
+      description: "We start with your research objectives or business goals, ensuring insights directly address your most important questions and challenges.",
       icon: "Target"
     },
     {
@@ -29,17 +29,17 @@ const dataAnalysisAdvantageContent: InSiteAdvantageContent = {
     },
     {
       title: "Accessible Expertise",
-      description: "We translate complex technical concepts into clear business language, making advanced analytics accessible to all stakeholders.",
+      description: "We translate complex technical concepts into clear language, making advanced analytics accessible to all stakeholders while maintaining scientific rigor.",
       icon: "MessageSquare"
     },
     {
       title: "Transparent Methods",
-      description: "We clearly explain our analytical approaches and assumptions, building trust in the insights and recommendations.",
+      description: "We clearly explain our analytical approaches and assumptions, building trust in the insights and ensuring reproducibility of results.",
       icon: "Eye"
     },
     {
       title: "Technical Excellence with Practical Focus",
-      description: "Our team combines statistical expertise with industry knowledge to deliver analysis that's both technically sound and practically useful.",
+      description: "Our team combines statistical expertise with domain knowledge to deliver analysis that's both technically sound and practically useful.",
       icon: "Lightbulb"
     },
     {
@@ -64,12 +64,15 @@ const dataAnalysisAdvantageContent: InSiteAdvantageContent = {
     },
     {
       title: "Competitive Advantage",
-      description: "Leverage data assets to develop unique insights and capabilities that differentiate your business from competitors."
+      description: "Leverage data assets to develop unique insights and capabilities that differentiate your work from others in your field."
     }, 
     {
       title: "Future Readiness",
       description: "Develop predictive capabilities that help you anticipate changes and position your organization for long-term success."
-    }
+    }, 
+    {      title: "Methodological Excellence",
+      description: "Ensure your research or analysis follows best practices and produces statistically valid, reproducible results."
+    },
   ],
 };
 

@@ -1,5 +1,6 @@
 // src/content/service-pages/web-app-dev/index.ts
 import hero from './hero-content';
+import overview from './overview-content';
 import valueProp from './value-prop-content';
 import serviceScope from './service-scope-content';
 import applications from './applications-content';
@@ -19,6 +20,7 @@ import metadata from './metadata';
  * 
  * @type {Object} webAppDevContent
  * @property {Object} hero - Content for the hero section.
+ * @property {Object} overview - Content for the overview section.  
  * @property {Object} valueProp - Content for the value proposition section.
  * @property {Object} serviceScope - Content for the service scope section.
  * @property {Object} applications - Content for the applications section.
@@ -31,6 +33,7 @@ import metadata from './metadata';
  */
 const webAppDevContent = {
   hero,
+  overview,
   valueProp,
   serviceScope,
   applications,

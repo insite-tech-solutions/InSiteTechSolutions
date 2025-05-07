@@ -16,7 +16,7 @@ import { CTAContent } from '@/page-templates/service-page/types';
  * @property {string} bgClassName - Optional custom background class for styling.
  */
 const dataAnalysisCTAContent: CTAContent = {
-  title: "Ready to Transform Your Data into Insights?",
+  title: "Ready to Transform Your Data into InSites?",
   description: "Let's harness the power of your data to drive better decisions and measurable business results.",
   primaryButtonText: "Schedule Free Consultation",
   primaryButtonLink: "/contact",

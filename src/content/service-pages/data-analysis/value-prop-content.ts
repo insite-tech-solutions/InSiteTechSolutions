@@ -15,8 +15,8 @@ import { ValuePropContent } from '@/page-templates/service-page/types';
  * @property {Object} callToAction - An object containing the call to action details, including title, description, button text, link, and icon.
  */
 const dataAnalysisValueProp: ValuePropContent = {
-  title: "Why Data Analysis Matters",
-  description: "In today's data-driven world, organizations that effectively analyze their data gain a significant competitive advantage. While most businesses collect vast amounts of data, many lack the expertise to transform it into actionable insights. Professional data analysis bridges this gap, helping you discover patterns, identify opportunities, and make evidence-based decisions that drive growth and efficiency. By leveraging advanced analytical techniques, you can uncover hidden value in your existing data and develop predictive capabilities that position your organization for future success.",
+  title: "How Data Analysis Can Help You",
+  description: "In today's data-driven world, effective data analysis is crucial for both research advancement and business success. Whether you're conducting academic research or running a business, the ability to transform raw data into meaningful insights is essential. Professional data analysis bridges the gap between complex data and actionable conclusions, helping you validate hypotheses, discover patterns, and make evidence-based decisions. By leveraging advanced analytical techniques, you can uncover hidden value in your data and develop robust methodologies that stand up to peer review or drive business growth.",
   
   // Industry trends that appear in expandable cards
   industryTrends: [
@@ -31,14 +31,9 @@ const dataAnalysisValueProp: ValuePropContent = {
       description: "Shifting from periodic reporting to continuous, real-time data analysis for immediate insights and faster decision-making."
     },
     {
-      icon: "CloudRain",
+      icon: "Cloud",
       title: "Cloud-based Analytics",
       description: "Utilizing cloud platforms for scalable, accessible, and cost-effective data processing and visualization."
-    },
-    {
-      icon: "Shield",
-      title: "Data Privacy and Ethics",
-      description: "Implementing responsible data practices that balance analytical insights with privacy protection and ethical considerations."
     },
     {
       icon: "LineChart",
@@ -48,7 +43,7 @@ const dataAnalysisValueProp: ValuePropContent = {
   ],
   
   // Description for the industry trends section
-  industryTrendsDescription: "The data analysis landscape is rapidly evolving with several key trends shaping success. Organizations that adapt to these changes gain significant competitive advantages in their markets.",
+  industryTrendsDescription: "The data analysis landscape is rapidly evolving with several key trends shaping success in both research and business applications. Organizations and researchers that adapt to these changes gain significant advantages in their respective fields.",
   
   // Market insights with inline animated stats
   marketInsights: [
@@ -62,9 +57,9 @@ const dataAnalysisValueProp: ValuePropContent = {
     {
       id: "2",
       parts: [
-        "Organizations that leverage customer behavioral insights outperform peers by ",
+        "Organizations that leverage data-driven insights outperform peers by ",
         { value: 85, suffix: "%" },
-        " in sales growth."
+        " in key performance metrics."
       ]
     },
     {
@@ -91,43 +86,17 @@ const dataAnalysisValueProp: ValuePropContent = {
       ]
     }
   ],
-  
-  // Custom comparison table data
-  comparisonTable: {
-    title: "Analytics Maturity Comparison",
-    headers: ["Capability", "Basic Analytics", "Advanced Analytics"],
-    rows: [
-      {
-        "capability": "Decision Process",
-        "basic analytics": "Intuition with data support",
-        "advanced analytics": "Data-driven with predictive insights"
-      },
-      {
-        "capability": "Time Orientation",
-        "basic analytics": "Historical reporting",
-        "advanced analytics": "Forward-looking predictions"
-      },
-      {
-        "capability": "Business Impact",
-        "basic analytics": "Incremental improvements",
-        "advanced analytics": "Transformative opportunities"
-      }
-    ]
-  },
+
   
   // Call to action displayed at the bottom of the right column
   callToAction: {
     title: "Ready to Unlock the Power of Your Data?",
-    description: "Let's transform your raw data into strategic insights that drive tangible business results.",
+    description: "Let's transform your raw data into meaningful insights that advance your research or drive business results.",
     buttonText: "Get Started",
     buttonLink: "/contact",
     buttonIcon: "ArrowRight",
   },
   
-  // Additional content for various sections
-  additionalContent: {
-    beforeCta: "Data analysis delivers exceptional ROI by revealing inefficiencies, identifying new revenue streams, and enabling precise forecasting. Unlike many business investments, analytics capabilities compound in value over time as your data assets grow and models become more refined. The ability to make evidence-based decisions across your organization creates a sustainable competitive advantage that's difficult for competitors to replicate."
-  },
 };
 
 export default dataAnalysisValueProp;

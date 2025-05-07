@@ -26,6 +26,7 @@ export default function WebAppDevelopmentPage() {
       <Header />
       <ServicePageTemplate
         heroContent={webAppDevelopmentContent.hero}
+        serviceOverviewContent={webAppDevelopmentContent.overview}
         valuePropContent={webAppDevelopmentContent.valueProp}
         serviceScopeContent={webAppDevelopmentContent.serviceScope}
         applicationsContent={webAppDevelopmentContent.applications}

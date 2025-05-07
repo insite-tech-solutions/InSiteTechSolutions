@@ -23,18 +23,6 @@ const dataAnalysisServiceScope: ServiceScopeContent = {
   
   services: [
     {
-      icon: "LineChart",
-      title: "Business Intelligence & Performance Analytics",
-      description: "Gain deeper insights into your business operations and performance metrics to drive strategic decision-making.",
-      benefits: [
-        "Sales, marketing, and operational performance analysis",
-        "KPI dashboards and executive reporting",
-        "Competitive intelligence and market analysis",
-        "Customer segmentation and behavior analytics",
-        "Financial modeling and forecasting"
-      ]
-    },
-    {
       icon: "FlaskConical",
       title: "Scientific Data Analysis & System Modeling",
       description: "Apply rigorous scientific methods to analyze experimental data and develop predictive models for complex systems.",
@@ -44,6 +32,18 @@ const dataAnalysisServiceScope: ServiceScopeContent = {
         "Computational simulation and modeling",
         "System optimization and parameter estimation",
         "Research methodology design"
+      ]
+    },
+    {
+      icon: "LineChart",
+      title: "Business Intelligence & Performance Analytics",
+      description: "Gain deeper insights into your business operations and performance metrics to drive strategic decision-making.",
+      benefits: [
+        "Sales, marketing, and operational performance analysis",
+        "KPI dashboards and executive reporting",
+        "Competitive intelligence and market analysis",
+        "Customer segmentation and behavior analytics",
+        "Financial modeling and forecasting"
       ]
     },
     {
@@ -109,7 +109,7 @@ const dataAnalysisServiceScope: ServiceScopeContent = {
       description: "Develop predictive capabilities that help you anticipate changes and respond proactively to emerging opportunities."
     }
   ],
-  backgroundIcon: "BarChart2",
+  backgroundIcon: "ChartColumn",
   backgroundIconWidth: 425,
   backgroundIconHeight: 375,
 };

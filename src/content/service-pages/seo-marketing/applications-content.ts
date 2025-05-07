@@ -18,8 +18,8 @@ import { ApplicationsContent } from '@/page-templates/service-page/types';
  * @property {number} backgroundIconHeight - Height of the background icon.
  */
 const seoMarketingApplications: ApplicationsContent = {
-  title: "Digital Marketing Across Industries",
-  description: "Our SEO and marketing strategies empower businesses across various sectors by improving their digital presence and targeting the right audience with the right message at the right time. Our digital strategies help businesses achieve their growth objectives by enhancing their:",
+  title: "Optimized Digital Marketing Solutions",
+  description: "Our SEO and marketing strategies empower a broad range of individuals, businesses, and organizations by improving their digital presence and targeting the right audience with the right message at the right time. Our digital strategies help organizations achieve their growth objectives by enhancing their:",
   industrySolutionsTitle: "Industry-Specific Solutions",
   industrySolutionsDescription: "We customize our approaches for different sectors, leveraging industry-specific insights to create targeted marketing strategies that deliver results.",
   
@@ -45,7 +45,7 @@ const seoMarketingApplications: ApplicationsContent = {
       ],
     },
     {
-      title: "Local Business Visibility",
+      title: "Local Visibility",
       icon: "MapPin",
       items: [
         "Local SEO campaigns",
@@ -65,16 +65,6 @@ const seoMarketingApplications: ApplicationsContent = {
         "Lead generation campaigns",
         "Authority building",
         "Professional networking"
-      ],
-    },
-    {
-      title: "Healthcare & Wellness",
-      icon: "Heart",
-      items: [
-        "Healthcare provider directory optimization",
-        "Patient education content",
-        "Local SEO optimization",
-        "Reputation management"
       ],
     },
     {
@@ -105,6 +95,16 @@ const seoMarketingApplications: ApplicationsContent = {
         "Targeted PPC campaigns",
         "Virtual tour promotion",
         "Lead qualification systems"
+      ],
+    },
+    {
+      title: "Creative & Design",
+      icon: "Palette",
+      items: [
+        "Portfolio optimization",
+        "Social media presence",
+        "Client case studies",
+        "Service showcase"
       ],
     },
   ], 

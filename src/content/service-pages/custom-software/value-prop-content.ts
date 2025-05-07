@@ -16,7 +16,7 @@ import { ValuePropContent } from '@/page-templates/service-page/types';
  */
 const customSoftwareValueProp: ValuePropContent = {
   title: "How Custom Software Can Help You",
-  description: "Many businesses, labs, and organizations face niche challenges that off-the-shelf software forces them to adapt their processes to rather than the other way around. Custom solutions flip this dynamic, creating systems that work exactly how your business needs them to. By developing software that aligns perfectly with your specific objectives eliminate inefficiencies, reduce manual work, and provide a competitive advantage through optimized workflows, unlocking new opportunities for innovation.",
+  description: "Many businesses, labs, and organizations face niche challenges that off-the-shelf software forces them to adapt their processes to rather than the other way around. Custom solutions flip this dynamic, creating systems that work exactly how your business needs them to. By developing software that aligns perfectly with your specific objectives, you can eliminate inefficiencies, reduce manual work, and provide a competitive advantage through optimized workflows, unlocking new opportunities for innovation.",
   
   // Industry trends that appear in expandable cards
   industryTrends: [

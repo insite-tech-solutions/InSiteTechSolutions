@@ -27,7 +27,7 @@ const webAppDevelopmentFAQContent: FAQContent = {
     {
       icon: "Clock",
       question: "How long does a typical website project take?",
-      answer: "Simple websites typically take 3-6 weeks, while complex applications can take 2-4 months."
+      answer: "Simple websites typically take 3-6 weeks, while complex applications can take 2-4 months or more."
     },
     {
       icon: "Code",

@@ -22,22 +22,27 @@ const dataAnalysisFAQContent: FAQContent = {
     {
       icon: "Database",
       question: "What types of data can you work with?",
-      answer: "We work with virtually any type of structured or unstructured data, including business metrics, customer information, scientific measurements, text, and more. Our expertise extends to both small datasets and large-scale data environments."
+      answer: "We work with virtually any type of structured or unstructured data, including research measurements, experimental data, business metrics, and more. Our expertise extends to both small datasets and large-scale data environments, with particular experience in academic research data analysis."
     },
     {
       icon: "Lock",
       question: "How do you ensure data security and confidentiality?",
-      answer: "We implement strict data security protocols, including secure transfer methods, access controls, and confidentiality agreements. We can also work within your existing security infrastructure or provide anonymized analysis when appropriate."
+      answer: "We implement strict data security protocols, including secure transfer methods, access controls, and confidentiality agreements. For research data, we adhere to relevant ethical guidelines and can work within your institution's security infrastructure or provide anonymized analysis when appropriate."
     },
     {
       icon: "FileText",
       question: "What deliverables can I expect from a data analysis project?",
-      answer: "Typical deliverables include comprehensive reports with visualizations, interactive dashboards, predictive models, and strategic recommendations. We tailor all deliverables to your specific needs and technical capabilities."
+      answer: "Typical deliverables include comprehensive reports with visualizations, statistical analyses, publication-ready figures, and clear interpretations. For research projects, we can also provide methodology documentation and statistical validation. We tailor all deliverables to your specific needs and technical capabilities."
     },
     {
       icon: "Code",
       question: "Do I need to have advanced technical knowledge to understand the results?",
-      answer: "No. We translate complex analytical findings into clear, business-focused insights that are accessible to non-technical stakeholders. We provide different levels of detail for technical and non-technical audiences as needed."
+      answer: "No. We translate complex analytical findings into clear, accessible insights that are appropriate for your audience. For research projects, we provide detailed statistical documentation while also offering clear interpretations. For business clients, we focus on actionable insights and strategic recommendations."
+    },
+    {
+      icon: "GraduationCap",
+      question: "Can you help with research methodology and experimental design?",
+      answer: "Yes. We can assist with research methodology design, statistical power analysis, and experimental planning. We help ensure your research is methodologically sound and that your data collection will yield statistically valid results."
     }
   ],
   

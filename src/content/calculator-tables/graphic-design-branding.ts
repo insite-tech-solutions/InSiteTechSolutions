@@ -182,7 +182,7 @@ export const graphicDesignBrandingTable = {
       },
       expedited: { 
         name: "Expedited/Rush Development", 
-        multiplier: { value: 1.25 } 
+        multiplier: { value: 1.5 } 
       }
     }
   },

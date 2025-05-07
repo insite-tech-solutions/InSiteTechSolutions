@@ -23,19 +23,19 @@ const consultingTrainingValueProp: ValuePropContent = {
     {
       icon: "Zap",
       title: "Digital Acceleration",
-      description: "Rapid adoption of digital technologies across all business functions, requiring new skills and implementation strategies."
+      description: "Rapid adoption of digital technologies across all sectors, requiring new skills and implementation strategies."
     },
     {
       icon: "Users",
       title: "Knowledge Workforce Development",
-      description: "Growing emphasis on upskilling employees to leverage new technologies and adapt to changing job requirements."
+      description: "Growing emphasis on upskilling teams to leverage new technologies and adapt to changing requirements."
     },
     {
-      icon: "Cloud",
-      title: "Cloud Transformation",
-      description: "Shift from on-premises infrastructure to cloud-based solutions, necessitating new management approaches and expertise."
+      icon: "FileText",
+      title: "Documentation & SOPs",
+      description: "Increasing focus on standardized processes and comprehensive documentation for operational excellence."
     },
-    {
+    {      
       icon: "Workflow",
       title: "Workflow Optimization",
       description: "Focus on streamlining business processes through technology to increase efficiency and reduce operational costs."
@@ -43,24 +43,17 @@ const consultingTrainingValueProp: ValuePropContent = {
     {
       icon: "Shield",
       title: "Digital Resilience",
-      description: "Increasing need for robust technology strategies that ensure business continuity and security in a digital-first world."
+      description: "Growing need for robust technology strategies that ensure continuity and security in a digital-first world."
     }
   ],
   
   // Description for the industry trends section
-  industryTrendsDescription: "The business technology landscape is evolving rapidly, with several key trends reshaping how organizations implement and leverage digital solutions. Organizations that develop the right expertise and implementation strategies gain significant advantages in operational efficiency and market responsiveness.",
+  industryTrendsDescription: "The technology landscape is evolving rapidly across all sectors, with several key trends reshaping how organizations implement and leverage digital solutions. Organizations that develop the right expertise and implementation strategies gain significant advantages in operational efficiency and market responsiveness.",
   
   // Market insights with inline animated stats
   marketInsights: [
     {
       id: "1",
-      parts: [
-        { value: 70, suffix: "%" },
-        " of digital transformation initiatives fail to reach their stated goals due to implementation challenges."
-      ]
-    },
-    {
-      id: "2",
       parts: [
         "Organizations with strong digital transformation expertise achieve ",
         { value: 26, suffix: "%" },
@@ -68,51 +61,29 @@ const consultingTrainingValueProp: ValuePropContent = {
       ]
     },
     {
-      id: "3",
+      id: "2",
       parts: [
         { value: 94, suffix: "%" },
-        " of executives report that specialized skills are needed to implement digital strategies effectively."
+        " of organizations report that specialized skills are needed to implement digital strategies effectively."
+      ]
+    },
+    {
+      id: "3",
+      parts: [
+        "Teams with comprehensive training programs show ",
+        { value: 218, suffix: "%" },
+        " higher productivity and better outcomes."
       ]
     },
     {
       id: "4",
-      parts: [
-        "Companies with comprehensive employee training programs have ",
-        { value: 218, suffix: "%" },
-        " higher revenue per employee."
-      ]
-    },
-    {
-      id: "5",
       parts: [
         { value: 83, suffix: "%" },
         " of organizations cite knowledge gaps as the primary barrier to successful technology implementation."
       ]
     }
   ],
-  
-  // Custom comparison table data
-  comparisonTable: {
-    title: "DIY vs. Expert-Guided Implementation",
-    headers: ["Aspect", "DIY Approach", "Expert-Guided Approach"],
-    rows: [
-      {
-        "aspect": "Implementation Time",
-        "diy approach": "Extended timeline with trial-and-error",
-        "expert-guided approach": "Accelerated deployment with proven methods"
-      },
-      {
-        "aspect": "Risk Level",
-        "diy approach": "High risk of costly mistakes",
-        "expert-guided approach": "Reduced risk through experience"
-      },
-      {
-        "aspect": "Knowledge Development",
-        "diy approach": "Limited to project-specific learning",
-        "expert-guided approach": "Comprehensive skill building and best practices"
-      }
-    ]
-  },
+
   
   // Call to action displayed at the bottom of the right column
   callToAction: {
@@ -122,11 +93,7 @@ const consultingTrainingValueProp: ValuePropContent = {
     buttonLink: "/contact",
     buttonIcon: "ArrowRight",
   },
-  
-  // Additional content for various sections
-  additionalContent: {
-    beforeCta: "Expert consulting and training deliver exceptional ROI by reducing implementation time, preventing costly mistakes, and building valuable internal capabilities. Unlike one-time fixes, knowledge transfer creates lasting value by enabling your team to continuously optimize and adapt your technology solutions as business needs evolve. Organizations that invest in expert guidance typically achieve faster implementation, higher user adoption, and more sustainable results from their technology investments."
-  },
+
 };
 
 export default consultingTrainingValueProp;

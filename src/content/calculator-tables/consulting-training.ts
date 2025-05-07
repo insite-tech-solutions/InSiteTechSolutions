@@ -251,7 +251,7 @@ export const consultingTrainingTable = {
       },
       expedited: { 
         name: "Expedited/Rush Support", 
-        multiplier: { value: 1.25 } 
+        multiplier: { value: 1.5 } 
       }
     }
   },

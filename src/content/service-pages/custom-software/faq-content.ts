@@ -27,18 +27,18 @@ const customSoftwareFAQContent: FAQContent = {
     {
       icon: "Clock",
       question: "How long does custom software development take?",
-      answer: "Typical projects range from 3-6 months, depending on complexity and scope.",
+      answer: "There is so much variability in project scope and complexity that it is difficult to provide a precise timeline, but small scale, simple projects can be done in a matter of days to weeks, whereas larger projects can range from 3-6+ months, depending on complexity.",
+    },
+    {
+      icon: "Settings",
+      question: "Can you integrate with our existing systems?",
+      answer: "Generally, yes, we are able to connect with most existing platforms and databases, but we will need to assess your specific requirements and existing systems.",
     },
     {
       icon: "Code",
       question: "Do you offer ongoing support and maintenance for custom software?",
       answer: "Yes, we offer comprehensive maintenance and support plans to ensure your software remains up-to-date, secure, and performing optimally.",
     },
-    {
-      icon: "Settings",
-      question: "Can you integrate with our existing systems?",
-      answer: "Yes, we specialize in system integration and can connect with most existing platforms and databases.",
-    }
   ],
   
   moreLink: {

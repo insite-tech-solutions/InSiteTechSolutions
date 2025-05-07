@@ -28,7 +28,7 @@ const customSoftwareServiceScope: ServiceScopeContent = {
         "Custom desktop and server applications",
         "Industry-specific tools and utilities",
         "Data processing and analytics platforms",
-        "Enterprise Resource Planning (ERP) systems"
+        "Reusable scripts and code modules"
       ]
     },
     {

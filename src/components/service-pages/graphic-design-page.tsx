@@ -27,6 +27,7 @@ export default function GraphicDesignPage() {
       <Header />
       <ServicePageTemplate
         heroContent={graphicDesignContent.hero}
+        serviceOverviewContent={graphicDesignContent.overview}
         valuePropContent={graphicDesignContent.valueProp}
         serviceScopeContent={graphicDesignContent.serviceScope}
         applicationsContent={graphicDesignContent.applications}

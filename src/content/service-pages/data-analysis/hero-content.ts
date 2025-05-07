@@ -24,7 +24,7 @@ import { HeroSectionContent } from '@/page-templates/service-page/types';
 const dataAnalysisHero: HeroSectionContent = {
   title: "Data Analysis",
   subtitle: "Transform raw data into actionable insights that drive better decisions",
-  description: "From business analytics to scientific research, our data analysis services help you uncover hidden patterns, optimize performance, and identify new opportunities. We combine statistical expertise with practical business knowledge to deliver insights that create real value.",
+  description: "From business analytics to scientific research, our data analysis services help you uncover hidden patterns, optimize performance, and identify new opportunities. We combine statistical expertise with practical knowledge to deliver insights that create real value.",
   image: "/graphics/data-visualization.gif",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
@@ -33,12 +33,12 @@ const dataAnalysisHero: HeroSectionContent = {
       type: 'icon',
       className: 'absolute',
       style: { 
-        top: '-19%', 
-        left: '-10%',
+        top: '-12%', 
+        left: '-6%',
         color: 'rgba(255, 255, 255, 0.1)',
         transform: 'rotate(12deg)'
       },
-      icon: 'BarChart',
+      icon: 'ChartSpline',
       size: 400,
     },
     {
