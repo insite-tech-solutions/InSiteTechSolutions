@@ -36,12 +36,16 @@ const config: Config = {
         'medium-grey': '#898685',
         'mild-grey': '#9b9b99',
         'light-grey': '#a7a8a8',
+        'very-light-grey-alt': '#cccccc',
         'very-light-grey': '#d9d9d9',
-        'dark-blue': '#1472bb',
-        'medium-blue': '#2398ff',
-        'light-blue': '#2bc0f8',
-        'dark-blue-alt': '#1764b8',
-        'medium-blue-alt': '#1d64cd',
+	      'dark-blue-alt': '#1764b8', //(mag blue mixed with tailwind blue 800 ish) 
+        'dark-blue': '#1472bb', //(previous mag blue)
+	      'medium-blue-alt': '#1d64cd', //(darker mix with tailwind blue 700ish ) 
+	      'medium-blue': '#0e72c8', //(updated mag blue) 
+        'mild-blue-alt': '#0773d6', //(slightly lighter version of medium blue good for blue-600 replacement)
+        'mild-blue': '#0173e3', //(homepage hero blue) 
+        'light-blue': '#2398ff', //(previous medium blue, pretty light)
+        'very-light-blue': '#2bc0f8',
       },
       fontFamily: {
         sans: ['var(--font-open-sans)', 'var(--font-noto-sans)', 'var(--font-lato)', 'var(--font-roboto)', 'sans-serif'],

@@ -84,7 +84,7 @@ const AdvantageCardComponent: React.FC<AdvantageCardProps> = ({ title, descripti
     >
       <div className="flex items-center gap-4 mb-4">
         <div className="p-3 rounded-full bg-blue-100">
-          <Icon className="h-6 w-6 text-blue-600" />
+          <Icon className="h-6 w-6 text-medium-blue-alt" />
         </div>
         <h3 className="text-xl font-semibold text-gray-50">{title}</h3>
       </div>
@@ -124,7 +124,7 @@ const InSiteAdvantageSectionWrapper: React.FC<InSiteAdvantageSectionProps> = ({ 
   return (
     <section className="pt-10 lg:pt-12 pb-2 w-full" aria-label="InSite Advantage Section">
       {/* Main Content Container with Gradient Background */}
-      <div className="container rounded-xl mx-auto p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600">
+      <div className="container rounded-xl mx-auto p-6 bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt">
         <motion.div
           initial="hidden"
           whileInView="visible"

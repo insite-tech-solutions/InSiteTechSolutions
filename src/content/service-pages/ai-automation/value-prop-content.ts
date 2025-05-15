@@ -26,7 +26,7 @@ const aiAutomationValueProp: ValuePropContent = {
       description: "Leveraging tools like Zapier, Make, and IFTTT to quickly automate routine tasks and workflows without complex development."
     },
     {
-      icon: "Brain",
+      icon: "BrainCog",
       title: "Generative AI Integration",
       description: "Leveraging large language models and generative AI to enhance content creation, customer service, and decision support systems."
     },

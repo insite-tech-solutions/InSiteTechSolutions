@@ -27,7 +27,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ items }) => {
         {items.map((item, index) => (
           <div key={index} className="relative pl-8">
             {/* Blue highlight for current title */}
-            <div className="absolute left-0 w-0.5 top-1 h-5 bg-blue-500" />
+            <div className="absolute left-0 w-0.5 top-1 h-5 bg-mild-blue" />
             
             <h3 className="text-lg font-semibold mb-2 text-black">{item.title}</h3>
             <p className="text-gray-600 mb-8">{item.description}</p>

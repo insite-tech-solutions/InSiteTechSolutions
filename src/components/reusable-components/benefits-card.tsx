@@ -60,13 +60,13 @@ const BenefitsCardComponent: React.FC<BenefitsCardProps> = ({
       w-78 min-h-[16rem] h-auto
       ${
         isActive
-          ? 'shadow-lg border-2 border-blue-600 z-10'
+          ? 'shadow-lg border-2 border-medium-blue z-10'
           : 'shadow-md border-2 border-transparent blur-[1.5px] opacity-97'
       }
     `}
     >
       <div className="p-2 rounded-full bg-blue-100 mb-4 mt-2">
-        <IconComponent className="h-6 w-6 text-blue-600" />
+        <IconComponent className="h-6 w-6 text-medium-blue-alt" />
       </div>
       <h4 className="text-lg font-semibold text-gray-800 mb-2">{title}</h4>
       <p className="text-gray-700">{description}</p>

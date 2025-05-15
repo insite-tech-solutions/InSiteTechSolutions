@@ -57,7 +57,7 @@ const KeyBenefits: React.FC<KeyBenefitsProps> = ({
   
   const backgroundElement = useMemo(() => (
     <IconComponent
-      className="text-medium-blue-alt"
+      className="text-mild-blue-alt"
       width={backgroundIconWidth || 425}
       height={backgroundIconHeight || 425}
       strokeWidth={1.5}

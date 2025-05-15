@@ -61,21 +61,21 @@ const IndustryCardComponent: React.FC<IndustryCardProps> = ({
         w-79 md:w-80 min-h-[17rem] h-auto 
         ${
           isActive
-            ? 'shadow-lg border-2 border-blue-600 z-10'
+            ? 'shadow-lg border-2 border-medium-blue z-10'
             : 'shadow-md border-2 border-transparent filter blur-[1.5px] opacity-97'
         }
       `}
     >
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 rounded-full bg-blue-100">
-          <IconComponent className="h-6 w-6 text-blue-600" />
+          <IconComponent className="h-6 w-6 text-medium-blue-alt" />
         </div>
         <h4 className="text-lg font-semibold text-gray-800">{title}</h4>
       </div>
       <ul className="space-y-2">
         {items.map((item, index) => (
           <li key={index} className="flex items-start gap-2">
-            <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
+            <ArrowRight className="h-4 w-4 text-medium-blue-alt mt-1 flex-shrink-0" />
             <span className="text-gray-700">{item}</span>
           </li>
         ))}

@@ -300,7 +300,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
       })
 
       .to(circle, {
-        border: '3px solid #2563eb',
+        border: '3px solid #0773d6',
         boxShadow: '0 10px 20px rgba(0,0,0,0.15)',
         onComplete: () => {
           gsap.set(circle, {
@@ -390,7 +390,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <div className="text-center max-w-4xl mx-auto py-16">
       <h2 className="text-5xl font-extrabold text-gray-900 mb-8">
         {content.title}
@@ -399,7 +399,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         {content.description}
       </p>
       </div>
-      <div ref={sectionRef} className="relative h-[400vh] md:h-[420vh] pb-12 lg:pb-0">
+      <div ref={sectionRef} className="relative h-[440vh] md:h-[465vh] pb-12 lg:pb-0">
         {/*
           Hidden measurement div:
           - Contains clones of the final card state for each step.
@@ -462,17 +462,17 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
                     }}
                     className="relative flex items-center justify-center overflow-hidden"
                     style={{
-                      width: '3rem', 
-                      height: '3rem', 
+                      width: '4.5rem', 
+                      height: '4.5rem', 
                       borderRadius: '9999px', 
-                      backgroundColor: '#2563eb',
+                      backgroundColor: '#0773d6',
                     }}
                   >
                     <span
                       ref={(el) => {
                         if (el) stepNumberRefs.current[index] = el;
                       }}
-                      className="text-white font-bold text-2xl text-center"
+                      className="text-white font-bold text-4xl text-center"
                     >
                       {index + 1}
                     </span>
@@ -483,7 +483,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
                           ref={(el) => {
                             if (el) iconRefs.current[index] = el;
                           }}
-                          className="p-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-900"
+                          className="p-3 rounded-lg bg-gradient-to-tr from-mild-blue to-blue-900"
                           style={{ pointerEvents: 'auto' }}
                           aria-hidden="true"
                         >
@@ -577,7 +577,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
         >
           <div className="container mx-auto lg:px-4 lg:pb-4">
             <div
-              className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue rounded-xl p-6 max-w-4xl mx-auto shadow-md"
+              className="bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue rounded-xl p-6 max-w-4xl mx-auto shadow-md"
             >
             <p className="text-gray-50 mb-4">
               {content.note}

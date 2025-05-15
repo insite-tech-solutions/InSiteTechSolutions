@@ -78,23 +78,23 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-500 transition-all duration-300"
+      className="bg-white rounded-xl shadow-sm border border-gray-100 hover:border-mild-blue transition-all duration-300"
     >
       <button
         onClick={onToggle}
-        className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
+        className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-mild-blue focus:ring-opacity-50 rounded-xl"
         aria-expanded={isOpen}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-blue-50 transition-colors duration-300">
-              <Icon className="h-5 w-5 text-blue-600" />
+              <Icon className="h-5 w-5 text-medium-blue-alt" />
             </div>
             <h3 className="text-lg font-medium text-gray-800">{question}</h3>
           </div>
           <div className="flex-shrink-0">
             <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
-              <ChevronDown className="h-5 w-5 text-blue-600" />
+              <ChevronDown className="h-5 w-5 text-medium-blue" />
             </motion.div>
           </div>
         </div>
@@ -141,7 +141,7 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerChildren}>
           {/* Section Header */}
           <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
-            <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-md font-medium mb-6">
+            <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-medium-blue-alt text-md font-medium mb-6">
               Frequently Asked Questions (FAQs)
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
@@ -168,7 +168,7 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
               <motion.div variants={fadeInUp} className="mt-12 flex justify-center">
                 <a
                   href={moreLink.url}
-                  className="group inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                  className="group inline-flex items-center gap-2 text-mild-blue hover:text-medium-blue-alt font-medium transition-colors"
                 >
                   {moreLink.text}
                   <svg

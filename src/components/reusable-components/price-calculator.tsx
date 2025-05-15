@@ -496,10 +496,10 @@ const PriceCalculator: React.FC<{ fixedService?: string }> = ({ fixedService }) 
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                  <Info className="h-4 w-4 text-medium-blue-alt hover:text-blue-700 transition-colors" />
+                  <Info className="h-4 w-4 text-medium-blue hover:text-blue-700 transition-colors" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
+              <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-medium-blue p-3 rounded-lg shadow-lg">
                 <p>{section.description}</p>
               </PopoverContent>
             </Popover>
@@ -563,10 +563,10 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                <Info className="h-4 w-4 text-medium-blue-alt hover:text-blue-700 transition-colors" />
+                <Info className="h-4 w-4 text-medium-blue hover:text-blue-700 transition-colors" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
+            <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-medium-blue p-3 rounded-lg shadow-lg">
               <p className="whitespace-normal">{section.description}</p>
             </PopoverContent>
           </Popover>
@@ -589,10 +589,21 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
           return (
             <div
               key={key}
-              className={`flex items-start space-x-2 border rounded-lg p-3 ${isSelected ? "bg-blue-50 border-blue-400" : "bg-white border-gray-200"} hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
-              onClick={(e) => {
-                // Prevent double-triggering if clicking the checkbox directly
-                if (!(e.target as HTMLElement).closest("button")) {
+              className={`flex items-start space-x-2 border rounded-lg p-3 ${isSelected ? "bg-blue-50 border-light-blue" : "bg-white border-gray-200"} hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
+              onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                const target = e.target as HTMLElement;
+                const checkboxId = `${sectionKey}_${key}`;
+
+                // Check if the click originated from the Checkbox button itself
+                const clickedOnCheckboxItself = !!target.closest(`button#${checkboxId}`);
+                
+                // Check if the click originated from the Label associated with the Checkbox
+                const clickedOnAssociatedLabel = !!target.closest(`label[for="${checkboxId}"]`);
+
+                // Only call the toggle handler if the click was on the container's padding area,
+                // not on the checkbox (which is handled by its onCheckedChange)
+                // and not on the label (which is handled by htmlFor triggering onCheckedChange).
+                if (!clickedOnCheckboxItself && !clickedOnAssociatedLabel) {
                   handleMultiOptionToggle(sectionKey, key);
                 }
               }}
@@ -662,7 +673,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
                       href={option.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-medium-blue-alt hover:text-blue-800 flex items-center gap-2 transition-colors"
+                      className="text-sm text-mild-blue hover:text-medium-blue-alt flex items-center gap-2 transition-colors"
                     >
                       {option.name}
                       <ExternalLink className="h-4 w-4" />
@@ -705,10 +716,10 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon" className="h-6 w-6 p-0">
-                <Info className="h-4 w-4 text-medium-blue-alt hover:text-blue-700 transition-colors" />
+                <Info className="h-4 w-4 text-medium-blue hover:text-blue-700 transition-colors" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-blue-500 p-3 rounded-lg shadow-lg">
+            <PopoverContent side="top" className="w-auto max-w-xs bg-white text-gray-800 border border-medium-blue p-3 rounded-lg shadow-lg">
               <p>{section.description}</p>
             </PopoverContent>
           </Popover>
@@ -720,7 +731,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           <div
             key={key}
             className={`flex items-center space-x-2 p-3 border rounded-lg ${
-              selectedKey === key ? "bg-blue-50 border-blue-400" : "bg-white border-gray-200"
+              selectedKey === key ? "bg-blue-50 border-light-blue" : "bg-white border-gray-200"
             } hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer`}
             onClick={() => handleOptionChange(sectionKey, key)}
           >
@@ -785,12 +796,12 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
         </p>
       </div>
       <Card aria-label="Service Price Calculator" className="w-full max-w-5xl mx-auto shadow-xl bg-white border-0 overflow-hidden">
-        <CardHeader className="bg-gradient-to-br from-medium-blue to-blue-800 text-white border-b-0 pb-6">
+        <CardHeader className="bg-gradient-to-br from-light-blue to-blue-800 text-white border-b-0 pb-6">
           <div className="flex items-center gap-3">
             <Calculator className="h-10 w-10" />
             <CardTitle className="text-2xl font-bold">Service Price Calculator</CardTitle>
           </div>
-          <p className="text-blue-100 mt-2 text-sm">Configure your service options to get an instant price estimate</p>
+          <p className="text-gray-50 mt-2 text-sm">Configure your service options to get an instant price estimate</p>
         </CardHeader>
 
         <CardContent className="p-0">
@@ -857,14 +868,14 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
             <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
                 <h2 className="text-xl font-bold text-gray-900">Estimated Price Range</h2>
-                <Badge className="bg-blue-100 text-dark-blue-alt hover:bg-blue-200 border-0">Based on your selections</Badge>
+                <Badge className="bg-blue-100 text-medium-blue-alt border-0">Based on your selections</Badge>
               </div>
 
               {/* One-time costs */}
               <div className="space-y-3 mb-4 mt-4 pt-4 border-t border-gray-200">
                 <div className="flex justify-between text-gray-900">
                   <span className="font-medium font-semibold">Project Cost:</span>
-                  <span className="font-bold text-lg">
+                  <span className="font-bold text-lg px-2">
                     ${costs.oneTime.min.toLocaleString()} – ${costs.oneTime.max.toLocaleString()}
                   </span>
                 </div>
@@ -878,7 +889,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
                     {costs.recurring.map((item, index) => (
                       <div key={index} className="flex justify-between text-gray-800">
                         <span>{item.name}:</span>
-                        <span className="font-medium px-2">
+                        <span className="font-medium px-2 pl-12">
                           ${item.min.toLocaleString()} – ${item.max.toLocaleString()} /{item.period}
                         </span>
                       </div>
@@ -898,7 +909,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           <p className="text-sm text-gray-600 text-center sm:text-left">
             Ready to get started? Request a detailed estimate and free consultation.
           </p>
-          <Button size="lg" className="px-8 bg-medium-blue-alt hover:bg-blue-700 text-white transition-colors w-full sm:w-auto">
+          <Button size="lg" className="px-8 bg-mild-blue hover:bg-medium-blue-alt text-white transition-colors w-full sm:w-auto">
             Request Detailed Estimate
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

@@ -69,7 +69,7 @@ export function InlineStat({
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="text-2xl font-bold text-medium-blue-alt inline-flex items-center"
+      className="text-2xl font-bold text-medium-blue inline-flex items-center"
     >
       {prefix}{count}{suffix}
     </motion.span>

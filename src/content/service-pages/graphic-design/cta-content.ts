@@ -22,7 +22,6 @@ const graphicDesignCTAContent: CTAContent = {
   primaryButtonLink: "/contact",
   secondaryButtonText: "View Case Studies",
   secondaryButtonLink: "/case-studies",
-  bgClassName: "bg-gradient-to-br from-medium-blue to-blue-800", // Optional custom background
 };
 
 export default graphicDesignCTAContent;

@@ -25,7 +25,8 @@ const aiAutomationHero: HeroSectionContent = {
   title: "AI & Automation",
   subtitle: "Harness the power of artificial intelligence to optimize operations and drive innovation",
   description: "From intelligent process automation to custom AI solutions, we help businesses streamline operations, reduce costs, and enhance productivity. Our AI and automation services combine cutting-edge technology with practical business strategies to deliver measurable results and transformative capabilities.",
-  image: "/graphics/ai-automation.gif",
+  svgComponent: "ai-automation-graphic",
+  image: "/src/assets/svg/ai-automation-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [

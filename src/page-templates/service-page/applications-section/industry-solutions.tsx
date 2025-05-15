@@ -60,7 +60,7 @@ const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({
 
   const backgroundElement = useMemo(() => (
     <IconComponent 
-      className="text-blue-600" 
+      className="text-mild-blue-alt" 
       width={backgroundIconWidth || 425}
       height={backgroundIconHeight || 425}
       strokeWidth={1.5} 
@@ -85,12 +85,12 @@ const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({
           duration: 0.6,
           ease: 'easeOut',
         }}
-        className="container mx-auto bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white rounded-xl p-8 text-center mt-6 md:mt-12 shadow-md hover:shadow-lg transition-all duration-200"
+        className="container mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-6 md:mt-12 shadow-md hover:shadow-lg transition-all duration-200"
       >
         <div className="flex items-center justify-center gap-2 mb-4">
           <h4 className="text-2xl font-semibold">And Many More!</h4>
         </div>
-        <p className="mb-6 text-blue-100">
+        <p className="mb-6 text-white">
           Don&apos;t see your industry listed? Contact us to discuss your
           specific needs.
         </p>

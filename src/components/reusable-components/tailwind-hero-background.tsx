@@ -80,7 +80,7 @@ const TailwindHeroBackground = ({
     )}
     style={{ 
       minHeight: `calc(100vh - 104px)`,
-      maxHeight: '1024px'
+      maxHeight: '1248px'
     }}
     >
       {/* Decorative elements */}

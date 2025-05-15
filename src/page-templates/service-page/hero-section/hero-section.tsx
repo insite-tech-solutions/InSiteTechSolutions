@@ -6,6 +6,8 @@ import { HeroSectionContent } from '../types';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { getIcon } from '@/utils/icon-registry';
+// This dynamic import is needed to load SVGs
+import dynamic from 'next/dynamic';
 
 /**
  * Hero Section for Service Pages
@@ -25,12 +27,34 @@ const HeroSectionWrapper = React.memo(function HeroSection({
     subtitle,
     description,
     image,
+    svgComponent, // Add this line
     ctaText = "Start Your Project Today",
     ctaLink = "/contact",
     decorElements = [],
     bgClassName = "bg-gradient-to-br from-dark-blue to-blue-800 p-6",
     customElements
   } = content;
+
+  // Dynamically load SVG component if specified
+  const SvgGraphic = useMemo(() => {
+    if (!svgComponent) return null;
+    // Dynamic import for the SVG component, wrapped to forward props
+    return dynamic(() =>
+      import(`@/assets/svg/${svgComponent}.svg`).then((mod) => {
+        const Component = mod.default;
+        // Forward props to the SVG
+        return (props: React.SVGProps<SVGSVGElement>) => <Component {...props} />;
+      }),
+      {
+        loading: () => (
+          <div className="w-full h-full min-h-[400px] flex items-center justify-center">
+            <div className="animate-pulse bg-gray-300 rounded-lg w-[600px] h-[400px]"></div>
+          </div>
+        ),
+        ssr: true,
+      }
+    );
+  }, [svgComponent]);
 
   // Memoize processing of decorative elements to avoid reprocessing on every render
   const processedDecorElements = useMemo(() => {
@@ -73,22 +97,27 @@ const HeroSectionWrapper = React.memo(function HeroSection({
               </p>
             </div>
             
-            {/* Image */}
-            <div className="order-2 md:order-none flex items-center justify-center md:justify-end h-full min-h-[400px]">
-              {image && (
-                <>
-                  {/* Optimize image loading: full width on small screens, half width on larger */}
-                  <Image
-                    src={image}
-                    alt={title}
-                    width={600}
-                    height={400}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="rounded-lg"
-                    priority
-                    aria-label={title}
-                  />
-                </>
+            {/* Image or SVG */}
+            <div className="order-2 md:order-none flex items-center justify-center h-full min-h-[400px]">
+              {/* Use SVG component if provided */}
+              {SvgGraphic && (
+                <SvgGraphic 
+                  className="w-full h-auto max-w-[600px] rounded-lg md:pt-12" 
+                  aria-label={title}
+                />
+              )}
+              {/* Fall back to Image if no SVG provided */}
+              {!SvgGraphic && image && (
+                <Image
+                  src={image}
+                  alt={title}
+                  width={600}
+                  height={400}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="rounded-lg"
+                  priority
+                  aria-label={title}
+                />
               )}
             </div>
 

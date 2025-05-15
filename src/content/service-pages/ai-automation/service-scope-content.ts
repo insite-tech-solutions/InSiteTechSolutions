@@ -23,7 +23,7 @@ const aiAutomationServiceScope: ServiceScopeContent = {
   
   services: [
     {
-      icon: "Brain",
+      icon: "BrainCircuit",
       title: "Machine Learning & Efficiency Optimization",
       description: "Leverage the power of machine learning to identify patterns, predict outcomes, and optimize business processes.",
       benefits: [

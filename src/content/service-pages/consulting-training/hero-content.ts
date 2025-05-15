@@ -25,7 +25,8 @@ const consultingTrainingHero: HeroSectionContent = {
   title: "Consulting & Training",
   subtitle: "Empower your team with expert guidance and the knowledge to succeed",
   description: "From basic tech help to complex consultation and training services, we help organizations and individuals navigate technological challenges. Our consulting and training services combine technical expertise with practical implementation support to ensure you can effectively leverage technology to achieve your goals.",
-  image: "/graphics/consulting-training.gif",
+  svgComponent: "consulting-graphic",
+  image: "/src/assets/svg/consulting-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [

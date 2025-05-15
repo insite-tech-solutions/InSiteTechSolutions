@@ -1,4 +1,17 @@
+/**
+ * @fileoverview TracingBeam component for visualizing scroll progress
+ * with a customizable gradient beam.
+ */
+
 "use client";
+
+/**
+ * TracingBeam component that creates a visual tracking beam following scroll movement
+ * 
+ * This component renders a vertical beam that follows the user's scroll position,
+ * creating a visual indicator of progress through the content.
+ */
+
 import React, { useEffect, useRef, useState, memo } from "react";
 import {
   motion,
@@ -121,11 +134,11 @@ const TracingBeamComponent: React.FC<TracingBeamProps> = ({
               y1={y1}
               y2={y2}
             >
-              <stop stopColor="#18CCFC" stopOpacity="0"></stop> {/* Cyan */}
-              <stop offset="0.03" stopColor="#2563EB" stopOpacity="0.98"></stop> {/* Smaller light blue tip */}
-              <stop stopColor="#2563EB"></stop> {/* Tailwind blue-600 */}
-              <stop offset="0.325" stopColor="#1D4ED8"></stop> {/* Darker blue */}
-              <stop offset="1" stopColor="#6002c9" stopOpacity="0.25"></stop> {/* Purple */}
+              <stop stopColor="#2398ff" stopOpacity="0"></stop> {/* Cyan, zero opacity keeps the track mostly transparent until the tip */}
+              <stop offset="0.03" stopColor="#0173e3" stopOpacity="0.98"></stop> {/* Smaller light blue tip */}
+              <stop stopColor="#0773d6"></stop> {/* mild blue alt */}
+              <stop offset="0.325" stopColor="#1d64cd"></stop> {/* medium blue alt */}
+              <stop offset="1" stopColor="#0e72c8" stopOpacity="0.75"></stop> {/* medium blue */}
             </motion.linearGradient>
           </defs>
         </svg>

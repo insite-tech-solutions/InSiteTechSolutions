@@ -32,13 +32,13 @@ const CTASectionWrapper: React.FC<CTASectionProps> = ({ content }) => {
     primaryButtonLink,
     secondaryButtonText,
     secondaryButtonLink,
-    bgClassName = "bg-gradient-to-br from-medium-blue to-blue-800"
+    bgClassName = "bg-gradient-to-br from-light-blue to-blue-800"
   } = content
 
   return (
     <div className="pb-16 py-8">
       <section
-        className={`container mx-auto relative rounded-2xl overflow-hidden ${bgClassName} border-2 border-medium-blue shadow-lg hover:shadow-xl text-white py-8 lg:py-16 px-8 transition-all duration-300`}
+        className={`container mx-auto relative rounded-2xl overflow-hidden ${bgClassName} border-2 border-light-blue shadow-lg hover:shadow-xl text-white py-8 lg:py-16 px-8 transition-all duration-300`}
         aria-label="Call to action section"
       >
         

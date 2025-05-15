@@ -41,7 +41,7 @@ export default function TailwindButton({
     <Link
       href={href}
       className={cn(
-        "group w-fit inline-flex items-center text-dark-blue py-3 px-6 rounded-full shadow-md hover:bg-white hover:shadow-lg duration-300 transform transition-all hover:scale-[1.02] active:scale-[0.98] active:shadow-inner",
+        "group w-fit inline-flex items-center text-medium-blue py-3 px-6 rounded-full shadow-md hover:bg-white hover:shadow-lg duration-300 transform transition-all hover:scale-[1.02] active:scale-[0.98] active:shadow-inner",
         className
       )}
     >

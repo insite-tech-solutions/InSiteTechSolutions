@@ -25,7 +25,8 @@ const dataAnalysisHero: HeroSectionContent = {
   title: "Data Analysis",
   subtitle: "Transform raw data into actionable insights that drive better decisions",
   description: "From business analytics to scientific research, our data analysis services help you uncover hidden patterns, optimize performance, and identify new opportunities. We combine statistical expertise with practical knowledge to deliver insights that create real value.",
-  image: "/graphics/data-visualization.gif",
+  svgComponent: "data-analysis-graphic",
+  image: "/src/assets/svg/data-analysis-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [

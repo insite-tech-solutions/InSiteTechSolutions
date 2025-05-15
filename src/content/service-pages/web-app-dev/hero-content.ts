@@ -25,7 +25,8 @@ const webAppDevelopmentHero: HeroSectionContent = {
   title: "Web & App Development",
   subtitle: "Transform your ideas into powerful digital solutions",
   description: "From responsive websites to powerful applications, we create digital solutions that drive real business results. Our development services combine modern technology with practical business sense to deliver exactly what your organization needs.",
-  image: "/graphics/responsive-design.gif",
+  svgComponent: "web-app-dev-graphic",
+  image: "/src/assets/svg/web-app-dev-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [

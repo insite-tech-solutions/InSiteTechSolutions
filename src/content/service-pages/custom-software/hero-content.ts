@@ -25,7 +25,8 @@ const customSoftwareHero: HeroSectionContent = {
   title: "Custom Software Solutions",
   subtitle: "Turn your technical challenges into opportunities with custom software",
   description: "From streamlining operations to solving complex computational problems, we create custom software that perfectly aligns with your business processes or research goals. Our solutions combine innovative technology with practical business sense to deliver measurable results.",
-  image: "/CustomSoftwareGraphic.svg",
+  svgComponent: "custom-software-graphic",
+  image: "/src/assets/svg/custom-software-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [

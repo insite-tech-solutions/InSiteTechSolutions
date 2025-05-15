@@ -51,14 +51,14 @@ const CategoryCard: React.FC<{
     >
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 rounded-lg bg-blue-100">
-          <IconComponent className="h-6 w-6 text-blue-600" />
+          <IconComponent className="h-6 w-6 text-medium-blue-alt" />
         </div>
         <h3 className="text-xl font-semibold text-gray-50">{category.title}</h3>
       </div>
       <ul className="space-y-3">
         {category.items.map((item, index) => (
           <li key={index} className="flex items-center gap-2 text-gray-100">
-            <ArrowRight className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+            <ArrowRight className="h-4 w-4 text-very-light-grey-alt flex-shrink-0" />
             <span>{item}</span>
           </li>
         ))}
@@ -85,7 +85,7 @@ const ApplicationCategories: React.FC<ApplicationCategoriesProps> = ({
   }, [categories]);
 
   return (
-    <section className="container mx-auto relative rounded-xl p-6 bg-gradient-to-br from-medium-blue via-blue-800 to-blue-600 shadow-xl">
+    <section className="container mx-auto relative rounded-xl p-6 bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt shadow-xl">
       <motion.div
         initial="hidden"
         whileInView="visible"

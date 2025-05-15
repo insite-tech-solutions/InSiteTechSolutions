@@ -40,12 +40,19 @@ export interface DecorElement {
  * @property {string} subtitle - The subtitle of the hero section.
  * @property {string} description - The description of the hero section.
  * @property {string} image - The image for the hero section.
+ * @property {string} svgComponent - The SVG component for the hero section.
+ * @property {string} ctaText - The text for the call to action button.
+ * @property {string} ctaLink - The link for the call to action button.
+ * @property {DecorElement[]} decorElements - The decorative elements for the hero section.
+ * @property {string} bgClassName - The custom background classes for the hero section.
+ * @property {ReactNode} customElements - Truly custom elements for the hero section.
  */
 export interface HeroSectionContent {
   title: string;
   subtitle: string;
   description: string;
-  image: string;
+  image?: string;         // Changed to optional
+  svgComponent?: string;  // Add this line - name of the SVG file
   ctaText?: string;
   ctaLink?: string;
   decorElements?: DecorElement[];

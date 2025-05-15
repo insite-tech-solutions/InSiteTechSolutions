@@ -86,7 +86,7 @@ const ServiceOverviewSection: React.FC<ServiceOverviewSectionProps> = ({ content
               key={index}
               href={item.anchor.startsWith('#') ? item.anchor : `#${item.anchor}`}
               onClick={(e) => handleTOCClick(e, item.anchor)}
-              className="inline-flex items-center px-3 py-1.5 text-sm md:px-4 md:py-2 font-medium text-gray-700 border border-medium-blue rounded-full hover:bg-blue-50 hover:text-blue-600 hover:border-blue-500 transition-all duration-200"
+              className="inline-flex items-center px-3 py-1.5 text-sm md:px-4 md:py-2 font-medium text-gray-700 border border-medium-blue rounded-full hover:bg-blue-50 hover:text-medium-blue-alt hover:border-mild-blue-alt transition-all duration-200"
             >
               {item.title}
             </a>
@@ -103,7 +103,7 @@ const ServiceOverviewSection: React.FC<ServiceOverviewSectionProps> = ({ content
    * @returns {React.ReactElement} CTA section
    */
   const renderCTA = () => (
-    <div className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 max-w-2xl mx-auto">
+    <div className="bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 max-w-2xl mx-auto">
       <div className="text-center text-xl mb-4">
         <strong>
           Have questions? Reach out today for a free initial consultation.
@@ -123,7 +123,7 @@ const ServiceOverviewSection: React.FC<ServiceOverviewSectionProps> = ({ content
   return (
     <section className="pt-10 pb-2 overflow-x-hidden">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-bold pb-8 text-center text-gray-900">Service Overview</h2>
+        <h2 className="text-4xl font-bold pb-8 text-center">Service Overview</h2>
         <div className="max-w-7xl mx-auto px-2">
           {/* Main Content from Markdown */}
           {markdownText && (

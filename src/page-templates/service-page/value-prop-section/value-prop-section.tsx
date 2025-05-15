@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { getIcon } from '@/utils/icon-registry';
-import { ChevronUp, ChevronDown, CheckCircle } from 'lucide-react';
+import { ChevronDown, CheckCircle } from 'lucide-react';
 import { InlineStat } from './inline-stat';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import { 
@@ -61,19 +61,17 @@ const TrendCard = React.memo(function TrendCard({
   return (
     <motion.article
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-medium-blue-alt transition-all hover:shadow-lg p-4"
+      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-mild-blue transition-all hover:shadow-lg p-4"
       onClick={onToggle}
     >
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <IconComponent className="h-6 w-6 text-medium-blue-alt" />
+          <IconComponent className="h-6 w-6 text-medium-blue" />
           <h4 className="text-gray-700">{title}</h4>
         </div>
-        {isOpen ? (
-          <ChevronUp className="h-5 w-5 text-gray-500" />
-        ) : (
-          <ChevronDown className="h-5 w-5 text-gray-500" />
-        )}
+        <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
+          <ChevronDown className="h-5 w-5 text-medium-blue" />
+        </motion.div>
       </header>
       <AnimatePresence>
         {isOpen && (
@@ -145,6 +143,9 @@ const MarketInsightCard = React.memo(function MarketInsightCard({ insights }: { 
     <article className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
       <h3 className="text-2xl font-semibold mb-4 text-gray-800">Key Market InSites</h3>
       {renderedInsights}
+      <p className="mt-4 text-xs text-gray-400">
+        * Facts and figures are for informational purposes only and may not be current as of your reading. We'll be adding citations and sources soon—check back for updates!
+      </p>
     </article>
   );
 });
@@ -180,7 +181,7 @@ const ComparisonTable = React.memo(function ComparisonTable({
       >
         <table className="w-full border-collapse table-fixed">
           <thead>
-            <tr className="bg-gradient-to-br from-medium-blue to-blue-800 text-white">
+            <tr className="bg-gradient-to-br from-light-blue to-blue-800 text-white">
               {tableData.headers.map((header: string, index: number) => (
                 <th key={index} className="p-4 text-left">{header}</th>
               ))}
@@ -322,7 +323,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
 
               <motion.aside
                 variants={fadeInUp}
-                className="bg-gradient-to-br from-medium-blue to-blue-800 border border-medium-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 <h3 className="text-2xl font-semibold mb-4">{callToAction.title}</h3>
                 <p className="mb-6">

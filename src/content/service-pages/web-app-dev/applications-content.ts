@@ -92,7 +92,7 @@ const webAppDevelopmentApplications: ApplicationsContent = {
       ],
     },
   ], 
-  backgroundIcon: "Layout",
+  backgroundIcon: "MonitorSmartphone",
   backgroundIconWidth: 400,
   backgroundIconHeight: 400,
 };

@@ -25,7 +25,7 @@ const aiAutomationApplications: ApplicationsContent = {
   
   categories: [
     {
-      title: "Operational Excellence",
+      title: "Organizational Efficiency",
       icon: "Settings",
       items: [
         "Workflow automation and process optimization",

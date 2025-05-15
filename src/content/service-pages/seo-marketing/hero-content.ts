@@ -25,7 +25,8 @@ const seoMarketingHero: HeroSectionContent = {
   title: "SEO & Online Marketing",
   subtitle: "Boost visibility, drive engagement, and grow your business online",
   description: "Transform your online presence into a powerful revenue generator with strategic SEO and marketing solutions. We blend data-driven techniques with creative marketing to ensure your business stands out in a crowded digital landscape.",
-  image: "/graphics/responsive-design.gif",
+  svgComponent: "seo-graphic",
+  image: "/src/assets/svg/seo-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [

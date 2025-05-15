@@ -84,15 +84,15 @@ const PriceFactorComponent: React.FC<PriceFactorProps> = ({ title, items, icon }
       className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-all"
     >
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-blue-100">
-          <Icon className="h-6 w-6 text-blue-600" />
+        <div className="p-2 rounded-lg bg-blue-50">
+          <Icon className="h-6 w-6 text-medium-blue-alt" />
         </div>
-        <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
+        <h4 className="text-xl font-semibold text-gray-800">{title}</h4>
       </div>
       <ul className="space-y-3">
         {items.map((item, index) => (
           <li key={index} className="flex items-start gap-2 text-gray-700">
-            <ArrowRight className="h-4 w-4 text-blue-600 mt-1 flex-shrink-0" />
+            <ArrowRight className="h-4 w-4 text-medium-blue-alt mt-1 flex-shrink-0" />
             <span>{item}</span>
           </li>
         ))}
@@ -181,7 +181,7 @@ const PriceSectionWrapper: React.FC<PriceSectionProps> = ({ content }) => {
               {longTermValue.link && (
                 <a 
                   href={longTermValue.link.url}
-                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                  className="inline-flex items-center gap-2 text-mild-blue hover:text-medium-blue-alt font-medium"
                 >
                   {longTermValue.link.text}
                   <ExternalLink className="h-4 w-4" />

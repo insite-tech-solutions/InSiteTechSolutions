@@ -6,9 +6,11 @@
  */
 // src/templates/service-page/service-page-template.tsx
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
+import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 
 // Direct imports for critical above-the-fold content
 import HeroSection from './hero-section';
@@ -68,22 +70,8 @@ interface ServicePageTemplateProps {
   options?: ServicePageTemplateOptions;
 }
 
-/**
- * Service Page Template Component
- * 
- * A flexible template for service pages that combines direct imports for critical
- * above-the-fold content with dynamic imports for below-the-fold sections.
- * 
- * Features:
- * - Performance optimized with critical content loaded immediately
- * - Secondary content lazy-loaded when needed
- * - Support for customization via options (skipping sections, adding custom sections)
- * - Fully typed content interfaces
- * 
- * @param {ServicePageTemplateProps} props - Component props
- * @returns {JSX.Element} A memoized service page template component
- */
-const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
+// Inner component that uses the loading context
+const ServicePageContent: React.FC<ServicePageTemplateProps> = ({
   heroContent,
   serviceOverviewContent,
   valuePropContent,
@@ -96,6 +84,16 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
   ctaContent,
   options = {}
 }) => {
+  const { setIsPageLoading } = usePageLoading();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPageLoading(false);
+    }, 500); // Adjust delay as needed (e.g., 1500ms = 1.5 seconds)
+
+    return () => clearTimeout(timer); // Cleanup timer on unmount
+  }, [setIsPageLoading]);
+
   const {
     skipSections = [] as SectionName[],
     addSections = {},
@@ -234,6 +232,41 @@ const ServicePageTemplate: React.FC<ServicePageTemplateProps> = ({
         )}
       </Layout>
     </main>
+  );
+};
+
+/**
+ * Service Page Template Component
+ * 
+ * A flexible template for service pages that combines direct imports for critical
+ * above-the-fold content with dynamic imports for below-the-fold sections.
+ * 
+ * Features:
+ * - Performance optimized with critical content loaded immediately
+ * - Secondary content lazy-loaded when needed
+ * - Support for customization via options (skipping sections, adding custom sections)
+ * - Fully typed content interfaces
+ * 
+ * @param {ServicePageTemplateProps} props - Component props
+ * @returns {JSX.Element} A memoized service page template component
+ */
+const ServicePageTemplate: React.FC<ServicePageTemplateProps> = (props) => {
+  return (
+    <PageLoadingProvider>
+      <ServicePageLoaderWrapper {...props} />
+    </PageLoadingProvider>
+  );
+};
+
+// New wrapper component to access context correctly
+const ServicePageLoaderWrapper: React.FC<ServicePageTemplateProps> = (props) => {
+  const { isPageLoading } = usePageLoading();
+
+  return (
+    <>
+      {isPageLoading && <PageTransitionLoader />}
+      <ServicePageContent {...props} />
+    </>
   );
 };
 

@@ -25,7 +25,8 @@ const graphicDesignHero: HeroSectionContent = {
   title: "Graphic Design & Branding",
   subtitle: "Create a memorable visual identity that captivates your audience",
   description: "From stunning logos to comprehensive brand identities, we craft visual elements that communicate your company's values and resonate with your target audience. Our design solutions blend creativity with strategic thinking to build a cohesive brand experience across all touchpoints.",
-  image: "/graphics/design-elements.gif",
+  svgComponent: "graphic-design-graphic",
+  image: "/src/assets/svg/graphic-design-graphic.svg",
   ctaText: "Start Your Project Today",
   ctaLink: "/contact",
   decorElements: [
