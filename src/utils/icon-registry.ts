@@ -98,6 +98,8 @@ import {
   Scale,
   MessageCircleQuestion,
   HelpCircle,
+  Info,
+  Calendar,
   ChevronUp,
   ChevronDown
 } from 'lucide-react';
@@ -202,6 +204,8 @@ export const IconRegistry = {
   'Scale': Scale,
   'MessageCircleQuestion': MessageCircleQuestion,
   'HelpCircle': HelpCircle,
+  'Info': Info,
+  'Calendar': Calendar,
   'ChevronUp': ChevronUp,
   'ChevronDown': ChevronDown
 };

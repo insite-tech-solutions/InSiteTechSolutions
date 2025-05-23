@@ -12,7 +12,7 @@ export const menuItems: MenuItem[] = [
     submenu: [
       { name: 'About us', href: '/about/us' },
       { name: 'Development Process', href: '/about/process' },
-      { name: 'Pricing & Payments', href: '/about/pricing' },
+      { name: 'Pricing & Payments', href: '/about/pricing-and-payments' },
       { name: 'Previous Works', href: '/about/works' },
       { name: 'Privacy Policy & Terms of Service', href: '/about/terms' },
     ],

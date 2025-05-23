@@ -56,6 +56,9 @@ const config: Config = {
         normal: '600', // This maps to 'Demi'
         bold: '700',   // This keeps 'Bold' as is
       },
+      transitionDuration: {
+        '400': '400ms',
+      },
     },
   },
   plugins: [],

@@ -1,9 +1,15 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Code, Palette, BarChart, Bot, Users, Search, Laptop, ArrowRight } from 'lucide-react'
+import WebAppDevGraphic from '@/assets/svg/web-app-dev-graphic.svg'
+import CustomSoftwareGraphic from '@/assets/svg/custom-software-graphic.svg'
+import SeoGraphic from '@/assets/svg/seo-graphic.svg'
+import GraphicDesignGraphic from '@/assets/svg/graphic-design-graphic.svg'
+import DataAnalysisGraphic from '@/assets/svg/data-analysis-graphic.svg'
+import AiAutomationGraphic from '@/assets/svg/ai-automation-graphic.svg'
+import ConsultingGraphic from '@/assets/svg/consulting-graphic.svg'
 
 const tabs = [
   { id: 'webDev', icon: Laptop, title: 'Web & App Development' },
@@ -20,7 +26,7 @@ type ContentType = {
     title: string
     description: string
     features: string[]
-    image: string
+    image: React.ComponentType<React.SVGProps<SVGSVGElement>>
   }
 }
 
@@ -35,7 +41,7 @@ const content: ContentType = {
       'Modern Tech Frameworks with Responsive Designs',
       'Ongoing Maintenance & Support'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: WebAppDevGraphic,
   },
   software: {
     title: 'Custom Software Solutions',
@@ -47,7 +53,7 @@ const content: ContentType = {
       'Legacy Software Modernization',
       'Inverse Design & Process Optimization'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: CustomSoftwareGraphic,
   },
   seo: {
     title: 'SEO & Online Marketing',
@@ -59,7 +65,7 @@ const content: ContentType = {
       'Analytics & Performance Tracking',
       'A/B Testing & Conversion Rate Optimization'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: SeoGraphic,
   },
   design: {
     title: 'Graphic Design & Branding',
@@ -71,7 +77,7 @@ const content: ContentType = {
       'Print & Digital Marketing Material Design',
       'Photo & Video Editing Services'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: GraphicDesignGraphic,
   },
   data: {
     title: 'Data Analysis',
@@ -83,7 +89,7 @@ const content: ContentType = {
       'Predictive Modeling & Forecasting',
       'Data Mining & Processing'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: DataAnalysisGraphic,
   },
   ai: {
     title: 'AI & Automation',
@@ -95,7 +101,7 @@ const content: ContentType = {
       'AI-Powered Chatbots & Virtual Assistants Development',
       'Custom GPT Creation, Prompt Engineering, & AI Integration Services'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: AiAutomationGraphic,
   },
   consulting: {
     title: 'Consulting & Training',
@@ -107,7 +113,7 @@ const content: ContentType = {
       'Technical Training & Consulting',
       'Official Documentation & Report Copywriting Services'
     ],
-    image: '/placeholder.svg?height=400&width=600',
+    image: ConsultingGraphic,
   },
 }
 
@@ -117,7 +123,7 @@ export default function ImmersiveHeroSection() {
   const ActiveIcon = tabs.find(tab => tab.id === activeTab)?.icon || Laptop
 
   return (
-    <div className="bg-white p-2">
+    <div className="p-2">
     <div className="rounded-xl bg-gradient-to-br from-blue-500 via-blue-800 to-blue-600 min-h-screen text-white shadow-xl overflow-hidden">
       <div className="container mx-auto px-4 py-12">
         <motion.h1 
@@ -211,13 +217,15 @@ export default function ImmersiveHeroSection() {
                 transition={{ duration: 0.5 }}
                 className="relative"
               >
-                <Image
-                  src={content[activeTab].image}
-                  alt={content[activeTab].title}
-                  className="rounded-lg shadow-2xl"
-                  width={600}
-                  height={400}
-                />
+                {content[activeTab].image && (() => {
+                  const SvgComponent = content[activeTab].image;
+                  return (
+                    <SvgComponent
+                      className="rounded-lg w-full h-auto max-w-[600px]"
+                      aria-label={content[activeTab].title}
+                    />
+                  );
+                })()}
                 <div className="absolute -bottom-4 -right-4 bg-indigo-600 text-white p-4 rounded-full shadow-lg">
                   <ActiveIcon size={32} />
                 </div>
@@ -226,34 +234,6 @@ export default function ImmersiveHeroSection() {
           </AnimatePresence>
         </div>
 
-        <motion.div 
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <h3 className="text-2xl font-bold mb-4">Why Choose InSite Tech Solutions?</h3>
-          <div className="flex flex-wrap justify-center gap-8">
-            {[
-              { icon: Users, text: 'Expert Team' },
-              { icon: Bot, text: 'Cutting-edge Tech' },
-              { icon: Laptop, text: 'Global Reach' },
-            ].map((item, index) => (
-              <motion.div 
-                key={index} 
-                className="flex flex-col items-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <div className="bg-white bg-opacity-20 p-4 rounded-full mb-2">
-                  <item.icon size={32} />
-                </div>
-                <span>{item.text}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </div>
     </div>

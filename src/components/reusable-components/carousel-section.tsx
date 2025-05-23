@@ -117,7 +117,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
   }, [carouselParams]);
 
   return (
-    <div className="container px-2 mx-auto relative rounded-xl">
+    <div className="w-full mx-auto px-6 md:px-8 lg:px-12 relative rounded-xl">
       {/* Section Title and Description */}
       <motion.div
         variants={fadeInUp}

@@ -506,7 +506,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
                             ref={(el) => {
                               if (el) dividerRefs.current[index] = el;
                             }}
-                            className="border-2 border-gray-300 my-1"
+                            className="border-2 border-light-grey my-1"
                             aria-hidden="true"
                             style={{ pointerEvents: 'none' }}
                           />
