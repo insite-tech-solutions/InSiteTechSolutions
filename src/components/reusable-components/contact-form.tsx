@@ -56,6 +56,21 @@ const budgetOptions = [
   { value: "$30,000+", label: "$30,000+" },
 ]
 
+// Phone number formatting function
+const formatPhoneNumber = (value: string) => {
+  // Remove all non-digits
+  const phoneNumber = value.replace(/\D/g, '')
+  
+  // Format based on length
+  if (phoneNumber.length < 4) {
+    return phoneNumber
+  } else if (phoneNumber.length < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`
+  } else {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`
+  }
+}
+
 export default function ContactForm({
   variant = "white",
   showHeader = true,
@@ -65,6 +80,7 @@ export default function ContactForm({
 }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [showMailingListInfo, setShowMailingListInfo] = useState(false)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -119,7 +135,7 @@ export default function ContactForm({
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white after:content-['*'] after:text-red-500 after:ml-0.5" : "after:content-['*'] after:text-red-500 after:ml-0.5"}>First Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="John" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                      <Input placeholder="John" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,7 +148,7 @@ export default function ContactForm({
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white" : undefined}>Last Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Doe" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                      <Input placeholder="Doe" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -148,7 +164,7 @@ export default function ContactForm({
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white after:content-['*'] after:text-red-500 after:ml-0.5" : "after:content-['*'] after:text-red-500 after:ml-0.5"}>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="john.doe@example.com" type="email" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                      <Input placeholder="john.doe@example.com" type="email" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -161,7 +177,16 @@ export default function ContactForm({
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white" : undefined}>Phone Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="(123) 456-7890" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                      <Input 
+                        placeholder="(123) 456-7890" 
+                        className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} 
+                        value={field.value}
+                        onChange={(e) => {
+                          const formatted = formatPhoneNumber(e.target.value)
+                          field.onChange(formatted)
+                        }}
+                        maxLength={14}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -177,7 +202,7 @@ export default function ContactForm({
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white" : undefined}>Website URL</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://example.com" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                      <Input placeholder="https://example.com" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -190,7 +215,7 @@ export default function ContactForm({
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white" : undefined}>Company Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Acme Inc." className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                      <Input placeholder="Acme Inc." className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -238,7 +263,7 @@ export default function ContactForm({
                 <FormItem>
                   <FormLabel className={variant === "frosted" ? "text-white" : undefined}>Additional information</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Tell us more about your project..." className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60" : undefined} {...field} />
+                    <Textarea placeholder="Tell us more about your project timeline, goals, technical requirements, or any questions you have..." className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -289,11 +314,25 @@ export default function ContactForm({
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel className={clsx("font-normal cursor-pointer", variant === "frosted" && "text-white")}>
-                      Yes, I&apos;d like to receive updates about your services and industry insights
+                      Subscribe to our mailing list to become an InSite Tech InSider and receive the latest tech tips and exclusive offers
                     </FormLabel>
-                    <p className={clsx("text-xs", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
-                      You can unsubscribe at any time
-                    </p>
+                    <div className="space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowMailingListInfo(!showMailingListInfo)}
+                        className={clsx(
+                          "text-xs underline hover:no-underline",
+                          variant === "frosted" ? "text-gray-300" : "text-muted-foreground"
+                        )}
+                      >
+                        {showMailingListInfo ? "Show less" : "Learn more"}
+                      </button>
+                      {showMailingListInfo && (
+                        <p className={clsx("text-xs leading-relaxed", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
+                          We use separate databases for our promotional and contact emails, if you don&apos;t click this box, you will not be added to the promo list. We value your privacy and security. You will receive an email to confirm your address (check your spam folder) and can unsubscribe at any time. We will never share your information without your consent.
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </FormItem>
               )}
@@ -337,7 +376,7 @@ export default function ContactForm({
             <Button
               type="submit"
               className={clsx(
-                "w-1/2",
+                "w-full",
                 variant === "frosted"
                   ? "bg-white border border-white hover:bg-white/20 text-medium-blue hover:text-white"
                   : "bg-medium-blue text-white hover:bg-dark-blue-alt"
@@ -358,11 +397,15 @@ export default function ContactForm({
         "rounded-xl p-6 shadow-lg bg-white/15 backdrop-blur-lg backdrop-filter",
         className
       )}>
-        <div className="flex flex-col space-y-1.5 pb-4">
-          <p className="text-2xl font-semibold leading-none tracking-tight text-white">{headerTitle}</p>
-          <p className="text-sm text-white/80">{headerDescription}</p>
+        {showHeader && (
+          <div className="flex flex-col space-y-1.5 pb-4">
+            <p className="text-2xl font-semibold leading-none tracking-tight text-white">{headerTitle}</p>
+            <p className="text-sm text-white/80">{headerDescription}</p>
+          </div>
+        )}
+        <div className={clsx(!showHeader && "pt-1")}>
+          {FormContent}
         </div>
-        {FormContent}
       </div>
     )
   }
@@ -372,11 +415,11 @@ export default function ContactForm({
     <Card className={clsx("bg-white border-0 shadow-xl", className)}>
       {showHeader && (
         <CardHeader>
-          <CardTitle>{headerTitle}</CardTitle>
+          <CardTitle className="text-medium-blue">{headerTitle}</CardTitle>
           <CardDescription>{headerDescription}</CardDescription>
         </CardHeader>
       )}
-      <CardContent>{FormContent}</CardContent>
+      <CardContent className={clsx(!showHeader && "pt-6")}>{FormContent}</CardContent>
     </Card>
   )
 } 

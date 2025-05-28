@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import ContactForm from "@/components/contact-page/contact-form"
+import ContactForm from "@/components/reusable-components/contact-form"
 import ContactInfo from "@/components/contact-page/contact-info"
 import LocationImageSection from "@/components/contact-page/location-image-section"
 import Header from "@/components/site-header/header"

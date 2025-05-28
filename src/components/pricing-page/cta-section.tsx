@@ -44,7 +44,7 @@ export default function CustomSolutionSection() {
       </div>
       <div>
         <div className="bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt rounded-2xl p-2 md:p-6 max-w-2xl mx-auto shadow-lg">
-          <ContactForm variant="frosted" showHeader={true} />
+          <ContactForm variant="white" showHeader={true} />
         </div>
       </div>
     </section>
