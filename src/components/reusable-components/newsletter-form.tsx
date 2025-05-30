@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import Turnstile from "@/components/ui/turnstile"
 
 // Form validation schema
 const formSchema = z.object({
@@ -27,6 +28,8 @@ export default function NewsletterForm({
 }: NewsletterFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   // Initialize form
   const form = useForm<FormValues>({
@@ -39,24 +42,38 @@ export default function NewsletterForm({
 
   // Handle form submission
   async function onSubmit(data: FormValues) {
+    if (!turnstileToken) {
+      setSubmitError("Please complete the security verification")
+      return
+    }
+
     setIsSubmitting(true)
+    setSubmitError(null)
 
     try {
-      // Replace with your actual API endpoint
-      // await fetch('/api/subscribe', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(data),
-      // })
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          turnstileToken,
+        }),
+      })
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      
-      console.log("Newsletter subscription data:", data)
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to subscribe')
+      }
+
       setIsSuccess(true)
       form.reset()
+      setTurnstileToken(null)
     } catch (error) {
-      console.error("Subscription error:", error)
+      console.error('Newsletter subscription error:', error)
+      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred')
     } finally {
       setIsSubmitting(false)
     }
@@ -70,10 +87,24 @@ export default function NewsletterForm({
         <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-md">
           <p className="font-medium">Thank you for subscribing!</p>
           <p className="text-sm mt-1">Please check your email for a confirmation link to complete your subscription.</p>
+          <Button 
+            onClick={() => setIsSuccess(false)} 
+            variant="outline" 
+            size="sm" 
+            className="mt-3"
+          >
+            Subscribe Another Email
+          </Button>
         </div>
       ) : (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {submitError && (
+              <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+                <p className="text-sm">{submitError}</p>
+              </div>
+            )}
+
             <FormField
               control={form.control}
               name="name"
@@ -81,7 +112,7 @@ export default function NewsletterForm({
                 <FormItem>
                   <FormLabel className="text-gray-800 after:content-['*'] after:text-red-500 after:ml-0.5">Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your name" {...field} className="text-gray-800 placeholder:text-gray-400" />
+                    <Input placeholder="Your Name" type="text" {...field} className="text-gray-800 placeholder:text-gray-400" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -102,10 +133,30 @@ export default function NewsletterForm({
               )}
             />
 
+            {/* Turnstile verification */}
+            <div className="flex justify-left">
+              <Turnstile
+                onVerify={(token) => {
+                  setTurnstileToken(token)
+                  setSubmitError(null)
+                }}
+                onError={() => {
+                  setTurnstileToken(null)
+                  setSubmitError("Security verification failed. Please try again.")
+                }}
+                onExpire={() => {
+                  setTurnstileToken(null)
+                  setSubmitError("Security verification expired. Please try again.")
+                }}
+                size="normal"
+                theme="light"
+              />
+            </div>
+
             <Button
               type="submit"
               className="w-full md:w-auto bg-medium-blue hover:bg-dark-blue-alt text-white"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !turnstileToken}
             >
               {isSubmitting ? "Subscribing..." : "Subscribe"}
             </Button>

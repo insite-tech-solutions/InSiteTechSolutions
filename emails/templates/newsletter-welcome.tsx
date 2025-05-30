@@ -122,12 +122,6 @@ import {
                 </Row>
               </Section>
 
-              <Section style={emailStyles.buttonContainer}>
-                <Button style={emailStyles.primaryButton} href="https://insitetechsolutions.com/services">
-                  Explore Our Services
-                </Button>
-              </Section>
-
               <Text style={emailStyles.signature}>
                 Best regards,<br />
                 <strong>The InSite Tech Solutions Team</strong><br />

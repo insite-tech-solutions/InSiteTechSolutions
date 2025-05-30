@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import Turnstile from "@/components/ui/turnstile"
 import clsx from "clsx"
 
 const formSchema = z.object({
@@ -49,6 +50,7 @@ const services = [
 ]
 
 const budgetOptions = [
+  { value: "Not sure yet", label: "Not sure yet" },
   { value: "$0 - $1,000", label: "$0 - $1,000" },
   { value: "$1,000 - $5,000", label: "$1,000 - $5,000" },
   { value: "$5,000 - $15,000", label: "$5,000 - $15,000" },
@@ -80,7 +82,11 @@ export default function ContactForm({
 }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [showMailingListInfo, setShowMailingListInfo] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [formHeight, setFormHeight] = useState<number | null>(null)
+  const formRef = useRef<HTMLDivElement>(null)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -99,15 +105,46 @@ export default function ContactForm({
     },
   })
 
-  async function onSubmit() {
+  // Measure form height when it's first rendered
+  useEffect(() => {
+    if (formRef.current && !isSuccess && formHeight === null) {
+      setFormHeight(formRef.current.offsetHeight)
+    }
+  }, [isSuccess, formHeight])
+
+  async function onSubmit(data: FormValues) {
+    if (!turnstileToken) {
+      setSubmitError("Please complete the security verification")
+      return
+    }
+
     setIsSubmitting(true)
+    setSubmitError(null)
+
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          turnstileToken,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form')
+      }
+
       setIsSuccess(true)
       form.reset()
+      setTurnstileToken(null)
     } catch (error) {
-      setIsSuccess(false)
+      console.error('Form submission error:', error)
+      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred')
     } finally {
       setIsSubmitting(false)
     }
@@ -116,16 +153,28 @@ export default function ContactForm({
   const FormContent = (
     <>
       {isSuccess ? (
-        <div className="text-center py-12">
-          <h3 className="text-2xl font-bold mb-4">Thank You!</h3>
-          <p className="mb-6">We&apos;ve received your request and will be in touch shortly.</p>
-          <Button onClick={() => setIsSuccess(false)} variant={variant === "white" ? "outline" : "default"}>
-            Submit Another Request
-          </Button>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center py-12">
+            <h3 className={clsx("text-2xl font-bold mb-4", variant === "frosted" && "text-white")}>Thank You!</h3>
+            <p className={clsx("mb-6", variant === "frosted" ? "text-white" : "text-gray-600")}>We&apos;ve received your request and will be in touch shortly.</p>
+            <Button 
+              onClick={() => setIsSuccess(false)} 
+              className={variant === "frosted" ? "bg-white text-medium-blue hover:bg-white/90" : undefined}
+              variant={variant === "white" ? "outline" : "default"}
+            >
+              Submit Another Request
+            </Button>
+          </div>
         </div>
       ) : (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {submitError && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+                <p className="text-red-600 text-sm">{submitError}</p>
+              </div>
+            )}
+            
             {/* Name fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
@@ -366,10 +415,25 @@ export default function ContactForm({
                 </FormItem>
               )}
             />
-            {/* TODO: Add Cloudflare Turnstile here */}
+            {/* Cloudflare Turnstile */}
             <div className="text-center">
-              <p className={clsx("text-xs", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
-                This site is protected by security verification
+              <Turnstile
+                onVerify={(token) => {
+                  setTurnstileToken(token)
+                  setSubmitError(null) // Clear any previous errors
+                }}
+                onError={() => {
+                  setTurnstileToken(null)
+                  setSubmitError("Security verification failed. Please try again.")
+                }}
+                onExpire={() => {
+                  setTurnstileToken(null)
+                  setSubmitError("Security verification expired. Please try again.")
+                }}
+                theme="light"
+              />
+              <p className={clsx("text-xs mt-2", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
+                This site is protected by Cloudflare Turnstile
               </p>
             </div>
             {/* Submit button */}
@@ -381,7 +445,7 @@ export default function ContactForm({
                   ? "bg-white border border-white hover:bg-white/20 text-medium-blue hover:text-white"
                   : "bg-medium-blue text-white hover:bg-dark-blue-alt"
               )}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !turnstileToken}
             >
               {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
@@ -393,17 +457,20 @@ export default function ContactForm({
 
   if (variant === "frosted") {
     return (
-      <div className={clsx(
-        "rounded-xl p-6 shadow-lg bg-white/15 backdrop-blur-lg backdrop-filter",
-        className
-      )}>
-        {showHeader && (
+      <div 
+        className={clsx(
+          "rounded-xl p-6 shadow-lg bg-white/15 backdrop-blur-lg backdrop-filter relative",
+          className
+        )}
+        style={formHeight ? { minHeight: formHeight } : undefined}
+      >
+        {showHeader && !isSuccess && (
           <div className="flex flex-col space-y-1.5 pb-4">
             <p className="text-2xl font-semibold leading-none tracking-tight text-white">{headerTitle}</p>
             <p className="text-sm text-white/80">{headerDescription}</p>
           </div>
         )}
-        <div className={clsx(!showHeader && "pt-1")}>
+        <div className={clsx(!showHeader ? "pt-1" : "")} ref={formRef}>
           {FormContent}
         </div>
       </div>
@@ -412,14 +479,17 @@ export default function ContactForm({
 
   // Default: white card
   return (
-    <Card className={clsx("bg-white border-0 shadow-xl", className)}>
-      {showHeader && (
+    <Card 
+      className={clsx("bg-white border-0 shadow-xl relative", className)}
+      style={formHeight ? { minHeight: formHeight } : undefined}
+    >
+      {showHeader && !isSuccess && (
         <CardHeader>
           <CardTitle className="text-medium-blue">{headerTitle}</CardTitle>
           <CardDescription>{headerDescription}</CardDescription>
         </CardHeader>
       )}
-      <CardContent className={clsx(!showHeader && "pt-6")}>{FormContent}</CardContent>
+      <CardContent className={clsx(!showHeader ? "pt-6" : "")} ref={formRef}>{FormContent}</CardContent>
     </Card>
   )
 } 
