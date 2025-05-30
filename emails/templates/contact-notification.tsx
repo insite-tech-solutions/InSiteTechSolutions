@@ -193,8 +193,8 @@ import {
                 
                 <div style={actionRow}>
                   <div style={actionColumn}>
-                    <Button style={secondaryActionButton} href="https://insitetechsolutions.com/admin/contacts">
-                      📋 View in CRM
+                    <Button style={secondaryActionButton} href={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://insitetechsolutions.com'}/api/crm/add-contact?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}${lastName ? `&lastName=${encodeURIComponent(lastName)}` : ''}${phoneNumber ? `&phone=${encodeURIComponent(phoneNumber)}` : ''}${companyName ? `&company=${encodeURIComponent(companyName)}` : ''}${websiteUrl ? `&website=${encodeURIComponent(websiteUrl)}` : ''}&services=${encodeURIComponent(services.join(','))}&budget=${encodeURIComponent(budget)}${comments ? `&comments=${encodeURIComponent(comments)}` : ''}&source=contact_form`}>
+                      📋 Add to CRM
                     </Button>
                   </div>
                   <div style={actionColumn}>
@@ -210,6 +210,9 @@ import {
               {/* Response Guidelines */}
               <Section style={guidelinesCard}>
                 <Text style={cardTitle}>📋 Response Guidelines</Text>
+                <Text style={guidelineItem}>
+                  ✅ <strong>Lead Creation:</strong> Click "Add to CRM" above to create a lead record and contact in ERPNext CRM
+                </Text>
                 <Text style={guidelineItem}>
                   ✅ <strong>Response Time:</strong> Aim to respond within 24-48 hours
                 </Text>
