@@ -94,13 +94,10 @@ class ERPNextClient {
 
   async createContact(contactData: ERPNextContact) {
     try {
-      console.log('Creating contact with data:', JSON.stringify(contactData, null, 2))
-      
       // Check if contact already exists
       const existingContacts = await this.makeRequest(`Contact?filters=[["email_id","=","${contactData.email_id}"]]`)
       
       if (existingContacts.data && existingContacts.data.length > 0) {
-        console.log('Contact already exists:', existingContacts.data[0])
         return {
           success: true,
           message: 'Contact already exists',
@@ -111,7 +108,6 @@ class ERPNextClient {
 
       // Create new contact
       const response = await this.makeRequest('Contact', 'POST', contactData)
-      console.log('Contact created successfully:', response)
       
       return {
         success: true,
@@ -127,15 +123,10 @@ class ERPNextClient {
 
   async createLead(leadData: ERPNextLead) {
     try {
-      console.log('Creating lead with data:', JSON.stringify(leadData, null, 2))
-      
       // Check if lead already exists
       const existingLeads = await this.makeRequest(`Lead?filters=[["email_id","=","${leadData.email_id}"]]`)
       
       if (existingLeads.data && existingLeads.data.length > 0) {
-        console.log('Lead already exists:', existingLeads.data[0])
-        console.log(`🔍 LEAD FOUND: Check ERPNext Lead ID: ${existingLeads.data[0].name}`)
-        console.log(`🔗 Direct link: ${this.config.url}/app/lead/${existingLeads.data[0].name}`)
         return {
           success: true,
           message: 'Lead already exists',
@@ -146,9 +137,6 @@ class ERPNextClient {
 
       // Create new lead
       const response = await this.makeRequest('Lead', 'POST', leadData)
-      console.log('Lead created successfully:', response)
-      console.log(`🎯 NEW LEAD CREATED: Check ERPNext Lead ID: ${response.data.name}`)
-      console.log(`🔗 Direct link: ${this.config.url}/app/lead/${response.data.name}`)
       
       return {
         success: true,
@@ -289,8 +277,6 @@ class ERPNextClient {
         delete contactData[key as keyof ERPNextContact]
       }
     })
-
-    console.log('Final contact data being sent to ERPNext:', JSON.stringify(contactData, null, 2))
 
     try {
       return await this.createContact(contactData)

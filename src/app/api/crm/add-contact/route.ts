@@ -34,14 +34,10 @@ export async function GET(request: NextRequest) {
       source: searchParams.get('source'),
     }
 
-    console.log('Raw URL parameters:', params)
-    console.log('Comments from URL:', searchParams.get('comments'))
-
     // Validate required fields
     const validationResult = addContactSchema.safeParse(params)
     
     if (!validationResult.success) {
-      console.log('Validation errors:', validationResult.error.errors)
       return new NextResponse(
         `
         <!DOCTYPE html>
