@@ -23,7 +23,7 @@ import dataAnalysisContent from '@/content/service-pages/data-analysis';
  */
 export default function DataAnalysisPage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={dataAnalysisContent.hero}

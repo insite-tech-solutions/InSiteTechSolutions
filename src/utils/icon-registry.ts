@@ -100,6 +100,7 @@ import {
   HelpCircle,
   Info,
   Calendar,
+  CreditCard,
   ChevronUp,
   ChevronDown
 } from 'lucide-react';
@@ -206,6 +207,7 @@ export const IconRegistry = {
   'HelpCircle': HelpCircle,
   'Info': Info,
   'Calendar': Calendar,
+  'CreditCard': CreditCard,
   'ChevronUp': ChevronUp,
   'ChevronDown': ChevronDown
 };

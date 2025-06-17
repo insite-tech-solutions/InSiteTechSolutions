@@ -23,7 +23,7 @@ import customSoftwareContent from '@/content/service-pages/custom-software';
  */
 export default function CustomSoftwarePage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={customSoftwareContent.hero}

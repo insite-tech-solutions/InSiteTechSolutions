@@ -22,7 +22,7 @@ import webAppDevelopmentContent from '@/content/service-pages/web-app-dev';
  */
 export default function WebAppDevelopmentPage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={webAppDevelopmentContent.hero}

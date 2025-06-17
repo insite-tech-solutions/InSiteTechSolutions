@@ -241,7 +241,7 @@ export async function GET(request: NextRequest) {
           }
 
           <div class="actions">
-            <a href="https://insitetechsolutions.erpnext.com/app/crm" class="btn btn-primary" target="_blank">
+            <a href="https://insitetechsolutions.frappe.cloud/app/crm" class="btn btn-primary" target="_blank">
               Open ERPNext
             </a>
             <a href="mailto:${formData.email}" class="btn btn-secondary">

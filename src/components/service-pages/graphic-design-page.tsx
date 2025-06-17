@@ -23,7 +23,7 @@ import graphicDesignContent from '@/content/service-pages/graphic-design';
  */
 export default function GraphicDesignPage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={graphicDesignContent.hero}

@@ -23,7 +23,7 @@ import consultingTrainingContent from '@/content/service-pages/consulting-traini
  */
 export default function ConsultingTrainingPage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={consultingTrainingContent.hero}

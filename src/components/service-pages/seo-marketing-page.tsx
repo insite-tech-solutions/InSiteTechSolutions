@@ -22,7 +22,7 @@ import seoMarketingContent from '@/content/service-pages/seo-marketing';
  */
 export default function SEOMarketingPage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={seoMarketingContent.hero}

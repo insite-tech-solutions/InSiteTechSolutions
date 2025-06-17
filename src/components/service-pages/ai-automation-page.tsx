@@ -23,7 +23,7 @@ import aiAutomationContent from '@/content/service-pages/ai-automation';
  */
 export default function AIAutomationPage() {
   return (
-    <div className='bg-gray-50'>
+    <div>
       <Header />
       <ServicePageTemplate
         heroContent={aiAutomationContent.hero}

@@ -28,16 +28,16 @@ const homepagePriceFactors = [
     items: [
       "Number of features and functionalities",
       "Intricacy of design and UX requirements",
-      "Integration with third-party services",
+      "Performance specifications",
     ],
     icon: "Layout",
   },
   {
     title: "Technical Complexity",
     items: [
-      "Choice of programming languages and frameworks",
-      "Database selection and architecture",
+      "Platform and programming language requirements",
       "Deployment and hosting environment",
+      "Integration with third-party services",
     ],
     icon: "Code",
   },
@@ -45,7 +45,7 @@ const homepagePriceFactors = [
     title: "Timeline",
     items: [
       "Standard delivery vs. expedited requests",
-      "Phased rollout or full launch",
+      "Number of requested revisions",
       "Resource allocation based on deadlines",
     ],
     icon: "Clock",
@@ -76,7 +76,7 @@ const PriceFactorCard: React.FC<PriceFactorProps> = ({ title, items, icon }) => 
       variants={fadeInUp}
       className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg transition-all"
     >
-      <div className="w-full rounded-t-lg bg-gradient-to-tr from-mild-blue to-blue-900 flex items-center gap-3 min-h-[56px] px-4 py-3">
+      <div className="w-full rounded-t-lg bg-gradient-to-br from-light-blue to-blue-800 flex items-center gap-3 min-h-[56px] px-4 py-3">
         {Icon && <Icon className="h-7 w-7 text-white flex-shrink-0" />}
         <h4 className="text-xl font-semibold text-white ml-2">{title}</h4>
       </div>
@@ -95,11 +95,11 @@ const PriceFactor = React.memo(PriceFactorCard)
 
 export default function PricingEstimator() {
   return (
-    <section className="py-8 w-full" aria-label="Pricing Estimator">
+    <section className="w-full" aria-label="Pricing Estimator">
       <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-2">Interactive Pricing Estimator</h2>
-          <p className="text-lg text-blue-600 max-w-2xl mx-auto">
-            Get a ballpark estimate for your project by selecting your requirements.
+          <h2 className="text-4xl font-bold mb-2">Interactive Pricing Estimator</h2>
+          <p className="text-lg text-medium-blue max-w-2xl mx-auto">
+            Get an estimated price range for your project by selecting your requirements.
           </p>
       </div>
       <motion.div
@@ -129,7 +129,7 @@ export default function PricingEstimator() {
       </motion.div>
       <div className="max-w-3xl mx-auto mt-8 text-center">
         <p className="text-gray-600 text-base">
-          Remember, this estimator provides ballpark figures. For a detailed quote tailored to your specific needs, please schedule a consultation.
+          Remember, this estimator provides ballpark figures. For a detailed estimate tailored to your specific needs, please schedule a free consultation.
         </p>
       </div>
     </section>

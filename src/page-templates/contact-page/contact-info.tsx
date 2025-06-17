@@ -5,9 +5,9 @@ import Link from "next/link"
 const contactMethods = [
   {
     icon: Mail,
-    contact: "contact@insite.tech",
+    contact: "contact@insitetechsolutions.com",
     label: "Email",
-    href: "mailto:contact@insite.tech",
+    href: "mailto:contact@insitetechsolutions.com",
   },
   {
     icon: Phone,
@@ -46,7 +46,7 @@ export default function ContactInfo() {
   return (
     <Card className="bg-white w-full border-0 shadow-xl self-center">
       <CardHeader>
-        <CardTitle>Contact Information</CardTitle>
+        <CardTitle className="text-medium-blue">Contact Information</CardTitle>
         <CardDescription>Reach out to us through any of these channels.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -82,7 +82,7 @@ export default function ContactInfo() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
+                className="p-2 rounded-full text-white transition-colors bg-medium-blue hover:bg-dark-blue-alt shadow-lg hover:shadow-md"
                 aria-label={link.ariaLabel}
               >
                 <link.icon className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" />

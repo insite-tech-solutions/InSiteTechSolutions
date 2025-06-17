@@ -4,36 +4,36 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function PaymentOptions() {
   const paymentMethods = [
     {
-      icon: <CreditCard className="h-8 w-8 mb-4 text-blue-600" />,
+      icon: <CreditCard className="h-8 w-8 mb-4 text-medium-blue" />,
       title: "Credit/Debit Cards",
       description: "Secure payment via Visa, Mastercard, and American Express through Stripe's secure payment gateway.",
     },
     {
-      icon: <Wallet className="h-8 w-8 mb-4 text-blue-600" />,
+      icon: <Wallet className="h-8 w-8 mb-4 text-medium-blue" />,
       title: "Digital Wallets",
       description:
-        "Convenient payments through Apple Pay, Google Pay, PayPal, and Venmo for quick and secure transactions.",
+        "Convenient payments through Apple Pay & Google Pay via Stripe, and Venmo for quick and secure transactions.",
     },
     {
-      icon: <Landmark className="h-8 w-8 mb-4 text-blue-600" />,
+      icon: <Landmark className="h-8 w-8 mb-4 text-medium-blue" />,
       title: "Bank Transfers",
       description:
         "Direct bank transfers via Zelle for domestic clients, with detailed invoicing and payment tracking.",
     },
     {
-      icon: <Globe className="h-8 w-8 mb-4 text-blue-600" />,
+      icon: <Globe className="h-8 w-8 mb-4 text-medium-blue" />,
       title: "International Transfers",
       description:
         "Wise (formerly TransferWise) for international clients, offering competitive exchange rates and lower fees.",
     },
     {
-      icon: <ShieldCheck className="h-8 w-8 mb-4 text-blue-600" />,
+      icon: <ShieldCheck className="h-8 w-8 mb-4 text-medium-blue" />,
       title: "Escrow Services",
       description:
         "Third-party escrow services available for larger projects requiring additional security via Escrow.com, Upwork, or Fiverr.",
     },
     {
-      icon: <Clock className="h-8 w-8 mb-4 text-blue-600" />,
+      icon: <Clock className="h-8 w-8 mb-4 text-medium-blue" />,
       title: "Milestone Payments",
       description:
         "Break down large projects into manageable payment milestones tied to specific deliverables and project phases.",
@@ -43,7 +43,7 @@ export default function PaymentOptions() {
   return (
     <section>
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4 text-blue-600">Payment Methods</h2>
+        <h2 className="text-3xl font-bold mb-4 text-medium-blue">Payment Methods</h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
           Choose from a variety of secure payment options that work best for your business.
         </p>
