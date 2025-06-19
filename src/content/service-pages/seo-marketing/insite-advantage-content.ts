@@ -1,4 +1,9 @@
-// src/content/services/seo-marketing/insite-advantage-content.ts
+/**
+ * @fileoverview InSite Advantage Content for the SEO & Online Marketing Service Page
+ *
+ * This file contains the content configuration for the InSite Advantage section of the SEO & Online Marketing service page.
+ * It includes a title, description, and a list of advantages and benefits.
+ */
 
 import { InSiteAdvantageContent } from '@/page-templates/service-page/types';
 

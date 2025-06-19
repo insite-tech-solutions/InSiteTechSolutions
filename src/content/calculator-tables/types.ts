@@ -1,4 +1,11 @@
 /**
+ * @fileoverview Shared Type Definitions for Pricing Calculator Configuration Tables
+ *
+ * This file contains reusable interfaces for cost ranges, feature options, and support options
+ * used across various pricing calculator configuration tables.
+ */
+
+/**
  * Shared type definitions for pricing calculator configuration tables.
  * Includes reusable interfaces for cost ranges, feature options, and support options.
  */

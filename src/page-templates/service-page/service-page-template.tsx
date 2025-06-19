@@ -1,12 +1,18 @@
 /**
- * Service Page Template component.
- * Dynamically composes a full service page using critical above-the-fold imports
- * and lazy-loaded dynamic imports for below-the-fold sections. Supports custom section injection,
- * layout variants, and optional section skipping through configuration.
+ * @fileoverview Service Page Template component
+ * 
+ * This module provides a configurable template for service pages with performance optimizations.
+ * It implements a progressive loading strategy with critical above-the-fold content loaded
+ * synchronously and below-the-fold sections loaded asynchronously via dynamic imports.
+ * 
+ * The architecture supports:
+ * - Section configuration and conditional rendering
+ * - Custom section injection at predefined insertion points
+ * - Multiple layout variants
+ * - Page transition loading states
  */
-// src/templates/service-page/service-page-template.tsx
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
@@ -17,7 +23,10 @@ import HeroSection from './hero-section';
 import ServiceOverviewSection from './overview-section';
 import ValuePropSection from './value-prop-section';
 
-// Dynamic imports for below-the-fold content
+/**
+ * Dynamic imports for below-the-fold content to improve initial page load performance
+ * These sections are loaded asynchronously after the initial render
+ */
 const ServiceScopeSection = dynamic(() => import('./service-scope-section'), { ssr: false });
 const ApplicationsSection = dynamic(() => import('./applications-section'), { ssr: false });
 const ProcessSection = dynamic(() => import('./process-section'), { ssr: false });
@@ -70,22 +79,32 @@ interface ServicePageTemplateProps {
   options?: ServicePageTemplateOptions;
 }
 
-// Inner component that uses the loading context
-const ServicePageContent: React.FC<ServicePageTemplateProps> = ({
-  heroContent,
-  serviceOverviewContent,
-  valuePropContent,
-  serviceScopeContent,
-  applicationsContent,
-  processContent,
-  pricingContent,
-  insiteAdvantageContent,
-  faqContent,
-  ctaContent,
-  options = {}
-}) => {
+/**
+ * Main content renderer for the Service Page Template
+ * 
+ * @component
+ * @param {ServicePageTemplateProps} props - Component props containing section content and options
+ * @returns {JSX.Element} The rendered service page content
+ */
+function ServicePageContent({ 
+  heroContent, 
+  serviceOverviewContent, 
+  valuePropContent, 
+  serviceScopeContent, 
+  applicationsContent, 
+  processContent, 
+  pricingContent, 
+  insiteAdvantageContent, 
+  faqContent, 
+  ctaContent, 
+  options = {} 
+}: ServicePageTemplateProps): JSX.Element {
   const { setIsPageLoading } = usePageLoading();
 
+  /**
+   * Effect to handle page loading state
+   * Sets loading state to false after a short delay to ensure smooth transitions
+   */
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsPageLoading(false);
@@ -100,7 +119,9 @@ const ServicePageContent: React.FC<ServicePageTemplateProps> = ({
     layoutVariant = 'default'
   } = options;
   
-  // Helper to check if a section should be rendered
+  /**
+   * Union type of all possible section names for type safety when checking sections
+   */
   type SectionName = 
     | 'hero' 
     | 'serviceOverview'
@@ -114,9 +135,14 @@ const ServicePageContent: React.FC<ServicePageTemplateProps> = ({
     | 'cta'
     | keyof ServicePageTemplateOptions['addSections'];
 
+  /**
+   * Helper function to check if a section should be rendered based on skipSections config
+   * @param {SectionName} sectionName - The name of the section to check
+   * @returns {boolean} Whether the section should be rendered
+   */
   const shouldRenderSection = (sectionName: SectionName) => !skipSections.includes(sectionName);
   
-  // Define insertion points for custom sections
+  // Extract custom section insertion points from options
   const customSectionsBeforeServiceOverview = addSections.beforeServiceOverview || null;
   const customSectionsAfterServiceOverview = addSections.afterServiceOverview || null;
   const customSectionsBeforeValueProp = addSections.beforeValueProp || null;
@@ -134,7 +160,6 @@ const ServicePageContent: React.FC<ServicePageTemplateProps> = ({
       {shouldRenderSection('hero') && (
         <HeroSection content={heroContent} />
       )}
-
 
       <Layout>
         {/* Custom section injection before Service Overview */}
@@ -233,33 +258,16 @@ const ServicePageContent: React.FC<ServicePageTemplateProps> = ({
       </Layout>
     </main>
   );
-};
+}
 
 /**
- * Service Page Template Component
+ * Wrapper component that conditionally renders loader and content based on loading state
  * 
- * A flexible template for service pages that combines direct imports for critical
- * above-the-fold content with dynamic imports for below-the-fold sections.
- * 
- * Features:
- * - Performance optimized with critical content loaded immediately
- * - Secondary content lazy-loaded when needed
- * - Support for customization via options (skipping sections, adding custom sections)
- * - Fully typed content interfaces
- * 
- * @param {ServicePageTemplateProps} props - Component props
- * @returns {JSX.Element} A memoized service page template component
+ * @component
+ * @param {ServicePageTemplateProps} props - Component props to pass to ServicePageContent
+ * @returns {JSX.Element} Page content with conditional loader
  */
-const ServicePageTemplate: React.FC<ServicePageTemplateProps> = (props) => {
-  return (
-    <PageLoadingProvider>
-      <ServicePageLoaderWrapper {...props} />
-    </PageLoadingProvider>
-  );
-};
-
-// New wrapper component to access context correctly
-const ServicePageLoaderWrapper: React.FC<ServicePageTemplateProps> = (props) => {
+function ServicePageLoaderWrapper(props: ServicePageTemplateProps): JSX.Element {
   const { isPageLoading } = usePageLoading();
 
   return (
@@ -268,6 +276,45 @@ const ServicePageLoaderWrapper: React.FC<ServicePageTemplateProps> = (props) => 
       <ServicePageContent {...props} />
     </>
   );
-};
+}
 
-export default ServicePageTemplate;
+/**
+ * Main export component that wraps the service page with loading context provider
+ * 
+ * @component
+ * @param {ServicePageTemplateProps} props - Component props containing section content and options
+ * @returns {JSX.Element} The fully wrapped service page template
+ * 
+ * @example
+ * ```tsx
+ * import ServicePageTemplate from '@/page-templates/service-page/service-page-template';
+ * import { 
+ *   heroContent, 
+ *   serviceOverviewContent,
+ *   valuePropContent,
+ *   // ... other content sections
+ * } from '@/content/service-pages/my-service';
+ * 
+ * export default function MyServicePage() {
+ *   return (
+ *     <ServicePageTemplate
+ *       heroContent={heroContent}
+ *       serviceOverviewContent={serviceOverviewContent}
+ *       valuePropContent={valuePropContent}
+ *       // ... other content sections
+ *       options={{
+ *         skipSections: ['faq'],
+ *         layoutVariant: 'compact'
+ *       }}
+ *     />
+ *   );
+ * }
+ * ```
+ */
+export default function ServicePageTemplate(props: ServicePageTemplateProps): JSX.Element {
+  return (
+    <PageLoadingProvider>
+      <ServicePageLoaderWrapper {...props} />
+    </PageLoadingProvider>
+  );
+}

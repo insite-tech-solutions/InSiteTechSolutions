@@ -1,4 +1,9 @@
-// src/content/services/consulting-training/insite-advantage-content.ts
+/**
+ * @fileoverview InSite Advantage Content for the Consulting & Training Service Page
+ *
+ * This file contains the content configuration for the InSite Advantage section of the Consulting & Training service page.
+ * It includes a title, description, and a list of advantages and benefits.
+ */
 
 import { InSiteAdvantageContent } from '@/page-templates/service-page/types';
 

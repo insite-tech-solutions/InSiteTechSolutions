@@ -1,4 +1,9 @@
-// src/content/services/seo-marketing/faq-content.ts
+/**
+ * @fileoverview FAQ Content for the SEO & Online Marketing Service Page
+ *
+ * This file contains the content configuration for the frequently asked questions section of the SEO & Online Marketing service page.
+ * It includes a title, description, and a list of frequently asked questions with answers.
+ */
 
 import { FAQContent } from '@/page-templates/service-page/types';
 

@@ -1,5 +1,5 @@
 /**
- * Consulting & Training Overview Content
+ * @fileoverview Overview Content for the Consulting & Training Service Page
  * 
  * This file contains the content configuration for the consulting and training service overview section.
  * It includes:

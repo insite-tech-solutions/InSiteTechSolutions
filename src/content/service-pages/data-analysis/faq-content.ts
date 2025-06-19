@@ -1,4 +1,9 @@
-// src/content/services/data-analysis/faq-content.ts
+/**
+ * @fileoverview FAQ Content for the Data Analysis Service Page
+ *
+ * This file contains the content configuration for the frequently asked questions section of the Data Analysis service page.
+ * It includes a title, description, and a list of frequently asked questions with answers.
+ */
 
 import { FAQContent } from '@/page-templates/service-page/types';
 

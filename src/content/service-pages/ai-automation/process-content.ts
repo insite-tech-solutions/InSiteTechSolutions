@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the AI & Automation Service Page
+ *
+ * This file contains the content configuration for the process section of the AI & Automation service page.
+ * It outlines the step-by-step methodology used for AI and automation projects.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the AI & Automation service page.
  * Outlines the step-by-step methodology used for AI and automation projects.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,7 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
 
 export const aiAutomationProcess: ProcessContent = {
   title: "Our Approach",

@@ -1,4 +1,9 @@
-// src/content/services/consulting-training/service-scope-content.ts
+/**
+ * @fileoverview Service Scope Content for the Consulting & Training Service Page
+ *
+ * This file contains the content configuration for the service scope section of the Consulting & Training service page.
+ * It includes a detailed breakdown of service offerings and the key benefits they provide.
+ */
 
 import { ServiceScopeContent } from '@/page-templates/service-page/types';
 

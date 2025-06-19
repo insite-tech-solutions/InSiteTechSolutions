@@ -1,28 +1,42 @@
 /**
- * Shared type definitions for full-service page templates.
- * Covers all content sections used across service pages including hero, value prop,
- * service scope, applications, process, pricing, benefits, FAQ, CTA, and metadata.
+ * @fileoverview Type definitions for service page templates
+ * 
+ * This module provides comprehensive TypeScript interfaces and types for all sections
+ * of service pages. These types ensure type safety and consistency across the service
+ * page template system.
+ * 
+ * The types are organized by section:
+ * - Hero section (HeroSectionContent, DecorElement)
+ * - Value proposition (ValuePropContent, Statistic, MarketInsight)
+ * - Service scope (ServiceScopeContent, ServiceItem, BenefitItem)
+ * - Applications (ApplicationsContent, ApplicationCategory, IndustryItem)
+ * - Process (ProcessContent, ProcessStep)
+ * - Pricing (PricingContent, PriceFactor)
+ * - InSite Advantage (InSiteAdvantageContent, InSiteAdvantageItem)
+ * - FAQ (FAQContent, FAQItem)
+ * - CTA (CTAContent)
+ * - Template options (ServicePageTemplateOptions)
  */
 
 import { CSSProperties, ReactNode } from 'react';
 import { LucideIcon } from 'lucide-react';
 
 /**
- * Base types for decorative elements used in hero backgrounds.
+ * Base type for Lucide icon names used throughout the service page components
  * 
- * @type {string} IconName - Name of a Lucide icon.
+ * @type {string} IconName - String identifier for a Lucide icon component
  */
-export type IconName = string; // Name of a Lucide icon
+export type IconName = string;
 
 /**
- * Represents a decorative element in the hero section.
+ * Represents a decorative element in the hero section background
  * 
  * @interface DecorElement
- * @property {'icon' | 'circle' | 'square'} type - The type of decorative element.
- * @property {string} [className] - Optional custom class name for styling.
- * @property {CSSProperties} [style] - Optional inline styles for the element.
- * @property {LucideIcon | IconName} [icon] - Optional icon for the element.
- * @property {number} [size] - Optional size for the element.
+ * @property {'icon' | 'circle' | 'square'} type - The type of decorative element to render
+ * @property {string} [className] - Optional CSS classes for custom styling
+ * @property {CSSProperties} [style] - Optional inline styles for positioning and appearance
+ * @property {LucideIcon | IconName} [icon] - Icon component or name (required for 'icon' type)
+ * @property {number} [size] - Size of the element in pixels
  */
 export interface DecorElement {
   type: 'icon' | 'circle' | 'square';
@@ -33,56 +47,56 @@ export interface DecorElement {
 }
 
 /**
- * Represents the content of the hero section.
+ * Configuration object for the hero section of service pages
  * 
  * @interface HeroSectionContent
- * @property {string} title - The title of the hero section.
- * @property {string} subtitle - The subtitle of the hero section.
- * @property {string} description - The description of the hero section.
- * @property {string} image - The image for the hero section.
- * @property {string} svgComponent - The SVG component for the hero section.
- * @property {string} ctaText - The text for the call to action button.
- * @property {string} ctaLink - The link for the call to action button.
- * @property {DecorElement[]} decorElements - The decorative elements for the hero section.
- * @property {string} bgClassName - The custom background classes for the hero section.
- * @property {ReactNode} customElements - Truly custom elements for the hero section.
+ * @property {string} title - Main heading displayed prominently in the hero
+ * @property {string} subtitle - Secondary heading that complements the title
+ * @property {string} description - Detailed description of the service offering
+ * @property {string} [image] - Optional static image URL (fallback for SVG)
+ * @property {string} [svgComponent] - Optional SVG component name for dynamic loading
+ * @property {string} [ctaText] - Call-to-action button text (defaults to "Start Your Project Today")
+ * @property {string} [ctaLink] - Call-to-action button link (defaults to "/contact")
+ * @property {DecorElement[]} [decorElements] - Optional decorative background elements
+ * @property {string} [bgClassName] - Optional custom background CSS classes
+ * @property {ReactNode} [customElements] - Optional custom React elements for advanced layouts
  */
 export interface HeroSectionContent {
   title: string;
   subtitle: string;
   description: string;
-  image?: string;         // Changed to optional
-  svgComponent?: string;  // Add this line - name of the SVG file
+  image?: string;
+  svgComponent?: string;
   ctaText?: string;
   ctaLink?: string;
   decorElements?: DecorElement[];
-  bgClassName?: string; // Custom background classes
-  customElements?: ReactNode; // For truly custom elements
+  bgClassName?: string;
+  customElements?: ReactNode;
 }
 
 /**
- * Represents a statistic used in the value proposition section.
+ * Represents a statistic with value and descriptive text
  * 
  * @interface Statistic
- * @property {number} value - The numeric value of the statistic.
- * @property {string} [prefix] - Optional prefix for the statistic.
- * @property {string} [suffix] - Optional suffix for the statistic.
- * @property {string | ReactNode} description - The description of the statistic.
+ * @property {number} value - The numeric value of the statistic
+ * @property {string} [prefix] - Optional prefix (e.g., "$", "+")
+ * @property {string} [suffix] - Optional suffix (e.g., "%", "M", "K")
+ * @property {string | ReactNode} description - Descriptive text or rich content explaining the statistic
  */
 export interface Statistic {
   value: number;
   prefix?: string;
   suffix?: string;
-  description: string | ReactNode; // Allow for rich content
+  description: string | ReactNode;
 }
 
 /**
- * Represents a data structure for inline statistics.
+ * Simplified statistic data structure for inline display
  * 
  * @interface StatData
- * @property {number} value - The numeric value of the statistic.
- * @property {string} [prefix] - Optional prefix for the statistic.
- * @property {string} [suffix] - Optional suffix for the statistic.
+ * @property {number} value - The numeric value
+ * @property {string} [prefix] - Optional prefix for the value
+ * @property {string} [suffix] - Optional suffix for the value
  */
 export interface StatData {
   value: number;
@@ -91,12 +105,12 @@ export interface StatData {
 }
 
 /**
- * Represents industry trends in the value proposition section.
+ * Represents an industry trend item with icon and description
  * 
  * @interface IndustryTrend
- * @property {IconName} icon - The icon representing the industry trend.
- * @property {string} title - The title of the industry trend.
- * @property {string} description - The description of the industry trend.
+ * @property {IconName} icon - Icon representing the trend
+ * @property {string} title - Title of the trend
+ * @property {string} description - Detailed description of the trend
  */
 export interface IndustryTrend {
   icon: IconName;
@@ -105,26 +119,26 @@ export interface IndustryTrend {
 }
 
 /**
- * Represents market insights in the value proposition section.
+ * Market insight with structured content supporting interleaved text and statistics
  * 
  * @interface MarketInsight
- * @property {string} id - The unique identifier for the market insight.
- * @property {(string | StatData)[]} parts - An array of structured content parts, which can be either text or statistics.
+ * @property {string} id - Unique identifier for the insight
+ * @property {(string | StatData)[]} parts - Array of content parts (text strings or statistics)
  */
 export interface MarketInsight {
   id: string;
-  parts: (string | StatData)[]; // Structured content with interleaved text and stats
+  parts: (string | StatData)[];
 }
 
 /**
- * Represents a call to action in the value proposition section.
+ * Call-to-action configuration for value proposition sections
  * 
  * @interface CallToAction
- * @property {string} title - The title of the call to action.
- * @property {string} description - A description of the call to action.
- * @property {string} buttonText - The text for the button.
- * @property {string} buttonLink - The link for the button.
- * @property {IconName} [buttonIcon] - Optional icon for the button.
+ * @property {string} title - CTA heading
+ * @property {string} description - CTA descriptive text
+ * @property {string} buttonText - Button label
+ * @property {string} buttonLink - Button destination URL
+ * @property {IconName} [buttonIcon] - Optional button icon
  */
 export interface CallToAction {
   title: string;
@@ -135,24 +149,24 @@ export interface CallToAction {
 }
 
 /**
- * Represents the content of the value proposition section.
+ * Content configuration for the value proposition section
  * 
  * @interface ValuePropContent
- * @property {string} title - The title of the value proposition section.
- * @property {string} description - A description of the value proposition.
- * @property {Statistic[]} [statistics] - Optional array of statistics related to the value proposition.
- * @property {IndustryTrend[]} industryTrends - An array of industry trends.
- * @property {string} [industryTrendsDescription] - Optional description for the industry trends section.
- * @property {MarketInsight[]} marketInsights - An array of market insights.
- * @property {CallToAction} callToAction - The call to action for the value proposition.
- * @property {Object} comparisonTable - Optional comparison table for the value proposition.
- * @property {string} [comparisonTable.title] - Optional title for the comparison table.
- * @property {string[]} [comparisonTable.headers] - Optional headers for the comparison table.
- * @property {Object[]} [comparisonTable.rows] - Optional rows for the comparison table.
- * @property {string} [comparisonTable.rows.feature] - Optional feature column for the comparison table.
- * @property {string} [comparisonTable.rows.digital] - Optional digital column for the comparison table.
- * @property {string} [comparisonTable.rows.traditional] - Optional traditional column for the comparison table.
- * @property {{ beforeTrends?: ReactNode; afterTrends?: ReactNode; beforeCta?: ReactNode; }} [additionalContent] - Optional additional content for the section.
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {Statistic[]} [statistics] - Optional array of key statistics
+ * @property {IndustryTrend[]} industryTrends - Array of relevant industry trends
+ * @property {string} [industryTrendsDescription] - Optional description for trends section
+ * @property {MarketInsight[]} marketInsights - Array of market insights with statistics
+ * @property {CallToAction} callToAction - Section call-to-action configuration
+ * @property {Object} [comparisonTable] - Optional comparison table data
+ * @property {string} [comparisonTable.title] - Table title
+ * @property {string[]} [comparisonTable.headers] - Table column headers
+ * @property {Object[]} [comparisonTable.rows] - Table row data with dynamic columns
+ * @property {Object} [additionalContent] - Optional additional content insertion points
+ * @property {ReactNode} [additionalContent.beforeTrends] - Content before trends section
+ * @property {ReactNode} [additionalContent.afterTrends] - Content after trends section
+ * @property {ReactNode} [additionalContent.beforeCta] - Content before CTA section
  */
 export interface ValuePropContent {
   title: string;
@@ -166,7 +180,7 @@ export interface ValuePropContent {
     title: string;
     headers: string[];
     rows: {
-      [key: string]: string; // Dynamic column values
+      [key: string]: string;
     }[];
   };
   additionalContent?: {
@@ -177,13 +191,13 @@ export interface ValuePropContent {
 }
 
 /**
- * Represents a service item in the service scope section.
+ * Represents an individual service offering with benefits
  * 
  * @interface ServiceItem
- * @property {IconName} icon - The icon representing the service.
- * @property {string} title - The title of the service item.
- * @property {string} description - A description of the service item.
- * @property {string[]} benefits - An array of benefits associated with the service item.
+ * @property {IconName} icon - Icon representing the service
+ * @property {string} title - Service name
+ * @property {string} description - Service description
+ * @property {string[]} benefits - Array of service benefits
  */
 export interface ServiceItem {
   icon: IconName;
@@ -193,12 +207,12 @@ export interface ServiceItem {
 }
 
 /**
- * Represents a benefit item in the service scope section.
+ * Represents a key benefit with icon and description
  * 
  * @interface BenefitItem
- * @property {IconName} icon - The icon representing the benefit.
- * @property {string} title - The title of the benefit item.
- * @property {string} description - A description of the benefit item.
+ * @property {IconName} icon - Icon representing the benefit
+ * @property {string} title - Benefit title
+ * @property {string} description - Benefit description
  */
 export interface BenefitItem {
   icon: IconName;
@@ -207,18 +221,18 @@ export interface BenefitItem {
 }
 
 /**
- * Represents the content of the service scope section.
+ * Content configuration for the service scope section
  * 
  * @interface ServiceScopeContent
- * @property {string} title - The title of the service scope section.
- * @property {string} description - A description of the service scope.
- * @property {ServiceItem[]} services - An array of service items.
- * @property {BenefitItem[]} [benefits] - Optional array of benefit items.
- * @property {string} [backgroundIcon] - Optional background icon for the section.
- * @property {string} [keyBenefitsTitle] - Optional title for the key benefits section.
- * @property {string} [keyBenefitsDescription] - Optional description for the key benefits section.
- * @property {string} [backgroundIconWidth] - Optional width for background icon
- * @property {string} [backgroundIconHeight] - Optional height for background icon
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {ServiceItem[]} services - Array of service offerings
+ * @property {BenefitItem[]} [benefits] - Optional array of key benefits
+ * @property {string} [backgroundIcon] - Optional background icon name
+ * @property {number} [backgroundIconWidth] - Optional background icon width
+ * @property {number} [backgroundIconHeight] - Optional background icon height
+ * @property {string} [keyBenefitsTitle] - Optional benefits subsection title
+ * @property {string} [keyBenefitsDescription] - Optional benefits subsection description
  */
 export interface ServiceScopeContent {
   title: string;
@@ -226,19 +240,19 @@ export interface ServiceScopeContent {
   services: ServiceItem[];
   benefits?: BenefitItem[];
   backgroundIcon?: string;
-  backgroundIconWidth?: number; // Optional width for background icon
-  backgroundIconHeight?: number; // Optional height for background icon
+  backgroundIconWidth?: number;
+  backgroundIconHeight?: number;
   keyBenefitsTitle?: string;
   keyBenefitsDescription?: string;
 }
 
 /**
- * Represents a category for the applications section.
+ * Represents a category of applications with related items
  * 
  * @interface ApplicationCategory
- * @property {string} title - The title of the application category.
- * @property {IconName} icon - The icon representing the category.
- * @property {string[]} items - An array of items in the category.
+ * @property {string} title - Category name
+ * @property {IconName} icon - Category icon
+ * @property {string[]} items - Array of application examples
  */
 export interface ApplicationCategory {
   title: string;
@@ -247,13 +261,13 @@ export interface ApplicationCategory {
 }
 
 /**
- * Represents an industry item for the applications section.
+ * Represents industry-specific solutions and use cases
  * 
  * @interface IndustryItem
- * @property {string} title - The title of the industry item.
- * @property {IconName} icon - The icon representing the industry item.
- * @property {string[]} items - An array of items in the industry.
- * @property {string} [backgroundIcon] - Optional background icon for the industry item.
+ * @property {string} title - Industry name
+ * @property {IconName} icon - Industry icon
+ * @property {string[]} items - Array of industry-specific applications
+ * @property {string} [backgroundIcon] - Optional background icon for visual enhancement
  */
 export interface IndustryItem {
   title: string;
@@ -263,18 +277,18 @@ export interface IndustryItem {
 }
 
 /**
- * Represents the content of the applications section.
+ * Content configuration for the applications section
  * 
  * @interface ApplicationsContent
- * @property {string} title - The title of the applications section.
- * @property {string} description - A description of the applications section.
- * @property {ApplicationCategory[]} categories - An array of application categories.
- * @property {IndustryItem[]} industries - An array of industry items.
- * @property {string} [backgroundIcon] - Optional background icon for the section.
- * @property {string} [industrySolutionsTitle] - Optional title for the industry solutions section.
- * @property {string} [industrySolutionsDescription] - Optional description for the industry solutions section.
- * @property {string} [backgroundIconWidth] - Optional width for background icon
- * @property {string} [backgroundIconHeight] - Optional height for background icon
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {ApplicationCategory[]} categories - Array of application categories
+ * @property {IndustryItem[]} industries - Array of industry-specific solutions
+ * @property {string} [backgroundIcon] - Optional section background icon
+ * @property {number} [backgroundIconWidth] - Optional background icon width
+ * @property {number} [backgroundIconHeight] - Optional background icon height
+ * @property {string} [industrySolutionsTitle] - Optional industry subsection title
+ * @property {string} [industrySolutionsDescription] - Optional industry subsection description
  */
 export interface ApplicationsContent {
   title: string;
@@ -282,22 +296,22 @@ export interface ApplicationsContent {
   categories: ApplicationCategory[];
   industries: IndustryItem[];
   backgroundIcon?: string;
-  backgroundIconWidth?: number; // Optional width for background icon
-  backgroundIconHeight?: number; // Optional height for background icon
+  backgroundIconWidth?: number;
+  backgroundIconHeight?: number;
   industrySolutionsTitle?: string;
   industrySolutionsDescription?: string;
 }
 
 /**
- * Represents a process step in the process section.
+ * Represents a step in the service delivery process
  * 
  * @interface ProcessStep
- * @property {number} step - The step number in the process.
- * @property {string} title - The title of the process step.
- * @property {string} description - A description of the process step.
- * @property {string[]} items - An array of items associated with the process step.
- * @property {string} timeline - The timeline for the process step.
- * @property {IconName} icon - The icon representing the process step.
+ * @property {number} step - Step number in the sequence
+ * @property {string} title - Step title
+ * @property {string} description - Step description
+ * @property {string[]} items - Array of activities or deliverables for this step
+ * @property {string} timeline - Expected duration or timeline
+ * @property {IconName} icon - Icon representing the step
  */
 export interface ProcessStep {
   step: number;
@@ -309,15 +323,15 @@ export interface ProcessStep {
 }
 
 /**
- * Represents the content of the process section.
+ * Content configuration for the process section
  * 
  * @interface ProcessContent
- * @property {string} title - The title of the process section.
- * @property {string} description - A description of the process section.
- * @property {ProcessStep[]} steps - An array of process steps.
- * @property {string} note - A note regarding the process.
- * @property {string} [linkText] - Optional text for a link related to the process.
- * @property {string} [linkUrl] - Optional URL for a link related to the process.
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {ProcessStep[]} steps - Array of process steps
+ * @property {string} note - Additional notes about the process
+ * @property {string} [linkText] - Optional link text for more information
+ * @property {string} [linkUrl] - Optional link URL for more information
  */
 export interface ProcessContent {
   title: string;
@@ -329,12 +343,12 @@ export interface ProcessContent {
 }
 
 /**
- * Represents a price factor in the pricing section.
+ * Represents a factor that influences pricing
  * 
  * @interface PriceFactor
- * @property {string} title - The title of the price factor.
- * @property {IconName} icon - The icon representing the price factor.
- * @property {string[]} items - An array of items associated with the price factor.
+ * @property {string} title - Factor name
+ * @property {IconName} icon - Factor icon
+ * @property {string[]} items - Array of specific considerations for this factor
  */
 export interface PriceFactor {
   title: string;
@@ -343,19 +357,19 @@ export interface PriceFactor {
 }
 
 /**
- * Represents the content of the pricing section.
+ * Content configuration for the pricing section
  * 
  * @interface PricingContent
- * @property {string} title - The title of the pricing section.
- * @property {string} description - A description of the pricing section.
- * @property {PriceFactor[]} factors - An array of price factors.
- * @property {Object} longTermValue - An object detailing the long-term value proposition.
- * @property {string} longTermValue.title - The title of the long-term value proposition.
- * @property {string} longTermValue.description - A description of the long-term value proposition.
- * @property {Object} [longTermValue.link] - Optional link for more information.
- * @property {string} longTermValue.link.text - The text for the link.
- * @property {string} longTermValue.link.url - The URL for the link.
- * @property {string} serviceType - The type of service for the price calculator
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {PriceFactor[]} factors - Array of pricing factors
+ * @property {Object} longTermValue - Long-term value proposition
+ * @property {string} longTermValue.title - Value proposition title
+ * @property {string} longTermValue.description - Value proposition description
+ * @property {Object} [longTermValue.link] - Optional link for more information
+ * @property {string} longTermValue.link.text - Link text
+ * @property {string} longTermValue.link.url - Link URL
+ * @property {string} serviceType - Service type identifier for price calculator integration
  */
 export interface PricingContent {
   title: string;
@@ -373,12 +387,12 @@ export interface PricingContent {
 }
 
 /**
- * Represents an advantage item for the InSite Advantage section.
+ * Represents an InSite company advantage with icon and description
  * 
  * @interface InSiteAdvantageItem
- * @property {string} title - The title of the advantage item.
- * @property {string} description - A description of the advantage item.
- * @property {string} icon - The icon representing the advantage item.
+ * @property {string} title - Advantage title
+ * @property {string} description - Advantage description
+ * @property {string} icon - Icon name representing the advantage
  */
 export interface InSiteAdvantageItem {
   title: string;
@@ -387,11 +401,11 @@ export interface InSiteAdvantageItem {
 }
 
 /**
- * Represents a benefit item for the InSite Advantage section.
+ * Represents a client benefit from working with InSite
  * 
  * @interface InSiteBenefitItem
- * @property {string} title - The title of the benefit item.
- * @property {string} description - A description of the benefit item.
+ * @property {string} title - Benefit title
+ * @property {string} description - Benefit description
  */
 export interface InSiteBenefitItem {
   title: string;
@@ -399,13 +413,13 @@ export interface InSiteBenefitItem {
 }
 
 /**
- * Represents the content of the InSite Advantage section.
+ * Content configuration for the InSite Advantage section
  * 
  * @interface InSiteAdvantageContent
- * @property {string} title - The title of the InSite Advantage section.
- * @property {string} description - A description of the InSite Advantage section.
- * @property {InSiteAdvantageItem[]} advantages - An array of advantages.
- * @property {InSiteBenefitItem[]} benefits - An array of benefits.
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {InSiteAdvantageItem[]} advantages - Array of company advantages
+ * @property {InSiteBenefitItem[]} benefits - Array of client benefits
  */
 export interface InSiteAdvantageContent {
   title: string;
@@ -415,12 +429,12 @@ export interface InSiteAdvantageContent {
 }
 
 /**
- * Represents an FAQ item for the FAQ section.
+ * Represents a frequently asked question with answer
  * 
  * @interface FAQItem
- * @property {string} question - The question for the FAQ item.
- * @property {string} answer - The answer for the FAQ item.
- * @property {IconName} icon - The icon representing the FAQ item.
+ * @property {string} question - The question text
+ * @property {string} answer - The answer text
+ * @property {IconName} icon - Icon representing the question category
  */
 export interface FAQItem {
   question: string;
@@ -429,15 +443,15 @@ export interface FAQItem {
 }
 
 /**
- * Represents the content of the FAQ section.
+ * Content configuration for the FAQ section
  * 
  * @interface FAQContent
- * @property {string} title - The title of the FAQ section.
- * @property {string} description - A description of the FAQ section.
- * @property {FAQItem[]} items - An array of FAQ items.
- * @property {Object} [moreLink] - Optional link for more FAQ information.
- * @property {string} moreLink.text - The text for the link.
- * @property {string} moreLink.url - The URL for the link.
+ * @property {string} title - Section heading
+ * @property {string} description - Section description
+ * @property {FAQItem[]} items - Array of FAQ items
+ * @property {Object} [moreLink] - Optional link to additional FAQ resources
+ * @property {string} moreLink.text - Link text
+ * @property {string} moreLink.url - Link URL
  */
 export interface FAQContent {
   title: string;
@@ -450,16 +464,16 @@ export interface FAQContent {
 }
 
 /**
- * Represents the content of the CTA section.
+ * Content configuration for the call-to-action section
  * 
  * @interface CTAContent
- * @property {string} title - The title of the CTA section.
- * @property {string} description - A description of the CTA section.
- * @property {string} primaryButtonText - The text for the primary button.
- * @property {string} primaryButtonLink - The link for the primary button.
- * @property {string} [secondaryButtonText] - Optional text for the secondary button.
- * @property {string} [secondaryButtonLink] - Optional link for the secondary button.
- * @property {string} [bgClassName] - Optional custom background classes for the CTA section.
+ * @property {string} title - CTA heading
+ * @property {string} description - CTA description
+ * @property {string} primaryButtonText - Primary button label
+ * @property {string} primaryButtonLink - Primary button destination
+ * @property {string} [secondaryButtonText] - Optional secondary button label
+ * @property {string} [secondaryButtonLink] - Optional secondary button destination
+ * @property {string} [bgClassName] - Optional custom background CSS classes
  */
 export interface CTAContent {
   title: string;
@@ -472,12 +486,12 @@ export interface CTAContent {
 }
 
 /**
- * Represents the metadata for a service.
+ * Metadata for service pages (used for SEO and navigation)
  * 
  * @interface ServiceMetadata
- * @property {string} title - The title of the service.
- * @property {string} description - A description of the service.
- * @property {string} slug - A URL-friendly identifier for the service.
+ * @property {string} title - Service title for meta tags
+ * @property {string} description - Service description for meta tags
+ * @property {string} slug - URL-friendly identifier for routing
  */
 export interface ServiceMetadata {
   title: string;
@@ -486,11 +500,11 @@ export interface ServiceMetadata {
 }
 
 /**
- * Represents a Table of Contents item.
- *
+ * Table of contents item for service overview sections
+ * 
  * @interface TOCItem
- * @property {string} title - The display text for the TOC link.
- * @property {string} anchor - The anchor ID (#section-id) to link to.
+ * @property {string} title - Display text for the TOC link
+ * @property {string} anchor - Anchor ID to link to (without #)
  */
 export interface TOCItem {
   title: string;
@@ -498,11 +512,11 @@ export interface TOCItem {
 }
 
 /**
- * Represents the content of the Service Overview section.
- *
+ * Content configuration for the service overview section
+ * 
  * @interface ServiceOverviewContent
- * @property {string} markdownText - The main content in Markdown format.
- * @property {TOCItem[]} tocItems - An array of TOC items.
+ * @property {string} markdownText - Main content in Markdown format
+ * @property {TOCItem[]} tocItems - Array of table of contents items
  */
 export interface ServiceOverviewContent {
   markdownText: string;
@@ -510,24 +524,24 @@ export interface ServiceOverviewContent {
 }
 
 /**
- * Represents options for service page templates.
+ * Configuration options for service page template behavior and layout
  * 
  * @interface ServicePageTemplateOptions
- * @property {('hero' | 'serviceOverview' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'insiteAdvantage' | 'faq' | 'cta')[]} [skipSections] - Sections to skip in the template.
- * @property {Object} [addSections] - Sections to add to the template.
- * @property {ReactNode} [addSections.beforeHero] - Content to add before the hero section.
- * @property {ReactNode} [addSections.afterHero] - Content to add after the hero section.
- * @property {ReactNode} [addSections.beforeServiceOverview] - Content to add before the service overview section.
- * @property {ReactNode} [addSections.afterServiceOverview] - Content to add after the service overview section.
- * @property {ReactNode} [addSections.beforeValueProp] - Content to add before the value proposition section.
- * @property {ReactNode} [addSections.afterValueProp] - Content to add after the value proposition section.
- * @property {ReactNode} [addSections.afterServiceScope] - Content to add after the service scope section.
- * @property {ReactNode} [addSections.afterApplications] - Content to add after the applications section.
- * @property {ReactNode} [addSections.afterProcess] - Content to add after the process section.
- * @property {ReactNode} [addSections.afterPricing] - Content to add after the pricing section.
- * @property {ReactNode} [addSections.afterBenefits] - Content to add after the benefits section.
- * @property {ReactNode} [addSections.afterFAQ] - Content to add after the FAQ section.
- * @property {'default' | 'compact' | 'expanded'} [layoutVariant] - The layout variant for the service page.
+ * @property {SectionName[]} [skipSections] - Array of section names to exclude from rendering
+ * @property {Object} [addSections] - Custom content injection points
+ * @property {ReactNode} [addSections.beforeHero] - Content before hero section
+ * @property {ReactNode} [addSections.afterHero] - Content after hero section
+ * @property {ReactNode} [addSections.beforeServiceOverview] - Content before service overview
+ * @property {ReactNode} [addSections.afterServiceOverview] - Content after service overview
+ * @property {ReactNode} [addSections.beforeValueProp] - Content before value proposition
+ * @property {ReactNode} [addSections.afterValueProp] - Content after value proposition
+ * @property {ReactNode} [addSections.afterServiceScope] - Content after service scope
+ * @property {ReactNode} [addSections.afterApplications] - Content after applications
+ * @property {ReactNode} [addSections.afterProcess] - Content after process
+ * @property {ReactNode} [addSections.afterPricing] - Content after pricing
+ * @property {ReactNode} [addSections.afterBenefits] - Content after benefits/advantages
+ * @property {ReactNode} [addSections.afterFAQ] - Content after FAQ
+ * @property {'default' | 'compact' | 'expanded'} [layoutVariant] - Layout variant for responsive behavior
  */
 export interface ServicePageTemplateOptions {
   skipSections?: ('hero' | 'serviceOverview' | 'valueProp' | 'serviceScope' | 'applications' | 'process' | 'pricing' | 'insiteAdvantage' | 'faq' | 'cta')[];

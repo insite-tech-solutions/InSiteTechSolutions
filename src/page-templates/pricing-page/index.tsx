@@ -1,12 +1,19 @@
 /**
- * Pricing Page Template
+ * @fileoverview Pricing Page Template
  *
- * This component acts as a template for the pricing and payments page. It aggregates
- * all the individual sections of the pricing page and arranges them within a consistent
- * layout structure. This approach mirrors the service page templates, promoting
- * reusability and maintainability.
+ * This component acts as the main template for the pricing and payments page, orchestrating
+ * all individual sections within a consistent layout structure. Features page loading states,
+ * proper section spacing, and component composition following the service page template pattern.
+ * 
+ * Architecture:
+ * - PageLoadingProvider context wrapper for loading states
+ * - Conditional loader rendering with transition effects
+ * - Hero section outside main layout for full-width design
+ * - Layout wrapper for content sections with consistent spacing
+ * - Modular section components for maintainability
  */
-import React, { useEffect } from 'react';
+
+import { useEffect } from 'react';
 import Layout from '@/components/reusable-components/layout';
 import HeroSection from '@/page-templates/pricing-page/hero-section';
 import PricingOverview from '@/page-templates/pricing-page/pricing-overview';
@@ -20,9 +27,26 @@ import pricingFAQContent from '@/page-templates/pricing-page/pricing-faq-content
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
 
-const PricingPageContent = () => {
+/**
+ * PricingPageContent Component
+ * 
+ * Main content component that renders all pricing page sections in the correct order
+ * with proper spacing and layout structure. Handles the page loading state timing
+ * and orchestrates the display of all pricing-related sections.
+ * 
+ * Features:
+ * - Automatic loading state management with timer
+ * - Hero section positioned outside main layout
+ * - Consistent vertical spacing between sections
+ * - Integration with shared FAQ component
+ * - Modular section composition for maintainability
+ * 
+ * @returns {JSX.Element} The complete pricing page content
+ */
+export function PricingPageContent(): JSX.Element {
   const { setIsPageLoading } = usePageLoading();
 
+  // Handle page loading state with delayed transition
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsPageLoading(false);
@@ -33,31 +57,43 @@ const PricingPageContent = () => {
   
   return (
     <>
+      {/* Hero Section - Full-width section outside main layout */}
       <HeroSection />
+      
+      {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout>
-        {/*
-          The following divs replicate the spacing from the original page.tsx implementation
-          to ensure visual consistency after refactoring.
-        */}
         <div className="py-16">
+          {/* Pricing Overview Section - Introduction and key advantages */}
             <div>
             <PricingOverview />
             </div>
+          
+          {/* Pricing Models Section - Available pricing structures */}
             <div className="my-16">
             <PricingModels />
             </div>
+          
+          {/* Payment Options Section - Available payment methods */}
             <div className="my-16">
             <PaymentOptions />
             </div>
+          
+          {/* Payment Terms Section - Policies and terms */}
             <div className="my-16">
               <PaymentTerms />
             </div>
+          
+          {/* Interactive Pricing Estimator Section */}
             <div className="my-16">
               <PricingEstimator />
             </div>
+          
+          {/* FAQ Section - Pricing-specific questions and answers */}
             <div className="my-16">
               <FAQSection content={pricingFAQContent} />
             </div>
+          
+          {/* Call-to-Action Section - Final conversion element */}
             <div className="my-12">
               <CustomSolutionSection />
             </div>
@@ -65,25 +101,60 @@ const PricingPageContent = () => {
       </Layout>
     </>
   );
-};
+}
 
-const PricingPageLoaderWrapper: React.FC = () => {
+/**
+ * PricingPageLoaderWrapper Component
+ * 
+ * Wrapper component that conditionally renders the page transition loader
+ * based on the loading state from context. Provides smooth transitions
+ * between loading and content states.
+ * 
+ * @returns {JSX.Element} Loader and content with conditional rendering
+ */
+function PricingPageLoaderWrapper(): JSX.Element {
   const { isPageLoading } = usePageLoading();
 
   return (
     <>
+      {/* Conditional Page Loader - Shows during initial page load */}
       {isPageLoading && <PageTransitionLoader />}
+      
+      {/* Main Page Content - Always rendered for smooth transitions */}
       <PricingPageContent />
     </>
   );
-};
+}
 
-const PricingPageTemplate = () => {
+/**
+ * PricingPageTemplate Component
+ * 
+ * Root template component that provides the page loading context to all child components.
+ * This is the main export used by the Next.js page component and ensures proper
+ * loading state management throughout the pricing page.
+ * 
+ * Features:
+ * - Page loading context provider wrapper
+ * - Consistent loading behavior across the application
+ * - Proper component hierarchy for state management
+ * - Clean separation of concerns between loading and content
+ * 
+ * @returns {JSX.Element} The complete pricing page template with context
+ * 
+ * @example
+ * ```tsx
+ * // Usage in Next.js page
+ * import PricingPageTemplate from '@/page-templates/pricing-page'
+ * 
+ * export default function PricingPage() {
+ *   return <PricingPageTemplate />
+ * }
+ * ```
+ */
+export default function PricingPageTemplate(): JSX.Element {
   return (
     <PageLoadingProvider>
       <PricingPageLoaderWrapper />
     </PageLoadingProvider>
   );
-};
-
-export default PricingPageTemplate; 
+}

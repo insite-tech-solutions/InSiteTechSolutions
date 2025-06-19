@@ -1,4 +1,12 @@
 /**
+ * @fileoverview Pricing and Configuration Table for Web & App Development Services
+ *
+ * This file defines the pricing and configuration data for Web & App Development services.
+ * It covers detailed project scope including pages, interactivity, platform types,
+ * target devices, features, support tiers, and bundled services used in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for Web & App Development services.
  * Covers detailed project scope including pages, interactivity, platform types,
  * target devices, features, support tiers, and bundled services for the pricing calculator.
@@ -20,8 +28,6 @@
  * @property {Object} extraServices - Extra services and customizations available for bundling.
  */
 // content/calculator_tables/webAppDevelopment.ts
-
-//import { CostRange, Multiplier } from './types';
 
 export const webAppDevelopmentTable = {
   name: "Web & App Development",

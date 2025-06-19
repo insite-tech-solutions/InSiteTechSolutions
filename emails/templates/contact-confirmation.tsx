@@ -1,3 +1,24 @@
+/**
+ * @fileoverview Contact Confirmation Email Template.
+ *
+ * This template is used to send an automatic confirmation email to users
+ * who have submitted a contact form through the website. It acknowledges
+ * receipt of their message and outlines the next steps in the communication process.
+ *
+ * Purpose:
+ * - **Confirmation**: Assures the user their message was successfully received.
+ * - **Transparency**: Informs the user about what to expect next (e.g., response timeline).
+ * - **Branding**: Maintains consistent brand messaging and appearance.
+ * - **Call to Action**: Provides alternative contact methods for immediate assistance.
+ *
+ * Technical Details:
+ * - Uses `@react-email/components` for structuring email-compatible HTML.
+ * - Integrates `EmailHeader` and `EmailFooter` for consistent branding elements.
+ * - Leverages `emailStyles` and `brandColors` for global and specific styling.
+ * - Dynamically includes `customerName` and `submittedAt` for personalization.
+ * - Features a timeline section to visually represent the next steps.
+ */
+
 import {
     Html,
     Head,
@@ -12,17 +33,38 @@ import { EmailFooter } from '../components/footer';
 import { emailStyles } from '../components/email-styles';
 import { brandColors } from '../components/brand-colors';
 
+/**
+ * Props for the `ContactConfirmation` component.
+ * @interface ContactConfirmationProps
+ */
 interface ContactConfirmationProps {
+  /**
+   * The name of the customer who submitted the contact form.
+   */
   customerName: string;
+  /**
+   * The timestamp or formatted date string indicating when the form was submitted.
+   */
   submittedAt: string;
+  /**
+   * Optional URL for the logo to be displayed in the email header.
+   */
   logoUrl?: string;
 }
 
+/**
+ * Renders the contact confirmation email template.
+ * This email is sent to users after they successfully submit a contact form,
+ * confirming receipt of their message and outlining next steps.
+ *
+ * @param {ContactConfirmationProps} props - The properties for the component.
+ * @returns {JSX.Element} The JSX element representing the contact confirmation email.
+ */
 export const ContactConfirmation = ({
   customerName,
   submittedAt,
   logoUrl,
-}: ContactConfirmationProps) => {
+}: ContactConfirmationProps): JSX.Element => {
   return (
     <Html lang="en">
       <Head>
@@ -114,13 +156,19 @@ export const ContactConfirmation = ({
 export default ContactConfirmation;
 
 // Additional custom styles
-const heroSection = {
+/**
+ * Styles for the hero section of the email.
+ */
+const heroSection: React.CSSProperties = {
   paddingTop: '36px',
   paddingBottom: '16px',
   textAlign: 'center' as const,
 };
 
-const heroHeading = {
+/**
+ * Styles for the main heading in the hero section.
+ */
+const heroHeading: React.CSSProperties = {
   fontSize: '32px',
   lineHeight: '40px',
   fontWeight: '700',
@@ -130,7 +178,10 @@ const heroHeading = {
   fontFamily: "'Kohinoor Latin', 'Open Sans', sans-serif",
 };
 
-const heroSubtext = {
+/**
+ * Styles for the subtext in the hero section.
+ */
+const heroSubtext: React.CSSProperties = {
   fontSize: '18px',
   lineHeight: '28px',
   color: brandColors.text.muted,
@@ -138,14 +189,22 @@ const heroSubtext = {
   margin: '0',
 };
 
-const personalizedGreeting = {
+/**
+ * Styles for the personalized greeting text.
+ * Extends `emailStyles.textLarge`.
+ */
+const personalizedGreeting: React.CSSProperties = {
   ...emailStyles.textLarge,
   fontWeight: '600',
   color: brandColors.text.primary,
   marginBottom: '24px',
 };
 
-const timelineCard = {
+/**
+ * Styles for the timeline card section.
+ * Extends `emailStyles.card`.
+ */
+const timelineCard: React.CSSProperties = {
   ...emailStyles.card,
   backgroundColor: brandColors.background.secondary,
   border: `1px solid ${brandColors.background.border}`,
@@ -156,7 +215,10 @@ const timelineCard = {
   boxSizing: 'border-box' as const,
 };
 
-const cardTitle = {
+/**
+ * Styles for the title within the timeline and contact cards.
+ */
+const cardTitle: React.CSSProperties = {
   fontSize: '18px',
   fontWeight: '600',
   color: brandColors.text.primary,
@@ -164,14 +226,20 @@ const cardTitle = {
   textAlign: 'center' as const,
 };
 
-const timelineItem = {
+/**
+ * Styles for an individual timeline item, using flex display.
+ */
+const timelineItem: React.CSSProperties = {
   margin: '12px 0',
   display: 'flex',
   alignItems: 'flex-start',
   width: '100%',
 };
 
-const timelineNumber = {
+/**
+ * Styles for the numbered circle in each timeline item.
+ */
+const timelineNumber: React.CSSProperties = {
   width: '24px',
   minWidth: '24px',
   height: '24px',
@@ -187,20 +255,31 @@ const timelineNumber = {
   flexShrink: 0,
 };
 
-const timelineContent = {
+/**
+ * Styles for the content area of each timeline item.
+ */
+const timelineContent: React.CSSProperties = {
   flex: 1,
   paddingLeft: '0',
   minWidth: 0,
 };
 
-const timelineText = {
+/**
+ * Styles for the text within each timeline item.
+ * Extends `emailStyles.text`.
+ */
+const timelineText: React.CSSProperties = {
   ...emailStyles.text,
   margin: '0',
   fontSize: '14px',
   lineHeight: '20px',
 };
 
-const contactCard = {
+/**
+ * Styles for the contact card section.
+ * Extends `emailStyles.card`.
+ */
+const contactCard: React.CSSProperties = {
   ...emailStyles.card,
   textAlign: 'center' as const,
   backgroundColor: '#f8fafc',
@@ -210,7 +289,10 @@ const contactCard = {
   boxSizing: 'border-box' as const,
 };
 
-const contactInfo = {
+/**
+ * Styles for the contact information text (email, phone, website).
+ */
+const contactInfo: React.CSSProperties = {
   ...emailStyles.text,
   fontFamily: "'Courier New', monospace",
   backgroundColor: brandColors.background.primary,
@@ -223,13 +305,19 @@ const contactInfo = {
   wordBreak: 'break-word' as const,
 };
 
-const teamRole = {
+/**
+ * Styles for the team role text in the signature.
+ */
+const teamRole: React.CSSProperties = {
   color: brandColors.text.muted,
   fontSize: '14px',
   fontStyle: 'italic',
 };
 
-const contentSection = {
+/**
+ * Styles for the main content section, providing inner padding.
+ */
+const contentSection: React.CSSProperties = {
   padding: '8px 16px 24px 16px',
 };
 

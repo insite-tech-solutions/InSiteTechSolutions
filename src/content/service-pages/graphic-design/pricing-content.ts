@@ -1,4 +1,9 @@
-// src/content/services/graphic-design/pricing-content.ts
+/**
+ * @fileoverview Pricing Content for the Graphic Design & Branding Service Page
+ *
+ * This file contains the content configuration for the pricing section of the Graphic Design & Branding service page.
+ * It includes details about pricing, factors affecting cost, and long-term value justification.
+ */
 
 import { PricingContent } from '@/page-templates/service-page/types';
 

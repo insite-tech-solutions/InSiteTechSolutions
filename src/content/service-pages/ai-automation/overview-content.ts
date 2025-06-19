@@ -1,5 +1,5 @@
 /**
- * AI & Automation Overview Content
+ * @fileoverview Overview Content for the AI & Automation Service Page
  * 
  * This file contains the content configuration for the AI and automation service overview section.
  * It includes:

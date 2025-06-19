@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Pricing and Configuration Table for Consulting & Training Services
+ *
+ * This file defines the pricing and configuration data for Consulting & Training services.
+ * It includes cost categories, complexity levels, delivery formats, engagement styles,
+ * expertise levels, features, customization options, support, and timeline factors
+ * used in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for Consulting & Training services.
  * Defines categories, rendering types, recurring cost types, and detailed options
  * with associated cost ranges or multipliers for the pricing calculator.
@@ -19,8 +28,6 @@
  * @property {Array} specialNotes - Special notes regarding the consulting services.
  */
 // content/calculator_tables/consultingTraining.ts
-
-//import { CostRange, Multiplier } from './types';
 
 export const consultingTrainingTable = {
   name: "Consulting & Training",

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview ProcessSection module: renders a dynamic, animated timeline of service process steps.
+ * - ProcessSectionWrapper manages orientation changes and preserves scroll position.
+ * - ProcessSection uses GSAP and ScrollTrigger for scroll-driven animations of each step.
+ */
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback, memo } from 'react';
@@ -10,16 +15,16 @@ import { getIcon } from '@/utils/icon-registry';
 
 /**
  * ProcessSectionWrapper Component
- * 
- * Wrapper component that handles orientation changes and scroll position preservation.
- * This ensures smooth transitions when the device orientation changes and maintains
- * the user's scroll position.
- * 
- * @param {Object} props - Component props
- * @param {ProcessContent} props.content - The content to display in the process section
- * @returns {React.ReactElement} The wrapped ProcessSection component
+ *
+ * Wrapper that handles device orientation changes and preserves the user's scroll position.
+ * It forces a re-mount of the ProcessSection on orientation change to re-initialize animations
+ * while seamlessly restoring the previous scroll position.
+ *
+ * @component
+ * @param {ProcessContent} props.content - The data for rendering process steps.
+ * @returns {React.ReactElement} The ProcessSection wrapped with orientation handling.
  */
-const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content }) => {
+const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content }): JSX.Element => {
   /**
    * Tracks the current orientation of the device (landscape/portrait)
    * Initialized based on window dimensions
@@ -134,15 +139,15 @@ const ProcessSectionWrapper: React.FC<{content: ProcessContent}> = ({ content })
 
 /**
  * ProcessSection Component
- * 
- * Main component that renders the process timeline with animated steps.
- * Each step morphs from a circle into a detailed card when scrolled into view.
- * 
- * @param {Object} props - Component props
- * @param {ProcessContent} props.content - The content to display in the process section
- * @returns {React.ReactElement} The process section with animated steps
+ *
+ * Renders the service process timeline with GSAP-powered scroll-triggered animations.
+ * Each step transitions from a circular marker to an expanded card as it scrolls into view.
+ *
+ * @component
+ * @param {ProcessContent} props.content - The data for process steps and related content.
+ * @returns {React.ReactElement} The animated process timeline section.
  */
-const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
+const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }): JSX.Element => {
   // Main container reference for the process section
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -391,14 +396,19 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
 
   return (
     <div className="w-full relative">
-      <div className="text-center max-w-4xl mx-auto py-16">
-      <h2 className="text-4xl font-extrabold text-gray-900 mb-8">
-        {content.title}
-      </h2>
-      <p className="text-xl text-gray-700 leading-relaxed">
-        {content.description}
-      </p>
-      </div>
+      {/* Process Section Container */}
+      <section aria-labelledby="process-section-title">
+        {/* Accessible landmark for section */}
+        <h2 id="process-section-title" className="sr-only">{content.title}</h2>
+        <div className="text-center max-w-4xl mx-auto py-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8">
+            {content.title}
+          </h2>
+          <p className="text-xl text-gray-700 leading-relaxed">
+            {content.description}
+          </p>
+        </div>
+      </section>
       <div ref={sectionRef} className="relative h-[440vh] md:h-[465vh] pb-12 lg:pb-0">
         {/*
           Hidden measurement div:
@@ -407,6 +417,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
           - Uses styles that EXACTLY match the final animated state defined in the GSAP timeline below.
           - opacity-0, pointer-events-none, absolute, -z-10 ensure it doesn't affect layout or interaction.
         */}
+        {/* Hidden Measurement Cards (aria-hidden) */}
         <div
           ref={measurementRef}
           // Use inset-x-0 to define bounds respecting padding, then apply width/centering
@@ -419,7 +430,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
               className="measurement-card rounded-xl relative bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg border-[3px] border-blue-600 mb-10"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-900">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-blue-600 to-blue-900">
                   {/* Placeholder for icon dimensions */}
                   <div className="h-7 w-7" />
                 </div>
@@ -483,7 +494,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }) => {
                           ref={(el) => {
                             if (el) iconRefs.current[index] = el;
                           }}
-                          className="p-3 rounded-lg bg-gradient-to-tr from-mild-blue to-blue-900"
+                          className="p-3 rounded-lg bg-gradient-to-br from-light-blue to-blue-900"
                           style={{ pointerEvents: 'auto' }}
                           aria-hidden="true"
                         >

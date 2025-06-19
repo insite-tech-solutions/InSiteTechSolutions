@@ -1,8 +1,5 @@
 // src/app/page.tsx
 
-import Image from 'next/image'
-import Link from 'next/link'
-
 
 //import HeroSection from '../components/HomepageHeroSec';
 import HeroSection from '@/page-templates/homepage/hero-section/hero-section';

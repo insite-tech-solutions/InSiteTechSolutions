@@ -1,4 +1,10 @@
-// src/content/services/data-analysis/applications-content.ts
+/**
+ * @fileoverview Applications Content for the Data Analysis Service Page
+ *
+ * This file contains the content configuration for the Data Analysis service page.
+ * It includes industry solutions, categories, and related descriptions/icons.
+ * The content is organized into sections and categories to provide a clear and structured presentation.
+ */
 
 import { ApplicationsContent } from '@/page-templates/service-page/types';
 

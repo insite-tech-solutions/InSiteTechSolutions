@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Pricing and Configuration Table for Custom Software Solutions Services
+ *
+ * This file defines the pricing and configuration data for Custom Software Solutions services.
+ * It includes cost categories, complexity levels, integrations, platform specifics,
+ * computing environments, development focus, programming languages, features, documentation options,
+ * ongoing maintenance, and additional features used in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for Custom Software Solutions services.
  * Defines all configurable service attributes, rendering types, category organization,
  * and associated cost ranges or multipliers used by the pricing calculator.

@@ -1,4 +1,9 @@
-// src/content/services/ai-automation/faq-content.ts
+/**
+ * @fileoverview FAQ Content for the AI & Automation Service Page
+ *
+ * This file contains the content configuration for the frequently asked questions section of the AI & Automation service page.
+ * It includes a title, description, and a list of frequently asked questions with answers.
+ */
 
 import { FAQContent } from '@/page-templates/service-page/types';
 

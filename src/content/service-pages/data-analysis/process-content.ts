@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the Data Analysis Service Page
+ *
+ * This file contains the content configuration for the process section of the Data Analysis service page.
+ * It outlines the step-by-step methodology used for data analysis projects.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the Data Analysis service page.
  * Outlines the step-by-step methodology used for data analysis projects.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,7 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
 
 export const dataAnalysisProcess: ProcessContent = {
   title: "Our Approach",

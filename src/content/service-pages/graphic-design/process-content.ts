@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the Graphic Design & Branding Service Page
+ *
+ * This file contains the content configuration for the process section of the Graphic Design & Branding service page.
+ * It outlines the step-by-step methodology used for design and branding projects.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the Graphic Design & Branding service page.
  * Outlines the step-by-step methodology used for design and branding projects.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,7 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
 
 export const graphicDesignProcess: ProcessContent = {
   title: "Our Approach",

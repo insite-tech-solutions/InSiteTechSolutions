@@ -1,3 +1,23 @@
+/**
+ * @fileoverview Email Footer Component.
+ *
+ * This component renders the standardized footer for all outgoing emails.
+ * It includes brand information, contact details, social media links, copyright,
+ * and an unsubscribe message. The design is responsive and uses predefined brand colors.
+ *
+ * Purpose:
+ * - **Consistency**: Ensures a uniform look and feel across all email communications.
+ * - **Branding**: Reinforces brand identity with logo, tagline, and contact information.
+ * - **Legal Compliance**: Includes necessary copyright and unsubscribe information.
+ * - **Usability**: Provides clear links for contact, website, and social media engagement.
+ *
+ * Technical Details:
+ * - Uses `@react-email/components` for structuring email-compatible HTML.
+ * - Imports `brandColors` for consistent styling.
+ * - Styles are defined as constant objects using inline CSS-in-JS for email client compatibility.
+ * - `EmailFooter` is a functional component returning the JSX structure.
+ */
+
 import {
     Section,
     Container,
@@ -6,8 +26,15 @@ import {
     Link,
   } from '@react-email/components';
 import { brandColors } from './brand-colors';
-  
-  export const EmailFooter = () => {
+
+/**
+ * Renders the standardized footer component for all outgoing emails.
+ * This footer includes brand information, contact details, social media links, copyright,
+ * and an unsubscribe message, ensuring consistency and compliance across email communications.
+ *
+ * @returns {JSX.Element} The JSX element representing the email footer.
+ */
+export const EmailFooter = (): JSX.Element => {
     return (
       <Section style={footerSection}>
         <Container style={container}>
@@ -50,26 +77,38 @@ import { brandColors } from './brand-colors';
     );
   };
   
-  const footerSection = {
+  /**
+   * Styles for the main footer section.
+   */
+  const footerSection: React.CSSProperties = {
     backgroundColor: brandColors.background.secondary,
     padding: '40px 0',
     borderTop: `1px solid ${brandColors.background.border}`,
   };
   
-  const container = {
+  /**
+   * Styles for the content container within the footer.
+   */
+  const container: React.CSSProperties = {
     maxWidth: '600px',
     margin: '0 auto',
     padding: '0 24px',
   };
   
-  const hr = {
+  /**
+   * Styles for the horizontal rule (separator).
+   */
+  const hr: React.CSSProperties = {
     borderColor: brandColors.background.border,
     margin: '20px 0',
     border: 'none',
     borderTop: `2px solid ${brandColors.background.border}`,
   };
   
-  const footerBrand = {
+  /**
+   * Styles for the brand name text in the footer.
+   */
+  const footerBrand: React.CSSProperties = {
     color: brandColors.text.primary,
     fontSize: '18px',
     lineHeight: '28px',
@@ -78,7 +117,10 @@ import { brandColors } from './brand-colors';
     fontFamily: "'Kohinoor Latin', 'Open Sans', sans-serif",
   };
   
-  const footerTagline = {
+  /**
+   * Styles for the brand tagline text in the footer.
+   */
+  const footerTagline: React.CSSProperties = {
     color: brandColors.text.muted,
     fontSize: '14px',
     lineHeight: '20px',
@@ -86,7 +128,10 @@ import { brandColors } from './brand-colors';
     margin: '0 0 16px 0',
   };
   
-  const footerContact = {
+  /**
+   * Styles for the contact information text in the footer.
+   */
+  const footerContact: React.CSSProperties = {
     color: brandColors.text.muted,
     fontSize: '14px',
     lineHeight: '22px',
@@ -94,7 +139,10 @@ import { brandColors } from './brand-colors';
     margin: '0 0 12px 0',
   };
   
-  const footerSocial = {
+  /**
+   * Styles for the social media links text in the footer.
+   */
+  const footerSocial: React.CSSProperties = {
     color: brandColors.text.muted,
     fontSize: '14px',
     lineHeight: '22px',
@@ -102,7 +150,10 @@ import { brandColors } from './brand-colors';
     margin: '0 0 16px 0',
   };
   
-  const copyright = {
+  /**
+   * Styles for the copyright text in the footer.
+   */
+  const copyright: React.CSSProperties = {
     color: brandColors.text.muted,
     fontSize: '12px',
     lineHeight: '18px',
@@ -111,7 +162,10 @@ import { brandColors } from './brand-colors';
     fontWeight: '500',
   };
   
-  const unsubscribeText = {
+  /**
+   * Styles for the unsubscribe text in the footer.
+   */
+  const unsubscribeText: React.CSSProperties = {
     color: brandColors.text.muted,
     fontSize: '11px',
     lineHeight: '16px',
@@ -120,7 +174,10 @@ import { brandColors } from './brand-colors';
     fontStyle: 'italic',
   };
   
-  const link = {
+  /**
+   * Styles for the interactive links within the footer.
+   */
+  const link: React.CSSProperties = {
     color: brandColors.primary,
     textDecoration: 'underline',
     fontWeight: '500',

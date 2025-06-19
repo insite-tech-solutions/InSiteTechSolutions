@@ -1,26 +1,78 @@
+/**
+ * @fileoverview CRM Contact/Lead Addition API Route Handler
+ *
+ * This module provides API route handlers for adding contacts and leads to the CRM system (ERPNext).
+ * It supports both `GET` requests (primarily for simple email-link based additions) and
+ * `POST` requests (for more robust, future API integrations with JSON bodies).
+ *
+ * Note: The presence of two `POST` functions is unusual for a single Next.js App Router `route.ts` file.
+ * Typically, only one function per HTTP method (GET, POST, etc.) is expected.
+ * This implementation handles both, but may indicate a potential structural review opportunity.
+ *
+ * Features:
+ * - **Input Validation**: Uses `zod` for schema validation of incoming data.
+ * - **ERPNext Integration**: Leverages `erpnextClient` to create lead records.
+ * - **HTML Responses for GET**: Provides user-friendly HTML pages for success or error when accessed directly via GET request.
+ * - **JSON Responses for POST**: Returns JSON responses for programmatic API calls.
+ * - **Data Transformation**: Maps incoming request data to ERPNext-compatible formats.
+ *
+ * Technical Implementation:
+ * - Utilizes Next.js App Router's `Route Handler` pattern.
+ * - Employs `NextRequest` and `NextResponse` for request and response handling.
+ * - Integrates with `@/lib/erpnext` for CRM operations.
+ * - Handles URL search parameters for `GET` requests and JSON bodies for `POST` requests.
+ * - Includes basic error handling and informative responses.
+ */
+
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { erpnextClient } from '@/lib/erpnext'
 
-// Validation schema for CRM contact addition
+/**
+ * Zod schema for validating incoming data for CRM contact/lead addition.
+ * Defines the expected structure and types of fields for both GET and POST requests.
+ */
 const addContactSchema = z.object({
+  /** The first name of the contact/lead, required. */
   firstName: z.string().min(1, "First name is required"),
+  /** The last name of the contact/lead (optional). Nullish values are treated as undefined. */
   lastName: z.string().nullish(),
+  /** The email address of the contact/lead, required and must be a valid email format. */
   email: z.string().email("Valid email is required"),
+  /** The phone number of the contact/lead (optional). Nullish values are treated as undefined. */
   phone: z.string().nullish(),
+  /** The company name of the contact/lead (optional). Nullish values are treated as undefined. */
   company: z.string().nullish(),
+  /** The website URL of the contact/lead's company (optional). Nullish values are treated as undefined. */
   website: z.string().nullish(),
+  /** A comma-separated string of services requested (optional). Nullish values are treated as undefined. */
   services: z.string().nullish(),
+  /** The estimated budget (optional). Nullish values are treated as undefined. */
   budget: z.string().nullish(),
+  /** Additional comments (optional). Nullish values are treated as undefined. */
   comments: z.string().nullish(),
+  /** The source from which the contact/lead was acquired (optional). Nullish values are treated as undefined. */
   source: z.string().nullish(),
 })
 
-export async function GET(request: NextRequest) {
+/**
+ * Handles GET requests to add a contact/lead to the CRM.
+ * This endpoint is typically used via a direct link (e.g., from an email) to quickly add a lead.
+ * It returns an HTML response indicating the success or failure of the operation.
+ *
+ * @param {NextRequest} request - The incoming Next.js request object containing search parameters.
+ * @returns {Promise<NextResponse>} A promise that resolves to a `NextResponse` object
+ *                                  containing an HTML page for success or error.
+ *                                  Returns:
+ *                                  - `200 OK` with a success HTML page if the lead is added/updated.
+ *                                  - `400 Bad Request` with an error HTML page for validation errors.
+ *                                  - `500 Internal Server Error` with an error HTML page for unexpected server errors.
+ */
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const { searchParams } = new URL(request.url)
     
-    // Extract parameters from URL
+    // Extract parameters from URL search query
     const params = {
       firstName: searchParams.get('firstName'),
       lastName: searchParams.get('lastName'),
@@ -34,7 +86,7 @@ export async function GET(request: NextRequest) {
       source: searchParams.get('source'),
     }
 
-    // Validate required fields
+    // Validate extracted parameters using the defined schema
     const validationResult = addContactSchema.safeParse(params)
     
     if (!validationResult.success) {
@@ -72,10 +124,10 @@ export async function GET(request: NextRequest) {
 
     const formData = validationResult.data
 
-    // Parse services if provided
+    // Parse services string into an array if provided
     const servicesArray = formData.services ? formData.services.split(',').map(s => s.trim()) : []
 
-    // Prepare data for ERPNext (convert null to undefined)
+    // Prepare data for ERPNext, converting nullish values to undefined for cleaner API calls
     const crmData = {
       firstName: formData.firstName,
       lastName: formData.lastName || undefined,
@@ -91,10 +143,10 @@ export async function GET(request: NextRequest) {
 
     console.log('Calling createLeadOnly with data:', JSON.stringify(crmData, null, 2))
 
-    // Add to CRM (lead only, contact should already exist from auto-creation)
+    // Call ERPNext client to create or update the lead (only lead, as contact is assumed to exist from auto-creation)
     const result = await erpnextClient.createLeadOnly(crmData)
 
-    // Return success page
+    // Return success page with lead details and ERPNext link
     return new NextResponse(
       `
       <!DOCTYPE html>
@@ -299,7 +351,20 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+/**
+ * Handles POST requests to add a contact/lead to the CRM.
+ * This endpoint is designed for programmatic API calls with a JSON request body.
+ * It returns a JSON response indicating the success or failure of the operation.
+ *
+ * @param {NextRequest} request - The incoming Next.js request object containing the JSON body.
+ * @returns {Promise<NextResponse>} A promise that resolves to a `NextResponse` object
+ *                                  containing a JSON response for success or error.
+ *                                  Returns:
+ *                                  - `200 OK` with a success JSON response if the lead is added/updated.
+ *                                  - `400 Bad Request` with a validation error JSON response.
+ *                                  - `500 Internal Server Error` with an error JSON response for unexpected server errors.
+ */
+export async function POST(request: NextRequest): Promise<NextResponse> {
   // Handle POST requests with JSON body (for future API use)
   try {
     const body = await request.json()

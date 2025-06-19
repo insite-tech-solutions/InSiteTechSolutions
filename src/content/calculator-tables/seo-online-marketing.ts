@@ -1,4 +1,12 @@
 /**
+ * @fileoverview Pricing and Configuration Table for SEO & Online Marketing Services
+ *
+ * This file defines the pricing and configuration data for SEO & Online Marketing services.
+ * It includes campaign parameters, service tiers, media types, support levels,
+ * analytics, and cross-service integrations used in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for SEO & Online Marketing services.
  * Defines all configurable campaign parameters, service tiers, media types,
  * support levels, analytics, and cross-service integrations for the pricing calculator.
@@ -21,8 +29,6 @@
  * @property {Object} extraServices - Extra services and customizations available for bundling.
  */
 // content/calculator_tables/seoOnlineMarketing.ts
-
-//import { CostRange, Multiplier } from './types';
 
 export const seoOnlineMarketingTable = {
   name: "SEO & Online Marketing",

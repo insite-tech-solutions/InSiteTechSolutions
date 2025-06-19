@@ -1,4 +1,10 @@
-// src/content/services/graphic-design/applications-content.ts
+/**
+ * @fileoverview Applications Content for the Graphic Design & Branding Service Page
+ *
+ * This file contains the content configuration for the Graphic Design & Branding service page.
+ * It includes industry solutions, categories, and related descriptions/icons.
+ * The content is organized into sections and categories to provide a clear and structured presentation.
+ */
 
 import { ApplicationsContent } from '@/page-templates/service-page/types';
 

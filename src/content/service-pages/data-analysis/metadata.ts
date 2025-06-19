@@ -1,4 +1,9 @@
-// src/content/service-pages/data-analysis/metadata.ts
+/**
+ * @fileoverview Metadata Configuration for the Data Analysis Service Page
+ *
+ * This file contains the metadata configuration for the Data Analysis service page.
+ * It includes SEO-relevant fields such as the title, description, and slug identifier.
+ */
 
 import { ServiceMetadata } from '@/page-templates/service-page/types';
 

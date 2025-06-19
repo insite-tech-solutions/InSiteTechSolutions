@@ -1,15 +1,23 @@
 /**
- * Page component for the Consulting & Training service.
- * Using Next.js App Router's built-in support for metadata.
+ * @fileoverview Consulting & Training Service Page Route Component
+ * 
+ * Next.js App Router page component for the /services/consulting-and-training route.
+ * Implements server-side rendering with static metadata export and component
+ * delegation pattern. Follows App Router conventions for SEO optimization and
+ * performance.
  */
 import { Metadata } from 'next';
 import ConsultingTrainingPage from '@/components/service-pages/consulting-training-page';
 import consultingTrainingContent from '@/content/service-pages/consulting-training';
 
 /**
- * Metadata configuration for the Consulting & Training service page.
+ * Static metadata configuration for the Consulting & Training service page.
  * 
- * @type {Metadata}
+ * Exported as a static object for Next.js App Router to process during build time.
+ * Provides SEO optimization with title and description meta tags derived from
+ * imported content.
+ * 
+ * @type {Metadata} Next.js metadata configuration object
  */
 export const metadata: Metadata = {
   title: consultingTrainingContent.metadata.title + ' | InSite Tech',
@@ -17,10 +25,26 @@ export const metadata: Metadata = {
 };
 
 /**
- * Server component that renders the Consulting & Training service page.
+ * Consulting & Training Service Page Route Component
  * 
- * @returns {JSX.Element} The rendered Consulting & Training page
+ * Server component that renders the Consulting & Training service page using the App
+ * Router pattern. It delegates the page rendering to the ConsultingTrainingPage
+ * client component, while handling route-level concerns like metadata.
+ * 
+ * Features:
+ * - Server-side rendering by default (App Router)
+ * - Static metadata export for SEO optimization
+ * - Component delegation for separation of concerns
+ * - Follows Next.js 13+ App Router conventions
+ * 
+ * @returns {JSX.Element} The rendered Consulting & Training service page.
+ * 
+ * @example
+ * ```
+ * // This component is automatically rendered by Next.js for the
+ * // /services/consulting-and-training route. No manual import is necessary.
+ * ```
  */
-export default function Page() {
+export default function Page(): JSX.Element {
   return <ConsultingTrainingPage />;
 }

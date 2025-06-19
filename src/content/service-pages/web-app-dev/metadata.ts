@@ -1,4 +1,9 @@
-// src/content/services/web-app-development/metadata.ts
+/**
+ * @fileoverview Metadata Configuration for the Web & App Development Service Page
+ *
+ * This file contains the metadata configuration for the Web & App Development service page.
+ * It includes SEO-relevant fields such as the title, description, and slug identifier.
+ */
 
 import { ServiceMetadata } from '@/page-templates/service-page/types';
 

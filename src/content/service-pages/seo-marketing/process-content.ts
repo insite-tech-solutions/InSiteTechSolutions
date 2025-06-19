@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the SEO & Online Marketing Service Page
+ *
+ * This file contains the content configuration for the process section of the SEO & Online Marketing service page.
+ * It outlines the step-by-step methodology used for digital marketing campaigns.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the SEO & Online Marketing service page.
  * Outlines the step-by-step methodology used for digital marketing campaigns.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,8 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
-
 export const seoMarketingProcess: ProcessContent = {
   title: "Our Approach",
   description: "We follow a systematic, data-driven approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure maximum online visibility and sustainable growth. Each step is tailored specifically to align with your business needs.",

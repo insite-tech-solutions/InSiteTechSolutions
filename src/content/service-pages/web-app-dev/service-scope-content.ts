@@ -1,4 +1,9 @@
-// src/content/services/web-app-development/service-scope-content.ts
+/**
+ * @fileoverview Service Scope Content for the Web & App Development Service Page
+ *
+ * This file contains the content configuration for the service scope section of the Web & App Development service page.
+ * It includes a detailed breakdown of service offerings and the key benefits they provide.
+ */
 
 import { ServiceScopeContent } from '@/page-templates/service-page/types';
 

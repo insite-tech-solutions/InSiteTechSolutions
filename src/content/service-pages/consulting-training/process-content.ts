@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the Consulting & Training Service Page
+ *
+ * This file contains the content configuration for the process section of the Consulting & Training service page.
+ * It outlines the step-by-step methodology used for consulting and training projects.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the Consulting & Training service page.
  * Outlines the step-by-step methodology used for consulting and training projects.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,8 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
-
 export const consultingTrainingProcess: ProcessContent = {
   title: "Our Approach",
   description: "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Delivery—to ensure that our consulting and training services deliver meaningful results and build lasting capabilities within your organization.",

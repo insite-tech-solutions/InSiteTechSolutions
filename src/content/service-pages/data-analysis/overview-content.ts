@@ -1,5 +1,5 @@
 /**
- * Data Analysis & Visualization Overview Content
+ * @fileoverview Overview Content for the Data Analysis Service Page
  * 
  * This file contains the content configuration for the data analysis and visualization service overview section.
  * It includes:

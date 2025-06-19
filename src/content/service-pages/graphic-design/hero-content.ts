@@ -1,4 +1,9 @@
-// src/content/services/graphic-design/hero-content.ts
+/**
+ * @fileoverview Hero Content for the Graphic Design & Branding Service Page
+ *
+ * This file contains the content configuration for the hero section of the Graphic Design & Branding service page.
+ * It includes title, subtitle, description, background styling, CTA, and decorative elements.
+ */
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 

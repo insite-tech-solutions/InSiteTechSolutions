@@ -1,4 +1,9 @@
-// src/content/service-pages/consulting-training/metadata.ts
+/**
+ * @fileoverview Metadata Configuration for the Consulting & Training Service Page
+ *
+ * This file contains the metadata configuration for the Consulting & Training service page.
+ * It includes SEO-relevant fields such as the title, description, and slug identifier.
+ */
 
 import { ServiceMetadata } from '@/page-templates/service-page/types';
 

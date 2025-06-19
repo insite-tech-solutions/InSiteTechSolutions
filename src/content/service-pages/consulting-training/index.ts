@@ -1,4 +1,10 @@
-// src/content/service-pages/consulting-training/index.ts
+/**
+ * @fileoverview Main Index File for the Consulting & Training Service Page
+ *
+ * This file aggregates all the content sections for the Consulting & Training service page.
+ * It exports a single object containing all the content configurations for easy import and use.
+ */
+
 import hero from './hero-content';
 import overview from './overview-content';
 import valueProp from './value-prop-content';
@@ -10,6 +16,19 @@ import insiteAdvantage from './insite-advantage-content';
 import faq from './faq-content';
 import cta from './cta-content';
 import metadata from './metadata';
+import { 
+  HeroSectionContent,
+  ServiceOverviewContent,
+  ValuePropContent,
+  ServiceScopeContent,
+  ApplicationsContent,
+  ProcessContent,
+  PricingContent,
+  InSiteAdvantageContent,
+  FAQContent,
+  CTAContent,
+  ServiceMetadata
+} from '@/page-templates/service-page/types';
 
 /**
  * Aggregated content for the Consulting & Training service page.
@@ -19,19 +38,34 @@ import metadata from './metadata';
  * process, pricing, InSite advantage, FAQ, CTA, and metadata.
  * 
  * @type {Object} consultingTrainingContent
- * @property {Object} hero - Content for the hero section.
- * @property {Object} overview - Content for the overview section.
- * @property {Object} valueProp - Content for the value proposition section.
- * @property {Object} serviceScope - Content for the service scope section.
- * @property {Object} applications - Content for the applications section.
- * @property {Object} process - Content for the process section.
- * @property {Object} pricing - Content for the pricing section.
- * @property {Object} insiteAdvantage - Content for the InSite advantage section.
- * @property {Object} faq - Content for the FAQ section.
- * @property {Object} cta - Content for the call-to-action section.
- * @property {Object} metadata - Metadata for the service page.
+ * @property {HeroSectionContent} hero - Content for the hero section.
+ * @property {ServiceOverviewContent} overview - Content for the overview section.
+ * @property {ValuePropContent} valueProp - Content for the value proposition section.
+ * @property {ServiceScopeContent} serviceScope - Content for the service scope section.
+ * @property {ApplicationsContent} applications - Content for the applications section.
+ * @property {ProcessContent} process - Content for the process section.
+ * @property {PricingContent} pricing - Content for the pricing section.
+ * @property {InSiteAdvantageContent} insiteAdvantage - Content for the InSite advantage section.
+ * @property {FAQContent} faq - Content for the FAQ section.
+ * @property {CTAContent} cta - Content for the call-to-action section.
+ * @property {ServiceMetadata} metadata - Metadata for the service page.
  */
-const consultingTrainingContent = {
+
+interface ConsultingTrainingContent {
+  hero: HeroSectionContent;
+  overview: ServiceOverviewContent;
+  valueProp: ValuePropContent;
+  serviceScope: ServiceScopeContent;
+  applications: ApplicationsContent;
+  process: ProcessContent;
+  pricing: PricingContent;
+  insiteAdvantage: InSiteAdvantageContent;
+  faq: FAQContent;
+  cta: CTAContent;
+  metadata: ServiceMetadata;
+}
+
+const consultingTrainingContent: ConsultingTrainingContent = {
   hero,
   overview,
   valueProp,

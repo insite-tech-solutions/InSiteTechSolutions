@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate-icons": "node scripts/generate-icon-registry.js",
+    "generate-icons": "node scripts/generate-icon-registry.mjs",
     "prebuild": "npm run generate-icons",
     "predev": "npm run generate-icons",
     "dev": "next dev",

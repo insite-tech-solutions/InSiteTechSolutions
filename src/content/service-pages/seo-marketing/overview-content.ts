@@ -1,5 +1,5 @@
 /**
- * SEO & Online Marketing Overview Content
+ * @fileoverview Overview Content for the SEO & Online Marketing Service Page
  * 
  * This file contains the content configuration for the SEO and online marketing service overview section.
  * It includes:

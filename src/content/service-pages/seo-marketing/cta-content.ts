@@ -1,4 +1,9 @@
-// src/content/services/seo-marketing/cta-content.ts
+/**
+ * @fileoverview CTA Content for the SEO & Online Marketing Service Page
+ *
+ * This file contains the content configuration for the call-to-action section of the SEO & Online Marketing service page.
+ * It includes a title, description, and button labels/links.
+ */
 
 import { CTAContent } from '@/page-templates/service-page/types';
 

@@ -1,4 +1,9 @@
-// src/content/services/consulting-training/pricing-content.ts
+/**
+ * @fileoverview Pricing Content for the Consulting & Training Service Page
+ *
+ * This file contains the content configuration for the pricing section of the Consulting & Training service page.
+ * It includes details about pricing, factors affecting cost, and long-term value justification.
+ */
 
 import { PricingContent } from '@/page-templates/service-page/types';
 

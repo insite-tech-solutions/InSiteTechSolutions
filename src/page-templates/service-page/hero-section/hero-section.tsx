@@ -1,6 +1,12 @@
-// src/templates/service-page/sections/hero/hero-section.tsx
+/**
+ * @fileoverview Hero Section component for service pages
+ * 
+ * This component renders a responsive hero banner with customizable background,
+ * content, SVG graphics, and decorative elements. It supports both SVG and image-based
+ * illustrations with dynamic loading of SVG components.
+ */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import Image from 'next/image';
 import { HeroSectionContent } from '../types';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
@@ -12,22 +18,26 @@ import dynamic from 'next/dynamic';
 /**
  * Hero Section for Service Pages
  * 
- * Displays the main hero banner with customizable background, content, and decorative elements.
+ * @component
+ * @param {Object} props - Component props
+ * @param {HeroSectionContent} props.content - Configuration object for the hero section
  * 
- * @param content - Configuration object for the hero section
- * @returns JSX.Element
+ * @features
+ * - Responsive layout with different arrangements for mobile and desktop
+ * - Dynamic SVG loading with fallback to static images
+ * - Customizable background gradients and decorative elements
+ * - Accessible structure with proper ARIA attributes
+ * - Support for custom elements insertion
+ * 
+ * @returns {JSX.Element} The rendered hero section
  */
-const HeroSectionWrapper = React.memo(function HeroSection({
-  content
-}: {
-  content: HeroSectionContent
-}) {
+function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.Element {
   const {
     title,
     subtitle,
     description,
     image,
-    svgComponent, // Add this line
+    svgComponent,
     ctaText = "Start Your Project Today",
     ctaLink = "/contact",
     decorElements = [],
@@ -35,15 +45,20 @@ const HeroSectionWrapper = React.memo(function HeroSection({
     customElements
   } = content;
 
-  // Dynamically load SVG component if specified
+  /**
+   * Dynamically loads an SVG component from the assets directory
+   * Uses Next.js dynamic import with loading state and SSR support
+   */
   const SvgGraphic = useMemo(() => {
     if (!svgComponent) return null;
-    // Dynamic import for the SVG component, wrapped to forward props
+    
     return dynamic(() =>
       import(`@/assets/svg/${svgComponent}.svg`).then((mod) => {
         const Component = mod.default;
-        // Forward props to the SVG
-        return (props: React.SVGProps<SVGSVGElement>) => <Component {...props} />;
+        // Forward props to the SVG component
+        const Wrapped = (props: React.SVGProps<SVGSVGElement>) => <Component {...props} />;
+        Wrapped.displayName = svgComponent;
+        return Wrapped;
       }),
       {
         loading: () => (
@@ -56,14 +71,17 @@ const HeroSectionWrapper = React.memo(function HeroSection({
     );
   }, [svgComponent]);
 
-  // Memoize processing of decorative elements to avoid reprocessing on every render
+  /**
+   * Process decorative elements to replace icon strings with actual icon components
+   * Uses the icon registry utility to retrieve icon components
+   */
   const processedDecorElements = useMemo(() => {
     return decorElements.map(element => {
       if (element.type === 'icon' && typeof element.icon === 'string') {
         const IconComponent = getIcon(element.icon);
         return {
           ...element,
-          icon: IconComponent || getIcon('Code'),
+          icon: IconComponent || getIcon('Code'), // Fallback to Code icon
         };
       }
       return element;
@@ -71,6 +89,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
   }, [decorElements]);
 
   return (
+    /* Hero Section Container */
     <section
       className="relative text-white mt-[104px]"
       aria-labelledby="hero-title"
@@ -97,7 +116,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
               </p>
             </div>
             
-            {/* Image or SVG */}
+            {/* Illustration: SVG or Image */}
             <div className="order-2 md:order-none flex items-center justify-center h-full min-h-[400px]">
               {/* Use SVG component if provided */}
               {SvgGraphic && (
@@ -121,7 +140,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
               )}
             </div>
 
-            {/* Mobile Button */}
+            {/* Mobile CTA Button - Only visible on small screens */}
             <div className="order-3 md:hidden px-6 pb-6 flex items-center justify-center">
               <TailwindButton 
                 href={ctaLink} 
@@ -131,7 +150,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
               </TailwindButton>
             </div>
 
-            {/* Desktop Button */}
+            {/* Desktop CTA Button - Hidden on mobile */}
             <div className="hidden md:block order-1 md:order-none px-6 pb-6">
               <TailwindButton 
                 href={ctaLink} 
@@ -141,7 +160,7 @@ const HeroSectionWrapper = React.memo(function HeroSection({
               </TailwindButton>
             </div>
             
-            {/* Custom Elements */}
+            {/* Optional Custom Elements Container - Spans full width */}
             {customElements && (
               <div className="col-span-1 md:col-span-2">
                 {customElements}
@@ -152,6 +171,6 @@ const HeroSectionWrapper = React.memo(function HeroSection({
       </TailwindHeroBackground>
     </section>
   );
-});
+}
 
-export default HeroSectionWrapper;
+export default memo(HeroSectionWrapper);

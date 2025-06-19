@@ -1,11 +1,15 @@
 /**
- * @fileoverview CarouselSection is a reusable animated slider component built with Swiper.js.
- * It accepts custom React cards and optional background visuals.
+ * @fileoverview Reusable Animated Carousel Section Component
+ *
+ * A flexible and animated slider component built using `Swiper.js` (a modern touch slider).
+ * This component is designed to display a collection of React elements (cards) in a carousel format.
+ * It supports various customization options, including autoplay, navigation, pagination, and a coverflow effect,
+ * and can optionally incorporate background visuals. `framer-motion` is integrated for section-level animations.
  */
 
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo, cloneElement, memo } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react'
 import SwiperCore from 'swiper'
@@ -16,9 +20,13 @@ import 'swiper/css/pagination'
 import 'swiper/css/effect-coverflow'
 
 
-// Initialize Swiper modules
+// Initialize Swiper modules globally to ensure they are available for all Swiper instances.
 SwiperCore.use([Autoplay, Navigation, Pagination, EffectCoverflow]);
 
+/**
+ * Defines the animation variants for a fade-in-up effect.
+ * This variant is used with `framer-motion` to animate the section's header.
+ */
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -35,15 +43,27 @@ const fadeInUp: Variants = {
  * Props for the CarouselSection component.
  */
 interface CarouselSectionProps {
+  /** The main title for the carousel section, displayed prominently above the carousel. */
   title: string;
+  /** A descriptive text that provides context or further explanation for the carousel content. */
   description: string;
+  /** An array of `React.ReactElement`s to be rendered as individual slides within the carousel.
+   * These elements should typically be card components that can accept an `isActive` prop. */
   cards: React.ReactElement[];
+  /** Optional. A ReactNode to be rendered as a background element behind the carousel.
+   * This can be an SVG, image, or any other React component for visual flair. */
   background?: React.ReactNode;
+  /** Optional. Partial `SwiperProps` object to override or extend the default Swiper carousel parameters.
+   * Allows for fine-grained control over carousel behavior (e.g., breakpoints, speed, effects). */
   carouselParams?: Partial<SwiperProps>;
 }
 
 /**
- * CarouselSection component displays a customizable carousel of cards with animations.
+ * CarouselSection component
+ *
+ * A highly customizable React component that renders an interactive and animated carousel.
+ * It leverages Swiper.js for core carousel functionality and framer-motion for smooth entrance animations.
+ * Each slide can contain any `React.ReactElement`, making it versatile for displaying various types of content, such as testimonial cards or feature highlights.
  * 
  * @param {CarouselSectionProps} props - Component props
  * @param {string} props.title - Title of the carousel section
@@ -53,13 +73,13 @@ interface CarouselSectionProps {
  * @param {Partial<SwiperProps>} [props.carouselParams={}] - Optional custom parameters for the Swiper carousel
  * @returns {JSX.Element} Rendered carousel section component
  */
-const CarouselSection: React.FC<CarouselSectionProps> = ({
+const CarouselSection = ({
   title,
   description,
   cards,
   background,
   carouselParams = {},
-}) => {
+}: CarouselSectionProps): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Merge default parameters with any overrides from carouselParams
@@ -117,8 +137,10 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
   }, [carouselParams]);
 
   return (
-    <div className="w-full mx-auto px-6 md:px-8 lg:px-12 relative rounded-xl">
-      {/* Section Title and Description */}
+    <section className="w-full mx-auto px-6 md:px-8 lg:px-12 relative rounded-xl" aria-labelledby="carousel-section-title">
+      {/* Accessible landmark for section */}
+      <h2 id="carousel-section-title" className="sr-only">{title}</h2>
+      {/* Section Header */}
       <motion.div
         variants={fadeInUp}
         initial="hidden"
@@ -142,7 +164,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
         )}
         </div>
 
-        {/* Carousel */}
+        {/* Carousel Container */}
         <Swiper
           {...mergedSwiperParams}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
@@ -150,7 +172,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
         >
           {cards.map((card, index) => (
             <SwiperSlide key={index}>
-              {React.cloneElement(card, {
+              {cloneElement(card, {
                 isActive: index === activeIndex,
               })}
             </SwiperSlide>
@@ -161,8 +183,12 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({
           style={{ bottom: '10px' }}
         ></div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default CarouselSection;
+/**
+ * Memoized version of CarouselSection to optimize performance.
+ * Prevents unnecessary re-renders when parent components update but props remain the same.
+ */
+export default memo(CarouselSection);

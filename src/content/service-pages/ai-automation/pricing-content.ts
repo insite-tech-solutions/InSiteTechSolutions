@@ -1,4 +1,9 @@
-// src/content/services/ai-automation/pricing-content.ts
+/**
+ * @fileoverview Pricing Content for the AI & Automation Service Page
+ *
+ * This file contains the content configuration for the pricing section of the AI & Automation service page.
+ * It includes details about pricing, factors affecting cost, and long-term value justification.
+ */
 
 import { PricingContent } from '@/page-templates/service-page/types';
 

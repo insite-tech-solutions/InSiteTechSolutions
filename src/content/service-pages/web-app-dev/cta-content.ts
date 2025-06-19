@@ -1,9 +1,14 @@
-// src/content/service-pages/custom-software/cta-content.ts
+/**
+ * @fileoverview CTA Content for the Web & App Development Service Page
+ *
+ * This file contains the content configuration for the call-to-action section of the Web & App Development service page.
+ * It includes a title, description, and button labels/links.
+ */
 
 import { CTAContent } from '@/page-templates/service-page/types';
 
 /**
- * Call-to-action content block for the Custom Software Solutions service page.
+ * Call-to-action content block for the Web & App Development service page.
  * This defines heading text, button labels, links, and optional background styling.
  * 
  * @type {CTAContent}
@@ -15,7 +20,7 @@ import { CTAContent } from '@/page-templates/service-page/types';
  * @property {string} secondaryButtonLink - URL for the secondary button's link.
  * @property {string} bgClassName - Optional custom background class for styling.
  */
-const customSoftwareCTAContent: CTAContent = {
+const webAppDevCTAContent: CTAContent = {
   title: "Ready to Transform Your Online Presence?",
   description: "Let's discuss how we can help bring your vision to life!",
   primaryButtonText: "Schedule Free Consultation",
@@ -24,4 +29,4 @@ const customSoftwareCTAContent: CTAContent = {
   secondaryButtonLink: "/case-studies",
 };
 
-export default customSoftwareCTAContent;
+export default webAppDevCTAContent;

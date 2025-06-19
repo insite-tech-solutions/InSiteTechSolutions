@@ -1,4 +1,9 @@
-// src/content/service-pages/custom-software/service-scope-content.ts
+/**
+ * @fileoverview Service Scope Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the service scope section of the Custom Software service page.
+ * It includes a detailed breakdown of service offerings and the key benefits they provide.
+ */
 
 import { ServiceScopeContent } from '@/page-templates/service-page/types';
 

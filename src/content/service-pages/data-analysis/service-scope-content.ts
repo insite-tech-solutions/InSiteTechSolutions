@@ -1,4 +1,9 @@
-// src/content/services/data-analysis/service-scope-content.ts
+/**
+ * @fileoverview Service Scope Content for the Data Analysis Service Page
+ *
+ * This file contains the content configuration for the service scope section of the Data Analysis service page.
+ * It includes a detailed breakdown of service offerings and the key benefits they provide.
+ */
 
 import { ServiceScopeContent } from '@/page-templates/service-page/types';
 

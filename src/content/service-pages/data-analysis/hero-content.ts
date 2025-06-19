@@ -1,4 +1,9 @@
-// src/content/services/data-analysis/hero-content.ts
+/**
+ * @fileoverview Hero Content for the Data Analysis Service Page
+ *
+ * This file contains the content configuration for the hero section of the Data Analysis service page.
+ * It includes title, subtitle, description, background styling, CTA, and decorative elements.
+ */
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 

@@ -1,4 +1,12 @@
 /**
+ * @fileoverview Pricing and Configuration Table for Graphic Design & Branding Services
+ *
+ * This file defines the pricing and configuration data for Graphic Design & Branding services.
+ * It includes project types, media formats, branding strategy, timelines, and optional add-ons
+ * used for estimating cost in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for Graphic Design & Branding services.
  * Includes project types, media formats, branding strategy, timelines, and optional add-ons
  * used for estimating cost in the pricing calculator.
@@ -17,8 +25,6 @@
  * @property {Object} extraServices - Extra services and customizations available for bundling.
  */
 // content/calculator_tables/graphicDesignBranding.ts
-
-//import { CostRange, Multiplier } from './types';
 
 export const graphicDesignBrandingTable = {
   name: "Graphic Design & Branding",

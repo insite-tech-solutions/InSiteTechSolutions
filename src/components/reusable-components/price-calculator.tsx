@@ -1,12 +1,14 @@
 /**
- * @fileoverview PriceCalculator is a component that provides an interactive calculator
- * for estimating project costs based on user-selected options. It supports various services
- * and dynamically calculates one-time and recurring costs.
+ * @fileoverview A comprehensive, data-driven price calculator component.
+ *
+ * This component provides an interactive interface for users to estimate project costs based on a wide
+ * range of selectable options. It is designed to be highly flexible, loading its structure and options
+ * from data tables. It dynamically calculates one-time and recurring costs, applies multipliers, and
+ * organizes options into logical categories for a user-friendly experience.
  */
 
 "use client"
 
-import type React from "react"
 import { useState, useMemo, useEffect } from "react"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -28,17 +30,19 @@ import aiAutomationTable from "@/content/calculator-tables/ai-automation"
 import consultingTrainingTable from "@/content/calculator-tables/consulting-training"
 
 // Type definitions
+/** Represents a min-max range for a cost. */
 interface CostRange {
   min: number
   max: number
 }
 
+/** Represents a multiplier to be applied to the base cost. */
 interface Multiplier {
   value: number
   description?: string
 }
 
-// Renamed from Option to avoid conflict and be more specific
+/** Defines a single selectable option in the calculator, which can have a cost, a multiplier, or both. */
 interface CalculatorOption {
   name: string
   cost?: CostRange
@@ -46,28 +50,27 @@ interface CalculatorOption {
   description?: string
 }
 
-// Type for options in the 'extraServices' section or similar informational lists
+/** Defines an informational option, often with a link to more details. */
 interface ExtraServiceOption {
   name: string
   url?: string
 }
 
-// Type for a generic section within a service table
-// It can have options structured as a Record or an array (for informational lists)
+/** Represents a single section within the calculator, such as "Project Type" or "Features". */
 interface ServiceSection {
   title: string
   description?: string
   options: Record<string, CalculatorOption> | (string | ExtraServiceOption)[]
 }
 
-// Type for the metadata within a service table
+/** Contains metadata for a service table, defining how sections are categorized and rendered. */
 interface ServiceMetadata {
   categories: Record<string, string[]>
   renderTypes: Record<string, string | Record<string, string>> // Can be string or nested object
   recurringCosts?: Record<string, string>
 }
 
-// The main interface for a service table object being imported
+/** The main interface for a service's data table, containing all sections, options, and metadata. */
 interface ServiceTable {
   name: string
   metadata: ServiceMetadata
@@ -77,15 +80,17 @@ interface ServiceTable {
   [key: string]: string | ServiceMetadata | string[] | ServiceSection | undefined
 }
 
-// Type for the map holding all service tables
+/** A map of service keys to their corresponding ServiceTable objects. */
 type ServiceTablesMap = Record<string, ServiceTable>
 
+/** Defines the state of the calculator, including the selected service and user's choices. */
 interface CalculatorState {
   service: string
   selectedOptions: Record<string, string> // Values are option keys (strings)
   selectedMultiOptions: Record<string, string[]> // For checkboxes
 }
 
+/** Represents a single recurring cost item in the final calculation. */
 interface RecurringCostItem {
   name: string
   period: string
@@ -93,15 +98,23 @@ interface RecurringCostItem {
   max: number
 }
 
-// Type for a section entry tuple used when iterating over organized sections
-// The value can be a ServiceSection or the specific structure for specialNotes/extraServices
+/** The value of a section entry, which can be a full section, an info section, or just notes. */
 type SectionEntryValue = ServiceSection | { description?: string; options?: (string | ExtraServiceOption)[] } | string[]
+/** A tuple representing a section key and its value. */
 type SectionEntry = [string, SectionEntryValue]
 
-// Type for the categorized sections object
+/** An object where keys are category names and values are arrays of section entries. */
 type CategorizedSections = Record<string, SectionEntry[]>
 
-// Move calculateCosts outside the component
+/**
+ * Calculates the total one-time and recurring costs based on the user's selections.
+ * This function iterates through the selected options and multi-options, sums up their costs,
+ * applies any relevant multipliers, and categorizes costs as one-time or recurring.
+ * It includes special logic, such as a feature implementation multiplier for web development services.
+ * @param {CalculatorState} calculatorState - The current state of the calculator.
+ * @param {ServiceTable | undefined} serviceTable - The data table for the currently selected service.
+ * @returns {{ oneTime: CostRange; recurring: RecurringCostItem[]; multiplier: number }} An object with the calculated costs.
+ */
 const calculateCosts = (calculatorState: CalculatorState, serviceTable: ServiceTable | undefined) => {
   if (!serviceTable) {
     return {
@@ -225,7 +238,13 @@ const calculateCosts = (calculatorState: CalculatorState, serviceTable: ServiceT
   };
 };
 
-// Move getOrganizedSections outside the component
+/**
+ * Organizes the sections of a service table into categories for rendering.
+ * It uses the `categories` definition from the service metadata if available. Otherwise, it falls
+ * back to a default categorization logic based on common section keys.
+ * @param {ServiceTable | undefined} serviceTable - The data table for the selected service.
+ * @returns {CategorizedSections} An object where keys are category names and values are arrays of section entries.
+ */
 const getOrganizedSections = (serviceTable: ServiceTable | undefined) => {
   if (!serviceTable) return {};
 
@@ -293,7 +312,39 @@ const getOrganizedSections = (serviceTable: ServiceTable | undefined) => {
   return defaultCategories;
 };
 
-const PriceCalculator: React.FC<{ fixedService?: string }> = ({ fixedService }) => {
+/**
+ * PriceCalculator component
+ *
+ * The main interactive price calculator component. It allows users to select a service and configure
+ * various options to receive a dynamic cost estimate.
+ *
+ * Features:
+ * - **Data-Driven**: Loads all services, sections, and options from external data tables.
+ * - **Service Selection**: Allows users to switch between different services, each with its own unique calculator form.
+ * - **Fixed Service Mode**: Can be configured to display the calculator for a single, fixed service.
+ * - **Dynamic Calculation**: Instantly recalculates one-time and recurring costs as the user changes selections.
+ * - **Complex Logic**: Handles base costs, multipliers, and special calculation rules (e.g., feature implementation types).
+ * - **Categorized Layout**: Organizes options into collapsible categories for better usability.
+ * - **Multiple Input Types**: Renders dropdowns, multi-select checkboxes, and radio buttons based on metadata.
+ * - **Informational Sections**: Displays helpful notes and links to external services.
+ * - **Responsive UI**: Designed to work across different screen sizes.
+ *
+ * @param {{ fixedService?: string }} props - The properties passed to the component.
+ * @param {string} [props.fixedService] - If provided, locks the calculator to this service and hides the service selector.
+ * @returns {JSX.Element} The rendered price calculator component.
+ *
+ * @example
+ * ```tsx
+ * // Default calculator with service selection
+ * <PriceCalculator />
+ *
+ * // Calculator locked to the "webAppDevelopment" service
+ * <PriceCalculator fixedService="webAppDevelopment" />
+ * ```
+ */
+export default function PriceCalculator({
+  fixedService,
+}: { fixedService?: string }): JSX.Element {
   const [calculatorState, setCalculatorState] = useState<CalculatorState>({
     service: fixedService || "customSoftwareSolutions", // Use fixedService if provided, otherwise use default
     selectedOptions: {},
@@ -479,7 +530,7 @@ const PriceCalculator: React.FC<{ fixedService?: string }> = ({ fixedService }) 
     return "dropdown"
   }
 
-  // Helper function to render a dropdown
+  /** Renders a dropdown (Select) input for a given section. */
   const renderDropdown = (sectionKey: string, section: ServiceSection | undefined) => {
     // Ensure section and its options are valid and structured as expected for dropdowns
     if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
@@ -528,8 +579,8 @@ const PriceCalculator: React.FC<{ fixedService?: string }> = ({ fixedService }) 
     )
   }
 
-  // Helper function to render multi-select checkboxes
-const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
+  /** Renders a group of checkboxes for a multi-select section. */
+  const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
   // Ensure section and its options are valid and structured as expected for checkboxes
   if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
     return null;
@@ -640,7 +691,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
   );
 };
 
-  // Helper function to render informational sections (like extraServices or specialNotes)
+  /** Renders an informational block for sections like 'specialNotes' or 'extraServices'. */
   const renderInformational = (sectionKey: string, sectionData: SectionEntryValue) => {
     // Type guard to check if it's the specialNotes string array
     if (Array.isArray(sectionData) && sectionData.every((item) => typeof item === "string")) {
@@ -699,7 +750,7 @@ const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undef
 
 
 
-// Helper function to render radio buttons
+/** Renders a group of radio buttons for a single-select section. */
 const renderRadio = (sectionKey: string, section: ServiceSection | undefined) => {
   // Ensure section and its options are valid and structured as expected
   if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
@@ -750,7 +801,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
 };
 
 
-  // Render a section based on its type
+  /** Determines the render type for a section and calls the appropriate render helper. */
   const renderSection = (sectionKey: string, section: SectionEntryValue) => {
     // Skip non-renderable types based on our logic
     if (typeof section !== "object" || section === null) {
@@ -795,6 +846,7 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           The interactive calculator below is not a formal quote and does not imply a commitment to accept any project. It&apos;s a helpful tool designed to provide transparency, set expectations, and give potential clients a general idea of their investment range. If you&apos;re unsure about your project or the estimated costs, feel free to reach out for a free consultation, as we will do our best to find a solution which meets your goals and budget. We offer various pricing models and payment options to best suit your needs.
         </p>
       </div>
+      {/* Price Calculator UI */}
       <Card aria-label="Service Price Calculator" className="w-full max-w-5xl mx-auto shadow-xl bg-white border-0 overflow-hidden">
         <CardHeader className="bg-gradient-to-br from-light-blue to-blue-800 text-white border-b-0 pb-6">
           <div className="flex items-center gap-3">
@@ -918,5 +970,3 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
     </div>
   )
 }
-
-export default PriceCalculator

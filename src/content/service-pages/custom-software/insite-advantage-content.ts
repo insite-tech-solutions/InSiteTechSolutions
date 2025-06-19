@@ -1,4 +1,9 @@
-// src/content/services/custom-software/benefits-content.ts
+/**
+ * @fileoverview InSite Advantage Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the InSite Advantage section of the Custom Software service page.
+ * It includes a title, description, and a list of advantages and benefits.
+ */
 
 import { InSiteAdvantageContent } from '@/page-templates/service-page/types';
 
@@ -12,7 +17,7 @@ import { InSiteAdvantageContent } from '@/page-templates/service-page/types';
  * @property {Array} advantages - An array of advantages, each containing a title, description, and icon.
  * @property {Array} benefits - An array of broader business benefits, each containing a title and description.
  */
-const customSoftwareBenefitsContent: InSiteAdvantageContent = {
+const customSoftwareAdvantageContent: InSiteAdvantageContent = {
   title: "The InSite Advantage",
   description: "Partnering with InSite Tech Solutions means collaborating with a team dedicated to delivering exceptional custom software that aligns with your objectives. We bridge the gap between technical expertise and practical business solutions, delivering digital strategies that are perfectly matched to your goals and budget, ensuring your software drives real results. We don't just develop software – we craft powerful tools that drive efficiency and solve real-world problems.",
   
@@ -77,4 +82,4 @@ const customSoftwareBenefitsContent: InSiteAdvantageContent = {
   ],
 };
 
-export default customSoftwareBenefitsContent;
+export default customSoftwareAdvantageContent;

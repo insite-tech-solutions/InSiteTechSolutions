@@ -1,4 +1,9 @@
-// src/content/services/custom-software/metadata.ts
+/**
+ * @fileoverview Metadata Configuration for the Custom Software Service Page
+ *
+ * This file contains the metadata configuration for the Custom Software service page.
+ * It includes SEO-relevant fields such as the title, description, and slug identifier.
+ */
 
 import { ServiceMetadata } from '@/page-templates/service-page/types';
 

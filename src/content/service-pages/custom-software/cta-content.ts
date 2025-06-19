@@ -1,4 +1,9 @@
-// src/content/service-pages/custom-software/cta-content.ts
+/**
+ * @fileoverview CTA Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the call-to-action section of the Custom Software service page.
+ * It includes a title, description, and button labels/links.
+ */
 
 import { CTAContent } from '@/page-templates/service-page/types';
 

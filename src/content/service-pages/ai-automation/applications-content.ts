@@ -1,4 +1,10 @@
-// src/content/services/ai-automation/applications-content.ts
+/**
+ * @fileoverview Applications Content for the AI & Automation Service Page
+ *
+ * This file contains the content configuration for the AI & Automation service page.
+ * It includes industry solutions, categories, and related descriptions/icons.
+ * The content is organized into sections and categories to provide a clear and structured presentation.
+ */
 
 import { ApplicationsContent } from '@/page-templates/service-page/types';
 

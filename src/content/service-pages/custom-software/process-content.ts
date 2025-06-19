@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the process section of the Custom Software service page.
+ * It outlines the step-by-step methodology used for client software projects.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the Custom Software Solutions service page.
  * Outlines the step-by-step methodology used for client software projects.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,8 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
-
 export const customSoftwareProcess: ProcessContent = {
   title: "Our Approach",
   description: "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure your custom software solution meets all requirements while maintaining flexibility for future growth.",

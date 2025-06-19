@@ -1,4 +1,9 @@
-// src/content/services/data-analysis/value-prop-content.ts
+/**
+ * @fileoverview Value Proposition Content for the Data Analysis Service Page
+ *
+ * This file contains the content configuration for the value proposition section of the Data Analysis service page.
+ * It includes key benefits, market trends, animated insights, and a final call to action.
+ */
 
 import { ValuePropContent } from '@/page-templates/service-page/types';
 

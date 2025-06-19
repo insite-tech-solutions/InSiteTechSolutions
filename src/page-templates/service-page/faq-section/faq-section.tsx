@@ -1,6 +1,9 @@
 /**
- * @fileoverview FAQSection component that displays frequently asked questions in an accordion format.
- * This component includes expandable FAQ items and an optional link to more resources.
+ * @fileoverview FAQ Section Component
+ * 
+ * This component displays frequently asked questions in an accordion format with smooth animations.
+ * Features expandable FAQ items with icons, scroll-triggered animations, and an optional link to more resources.
+ * Built with Framer Motion for smooth transitions and proper accessibility support.
  */
 
 "use client"
@@ -11,7 +14,10 @@ import { ChevronDown } from "lucide-react"
 import { FAQContent } from '../types'
 import { getIcon } from '@/utils/icon-registry'
 
-// Animation variants
+/**
+ * Animation variant for fade-in-up motion effect
+ * Used for individual FAQ items and section elements when scrolling into view
+ */
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -24,6 +30,10 @@ const fadeInUp: Variants = {
   },
 }
 
+/**
+ * Animation variant for staggered children animations
+ * Creates a cascading effect when multiple FAQ elements animate in sequence
+ */
 const staggerChildren: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -34,16 +44,27 @@ const staggerChildren: Variants = {
   },
 }
 
+/**
+ * Props interface for individual FAQ item components
+ */
 interface FAQItemProps {
+  /** The question text to display */
   question: string
+  /** The answer text to reveal when expanded */
   answer: string
+  /** Icon identifier from the icon registry */
   icon: string
+  /** Whether this FAQ item is currently expanded */
   isOpen: boolean
+  /** Function to toggle the expanded state */
   onToggle: () => void
 }
 
 /**
  * Individual FAQ item component with expandable/collapsible behavior.
+ * 
+ * Features smooth accordion animation, icon integration, and accessibility support
+ * with proper ARIA attributes and keyboard navigation.
  * 
  * @param {FAQItemProps} props - Component props
  * @param {string} props.question - The question being asked
@@ -60,11 +81,11 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
   const Icon = getIcon(icon)
 
   /**
-   * Effect hook to handle the visibility of the FAQ item.
+   * Effect hook to handle the visibility-triggered animation of the FAQ item.
    * 
    * @description
-   * This effect hook starts the animation when the FAQ item is in view.
-   * It uses the `useInView` hook to detect when the FAQ item is in view and the `useAnimation` hook to control the animation.
+   * This effect hook starts the animation when the FAQ item scrolls into view.
+   * It uses the `useInView` hook to detect visibility and the `useAnimation` hook to control the animation timing.
    */
   useEffect(() => {
     if (isInView) {
@@ -80,18 +101,22 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
       variants={fadeInUp}
       className="bg-white rounded-xl shadow-sm border border-gray-100 hover:border-mild-blue transition-all duration-300"
     >
+      {/* FAQ Question Button - Toggles expanded state */}
       <button
         onClick={onToggle}
         className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-mild-blue focus:ring-opacity-50 rounded-xl"
         aria-expanded={isOpen}
       >
         <div className="flex items-center justify-between">
+          {/* Question Content - Icon and text */}
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-blue-50 transition-colors duration-300">
               <Icon className="h-5 w-5 text-medium-blue-alt" />
             </div>
             <h3 className="text-lg font-medium text-gray-800">{question}</h3>
           </div>
+          
+          {/* Animated Chevron - Rotates based on open state */}
           <div className="flex-shrink-0">
             <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
               <ChevronDown className="h-5 w-5 text-medium-blue" />
@@ -99,6 +124,8 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
           </div>
         </div>
       </button>
+      
+      {/* Expandable Answer Content - Animated accordion */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -116,17 +143,48 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
   )
 }
 
-// Props interface for the FAQSection component
+/**
+ * Props interface for the main FAQ section component
+ */
 interface FAQSectionProps {
+  /** Content configuration object containing all FAQ data and settings */
   content: FAQContent
 }
 
 /**
- * FAQSection component displays frequently asked questions in an accordion format.
+ * FAQ Section Component
+ * 
+ * Main component that renders a complete FAQ section with animated accordion-style
+ * questions and answers, plus an optional call-to-action link.
+ * 
+ * Features:
+ * - Smooth accordion animations with Framer Motion
+ * - Scroll-triggered visibility animations
+ * - Icon integration from the icon registry
+ * - Single-item expansion (accordion behavior)
+ * - Responsive design with mobile-first approach
+ * - Accessibility support with ARIA attributes
+ * - Optional call-to-action link with hover animations
+ * - Clean typography hierarchy and spacing
  * 
  * @param {FAQSectionProps} props - Component props
  * @param {FAQContent} props.content - Content object containing FAQs and additional information
  * @returns {JSX.Element} Rendered FAQ section component
+ * 
+ * @example
+ * ```tsx
+ * // Usage in a service page
+ * import FAQSection from '@/page-templates/service-page/faq-section/faq-section'
+ * import { faqContent } from '@/content/service-pages/web-dev/faq-content'
+ * 
+ * export default function ServicePage() {
+ *   return (
+ *     <div>
+ *       <FAQSection content={faqContent} />
+ *     </div>
+ *   )
+ * }
+ * ```
  */
 const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
   const { title, description, items, moreLink } = content
@@ -135,25 +193,29 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
   return (
     <section 
       className="pb-6"
-      aria-label="Frequently Asked Questions Section"
+      aria-labelledby="faq-section-title"
     >
+      {/* Hidden heading for screen readers - provides accessible section context */}
+      <h2 id="faq-section-title" className="sr-only">{title}</h2>
       <div className="max-w-4xl mx-auto">
+        {/* Animated Container - Staggered animations for child elements */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerChildren}>
-          {/* Section Header */}
+          {/* Section Header - Title, badge, and description */}
           <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
             <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-medium-blue-alt text-md font-medium mb-6">
               Frequently Asked Questions (FAQs)
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
             <p className="text-lg text-gray-600">{description}</p>
           </motion.div>
 
-          {/* FAQ Items */}
+          {/* FAQ Content Container */}
           <div>
+            {/* FAQ Items List - Accordion-style expandable questions */}
             <div className="space-y-4">
               {items.map((faq, index) => (
                 <FAQItemComponent
-                  key={index}
+                  key={faq.question.toLowerCase().replace(/\s+/g, '-')}
                   question={faq.question}
                   answer={faq.answer}
                   icon={faq.icon}
@@ -163,7 +225,7 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
               ))}
             </div>
 
-            {/* Call-to-Action Link */}
+            {/* Optional Call-to-Action Link - Links to additional resources */}
             {moreLink && (
               <motion.div variants={fadeInUp} className="mt-12 flex justify-center">
                 <a

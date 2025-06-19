@@ -1,4 +1,9 @@
-// src/content/services/ai-automation/cta-content.ts
+/**
+ * @fileoverview CTA Content for the AI & Automation Service Page
+ *
+ * This file contains the content configuration for the call-to-action section of the AI & Automation service page.
+ * It includes a title, description, and button labels/links.
+ */
 
 import { CTAContent } from '@/page-templates/service-page/types';
 

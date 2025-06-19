@@ -1,7 +1,7 @@
 "use client"
 
 import CarouselSection from "@/components/reusable-components/carousel-section"
-import TestimonialCard from "@/components/reusable-components/TestimonialCard" // Adjusted import path
+import TestimonialCard from "@/components/reusable-components/testimonial-card" // Adjusted import path
 import { SwiperProps } from "swiper/react";
 
 // Testimonial type definition (ensure this matches or is imported if defined elsewhere)

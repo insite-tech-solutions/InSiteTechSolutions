@@ -72,7 +72,7 @@ const ProcessSection = () => {
                   className="w-full flex items-stretch text-left focus:outline-none p-0"
                 >
                   {/* Icon Square */}
-                  <div className="bg-gradient-to-tr from-mild-blue to-blue-900 p-4 flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-light-blue to-blue-900 p-4 flex items-center justify-center">
                     {step.icon}
                   </div>
                   {/* Title Area */}
@@ -136,7 +136,7 @@ const ProcessSection = () => {
                   className="w-full flex items-stretch text-left focus:outline-none p-0"
                 >
                   {/* Icon Square */}
-                  <div className="bg-gradient-to-tr from-mild-blue to-blue-900 p-4 flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-light-blue to-blue-900 p-4 flex items-center justify-center">
                     {step.icon}
                   </div>
                   {/* Title Area */}

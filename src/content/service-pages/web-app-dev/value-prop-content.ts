@@ -1,4 +1,9 @@
-// src/content/services/web-app-development/value-prop-content.ts
+/**
+ * @fileoverview Value Prop Content for the Web & App Development Service Page
+ *
+ * This file contains the content configuration for the value proposition section of the Web & App Development service page.
+ * It includes key benefits, market trends, animated insights, and a final call to action.
+ */
 
 import { ValuePropContent } from '@/page-templates/service-page/types';
 

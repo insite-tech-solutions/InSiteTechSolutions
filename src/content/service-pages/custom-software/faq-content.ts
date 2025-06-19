@@ -1,4 +1,9 @@
-// src/content/service-pages/custom-software/faq-content.ts
+/**
+ * @fileoverview FAQ Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the frequently asked questions section of the Custom Software service page.
+ * It includes a title, description, and a list of frequently asked questions with answers.
+ */
 
 import { FAQContent } from '@/page-templates/service-page/types';
 

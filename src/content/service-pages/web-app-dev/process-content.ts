@@ -1,4 +1,13 @@
 /**
+ * @fileoverview Process Content for the Web & App Development Service Page
+ *
+ * This file contains the content configuration for the process section of the Web & App Development service page.
+ * It outlines the step-by-step methodology used for client web and app projects.
+ */
+
+import { ProcessContent } from '@/page-templates/service-page/types';
+
+/**
  * Process content configuration for the Web & App Development service page.
  * Outlines the step-by-step methodology used for client web and app projects.
  * Each step includes a timeline, description, icon, and task checklist.
@@ -11,8 +20,6 @@
  * @property {string} linkText - The text of the link to the process page.
  * @property {string} linkUrl - The URL of the process page.
  */
-import { ProcessContent } from '@/page-templates/service-page/types';
-
 export const webAppDevelopmentProcess: ProcessContent = {
   title: "Our Approach",
   description: "We follow a collaborative, transparent, and iterative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure that every project meets your unique needs while staying on time and on budget. We believe in right-sized solutions—no overengineering, no unnecessary complexity.",

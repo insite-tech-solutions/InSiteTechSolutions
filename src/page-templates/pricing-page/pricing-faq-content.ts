@@ -1,8 +1,38 @@
+/**
+ * @fileoverview Pricing FAQ Content Configuration
+ * 
+ * This file contains the content configuration for the pricing page FAQ section.
+ * Includes commonly asked questions about pricing models, payment methods, estimates,
+ * payment terms, time tracking, custom arrangements, and service bundling.
+ * 
+ * The content is structured to work with the FAQ Section component and provides
+ * comprehensive answers to help potential clients understand the pricing structure.
+ */
+
 import { FAQContent } from '@/page-templates/service-page/types';
 
+/**
+ * Pricing FAQ Content Configuration
+ * 
+ * Comprehensive FAQ content specifically tailored for the pricing page.
+ * Covers all major aspects of pricing, payments, and business terms.
+ * 
+ * @type {FAQContent} FAQ content configuration object
+ * @property {string} title - The main title for the FAQ section.
+ * @property {string} description - A brief description encouraging users to explore FAQs.
+ * @property {Array} items - An array of FAQ items, each containing an icon, question, and answer.
+ * @property {Object} moreLink - An optional link to view all FAQs.
+ * @property {string} moreLink.text - Text for the link to view all FAQs.
+ * @property {string} moreLink.url - URL for the link to view all FAQs.
+ */
 const pricingFAQContent: FAQContent = {
+  /** Section title displayed in the FAQ component */
   title: "Pricing & Payment FAQs",
+  
+  /** Brief description explaining the purpose of these FAQs */
   description: "Answers to common questions about our pricing models, payment options, and how we ensure transparency and value.",
+  
+  /** Array of individual FAQ items with questions, answers, and icons */
   items: [
     {
       icon: "DollarSign",
@@ -40,6 +70,8 @@ const pricingFAQContent: FAQContent = {
       answer: "Yes! We offer discounts when you bundle multiple services together. As your one-stop shop for all your tech needs, you can save money and get a cohesive, professional result for your business.",
     },
   ],
+  
+  /** Optional link to additional FAQ resources */
   moreLink: {
     text: "View all frequently asked questions",
     url: "/faq",

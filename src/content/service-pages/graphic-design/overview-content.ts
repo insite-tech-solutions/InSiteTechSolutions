@@ -1,5 +1,5 @@
 /**
- * Graphic Design & Branding Overview Content
+ * @fileoverview Overview Content for the Graphic Design & Branding Service Page
  * 
  * This file contains the content configuration for the graphic design and branding service overview section.
  * It includes:

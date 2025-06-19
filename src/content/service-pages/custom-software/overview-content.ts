@@ -1,5 +1,5 @@
 /**
- * Custom Software Solutions Overview Content
+ * @fileoverview Overview Content for the Custom Software Service Page
  * 
  * This file contains the content configuration for the custom software development service overview section.
  * It includes:

@@ -1,9 +1,14 @@
-// src/content/services/seo-marketing/hero-content.ts
+/**
+ * @fileoverview Hero Content for the SEO & Online Marketing Service Page
+ *
+ * This file contains the content configuration for the hero section of the SEO & Online Marketing service page.
+ * It includes title, subtitle, description, background styling, CTA, and decorative elements.
+ */
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 
 /**
- * Hero section content for the Web & App Development service page.
+ * Hero section content for the SEO & Online Marketing service page.
  * This includes title, subtitle, description, background styling, CTA, and decorative elements.
  * 
  * @type {HeroSectionContent}

@@ -80,7 +80,7 @@ const PriceFactorCard: React.FC<PriceFactorProps> = ({ title, items, icon }) => 
       variants={fadeInUp}
       className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg transition-all"
     >
-      <div className="w-full rounded-t-lg bg-gradient-to-tr from-mild-blue to-blue-900 flex items-center justify-left gap-3 min-h-[56px] px-4 py-3">
+      <div className="w-full rounded-t-lg bg-gradient-to-br from-light-blue to-blue-800 flex items-center justify-left gap-3 min-h-[56px] px-4 py-3">
         {Icon && <Icon className="h-7 w-7 text-white flex-shrink-0" />}
         <h4 className="text-xl font-semibold text-white ml-2">{title}</h4>
       </div>

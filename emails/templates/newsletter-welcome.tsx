@@ -1,3 +1,24 @@
+/**
+ * @fileoverview Newsletter Welcome Email Template.
+ *
+ * This template is sent to users immediately after they successfully confirm
+ * their subscription to the InSite Tech Solutions newsletter. It extends a warm welcome,
+ * reiterates the benefits of subscribing, and provides quick links to valuable resources.
+ *
+ * Purpose:
+ * - **Warm Welcome**: Greets new subscribers and confirms their successful subscription.
+ * - **Value Proposition**: Reminds subscribers of the benefits and type of content they will receive.
+ * - **Engagement**: Directs users to existing content (blog, case studies, FAQ) to encourage immediate engagement.
+ * - **Unsubscribe Option**: Clearly provides an unsubscribe link for compliance and user control.
+ *
+ * Technical Details:
+ * - Uses `@react-email/components` for structuring email-compatible HTML.
+ * - Integrates `EmailHeader` and `EmailFooter` for consistent branding.
+ * - Leverages `emailStyles` and `brandColors` for global and specific styling.
+ * - Dynamically includes an `unsubscribeUrl` for easy opt-out.
+ * - Features sections for newsletter content highlights and useful resources.
+ */
+
 import {
     Html,
     Head,
@@ -5,7 +26,6 @@ import {
     Container,
     Section,
     Text,
-    Button,
     Hr,
     Row,
     Column,
@@ -16,15 +36,33 @@ import {
   import { emailStyles } from '../components/email-styles';
   import { brandColors } from '../components/brand-colors';
   
+  /**
+   * Props for the `NewsletterWelcome` component.
+   * @interface NewsletterWelcomeProps
+   */
   interface NewsletterWelcomeProps {
+    /**
+     * The URL for users to unsubscribe from the newsletter.
+     */
     unsubscribeUrl: string;
+    /**
+     * Optional URL for the logo to be displayed in the email header.
+     */
     logoUrl?: string;
   }
   
-  export const NewsletterWelcome = ({
-    unsubscribeUrl,
-    logoUrl,
-  }: NewsletterWelcomeProps) => {
+/**
+ * Renders the newsletter welcome email template.
+ * This email is sent to new subscribers upon successful confirmation of their subscription,
+ * welcoming them to the InSite Tech Solutions community and providing key information.
+ *
+ * @param {NewsletterWelcomeProps} props - The properties for the component.
+ * @returns {JSX.Element} The JSX element representing the newsletter welcome email.
+ */
+export const NewsletterWelcome = ({
+  unsubscribeUrl,
+  logoUrl,
+}: NewsletterWelcomeProps): JSX.Element => {
     return (
       <Html lang="en">
         <Head>
@@ -145,20 +183,29 @@ import {
   export default NewsletterWelcome;
   
   // Additional custom styles
-  const heroSection = {
+  /**
+   * Styles for the hero section of the email.
+   */
+  const heroSection: React.CSSProperties = {
     paddingTop: '36px',
     paddingBottom: '12px',
     textAlign: 'center' as const,
   };
   
-  const heroIcon = {
+  /**
+   * Styles for the icon displayed in the hero section (e.g., 🎉).
+   */
+  const heroIcon: React.CSSProperties = {
     fontSize: '48px',
     lineHeight: '1',
     margin: '0 0 16px 0',
     textAlign: 'center' as const,
   };
   
-  const heroHeading = {
+  /**
+   * Styles for the main heading in the hero section.
+   */
+  const heroHeading: React.CSSProperties = {
     fontSize: '32px',
     lineHeight: '40px',
     fontWeight: '700',
@@ -168,7 +215,10 @@ import {
     fontFamily: "'Kohinoor Latin', 'Open Sans', sans-serif",
   };
   
-  const heroSubtext = {
+  /**
+   * Styles for the subtext in the hero section.
+   */
+  const heroSubtext: React.CSSProperties = {
     fontSize: '18px',
     lineHeight: '28px',
     color: brandColors.text.muted,
@@ -176,14 +226,21 @@ import {
     margin: '0',
   };
   
-  const welcomeCard = {
+  /**
+   * Styles for the welcome card section, highlighting newsletter features.
+   * Extends `emailStyles.card`.
+   */
+  const welcomeCard: React.CSSProperties = {
     ...emailStyles.card,
     backgroundColor: brandColors.background.secondary,
     border: `1px solid ${brandColors.background.border}`,
     borderLeft: `4px solid ${brandColors.secondary}`,
   };
   
-  const cardTitle = {
+  /**
+   * Styles for the title within the welcome and resources cards.
+   */
+  const cardTitle: React.CSSProperties = {
     fontSize: '18px',
     fontWeight: '600',
     color: brandColors.text.primary,
@@ -191,52 +248,81 @@ import {
     textAlign: 'center' as const,
   };
   
-  const featureItem = {
+  /**
+   * Styles for an individual feature item within the welcome card.
+   */
+  const featureItem: React.CSSProperties = {
     margin: '16px 0',
     alignItems: 'flex-start',
   };
   
-  const featureIcon = {
+  /**
+   * Styles for the emoji icon preceding each feature description.
+   */
+  const featureIcon: React.CSSProperties = {
     width: '32px',
     fontSize: '20px',
     textAlign: 'center' as const,
     paddingTop: '2px',
   };
   
-  const featureContent = {
+  /**
+   * Styles for the text content area of each feature item.
+   */
+  const featureContent: React.CSSProperties = {
     paddingLeft: '16px',
   };
   
-  const featureTitle = {
+  /**
+   * Styles for the title of each feature.
+   */
+  const featureTitle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: '600',
     color: brandColors.text.primary,
     margin: '0 0 4px 0',
   };
   
-  const featureDescription = {
+  /**
+   * Styles for the description text of each feature.
+   */
+  const featureDescription: React.CSSProperties = {
     fontSize: '14px',
     color: brandColors.text.muted,
     margin: '0',
     lineHeight: '20px',
   };
   
-  const resourcesCard = {
+  /**
+   * Styles for the resources card section.
+   * Extends `emailStyles.card`.
+   */
+  const resourcesCard: React.CSSProperties = {
     ...emailStyles.card,
     backgroundColor: '#f8fafc',
     border: `1px solid ${brandColors.background.border}`,
   };
   
-  const resourceRow = {
+  /**
+   * Styles for a row of resources.
+   */
+  const resourceRow: React.CSSProperties = {
     margin: '12px 0',
   };
   
-  const resourceColumn = {
+  /**
+   * Styles for a column within a resource row.
+   */
+  const resourceColumn: React.CSSProperties = {
     textAlign: 'center' as const,
     padding: '8px',
   };
   
-  const resourceLink = {
+  /**
+   * Styles for the link text of each resource.
+   * Extends `emailStyles.link`.
+   */
+  const resourceLink: React.CSSProperties = {
     ...emailStyles.link,
     fontSize: '14px',
     fontWeight: '600',
@@ -245,26 +331,38 @@ import {
     marginBottom: '4px',
   };
   
-  const resourceDesc = {
+  /**
+   * Styles for the description text of each resource.
+   */
+  const resourceDesc: React.CSSProperties = {
     fontSize: '12px',
     color: brandColors.text.muted,
     margin: '0',
     lineHeight: '16px',
   };
   
-  const teamRole = {
+  /**
+   * Styles for the team role text in the signature.
+   */
+  const teamRole: React.CSSProperties = {
     color: brandColors.text.muted,
     fontSize: '14px',
     fontStyle: 'italic',
   };
   
-  const unsubscribeText = {
+  /**
+   * Styles for the unsubscribe text at the bottom of the email.
+   */
+  const unsubscribeText: React.CSSProperties = {
     ...emailStyles.textSmall,
     textAlign: 'center' as const,
     fontStyle: 'italic',
   };
-  
-  const contentSection = {
+
+  /**
+   * Styles for the main content section, providing inner padding.
+   */
+  const contentSection: React.CSSProperties = {
     padding: '8px 16px 24px 16px',
   };
   

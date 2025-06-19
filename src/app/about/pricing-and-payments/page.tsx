@@ -1,14 +1,21 @@
 /**
- * Page component for the Pricing & Payments page.
- * Using Next.js App Router's built-in support for metadata.
+ * @fileoverview Pricing & Payments Page Route Component
+ *
+ * Next.js App Router page component for the /about/pricing-and-payments route.
+ * Implements server-side rendering with static metadata export and component
+ * delegation pattern. Follows App Router conventions for SEO optimization and
+ * performance.
  */
 import type { Metadata } from "next";
 import PricingPage from "@/components/about-pages/pricing-page";
 
 /**
- * Metadata configuration for the Pricing & Payments page.
+ * Static metadata configuration for the Pricing & Payments page.
+ *
+ * Exported as a static object for Next.js App Router to process during build time.
+ * Provides SEO optimization with title and description meta tags.
  * 
- * @type {Metadata}
+ * @type {Metadata} Next.js metadata configuration object
  */
 export const metadata: Metadata = {
   title: "Pricing & Payment Options | Your Tech Services",
@@ -17,10 +24,26 @@ export const metadata: Metadata = {
 };
 
 /**
- * Server component that renders the Pricing & Payments page.
+ * Pricing & Payments Page Route Component
+ *
+ * Server component that renders the Pricing & Payments page using the App Router pattern.
+ * Delegates rendering to the PricingPage component while handling route-level
+ * concerns like metadata and server-side rendering.
+ *
+ * Features:
+ * - Server-side rendering by default (App Router)
+ * - Static metadata export for SEO optimization
+ * - Component delegation pattern for separation of concerns
+ * - Follows Next.js 13+ App Router conventions
  * 
- * @returns {JSX.Element} The rendered Pricing & Payments page
+ * @returns {JSX.Element} The rendered Pricing & Payments page component
+ *
+ * @example
+ * ```
+ * // This component is automatically used by Next.js for the /about/pricing-and-payments route
+ * // No manual import needed - handled by the App Router file system
+ * ```
  */
-export default function Page() {
+export default function Page(): JSX.Element {
   return <PricingPage />;
 }

@@ -1,4 +1,9 @@
-// src/content/services/web-app-development/hero-content.ts
+/**
+ * @fileoverview Hero Content for the Web & App Development Service Page
+ *
+ * This file contains the content configuration for the hero section of the Web & App Development service page.
+ * It includes title, subtitle, description, background styling, CTA, and decorative elements.
+ */
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 

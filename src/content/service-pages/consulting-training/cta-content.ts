@@ -1,4 +1,9 @@
-// src/content/services/consulting-training/cta-content.ts
+/**
+ * @fileoverview CTA Content for the Consulting & Training Service Page
+ *
+ * This file contains the content configuration for the call-to-action section of the Consulting & Training service page.
+ * It includes a title, description, and button labels/links.
+ */
 
 import { CTAContent } from '@/page-templates/service-page/types';
 

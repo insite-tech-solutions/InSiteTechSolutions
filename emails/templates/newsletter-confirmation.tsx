@@ -1,3 +1,24 @@
+/**
+ * @fileoverview Newsletter Confirmation Email Template.
+ *
+ * This template is used to send a confirmation email to users who have subscribed
+ * to the InSite Tech Solutions newsletter. It requires the user to click a confirmation link
+ * to finalize their subscription, ensuring a double opt-in process.
+ *
+ * Purpose:
+ * - **Email Verification**: Confirms the subscriber's email address is valid and owned by them.
+ * - **Spam Prevention**: Implements a double opt-in mechanism to prevent unsolicited subscriptions and reduce spam complaints.
+ * - **Expectation Setting**: Informs the subscriber about the benefits of the newsletter and what to expect.
+ * - **Security Note**: Provides important information about the link's expiration and privacy.
+ *
+ * Technical Details:
+ * - Uses `@react-email/components` for structuring email-compatible HTML.
+ * - Integrates `EmailHeader` and `EmailFooter` for consistent branding.
+ * - Leverages `emailStyles` and `brandColors` for global and specific styling.
+ * - Dynamically includes a `confirmationUrl` for the opt-in process.
+ * - Features a prominent call-to-action button and a section detailing newsletter benefits.
+ */
+
 import {
     Html,
     Head,
@@ -15,15 +36,33 @@ import {
   import { emailStyles } from '../components/email-styles';
   import { brandColors } from '../components/brand-colors';
   
+  /**
+   * Props for the `NewsletterConfirm` component.
+   * @interface NewsletterConfirmProps
+   */
   interface NewsletterConfirmProps {
+    /**
+     * The URL that the user must click to confirm their newsletter subscription.
+     */
     confirmationUrl: string;
+    /**
+     * Optional URL for the logo to be displayed in the email header.
+     */
     logoUrl?: string;
   }
   
-  export const NewsletterConfirm = ({
-    confirmationUrl,
-    logoUrl,
-  }: NewsletterConfirmProps) => {
+/**
+ * Renders the newsletter confirmation email template.
+ * This email is sent to new subscribers, prompting them to confirm their email
+ * address to complete their subscription to the InSite Tech Solutions newsletter.
+ *
+ * @param {NewsletterConfirmProps} props - The properties for the component.
+ * @returns {JSX.Element} The JSX element representing the newsletter confirmation email.
+ */
+export const NewsletterConfirm = ({
+  confirmationUrl,
+  logoUrl,
+}: NewsletterConfirmProps): JSX.Element => {
     return (
       <Html lang="en">
         <Head>
@@ -115,20 +154,29 @@ import {
   export default NewsletterConfirm;
   
   // Additional custom styles
-  const heroSection = {
+  /**
+   * Styles for the hero section of the email.
+   */
+  const heroSection: React.CSSProperties = {
     paddingTop: '24px',
     paddingBottom: '16px',
     textAlign: 'center' as const,
   };
   
-  const heroIcon = {
+  /**
+   * Styles for the icon displayed in the hero section (e.g., 📧).
+   */
+  const heroIcon: React.CSSProperties = {
     fontSize: '48px',
     lineHeight: '1',
     margin: '0 0 16px 0',
     textAlign: 'center' as const,
   };
   
-  const heroHeading = {
+  /**
+   * Styles for the main heading in the hero section.
+   */
+  const heroHeading: React.CSSProperties = {
     fontSize: '32px',
     lineHeight: '40px',
     fontWeight: '700',
@@ -138,7 +186,10 @@ import {
     fontFamily: "'Kohinoor Latin', 'Open Sans', sans-serif",
   };
   
-  const heroSubtext = {
+  /**
+   * Styles for the subtext in the hero section.
+   */
+  const heroSubtext: React.CSSProperties = {
     fontSize: '18px',
     lineHeight: '28px',
     color: brandColors.text.muted,
@@ -146,14 +197,21 @@ import {
     margin: '0',
   };
   
-  const benefitsCard = {
+  /**
+   * Styles for the benefits card section, highlighting newsletter advantages.
+   * Extends `emailStyles.card`.
+   */
+  const benefitsCard: React.CSSProperties = {
     ...emailStyles.card,
     backgroundColor: brandColors.background.secondary,
     border: `1px solid ${brandColors.background.border}`,
     borderLeft: `4px solid ${brandColors.accent}`,
   };
   
-  const cardTitle = {
+  /**
+   * Styles for the title within the benefits card.
+   */
+  const cardTitle: React.CSSProperties = {
     fontSize: '18px',
     fontWeight: '600',
     color: brandColors.text.primary,
@@ -161,37 +219,56 @@ import {
     textAlign: 'center' as const,
   };
   
-  const benefitItem = {
+  /**
+   * Styles for an individual benefit item within the benefits card.
+   */
+  const benefitItem: React.CSSProperties = {
     margin: '16px 0',
     alignItems: 'flex-start',
   };
   
-  const benefitIcon = {
+  /**
+   * Styles for the emoji icon preceding each benefit description.
+   */
+  const benefitIcon: React.CSSProperties = {
     width: '32px',
     fontSize: '20px',
     textAlign: 'center' as const,
     paddingTop: '2px',
   };
   
-  const benefitText = {
+  /**
+   * Styles for the text content area of each benefit item.
+   */
+  const benefitText: React.CSSProperties = {
     paddingLeft: '16px',
   };
   
-  const benefitTitle = {
+  /**
+   * Styles for the title of each benefit.
+   */
+  const benefitTitle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: '600',
     color: brandColors.text.primary,
     margin: '0 0 4px 0',
   };
   
-  const benefitDescription = {
+  /**
+   * Styles for the description text of each benefit.
+   */
+  const benefitDescription: React.CSSProperties = {
     fontSize: '14px',
     color: brandColors.text.muted,
     margin: '0',
     lineHeight: '20px',
   };
   
-  const confirmButton = {
+  /**
+   * Styles for the main confirmation button.
+   * Extends `emailStyles.primaryButton`.
+   */
+  const confirmButton: React.CSSProperties = {
     ...emailStyles.primaryButton,
     backgroundColor: brandColors.accent,
     fontSize: '18px',
@@ -200,20 +277,30 @@ import {
     fontWeight: '700',
   };
   
-  const securityCard = {
+  /**
+   * Styles for the security information card.
+   * Extends `emailStyles.card`.
+   */
+  const securityCard: React.CSSProperties = {
     ...emailStyles.card,
     backgroundColor: '#f0f9ff',
     border: `1px solid ${brandColors.light}`,
     textAlign: 'center' as const,
   };
   
-  const securityTitle = {
+  /**
+   * Styles for the title within the security card.
+   */
+  const securityTitle: React.CSSProperties = {
     fontSize: '16px',
     fontWeight: '600',
     color: brandColors.text.primary,
     margin: '0 0 12px 0',
   };
 
-  const contentSection = {
+  /**
+   * Styles for the main content section, providing inner padding.
+   */
+  const contentSection: React.CSSProperties = {
     padding: '8px 16px 24px 16px',
   };

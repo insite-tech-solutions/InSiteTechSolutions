@@ -1,4 +1,10 @@
-// src/content/services/web-app-development/applications-content.ts
+/**
+ * @fileoverview Applications Content for the Web & App Development Service Page
+ *
+ * This file contains the content configuration for the Web & App Development service page.
+ * It includes industry solutions, categories, and related descriptions/icons.
+ * The content is organized into sections and categories to provide a clear and structured presentation.
+ */
 
 import { ApplicationsContent } from '@/page-templates/service-page/types';
 

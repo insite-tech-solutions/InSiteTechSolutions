@@ -1,5 +1,10 @@
-// Shared email styles for InSite Tech Solutions
-// Ensures consistency across all email templates
+/**
+ * @fileoverview Shared Email Styles for InSite Tech Solutions.
+ * 
+ * This file defines the base styles and layout structure for all email templates.
+ * It ensures consistency across all email communications and provides a clean,
+ * responsive design for the email content.
+ */
 
 import { brandColors } from './brand-colors';
 

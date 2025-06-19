@@ -1,4 +1,9 @@
-// src/content/services/custom-software/hero-content.ts
+/**
+ * @fileoverview Hero Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the hero section of the Custom Software service page.
+ * It includes title, subtitle, description, background styling, CTA, and decorative elements.
+ */
 
 import { HeroSectionContent } from '@/page-templates/service-page/types';
 

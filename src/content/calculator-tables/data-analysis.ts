@@ -1,4 +1,12 @@
 /**
+ * @fileoverview Pricing and Configuration Table for Data Analysis Services
+ *
+ * This file defines the pricing and configuration data for Data Analysis services.
+ * It covers cost structures for complexity, tools, data types, support options,
+ * and related services for use in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for Data Analysis services.
  * Covers cost structures for complexity, tools, data types, support options,
  * and related services for use in the pricing calculator.
@@ -20,8 +28,6 @@
  * @property {Array} specialNotes - Special notes regarding the data analysis services.
  */
 // content/calculator_tables/dataAnalysis.ts
-
-//import { CostRange, Multiplier } from './types';
 
 export const dataAnalysisTable = {
   name: "Data Analysis",

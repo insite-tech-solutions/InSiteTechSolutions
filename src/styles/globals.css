@@ -1,4 +1,9 @@
-/* app/globals.css */
+/**
+ * @fileoverview Global Styles for InSite Tech Solutions Website.
+ * 
+ * This file contains the global styles for the InSite Tech Solutions website.
+ * It includes base styles, media queries, and theme-specific overrides.
+ */
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';

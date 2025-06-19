@@ -1,3 +1,25 @@
+/**
+ * @fileoverview Contact Notification Email Template.
+ *
+ * This template is used to notify internal team members about new contact form submissions.
+ * It provides a comprehensive summary of the submitted information, including customer details,
+ * project requirements, budget, and quick action links for efficient lead management.
+ *
+ * Purpose:
+ * - **Immediate Notification**: Alerts team members to new inquiries promptly.
+ * - **Information Summary**: Consolidates all relevant contact form data into a single, digestible email.
+ * - **Streamlined Workflow**: Offers direct links for replying, calling, adding to CRM, and scheduling follow-ups.
+ * - **Response Guidelines**: Provides a checklist for consistent and effective lead follow-up.
+ *
+ * Technical Details:
+ * - Uses `@react-email/components` for structuring email-compatible HTML.
+ * - Integrates `EmailHeader` and `EmailFooter` for consistent branding.
+ * - Utilizes `emailStyles` and `brandColors` for global and specific styling.
+ * - Dynamically renders customer and project details based on `ContactNotificationProps`.
+ * - Features interactive buttons for quick actions.
+ * - Includes a predefined mapping (`serviceLabels`) for converting service IDs to readable names.
+ */
+
 import {
     Html,
     Head,
@@ -13,27 +35,67 @@ import {
   import { emailStyles } from '../components/email-styles';
   import { brandColors } from '../components/brand-colors';
   
+  /**
+   * Props for the `ContactNotification` component.
+   * @interface ContactNotificationProps
+   */
   interface ContactNotificationProps {
-    // Required fields
+    /**
+     * The first name of the customer.
+     */
     firstName: string;
+    /**
+     * The email address of the customer.
+     */
     email: string;
+    /**
+     * An array of service IDs requested by the customer.
+     */
     services: string[];
+    /**
+     * The budget range specified by the customer.
+     */
     budget: string;
+    /**
+     * The timestamp or formatted date string indicating when the form was submitted.
+     */
     submittedAt: string;
     
-    // Optional fields
+    /**
+     * The last name of the customer (optional).
+     */
     lastName?: string;
+    /**
+     * The phone number of the customer (optional).
+     */
     phoneNumber?: string;
+    /**
+     * The website URL provided by the customer (optional).
+     */
     websiteUrl?: string;
+    /**
+     * The company name provided by the customer (optional).
+     */
     companyName?: string;
+    /**
+     * Additional comments or message from the customer (optional).
+     */
     comments?: string;
+    /**
+     * Indicates if the customer opted to join the mailing list (optional).
+     */
     mailingList?: boolean;
     
-    // System fields
+    /**
+     * Optional URL for the logo to be displayed in the email header.
+     */
     logoUrl?: string;
   }
 
-  // Service mapping from form IDs to readable labels
+  /**
+   * A mapping from service form IDs to more readable labels.
+   * @type {Record<string, string>}
+   */
   const serviceLabels: Record<string, string> = {
     'web-app-development': 'Web & App Development',
     'custom-software-solutions': 'Custom Software Solutions',
@@ -45,20 +107,28 @@ import {
     'other': 'Other',
   };
   
-  export const ContactNotification = ({
-    firstName = "John",
-    lastName, 
-    email = "john.doe@example.com",
-    phoneNumber,
-    websiteUrl,
-    companyName,
-    services = ["web-app-development"],
-    comments,
-    budget = "$5,000 - $15,000",
-    mailingList = false,
-    submittedAt = "December 15, 2024 at 2:30 PM",
-    logoUrl,
-  }: ContactNotificationProps) => {
+/**
+ * Renders the contact notification email template for internal team members.
+ * This email provides a detailed summary of a new contact form submission
+ * and quick actions for efficient lead management.
+ *
+ * @param {ContactNotificationProps} props - The properties for the component.
+ * @returns {JSX.Element} The JSX element representing the contact notification email.
+ */
+export const ContactNotification = ({
+  firstName = "John",
+  lastName, 
+  email = "john.doe@example.com",
+  phoneNumber,
+  websiteUrl,
+  companyName,
+  services = ["web-app-development"],
+  comments,
+  budget = "$5,000 - $15,000",
+  mailingList = false,
+  submittedAt = "December 15, 2024 at 2:30 PM",
+  logoUrl,
+}: ContactNotificationProps): JSX.Element => {
     const fullName = lastName ? `${firstName} ${lastName}` : firstName;
     const selectedServices = (services || []).map(serviceId => serviceLabels[serviceId] || serviceId);
     
@@ -211,7 +281,7 @@ import {
               <Section style={guidelinesCard}>
                 <Text style={cardTitle}>📋 Response Guidelines</Text>
                 <Text style={guidelineItem}>
-                  ✅ <strong>Lead Creation:</strong> Click "Add to CRM" above to create a lead record and contact in ERPNext CRM
+                  ✅ <strong>Lead Creation:</strong> Click &quot;Add to CRM&quot; above to create a lead record and contact in ERPNext CRM
                 </Text>
                 <Text style={guidelineItem}>
                   ✅ <strong>Response Time:</strong> Aim to respond within 24-48 hours
@@ -244,7 +314,10 @@ import {
   export default ContactNotification;
   
   // Additional custom styles
-  const alertSection = {
+  /**
+   * Styles for the alert section at the top of the email.
+   */
+  const alertSection: React.CSSProperties = {
     backgroundColor: '#f8fdf8',
     borderTop: `4px solid rgb(94, 239, 68)`,
     borderBottom: `1px solid ${brandColors.background.border}`,
@@ -252,7 +325,10 @@ import {
     textAlign: 'center' as const,
   };
   
-  const alertHeading = {
+  /**
+   * Styles for the main heading in the alert section.
+   */
+  const alertHeading: React.CSSProperties = {
     fontSize: '24px',
     lineHeight: '32px',
     fontWeight: '700',
@@ -262,7 +338,10 @@ import {
     fontFamily: "'Kohinoor Latin', 'Open Sans', sans-serif",
   };
   
-  const alertSubtext = {
+  /**
+   * Styles for the subtext in the alert section.
+   */
+  const alertSubtext: React.CSSProperties = {
     fontSize: '14px',
     color: '#0AAA40',
     textAlign: 'center' as const,
@@ -270,27 +349,71 @@ import {
     fontWeight: '500',
   };
   
-  const urgencyBadge = {
+  /**
+   * Styles for the urgency badge, indicating action is required.
+   */
+  const urgencyBadge: React.CSSProperties = {
     ...emailStyles.badge,
     backgroundColor: '#0BDA51',
     margin: '0 0 16px 0',
   };
   
-  const customerCard = {
+  /**
+   * Styles for the customer information card.
+   * Extends `emailStyles.card`.
+   */
+  const customerCard: React.CSSProperties = {
     ...emailStyles.card,
     backgroundColor: brandColors.background.secondary,
     border: `1px solid ${brandColors.background.border}`,
     borderLeft: `4px solid ${brandColors.primary}`,
   };
-
-  const projectCard = {
+  
+  /**
+   * Styles for the project details card.
+   * Extends `emailStyles.card`.
+   */
+  const projectCard: React.CSSProperties = {
     ...emailStyles.card,
     backgroundColor: '#f0f9ff',
     border: `1px solid ${brandColors.light}`,
     borderLeft: `4px solid ${brandColors.accent}`,
   };
   
-  const cardTitle = {
+  /**
+   * Styles for the message (comments) card.
+   * Extends `emailStyles.messageSection`.
+   */
+  const messageCard: React.CSSProperties = {
+    ...emailStyles.messageSection,
+    borderLeft: `4px solid ${brandColors.accent}`,
+  };
+  
+  /**
+   * Styles for the quick actions card.
+   * Extends `emailStyles.card`.
+   */
+  const actionsCard: React.CSSProperties = {
+    ...emailStyles.card,
+    backgroundColor: '#f0f9ff',
+    border: `1px solid ${brandColors.light}`,
+  };
+  
+  /**
+   * Styles for the response guidelines card.
+   * Extends `emailStyles.card`.
+   */
+  const guidelinesCard: React.CSSProperties = {
+    ...emailStyles.card,
+    backgroundColor: '#f8fdf8',
+    border: `1px solid #22c55e`,
+    borderLeft: `4px solid #16a34a`,
+  };
+  
+  /**
+   * Styles for the title within various cards (customer, project, message, etc.).
+   */
+  const cardTitle: React.CSSProperties = {
     fontSize: '18px',
     fontWeight: '600',
     color: brandColors.text.primary,
@@ -298,7 +421,10 @@ import {
     textAlign: 'center' as const,
   };
   
-  const infoRowShort = {
+  /**
+   * Styles for a short information row (label and value side-by-side).
+   */
+  const infoRowShort: React.CSSProperties = {
     margin: '12px 0',
     borderBottom: `1px solid ${brandColors.background.border}`,
     paddingBottom: '8px',
@@ -308,7 +434,10 @@ import {
     gap: '8px',
   };
   
-  const infoRowLong = {
+  /**
+   * Styles for a longer information row, typically for multi-line content.
+   */
+  const infoRowLong: React.CSSProperties = {
     margin: '12px 0',
     borderBottom: `1px solid ${brandColors.background.border}`,
     paddingBottom: '8px',
@@ -318,7 +447,10 @@ import {
     gap: '12px',
   };
   
-  const labelTextShort = {
+  /**
+   * Styles for the label text in information rows (short).
+   */
+  const labelTextShort: React.CSSProperties = {
     fontSize: '14px',
     fontWeight: '600',
     color: brandColors.text.muted,
@@ -327,7 +459,10 @@ import {
     minWidth: 'fit-content',
   };
   
-  const labelTextLong = {
+  /**
+   * Styles for the label text in information rows (long).
+   */
+  const labelTextLong: React.CSSProperties = {
     fontSize: '14px',
     fontWeight: '600',
     color: brandColors.text.muted,
@@ -335,15 +470,21 @@ import {
     minWidth: '60px',
   };
   
-  const valueText = {
+  /**
+   * Styles for the value text in information rows.
+   */
+  const valueText: React.CSSProperties = {
     fontSize: '16px',
     color: brandColors.text.primary,
     margin: '0',
     fontWeight: '500',
     wordBreak: 'break-word' as const,
   };
-
-  const budgetText = {
+  
+  /**
+   * Styles for the budget text, with a distinct color.
+   */
+  const budgetText: React.CSSProperties = {
     ...valueText,
     backgroundColor: brandColors.accent,
     color: brandColors.text.light,
@@ -354,37 +495,38 @@ import {
     display: 'inline-block',
   };
   
-  const messageCard = {
-    ...emailStyles.messageSection,
-    borderLeft: `4px solid ${brandColors.accent}`,
-  };
-  
-  const messageText = {
+  /**
+   * Styles for the message (comments) text area.
+   */
+  const messageText: React.CSSProperties = {
     ...emailStyles.messageText,
     backgroundColor: brandColors.background.primary,
     border: `1px solid ${brandColors.background.border}`,
     minHeight: '100px',
   };
   
-  const actionsCard = {
-    ...emailStyles.card,
-    backgroundColor: '#f0f9ff',
-    border: `1px solid ${brandColors.light}`,
-  };
-  
-  const actionRow = {
+  /**
+   * Styles for a row of action buttons, using flex display.
+   */
+  const actionRow: React.CSSProperties = {
     margin: '12px 0',
     display: 'flex',
     gap: '8px',
     width: '100%',
   };
   
-  const actionColumn = {
+  /**
+   * Styles for a column within an action row.
+   */
+  const actionColumn: React.CSSProperties = {
     textAlign: 'center' as const,
     flex: 1,
   };
   
-  const primaryActionButton = {
+  /**
+   * Styles for the primary action button.
+   */
+  const primaryActionButton: React.CSSProperties = {
     ...emailStyles.primaryButton,
     backgroundColor: brandColors.primary,
     fontSize: '14px',
@@ -394,7 +536,10 @@ import {
     boxSizing: 'border-box' as const,
   };
   
-  const secondaryActionButton = {
+  /**
+   * Styles for secondary action buttons.
+   */
+  const secondaryActionButton: React.CSSProperties = {
     ...emailStyles.secondaryButton,
     fontSize: '14px',
     padding: '12px 20px',
@@ -403,20 +548,19 @@ import {
     boxSizing: 'border-box' as const,
   };
   
-  const guidelinesCard = {
-    ...emailStyles.card,
-    backgroundColor: '#f8fdf8',
-    border: `1px solid #22c55e`,
-    borderLeft: `4px solid #16a34a`,
-  };
-  
-  const guidelineItem = {
+  /**
+   * Styles for an individual guideline item.
+   */
+  const guidelineItem: React.CSSProperties = {
     ...emailStyles.textSmall,
     margin: '8px 0',
     textAlign: 'left' as const,
   };
   
-  const timestampText = {
+  /**
+   * Styles for the timestamp text at the bottom of the email.
+   */
+  const timestampText: React.CSSProperties = {
     ...emailStyles.textSmall,
     textAlign: 'center' as const,
     fontStyle: 'italic',

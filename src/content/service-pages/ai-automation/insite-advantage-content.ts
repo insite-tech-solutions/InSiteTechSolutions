@@ -1,4 +1,9 @@
-// src/content/services/ai-automation/insite-advantage-content.ts
+/**
+ * @fileoverview InSite Advantage Content for the AI & Automation Service Page
+ *
+ * This file contains the content configuration for the InSite Advantage section of the AI & Automation service page.
+ * It includes a title, description, and a list of advantages and benefits.
+ */
 
 import { InSiteAdvantageContent } from '@/page-templates/service-page/types';
 

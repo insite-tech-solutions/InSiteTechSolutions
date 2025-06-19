@@ -1,5 +1,5 @@
 /**
- * Web App Development Overview Content
+ * @fileoverview Overview Content for the Web & App Development Service Page
  * 
  * This file contains the content configuration for the web app development service overview section.
  * It includes:

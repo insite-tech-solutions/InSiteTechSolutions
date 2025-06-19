@@ -1,17 +1,57 @@
+/**
+ * @fileoverview Newsletter Error Page Route Component
+ *
+ * This module defines the Next.js App Router page component for the
+ * `/newsletter/error` route. It is displayed to users when there is an issue
+ * with their newsletter subscription confirmation or unsubscription process.
+ * The page provides an informative error message and suggests steps for resolution.
+ *
+ * Features:
+ * - Displays a prominent error message and icon.
+ * - Provides actionable steps for the user to troubleshoot or seek assistance.
+ * - Offers call-to-action links to retry, contact support, or navigate back to the homepage.
+ * - Dynamically sets the document title using `useEffect`.
+ *
+ * Technical Implementation:
+ * - Uses `Next.js` App Router page conventions (`page.tsx`) and marked as a client component (`'use client'`).
+ * - Employs `lucide-react` for icons and `next/link` for client-side navigation.
+ * - Includes a button to reload the page for retry attempts.
+ * - Designed to provide a clear and helpful user experience during error scenarios.
+ */
+
 'use client'
 
-import React from 'react'
-import Link from 'next/link'
-import { AlertCircle, Mail, ArrowLeft, RefreshCw } from 'lucide-react'
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { AlertCircle, Mail, ArrowLeft, RefreshCw } from 'lucide-react';
 
-export default function NewsletterErrorPage() {
-  // Set document title on component mount
-  React.useEffect(() => {
+/**
+ * Newsletter Error Page Component
+ *
+ * This client component renders the page shown to users when an error occurs
+ * during a newsletter-related operation (e.g., confirmation, unsubscription).
+ * It guides the user on how to proceed and offers various recovery options.
+ *
+ * @returns {JSX.Element} The rendered newsletter error page.
+ *
+ * @example
+ * ```tsx
+ * // This component is automatically rendered by Next.js for the
+ * // /newsletter/error route. No manual import is necessary within other components.
+ * ```
+ */
+export default function NewsletterErrorPage(): JSX.Element {
+  // Dynamically set the document title when the component mounts.
+  // This ensures the browser tab/window title reflects the page content.
+  useEffect(() => {
     document.title = 'Newsletter Error | InSite Tech Solutions'
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-gray-50 flex items-center justify-center p-4">
+    <section aria-labelledby="newsletter-error-title">
+      {/* Accessible landmark for section */}
+      <h2 id="newsletter-error-title" className="sr-only">Newsletter Error</h2>
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-gray-50 flex items-center justify-center p-4">
       <div className="max-w-md md:max-w-lg w-full bg-white rounded-lg shadow-lg p-8 text-center">
         {/* Error Icon */}
         <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
@@ -81,6 +121,7 @@ export default function NewsletterErrorPage() {
           </p>
         </div>
       </div>
-    </div>
+      </div>
+    </section>
   )
-} 
+}

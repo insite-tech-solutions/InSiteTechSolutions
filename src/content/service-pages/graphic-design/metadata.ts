@@ -1,4 +1,9 @@
-// src/content/service-pages/graphic-design/metadata.ts
+/**
+ * @fileoverview Metadata Configuration for the Graphic Design & Branding Service Page
+ *
+ * This file contains the metadata configuration for the Graphic Design & Branding service page.
+ * It includes SEO-relevant fields such as the title, description, and slug identifier.
+ */
 
 import { ServiceMetadata } from '@/page-templates/service-page/types';
 

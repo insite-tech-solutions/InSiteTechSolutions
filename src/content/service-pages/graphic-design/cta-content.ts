@@ -1,4 +1,9 @@
-// src/content/services/graphic-design/cta-content.ts
+/**
+ * @fileoverview CTA Content for the Graphic Design & Branding Service Page
+ *
+ * This file contains the content configuration for the call-to-action section of the Graphic Design & Branding service page.
+ * It includes a title, description, and button labels/links.
+ */
 
 import { CTAContent } from '@/page-templates/service-page/types';
 

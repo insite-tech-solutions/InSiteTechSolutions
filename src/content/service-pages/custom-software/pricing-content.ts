@@ -1,4 +1,9 @@
-// src/content/services/custom-software/pricing-content.ts
+/**
+ * @fileoverview Pricing Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the pricing section of the Custom Software service page.
+ * It includes details about pricing, factors affecting cost, and long-term value justification.
+ */
 
 import { PricingContent } from '@/page-templates/service-page/types';
 

@@ -1,4 +1,9 @@
-// src/content/services/graphic-design/faq-content.ts
+/**
+ * @fileoverview FAQ Content for the Graphic Design & Branding Service Page
+ *
+ * This file contains the content configuration for the frequently asked questions section of the Graphic Design & Branding service page.
+ * It includes a title, description, and a list of frequently asked questions with answers.
+ */
 
 import { FAQContent } from '@/page-templates/service-page/types';
 

@@ -1,4 +1,12 @@
 /**
+ * @fileoverview Pricing and Configuration Table for AI & Automation Services
+ *
+ * This file defines the pricing and configuration data for AI & Automation services.
+ * It includes cost categories, complexity levels, integrations, support options,
+ * and additional features used in the pricing calculator.
+ */
+
+/**
  * Pricing and configuration table for AI & Automation services.
  * Defines cost categories, complexity levels, integrations, support options,
  * and additional features for the pricing calculator.

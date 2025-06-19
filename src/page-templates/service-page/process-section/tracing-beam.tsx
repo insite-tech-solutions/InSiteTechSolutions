@@ -1,6 +1,6 @@
 /**
  * @fileoverview TracingBeam component for visualizing scroll progress
- * with a customizable gradient beam.
+ * with a customizable gradient beam using Framer Motion.
  */
 
 "use client";
@@ -20,53 +20,96 @@ import {
   useSpring,
 } from "framer-motion";
 
+/**
+ * Utility function to conditionally join CSS class names.
+ * @param classes - A list of strings, which can be CSS class names.
+ * @returns A single string of joined CSS class names.
+ */
 const cn = (...classes: string[]) => classes.filter(Boolean).join(' ');
 
 /**
- * Props interface for the TracingBeam component
- * 
- * @param children - React nodes to be rendered inside the tracing beam container
- * @param className - Optional additional CSS classes to apply to the component
+ * Props interface for the TracingBeam component.
+ * Defines the expected properties for rendering the tracing beam.
+ * @interface TracingBeamProps
+ * @property {React.ReactNode} children - The child elements to be rendered within the tracing beam's scrollable area.
+ * @property {string} [className] - Optional additional CSS classes to apply to the main container div.
  */
-// Define Props Interface
 interface TracingBeamProps {
   children: React.ReactNode;
   className?: string;
 }
 
-// Define y2 as a constant outside the component
+/**
+ * A constant representing the fixed `y2` value for the linear gradient.
+ * This ensures the gradient's end point is static, contributing to the beam's visual effect.
+ */
 const Y2_CONSTANT = 0;
 
 /**
- * TracingBeam component that creates a visual tracking beam following scroll movement
- * 
- * This component renders a vertical beam that follows the user's scroll position,
- * creating a visual indicator of progress through the content.
+ * TracingBeam component that creates a visual tracking beam following scroll movement.
+ * This component renders a vertical beam that dynamically adjusts its gradient based on
+ * the user's scroll position within its children content. It uses Framer Motion for
+ * smooth animations and scroll tracking.
+ *
+ * The beam visually indicates scroll progress, appearing as a dynamic gradient line.
+ * It's designed to be a subtle, non-intrusive scroll indicator.
+ *
+ * @component
+ * @param {TracingBeamProps} props - The properties passed to the component.
+ * @returns {JSX.Element} A React functional component that renders a tracing beam.
  */
 const TracingBeamComponent: React.FC<TracingBeamProps> = ({
   children,
   className,
-}) => {
+}: TracingBeamProps): JSX.Element => {
+  /**
+   * Ref for the main container div, used as the scroll target for `useScroll`.
+   * This ref helps in determining the scroll progress relative to this specific section.
+   */
   const ref = useRef<HTMLDivElement>(null);
 
-  // Set the offset so that:
-  // 0 = top of section at viewport center
-  // 1 = bottom of section at viewport center
+  /**
+   * `scrollYProgress` from `useScroll` hook.
+   * Tracks the scroll progress within the `ref` element, normalized to a [0, 1] range.
+   * The offset ensures that 0 corresponds to the top of the section at the viewport center
+   * and 1 corresponds to the bottom of the section at the viewport center.
+   */
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start center", "end center"],
   });
 
+  /**
+   * Ref for the content wrapper div.
+   * Used to measure the `offsetHeight` of the children content, which in turn determines
+   * the SVG height to ensure the beam covers the entire content length.
+   */
   const contentRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * State to store the calculated height of the SVG.
+   * This height is dynamically set based on the `offsetHeight` of the `contentRef`
+   * to ensure the SVG beam spans the entire length of the content.
+   */
   const [svgHeight, setSvgHeight] = useState(0);
 
+  /**
+   * Effect hook to measure the content height after initial render and on updates.
+   * It sets the `svgHeight` state based on the `contentRef.current.offsetHeight`.
+   */
   useEffect(() => {
     if (contentRef.current) {
       setSvgHeight(contentRef.current.offsetHeight);
     }
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once after mount
 
-  // Updated transforms to be [0,1] for simplicity and full sync with scroll
+  /**
+   * `y1` value for the linear gradient, animated using `useSpring`.
+   * It transforms `scrollYProgress` from [0, 1] to [1, svgHeight + 50],
+   * effectively moving the start point of the gradient (and thus the beam's head)
+   * from the top to the bottom of the content as the user scrolls.
+   * `stiffness` and `damping` control the spring animation's physics for a smooth feel.
+   */
   const y1 = useSpring(
     useTransform(scrollYProgress, [0, 1], [1, svgHeight + 50]),
     {
@@ -85,8 +128,13 @@ const TracingBeamComponent: React.FC<TracingBeamProps> = ({
     }
   );
   */
+  /**
+   * `y2` value for the linear gradient. Currently a constant, but can be made dynamic.
+   * This determines the end point of the gradient.
+   */
   const y2 = Y2_CONSTANT;
 
+  {/* Container & SVG Beam */}
   return (
     <motion.div
       ref={ref}
@@ -102,8 +150,7 @@ const TracingBeamComponent: React.FC<TracingBeamProps> = ({
             minHeight: '100%',
             width: '100%',
           }}
-          aria-hidden="false"
-          aria-label="Tracing Beam Visualization"
+          aria-hidden="true"
         >
           <motion.path
             d={`M 10 0V ${svgHeight}`}
@@ -143,6 +190,7 @@ const TracingBeamComponent: React.FC<TracingBeamProps> = ({
           </defs>
         </svg>
       </div>
+      {/* Content Wrapper */}
       <div ref={contentRef} className="h-full">{children}</div>
     </motion.div>
   );

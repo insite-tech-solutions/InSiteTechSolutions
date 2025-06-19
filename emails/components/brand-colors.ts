@@ -1,5 +1,12 @@
-// Brand colors for InSite Tech Solutions emails
-// These match the website's color system from tailwind.config.ts
+/**
+ * @fileoverview Brand Colors for InSite Tech Solutions Emails.
+ * 
+ * This file defines the color palette used for branding InSite Tech Solutions emails.
+ * It includes primary colors, semantic text colors, and background colors.
+ * 
+ * The colors are sourced from the website's Tailwind configuration, ensuring consistency
+ * across all email communications.
+ */
 
 export const brandColors = {
   // Primary Blues (from tailwind config)

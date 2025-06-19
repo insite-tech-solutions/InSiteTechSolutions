@@ -1,4 +1,9 @@
-// src/content/services/consulting-training/value-prop-content.ts
+/**
+ * @fileoverview Value Proposition Content for the Consulting & Training Service Page
+ *
+ * This file contains the content configuration for the value proposition section of the Consulting & Training service page.
+ * It includes key benefits, market trends, animated insights, and a final call to action.
+ */
 
 import { ValuePropContent } from '@/page-templates/service-page/types';
 
