@@ -102,6 +102,7 @@ import {
   HelpCircle,
   Info,
   Calendar,
+  GitBranch,
   CreditCard,
   ChevronUp,
   ChevronDown
@@ -209,6 +210,7 @@ export const IconRegistry = {
   'HelpCircle': HelpCircle,
   'Info': Info,
   'Calendar': Calendar,
+  'GitBranch': GitBranch,
   'CreditCard': CreditCard,
   'ChevronUp': ChevronUp,
   'ChevronDown': ChevronDown

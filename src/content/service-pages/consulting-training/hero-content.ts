@@ -60,7 +60,7 @@ const consultingTrainingHero: HeroSectionContent = {
       size: 450,
     },
   ],
-  bgClassName: "bg-gradient-to-br from-dark-blue to-blue-800 p-6",
+  bgClassName: "bg-gradient-to-br from-medium-blue via-mild-blue to-blue-700 p-6",
 };
 
 export default consultingTrainingHero;

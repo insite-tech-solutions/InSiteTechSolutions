@@ -44,7 +44,7 @@ export default function HeroSection(): JSX.Element {
   return (
     <section 
       aria-labelledby="hero-section-title" 
-      className="relative bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 overflow-hidden py-20 md:py-32 flex items-center justify-center mt-[104px]"
+      className="relative bg-gradient-to-br from-medium-blue via-mild-blue to-blue-700 overflow-hidden py-20 md:py-32 flex items-center justify-center mt-[104px]"
     >
       {/* Decorative Background Elements - Pricing-themed visual elements */}
       <div className="absolute -top-20 -left-20 w-80 h-80 bg-blue-400 opacity-10 rounded-full z-0" />
@@ -72,7 +72,7 @@ export default function HeroSection(): JSX.Element {
         {/* Call-to-Action Button - Primary conversion element */}
         <TailwindButton 
           href="/contact" 
-          className="bg-white text-blue-700 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-blue-50 hover:scale-105 transition-all text-lg mx-auto"
+          className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-blue-50 hover:scale-105 transition-all mx-auto"
         >
           Get a Custom Estimate
         </TailwindButton>

@@ -1,7 +1,7 @@
 /**
- * @fileoverview Pricing Page Template
+ * @fileoverview Process Page Template
  *
- * This component acts as the main template for the pricing and payments page, orchestrating
+ * This component acts as the main template for the development process page, orchestrating
  * all individual sections within a consistent layout structure. Features page loading states,
  * proper section spacing, and component composition following the service page template pattern.
  * 
@@ -13,37 +13,37 @@
  * - Modular section components for maintainability
  */
 
+'use client';
+
 import { useEffect } from 'react';
 import Layout from '@/components/reusable-components/layout';
-import HeroSection from '@/page-templates/pricing-page/hero-section';
-import PricingOverview from '@/page-templates/pricing-page/pricing-overview';
-import PricingModels from '@/page-templates/pricing-page/pricing-models';
-import PaymentOptions from '@/page-templates/pricing-page/payment-methods';
-import PaymentTerms from '@/page-templates/pricing-page/payment-terms';
-import PricingEstimator from '@/page-templates/pricing-page/pricing-estimator';
+import HeroSection from './hero-section';
+import ProcessOverviewSection from './process-overview-section';
+import DetailedProcessSection from './detailed-process-section';
+import BestPracticesSection from './best-practices-section';
 import FAQSection from '@/page-templates/service-page/faq-section/faq-section';
-import CustomSolutionSection from '@/page-templates/pricing-page/cta-section';
-import pricingFAQContent from '@/content/about-pages/pricing-page/pricing-faq-content';
+import CtaSection from './cta-section';
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+import processFAQContent from '@/content/about-pages/process-page/process-faq-content';
 
 /**
- * PricingPageContent Component
+ * ProcessPageContent Component
  * 
- * Main content component that renders all pricing page sections in the correct order
+ * Main content component that renders all process page sections in the correct order
  * with proper spacing and layout structure. Handles the page loading state timing
- * and orchestrates the display of all pricing-related sections.
+ * and orchestrates the display of all process-related sections.
  * 
  * Features:
  * - Automatic loading state management with timer
  * - Hero section positioned outside main layout
  * - Consistent vertical spacing between sections
- * - Integration with shared FAQ component
+ * - Integration with shared layout component
  * - Modular section composition for maintainability
  * 
- * @returns {JSX.Element} The complete pricing page content
+ * @returns {JSX.Element} The complete process page content
  */
-export function PricingPageContent(): JSX.Element {
+export function ProcessPageContent(): JSX.Element {
   const { setIsPageLoading } = usePageLoading();
 
   // Handle page loading state with delayed transition
@@ -62,41 +62,31 @@ export function PricingPageContent(): JSX.Element {
       
       {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout>
-        <div className="py-16">
-          {/* Pricing Overview Section - Introduction and key advantages */}
-            <div>
-            <PricingOverview />
-            </div>
+        <div className="pt-16">
+          {/* Process Overview Section - Introduction to the 5Ds methodology */}
+          <div>
+            <ProcessOverviewSection />
+          </div>
           
-          {/* Pricing Models Section - Available pricing structures */}
-            <div className="my-16">
-            <PricingModels />
-            </div>
+          {/* Detailed Process Section - In-depth breakdown of each phase */}
+          <div className="my-10">
+            <DetailedProcessSection />
+          </div>
           
-          {/* Payment Options Section - Available payment methods */}
-            <div className="my-16">
-            <PaymentOptions />
-            </div>
-          
-          {/* Payment Terms Section - Policies and terms */}
-            <div className="my-16">
-              <PaymentTerms />
-            </div>
-          
-          {/* Interactive Pricing Estimator Section */}
-            <div className="my-16">
-              <PricingEstimator />
-            </div>
-          
-          {/* FAQ Section - Pricing-specific questions and answers */}
-            <div className="my-16">
-              <FAQSection content={pricingFAQContent} />
-            </div>
+          {/* Best Practices Section - Standards and methodologies we follow */}
+          <div className="my-6">
+            <BestPracticesSection />
+          </div>
+
+          {/* FAQ Section - Additional information and questions */}
+          <div className="my-10">
+            <FAQSection content={processFAQContent} />
+          </div>
           
           {/* Call-to-Action Section - Final conversion element */}
-            <div className="my-12">
-              <CustomSolutionSection />
-            </div>
+          <div className="mt-10">
+            <CtaSection />
+          </div>
         </div>
       </Layout>
     </>
@@ -104,7 +94,7 @@ export function PricingPageContent(): JSX.Element {
 }
 
 /**
- * PricingPageLoaderWrapper Component
+ * ProcessPageLoaderWrapper Component
  * 
  * Wrapper component that conditionally renders the page transition loader
  * based on the loading state from context. Provides smooth transitions
@@ -112,7 +102,7 @@ export function PricingPageContent(): JSX.Element {
  * 
  * @returns {JSX.Element} Loader and content with conditional rendering
  */
-function PricingPageLoaderWrapper(): JSX.Element {
+function ProcessPageLoaderWrapper(): JSX.Element {
   const { isPageLoading } = usePageLoading();
 
   return (
@@ -121,17 +111,17 @@ function PricingPageLoaderWrapper(): JSX.Element {
       {isPageLoading && <PageTransitionLoader />}
       
       {/* Main Page Content - Always rendered for smooth transitions */}
-      <PricingPageContent />
+      <ProcessPageContent />
     </>
   );
 }
 
 /**
- * PricingPageTemplate Component
+ * ProcessPageTemplate Component
  * 
  * Root template component that provides the page loading context to all child components.
  * This is the main export used by the Next.js page component and ensures proper
- * loading state management throughout the pricing page.
+ * loading state management throughout the process page.
  * 
  * Features:
  * - Page loading context provider wrapper
@@ -139,22 +129,22 @@ function PricingPageLoaderWrapper(): JSX.Element {
  * - Proper component hierarchy for state management
  * - Clean separation of concerns between loading and content
  * 
- * @returns {JSX.Element} The complete pricing page template with context
+ * @returns {JSX.Element} The complete process page template with context
  * 
  * @example
  * ```tsx
  * // Usage in Next.js page
- * import PricingPageTemplate from '@/page-templates/pricing-page'
+ * import ProcessPageTemplate from '@/page-templates/process-page'
  * 
- * export default function PricingPage() {
- *   return <PricingPageTemplate />
+ * export default function ProcessPage() {
+ *   return <ProcessPageTemplate />
  * }
  * ```
  */
-export default function PricingPageTemplate(): JSX.Element {
+export default function ProcessPageTemplate(): JSX.Element {
   return (
     <PageLoadingProvider>
-      <PricingPageLoaderWrapper />
+      <ProcessPageLoaderWrapper />
     </PageLoadingProvider>
   );
-}
+} 

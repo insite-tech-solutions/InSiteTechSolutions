@@ -115,7 +115,7 @@ export default function PaymentOptions(): JSX.Element {
         {paymentMethods.map((method) => (
           <Card 
             key={method.title.toLowerCase().replace(/\s+/g, '-')} 
-            className="border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all"
+            className="border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all duration-300"
           >
             {/* Card Header - Icon and title */}
             <CardHeader className="pb-2">

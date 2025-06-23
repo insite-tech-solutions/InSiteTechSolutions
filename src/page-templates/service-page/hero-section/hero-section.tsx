@@ -114,6 +114,15 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
               <p className="text-lg md:text-xl drop-shadow-lg">
                 {description}
               </p>
+              {/* Desktop CTA Button - visible on md and above */}
+              <div className="hidden md:block mt-8 mb-4">
+                <TailwindButton
+                  href={ctaLink}
+                  className="bg-gray-50 font-semibold"
+                >
+                  {ctaText}
+                </TailwindButton>
+              </div>
             </div>
             
             {/* Illustration: SVG or Image */}
@@ -145,16 +154,6 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
               <TailwindButton 
                 href={ctaLink} 
                 className="bg-gray-50 font-semibold w-1/2 mx-auto"
-              >
-                {ctaText}
-              </TailwindButton>
-            </div>
-
-            {/* Desktop CTA Button - Hidden on mobile */}
-            <div className="hidden md:block order-1 md:order-none px-6 pb-6">
-              <TailwindButton 
-                href={ctaLink} 
-                className="bg-gray-50 font-semibold"
               >
                 {ctaText}
               </TailwindButton>

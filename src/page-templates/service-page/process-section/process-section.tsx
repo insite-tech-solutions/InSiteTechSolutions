@@ -593,13 +593,15 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }): JSX.E
             <p className="text-gray-50 mb-4">
               {content.note}
             </p>
+            {content.linkText && content.linkUrl && (
               <a
-                href="/about/process"
+                href={content.linkUrl}
                 className="inline-flex items-center gap-2 text-purple-300 hover:text-purple-400 font-medium"
               >
-                Learn more about our process
+                {content.linkText}
                 <ExternalLink className="h-4 w-4" />
               </a>
+            )}
             </div>
           </div>
         </div>
