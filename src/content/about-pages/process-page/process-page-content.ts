@@ -25,20 +25,56 @@
 import { ProcessContent } from "@/page-templates/service-page/types";
 import { CheckCircle, Code, FileText, GitBranch, Handshake, Smartphone } from "lucide-react";
 
+interface HeroContent {
+  title: string;
+  subtitle: string;
+  cta1: {
+    text: string;
+    href: string;
+  };
+  cta2: {
+    text: string;
+    href: string;
+  };
+}
+
+interface ProcessStep {
+  number: string;
+  title: string;
+  iconName: string;
+  description: string;
+}
+
+interface ProcessOverviewContent {
+  title: string;
+  description: string;
+  steps: ProcessStep[];
+}
+
+interface BestPractice {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
+interface BestPracticesContent {
+  title: string;
+  description: string;
+  practices: BestPractice[];
+}
+
+interface CtaContent {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
 /**
  * Content for the Hero Section of the Process Page.
  * Defines the main title, subtitle, and two call-to-action buttons.
- * @type {object}
- * @property {string} title - The main title of the hero section.
- * @property {string} subtitle - The supporting subtitle text.
- * @property {object} cta1 - Details for the primary call-to-action button.
- * @property {string} cta1.text - The text displayed on the primary button.
- * @property {string} cta1.href - The URL the primary button links to.
- * @property {object} cta2 - Details for the secondary call-to-action button.
- * @property {string} cta2.text - The text displayed on the secondary button.
- * @property {string} cta2.href - The URL the secondary button links to.
  */
-export const processPageHeroContent = {
+export const processPageHeroContent: HeroContent = {
   title: "Our Process: The 5Ds",
   subtitle: "From concept to launch, we follow a proven methodology that emphasizes flexibility and collaboration. Every project is unique, so our approach allows us to tailor solutions to your needs while following industry best practices.",
   cta1: {
@@ -55,16 +91,8 @@ export const processPageHeroContent = {
  * Content for the Process Overview Section of the Process Page.
  * Describes the 5-step process with a title, description, and an array of individual steps.
  * Each step includes a number, title, icon name, and a description.
- * @type {object}
- * @property {string} title - The main title for the process overview section.
- * @property {string} description - The introductory description for the process.
- * @property {Array<object>} steps - An array of objects, each representing a step in the process.
- * @property {string} steps[].number - The step number (e.g., "1").
- * @property {string} steps[].title - The title of the step (e.g., "Discovery").
- * @property {string} steps[].iconName - The name of the Lucide icon to represent the step (e.g., "Search").
- * @property {string} steps[].description - A detailed description of what happens in this step.
  */
-export const processPageOverviewContent = {
+export const processPageOverviewContent: ProcessOverviewContent = {
     title: "Our Proven 5-Step Process",
     description: "We believe every successful project starts with a clear, collaborative process. We follow a methodology that we refer to as the 5 Ds: Discovery, Definition, Design, Development, and Deployment. Our approach is designed to deliver results that drive your business forward—combining strategic insight, creative thinking, and technical expertise at every stage.",
     steps: [
@@ -105,19 +133,6 @@ export const processPageOverviewContent = {
  * Content for the Detailed Process Section of the Process Page.
  * Provides an in-depth breakdown of the methodology, including title, description, and an array of detailed steps.
  * Conforms to the `ProcessContent` type for consistent structure.
- * @type {ProcessContent}
- * @property {string} title - The main title for the detailed process section.
- * @property {string} description - An extensive description of the methodology.
- * @property {Array<object>} steps - An array of objects, each detailing a step.
- * @property {number} steps[].step - The step number.
- * @property {string} steps[].title - The title of the detailed step.
- * @property {string} steps[].description - A comprehensive description of the step.
- * @property {Array<string>} steps[].items - A list of key activities or deliverables within the step.
- * @property {string} steps[].timeline - Estimated timeline for the step.
- * @property {string} steps[].icon - The name of the Lucide icon associated with the step.
- * @property {string} note - A disclaimer or additional important note about the timelines.
- * @property {string} linkText - The text for a concluding call-to-action link.
- * @property {string} linkUrl - The URL for the concluding call-to-action link.
  */
 export const detailedProcessContent: ProcessContent = {
     title: "A Deeper Dive Into Our Methodology",
@@ -193,15 +208,8 @@ export const detailedProcessContent: ProcessContent = {
    * Content for the Best Practices Section of the Process Page.
    * Defines the section title, description, and an array of individual practices.
    * Each practice includes an icon component, title, and description.
-   * @type {object}
-   * @property {string} title - The main title for the best practices section.
-   * @property {string} description - An introductory description for the best practices.
-   * @property {Array<object>} practices - An array of objects, each describing a best practice.
-   * @property {React.ElementType} practices[].icon - The Lucide React component for the practice icon.
-   * @property {string} practices[].title - The title of the best practice.
-   * @property {string} practices[].description - A detailed description of the best practice.
    */
-  export const bestPracticesContent = {
+  export const bestPracticesContent: BestPracticesContent = {
     title: "Best Practices We Stand By",
     description: "Our commitment to quality goes beyond code. We adhere to industry-leading standards to build products that are secure, reliable, and built to last.",
     practices: [
@@ -241,13 +249,8 @@ export const detailedProcessContent: ProcessContent = {
   /**
    * Content for the Call-to-Action (CTA) Section of the Process Page.
    * Defines the title, description, and details for the CTA button.
-   * @type {object}
-   * @property {string} title - The main title for the CTA section.
-   * @property {string} description - The descriptive text for the CTA.
-   * @property {string} buttonText - The text displayed on the CTA button.
-   * @property {string} buttonLink - The URL the CTA button links to.
    */
-  export const processPageCtaContent = {
+  export const processPageCtaContent: CtaContent = {
     title: "Ready to Get Started?",
     description: "Let's talk about your goals and see how our process can help bring your ideas to life. We're ready to build something great together. Get started on the Discovery phase with a free consultation.",
     buttonText: "Book a Free Consultation",
