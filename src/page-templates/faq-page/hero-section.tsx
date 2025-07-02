@@ -1,20 +1,22 @@
 /**
- * @fileoverview Hero Section Component for Legal Documents Page
+ * @fileoverview Hero Section Component for FAQ Page
  * 
  * This component renders the main hero section using the established TailwindHeroBackground
  * component with decorative elements and proper styling consistent with the site architecture.
  */
 
+'use client';
+
 import { motion } from 'framer-motion';
-import { Shield, FileText } from 'lucide-react';
+import { HelpCircle, MessageCircle } from 'lucide-react';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { DecorElement } from '@/page-templates/service-page/types';
 
-// Static decorative elements for Privacy & Terms HeroSection
+// Static decorative elements for FAQPageHero
 const decorElements: DecorElement[] = [
   {
     type: 'icon',
-    icon: Shield,
+    icon: HelpCircle,
     size: 320,
     className: 'text-blue-200 opacity-10',
     style: { 
@@ -25,7 +27,7 @@ const decorElements: DecorElement[] = [
   },
   {
     type: 'icon',
-    icon: FileText,
+    icon: MessageCircle,
     size: 380,
     className: 'text-blue-200 opacity-10',
     style: { 
@@ -37,23 +39,24 @@ const decorElements: DecorElement[] = [
 ];
 
 /**
- * HeroSection Component
+ * FAQPageHero Component
  * 
- * Renders the main hero section for the legal page using TailwindHeroBackground
- * with Shield and FileText decorative icons and animated content.
+ * Renders the main hero section for the FAQ page using TailwindHeroBackground
+ * with HelpCircle and MessageCircle decorative icons and animated content.
  * 
  * Features:
  * - Standard TailwindHeroBackground with gradient
- * - Legal-themed decorative icons (Shield, FileText)
+ * - FAQ-themed decorative icons (HelpCircle, MessageCircle)
  * - Animated text with motion effects
  * - Proper spacing for fixed header
  * 
  * @returns {JSX.Element} The rendered hero section component
  */
-export default function HeroSection(): JSX.Element {
-
+export default function FAQPageHero(): JSX.Element {
   return (
-    <div className="mt-[104px]">
+    <section aria-labelledby="faq-hero-title" className="mt-[104px]">
+      {/* Accessible landmark for FAQ Hero */}
+      <h2 id="faq-hero-title" className="sr-only">Frequently Asked Questions</h2>
       <TailwindHeroBackground 
         className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-700 py-20 md:py-32"
         decorElements={decorElements}
@@ -65,7 +68,7 @@ export default function HeroSection(): JSX.Element {
             transition={{ duration: 0.5 }}
             className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
           >
-            Legal Center
+            Frequently Asked Questions
           </motion.h1>
           
           <motion.p
@@ -74,10 +77,10 @@ export default function HeroSection(): JSX.Element {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow"
           >
-            Your privacy and our terms of service are important. Here&apos;s a clear look at our policies and your rights.
+            Have questions? We have answers. Browse our most commonly asked questions across services, pricing, process, and more.
           </motion.p>
         </div>
       </TailwindHeroBackground>
-    </div>
+    </section>
   );
-} 
+}

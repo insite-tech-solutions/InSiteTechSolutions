@@ -148,7 +148,11 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
  */
 interface FAQSectionProps {
   /** Content configuration object containing all FAQ data and settings */
-  content: FAQContent
+  content: FAQContent;
+  /** Optional anchor ID to provide a unique landmark for in-page navigation. */
+  anchorId?: string;
+  /** Whether to display the default badge above the section title. Defaults to true. */
+  showBadge?: boolean;
 }
 
 /**
@@ -186,13 +190,14 @@ interface FAQSectionProps {
  * }
  * ```
  */
-const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
+const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content, anchorId, showBadge = true }) => {
   const { title, description, items, moreLink } = content
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section 
-      className="pb-6"
+    <section
+      id={anchorId}
+      className="pb-6 scroll-mt-64 lg:scroll-mt-32"
       aria-labelledby="faq-section-title"
     >
       {/* Hidden heading for screen readers - provides accessible section context */}
@@ -202,11 +207,15 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content }) => {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerChildren}>
           {/* Section Header - Title, badge, and description */}
           <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
-            <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-medium-blue-alt text-md font-medium mb-6">
-              Frequently Asked Questions (FAQs)
-            </div>
+            {showBadge && (
+              <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-medium-blue-alt text-md font-medium mb-6">
+                Frequently Asked Questions (FAQs)
+              </div>
+            )}
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
-            <p className="text-lg text-gray-600">{description}</p>
+            {description && description.trim().length > 0 && (
+              <p className="text-lg text-gray-600">{description}</p>
+            )}
           </motion.div>
 
           {/* FAQ Content Container */}

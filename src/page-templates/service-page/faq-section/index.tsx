@@ -15,9 +15,15 @@ import FAQSectionWrapper from './faq-section'
  * @interface FAQSectionProps
  * @property {FAQContent} content - Configuration object containing all FAQ section content
  * including title, description, FAQ items, and optional "more" link
+ * @property {string} [anchorId] - Optional anchor ID to provide a unique landmark for in-page navigation.
+ * @property {boolean} [showBadge] - Whether to display the default badge above the section title. Defaults to true.
  */
 interface FAQSectionProps {
   content: FAQContent
+  /** Optional anchor ID to provide a unique landmark for in-page navigation. */
+  anchorId?: string
+  /** Whether to display the default badge above the section title. Defaults to true. */
+  showBadge?: boolean
 }
 
 /**
@@ -30,6 +36,8 @@ interface FAQSectionProps {
  * @param {FAQSectionProps} props - Component props
  * @param {FAQContent} props.content - Configuration for the FAQ section including 
  * title, description, FAQ items (questions, answers, icons), and optional link to more resources
+ * @param {string} [props.anchorId] - Optional anchor ID to provide a unique landmark for in-page navigation.
+ * @param {boolean} [props.showBadge] - Whether to display the default badge above the section title. Defaults to true.
  * 
  * @returns {JSX.Element} Rendered FAQ section with accordion functionality
  * 
@@ -41,8 +49,8 @@ interface FAQSectionProps {
  * <FAQSection content={faqContent} />
  * ```
  */
-function FAQSection({ content }: FAQSectionProps): JSX.Element {
-  return <FAQSectionWrapper content={content} />
+function FAQSection({ content, anchorId, showBadge }: FAQSectionProps): JSX.Element {
+  return <FAQSectionWrapper content={content} anchorId={anchorId} showBadge={showBadge} />
 }
 
 export default memo(FAQSection)

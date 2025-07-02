@@ -17,6 +17,24 @@ import TailwindButton from '@/components/reusable-components/tailwind-button';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { DecorElement } from '@/page-templates/service-page/types';
 
+// Static decorative elements for Process HeroSection
+const decorElements: DecorElement[] = [
+  {
+    type: 'icon',
+    icon: Cog,
+    size: 320,
+    className: 'text-blue-200 opacity-10',
+    style: { top: '-5%', left: '-5%', transform: 'rotate(-19deg)' }
+  },
+  {
+    type: 'icon',
+    icon: Code,
+    size: 384,
+    className: 'text-blue-200 opacity-10',
+    style: { bottom: '-2%', right: '-2%', transform: 'rotate(23deg)' }
+  }
+];
+
 /**
  * HeroSection Component
  * 
@@ -35,24 +53,6 @@ import { DecorElement } from '@/page-templates/service-page/types';
 // Main hero section for the Process page
 export default function HeroSection(): JSX.Element {
   const { subtitle, cta1, cta2 } = processPageHeroContent;
-
-  // Decorative elements for the hero background
-  const decorElements: DecorElement[] = [
-    {
-      type: 'icon',
-      icon: Cog,
-      size: 320,
-      className: 'text-blue-200 opacity-10',
-      style: { top: '-5%', left: '-5%', transform: 'rotate(-19deg)' }
-    },
-    {
-      type: 'icon',
-      icon: Code,
-      size: 384,
-      className: 'text-blue-200 opacity-10',
-      style: { bottom: '-2%', right: '-2%', transform: 'rotate(23deg)' }
-    }
-  ];
 
   return (
     <TailwindHeroBackground 
