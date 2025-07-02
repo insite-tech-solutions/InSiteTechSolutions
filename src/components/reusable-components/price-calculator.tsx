@@ -580,7 +580,7 @@ export default function PriceCalculator({
   }
 
   /** Renders a group of checkboxes for a multi-select section. */
-  const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
+const renderMultiCheckbox = (sectionKey: string, section: ServiceSection | undefined) => {
   // Ensure section and its options are valid and structured as expected for checkboxes
   if (!section || !section.options || typeof section.options !== "object" || Array.isArray(section.options))
     return null;

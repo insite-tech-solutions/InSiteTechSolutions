@@ -14,6 +14,8 @@ import Link from 'next/link';
 import { Cog, Code } from 'lucide-react';
 import { processPageHeroContent } from '@/content/about-pages/process-page/process-page-content';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
+import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
+import { DecorElement } from '@/page-templates/service-page/types';
 
 /**
  * HeroSection Component
@@ -34,17 +36,31 @@ import TailwindButton from '@/components/reusable-components/tailwind-button';
 export default function HeroSection(): JSX.Element {
   const { subtitle, cta1, cta2 } = processPageHeroContent;
 
+  // Decorative elements for the hero background
+  const decorElements: DecorElement[] = [
+    {
+      type: 'icon',
+      icon: Cog,
+      size: 320,
+      className: 'text-blue-200 opacity-10',
+      style: { top: '-5%', left: '-5%', transform: 'rotate(-19deg)' }
+    },
+    {
+      type: 'icon',
+      icon: Code,
+      size: 384,
+      className: 'text-blue-200 opacity-10',
+      style: { bottom: '-2%', right: '-2%', transform: 'rotate(23deg)' }
+    }
+  ];
+
   return (
-    <section 
-      aria-labelledby="hero-section-title" 
-      className="relative bg-gradient-to-br from-medium-blue via-mild-blue to-blue-700 overflow-hidden py-20 md:py-32 flex items-center justify-center mt-[104px]"
+    <TailwindHeroBackground 
+      className="from-medium-blue via-mild-blue to-blue-700 mt-[104px]"
+      decorElements={decorElements}
     >
-      {/* Decorative Background Elements - Process-themed visual elements */}
-      <Cog className="absolute -top-20 -left-20 text-blue-200 opacity-10 w-80 h-80 z-0 rotate-[-19deg]" />
-      <Code className="absolute -bottom-8 -right-8 text-blue-200 opacity-10 w-96 h-96 z-0 rotate-[23deg]" />
-      
       {/* Hero Content Container - Main content with proper z-index layering */}
-      <div className="container relative z-10 mx-auto flex flex-col items-center justify-center px-4 text-center">
+      <div className="flex flex-col items-center justify-center px-4 text-center py-20 md:py-32">
         {/* Primary Heading - Main page title */}
         <motion.h1
           id="hero-section-title"
@@ -97,6 +113,6 @@ export default function HeroSection(): JSX.Element {
               </Link>
         </motion.div>
       </div>
-    </section>
+    </TailwindHeroBackground>
   );
 }

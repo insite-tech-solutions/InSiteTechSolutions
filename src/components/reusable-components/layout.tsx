@@ -26,7 +26,7 @@ interface LayoutProps {
  * content is centered within a maximum width, maintains a minimum screen height, and applies
  * a default background color. The `className` prop allows for easy extension and customization
  * of the layout's appearance for different use cases.
- *
+ * 
  * Features:
  * - **Consistent Structure**: Provides a standardized outer wrapper for content.
  * - **Responsive Centering**: Automatically centers content up to a maximum width.

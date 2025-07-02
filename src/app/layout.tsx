@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Noto_Sans, Lato, Roboto } from 'next/font/google'
 import "../styles/globals.css";
+import Script from 'next/script';
 /*
 import localFont from "next/font/local";
 const geistSans = localFont({
@@ -53,6 +54,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${openSans.variable} ${notoSans.variable} ${lato.variable} ${roboto.variable}`}>
+      <head>
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="eca7ade8-1f83-4309-b1d4-6d2f5fbe7173"
+          strategy="afterInteractive"
+        />
+      </head>
       <body>{children}</body>
     </html>
   )

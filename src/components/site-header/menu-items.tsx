@@ -14,7 +14,7 @@ export const menuItems: MenuItem[] = [
       { name: 'Development Process', href: '/about/development-process' },
       { name: 'Pricing & Payments', href: '/about/pricing-and-payments' },
       { name: 'Previous Works', href: '/about/works' },
-      { name: 'Privacy Policy & Terms of Service', href: '/about/terms' },
+      { name: 'Privacy Policy & Terms of Service', href: '/about/privacy-policy-and-terms-of-service' },
     ],
   },
   {
