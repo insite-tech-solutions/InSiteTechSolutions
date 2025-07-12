@@ -19,7 +19,7 @@
  * - Hero section outside main layout for full-width design
  * - Layout wrapper for content sections with consistent spacing
  * - Modular section components for maintainability
- * - Dynamic imports for below-the-fold content to improve performance
+ * - Dynamic imports for below-the-fold contents to improve performance
  * 
  * Performance Optimizations:
  * - Dynamic imports for below-the-fold sections
