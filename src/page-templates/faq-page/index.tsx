@@ -13,20 +13,25 @@
  * - Modular section components for maintainability
  * - Responsive table of contents (desktop sticky, mobile dropdown)
  * - Multiple FAQ sections aggregated from different content files
+ * - Dynamic imports for below-the-fold content to improve performance
  */
 
 'use client';
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
 
+// Direct imports for critical above-the-fold content
 import FAQPageHero from './hero-section';
 import TableOfContents from './table-of-contents';
 import MobileTOC from './mobile-toc';
-import FAQSection from '@/page-templates/service-page/faq-section';
-import CTASection from '@/page-templates/service-page/cta-section';
+
+// Dynamic imports for below-the-fold content to improve initial page load performance
+const FAQSection = dynamic(() => import('@/page-templates/service-page/faq-section'), { ssr: false });
+const CTASection = dynamic(() => import('@/page-templates/service-page/cta-section'), { ssr: false });
 
 import { faqPageSections } from '@/content/insites-pages/faq-page/sections';
 import faqPageCTAContent from '@/content/insites-pages/faq-page/cta-content';
@@ -64,23 +69,23 @@ function FAQPageContent(): JSX.Element {
 
       {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout className="pt-16">
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="lg:flex lg:space-x-4">
           {/* Mobile Table of Contents - Dropdown style for mobile devices */}
           <div className="lg:hidden">
             <MobileTOC sections={faqPageSections} />
           </div>
           
           {/* Desktop Table of Contents - Sticky sidebar for desktop */}
-          <div className="hidden lg:block">
+          <aside className="hidden lg:block">
             <TableOfContents sections={faqPageSections} />
-          </div>
+          </aside>
           
           {/* FAQ Sections - Main content area with all FAQ categories */}
-          <div className="flex-1 space-y-16">
+          <main className="flex-grow space-y-16">
             {faqPageSections.map(({ id, content }) => (
               <FAQSection key={id} content={content} anchorId={id} showBadge={false} />
             ))}
-          </div>
+          </main>
         </div>
 
         {/* Call-to-Action Section - Final conversion element */}

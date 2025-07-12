@@ -7,6 +7,7 @@
  * 
  * Features:
  * - Sticky positioning on desktop for persistent navigation
+ * - Scrollable when content exceeds viewport height
  * - Intersection Observer for automatic active section highlighting
  * - Smooth scrolling to section anchors
  * - Responsive design with hover effects
@@ -18,13 +19,13 @@
  * - Implements smooth scrolling with `scrollIntoView`
  * - Memoized component for performance optimization
  * - Framer Motion for subtle hover animations
+ * - Sticky positioning with max-height and overflow handling
  */
 
 'use client';
 
 import { FAQPageSection } from '@/content/insites-pages/faq-page/sections';
 import { useEffect, useState, memo } from 'react';
-import { motion } from 'framer-motion';
 
 /**
  * Props interface for the TableOfContents component
@@ -48,6 +49,7 @@ interface TOCProps {
  * - Automatic active section detection and highlighting
  * - Smooth scrolling to section anchors
  * - Sticky positioning for persistent navigation
+ * - Scrollable when content exceeds viewport height
  * - Hover effects and visual feedback
  * - Accessibility-compliant markup
  * 
@@ -105,42 +107,34 @@ const TableOfContents = ({ sections }: TOCProps): JSX.Element => {
   }, [sections]);
 
   return (
-    <section aria-labelledby="faq-toc-title">
-      {/* Accessible landmark for screen readers */}
-      <h2 id="faq-toc-title" className="sr-only">FAQ Table of Contents</h2>
-      
-      {/* Navigation container with sticky positioning */}
-      <nav
-        aria-label="FAQ Page Sections"
-        className="w-64 flex-shrink-0 sticky top-28 self-start"
-      >
-        <ul className="space-y-2">
-          {/* Table of Contents Links */}
-          {sections.map((section) => (
-            <li key={section.id}>
-              <motion.a
-                href={`#${section.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.getElementById(section.id);
-                  if (element) {
-                    element.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'start'
-                    });
-                  }
-                }}
-                className={`block px-3 py-2 rounded-md transition-colors hover:bg-blue-50 hover:text-medium-blue-alt ${
-                  activeId === section.id ? 'bg-blue-100 text-medium-blue-alt' : 'text-gray-700'
-                }`}
-              >
-                {section.content.title}
-              </motion.a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </section>
+    <div className="w-64 flex-shrink-0 sticky top-28 self-start max-h-[calc(90vh-5rem)] overflow-y-auto bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+      <h3 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wide">FAQ Sections</h3>
+      <ul className="space-y-2">
+        {/* Table of Contents Links */}
+        {sections.map((section) => (
+          <li key={section.id}>
+            <a
+              href={`#${section.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById(section.id);
+                if (element) {
+                  element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }
+              }}
+              className={`block text-sm lg:text-[15px] text-gray-700 hover:text-blue-600 transition-colors py-1.5 px-0.5 rounded ${
+                activeId === section.id ? 'font-semibold text-blue-600' : ''
+              }`}
+            >
+              {section.content.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

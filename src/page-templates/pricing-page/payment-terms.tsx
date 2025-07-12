@@ -86,6 +86,7 @@ const paymentTerms: PaymentTerm[] = [
 export default function PaymentTerms(): JSX.Element {
   return (
     <section aria-labelledby="payment-terms-title">
+      <div className="container mx-auto"> 
       {/* Hidden heading for screen readers - provides accessible section context */}
       <h2 id="payment-terms-title" className="sr-only">Payment Terms & Policies</h2>
 
@@ -141,6 +142,7 @@ export default function PaymentTerms(): JSX.Element {
           for complete details on our policies and procedures.
         </AlertDescription>
       </Alert>
+      </div>
     </section>
   )
 }

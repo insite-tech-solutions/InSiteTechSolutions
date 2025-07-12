@@ -99,7 +99,7 @@ export default function HeroSection(): JSX.Element {
         >
           <TailwindButton
             href="/contact"
-            className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-blue-50 hover:scale-105 transition-all"
+            className="bg-gray-50 font-semibold"
           >
             Get In Touch
           </TailwindButton>

@@ -11,21 +11,31 @@
  * - Hero section outside main layout for full-width design
  * - Layout wrapper for content sections with consistent spacing
  * - Modular section components for maintainability
+ * - Dynamic imports for below-the-fold content to improve performance
  */
 
+'use client';
+
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
-import HeroSection from '@/page-templates/pricing-page/hero-section';
-import PricingOverview from '@/page-templates/pricing-page/pricing-overview';
-import PricingModels from '@/page-templates/pricing-page/pricing-models';
-import PaymentOptions from '@/page-templates/pricing-page/payment-methods';
-import PaymentTerms from '@/page-templates/pricing-page/payment-terms';
-import PricingEstimator from '@/page-templates/pricing-page/pricing-estimator';
-import FAQSection from '@/page-templates/service-page/faq-section/faq-section';
-import CustomSolutionSection from '@/page-templates/pricing-page/cta-section';
-import pricingFAQContent from '@/content/about-pages/pricing-page/pricing-faq-content';
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+
+// Direct imports for critical above-the-fold content
+import HeroSection from '@/page-templates/pricing-page/hero-section';
+import PricingOverview from '@/page-templates/pricing-page/pricing-overview';
+
+
+// Dynamic imports for below-the-fold content to improve initial page load performance
+const PricingModels = dynamic(() => import('@/page-templates/pricing-page/pricing-models'), { ssr: false });
+const PaymentOptions = dynamic(() => import('@/page-templates/pricing-page/payment-methods'), { ssr: false });
+const PaymentTerms = dynamic(() => import('@/page-templates/pricing-page/payment-terms'), { ssr: false });
+const PricingEstimator = dynamic(() => import('@/page-templates/pricing-page/pricing-estimator'), { ssr: false });
+const FAQSection = dynamic(() => import('@/page-templates/service-page/faq-section/faq-section'), { ssr: false });
+const CustomSolutionSection = dynamic(() => import('@/page-templates/pricing-page/cta-section'), { ssr: false });
+
+import pricingFAQContent from '@/content/about-pages/pricing-page/pricing-faq-content';
 
 /**
  * PricingPageContent Component

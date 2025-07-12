@@ -8,11 +8,11 @@ import { SwiperProps } from "swiper/react";
 interface Testimonial {
   id: number
   name: string
-  position: string
-  company: string
+  position?: string
+  company?: string
   content: string
-  rating: number
-  image: string
+  image?: string
+  isBusiness?: boolean
 }
 
 // Sample testimonial data (can be fetched or imported)
@@ -24,8 +24,7 @@ const testimonialsData: Testimonial[] = [
     company: "TechVision Inc.",
     content:
       "Working with this team transformed our digital presence. Their technical expertise and attention to detail exceeded our expectations. The solutions they delivered were not only innovative but also perfectly aligned with our business goals.",
-    rating: 5,
-    image: "/placeholder.svg?height=100&width=100",
+    isBusiness: true,
   },
   {
     id: 2,
@@ -34,8 +33,7 @@ const testimonialsData: Testimonial[] = [
     company: "StartupLaunch",
     content:
       "I've worked with many developers, but this team stands out for their professionalism and technical skill. They delivered our project ahead of schedule and were incredibly responsive throughout the entire process.",
-    rating: 5,
-    image: "/placeholder.svg?height=100&width=100",
+    isBusiness: true,
   },
   {
     id: 3,
@@ -44,8 +42,7 @@ const testimonialsData: Testimonial[] = [
     company: "GrowthMedia",
     content:
       "The custom solution they built for our marketing team has dramatically improved our workflow efficiency. Their understanding of both technology and business needs made them the perfect partner for our project.",
-    rating: 4,
-    image: "/placeholder.svg?height=100&width=100",
+    isBusiness: true,
   },
   {
     id: 4,
@@ -54,8 +51,20 @@ const testimonialsData: Testimonial[] = [
     company: "InnovateX",
     content:
       "From the initial consultation to the final delivery, the experience was seamless. They took the time to understand our unique challenges and delivered a solution that perfectly addressed our needs.",
-    rating: 5,
-    image: "/placeholder.svg?height=100&width=100",
+    isBusiness: true,
+  },
+  {
+    id: 5,
+    name: "Alex Thompson",
+    content:
+      "The website redesign completely transformed our online presence. The team was incredibly responsive and delivered exactly what we envisioned.",
+  },
+  {
+    id: 6,
+    name: "Maria Garcia",
+    position: "Operations Manager",
+    content:
+      "Their automation solutions saved us countless hours every week. The implementation was smooth and the results were immediate.",
   },
 ];
 
@@ -104,7 +113,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="py-16">
+    <section>
       {/* 
         The <CarouselSection> already includes a container, title, and description structure.
         We pass our specific title and description. 
@@ -121,7 +130,7 @@ export default function TestimonialsSection() {
       {/* Add global styles for Swiper navigation and pagination to match site theme */}
       <style jsx global>{`
         .swiper-button-next, .swiper-button-prev {
-          color: #2563EB; /* blue-600 */
+          color: #0e72c8; /* medium-blue */
           width: 28px;
           height: 28px;
           background-color: white;
@@ -148,7 +157,7 @@ export default function TestimonialsSection() {
           transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
         }
         .swiper-pagination-bullet-active {
-          background-color: #2563EB; /* blue-600 */
+          background-color: #0e72c8; /* medium-blue */
           opacity: 1;
           width: 24px; /* elongated active bullet */
           border-radius: 4px;
@@ -159,7 +168,7 @@ export default function TestimonialsSection() {
             padding-bottom: 40px;
             padding-left: 30px;
             padding-right: 30px;
-            padding-top: 32px; /* Add top padding to prevent clipping */
+            padding-top: 12px; /* Add top padding to prevent clipping */
         }
         .swiper-slide {
             display: flex;

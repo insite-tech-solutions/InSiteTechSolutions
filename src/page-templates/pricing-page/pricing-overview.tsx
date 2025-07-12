@@ -97,7 +97,7 @@ export default function PricingOverview(): JSX.Element {
       {/* Hidden heading for screen readers - provides accessible section context */}
       <h2 id="pricing-overview-title" className="sr-only">Pricing Overview</h2>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="container mx-auto">
         {/* Flexible Solutions Content - Hoisted for better performance */}
         {flexibleSolutionsContent}
         

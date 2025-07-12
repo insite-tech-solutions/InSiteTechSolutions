@@ -2,13 +2,12 @@
  * @fileoverview Reusable Testimonial Card Component
  *
  * A presentational component designed to display individual customer testimonials.
- * It features a quote, author information (name, position, company, image), and a star rating.
+ * It features a quote, author information (name, position, company, image), and an initials avatar.
  * The component is designed to be interactive, visually appealing, and optimized for use within carousels or testimonial sections.
  */
 "use client"
 
-import Image from "next/image"
-import { Star, Quote } from "lucide-react"
+import { Quote, User, Building } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { memo } from 'react';
 
@@ -21,16 +20,16 @@ interface Testimonial {
   id: number
   /** The full name of the person giving the testimonial. */
   name: string
-  /** The position or title of the person. */
-  position: string
-  /** The company or organization the person represents. */
-  company: string
+  /** The position or title of the person (optional). */
+  position?: string
+  /** The company or organization the person represents (optional). */
+  company?: string
   /** The actual content of the testimonial quote. */
   content: string
-  /** A numerical rating from 1 to 5, representing the customer's satisfaction. */
-  rating: number
-  /** The URL or path to the author's profile image. */
-  image: string
+  /** The URL or path to the author's profile image (optional). */
+  image?: string
+  /** Whether this is a business testimonial (affects avatar icon). */
+  isBusiness?: boolean
 }
 
 /**
@@ -44,41 +43,64 @@ interface TestimonialCardProps {
 }
 
 /**
- * Helper function to render a visual star rating.
- * Generates 5 star icons, filling them based on the provided `rating`.
+ * Helper function to generate initials from a name.
+ * Extracts first letter of first name and first letter of last name.
  *
- * @param {number} rating - The rating value (1-5) to display.
- * @returns {JSX.Element[]} An array of `Star` icons representing the rating.
+ * @param {string} name - The full name to extract initials from.
+ * @returns {string} The initials (e.g., "JD" for "John Doe").
  */
-const renderStars = (rating: number) => {
-  return Array(5)
-    .fill(0)
-    .map((_, i) => (
-      <Star
-        key={i}
-        className={cn(
-          "w-4 h-4",
-          i < rating ? "text-blue-500 fill-blue-500" : "text-gray-300",
-        )}
-      />
-    ))
+const getInitials = (name: string): string => {
+  const parts = name.trim().split(' ')
+  if (parts.length === 1) {
+    return parts[0].charAt(0).toUpperCase()
+  }
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase()
+}
+
+/**
+ * Helper function to render the avatar for a testimonial.
+ * Uses initials if available, falls back to appropriate icon.
+ *
+ * @param {Testimonial} testimonial - The testimonial data.
+ * @returns {JSX.Element} The avatar element.
+ */
+const renderAvatar = (testimonial: Testimonial): JSX.Element => {
+  const initials = getInitials(testimonial.name)
+  
+  // If we have initials (more than 0 characters), use them
+  if (initials.length > 0) {
+    return (
+      <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+        <span className="text-medium-blue font-semibold text-xl">
+          {initials}
+        </span>
+      </div>
+    )
+  }
+  
+  // Fallback to icon
+  const IconComponent = testimonial.isBusiness ? Building : User
+  return (
+    <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+      <IconComponent className="w-6 h-6 text-white" />
+    </div>
+  )
 }
 
 /**
  * TestimonialCard component
  *
  * A visually appealing card component used to display individual customer testimonials.
- * It features the customer's quote, their name, position, company, a profile image,
- * and a star rating. The card includes styling for active/inactive states, making it ideal
- * for carousels or interactive displays.
+ * It features the customer's quote, their name, position, company, and an initials avatar.
+ * The card includes styling for active/inactive states, making it ideal for carousels or interactive displays.
  *
  * Features:
  * - **Quote Display**: Clearly presents the customer's testimonial text.
- * - **Author Information**: Shows the author's name, position, company, and profile picture.
- * - **Star Rating**: Visually represents the customer's rating out of five stars.
+ * - **Author Information**: Shows the author's name, position, and company (when available).
+ * - **Initials Avatar**: Uses initials in a blue circle, with fallback to appropriate icons.
  * - **Dynamic Styling**: Adjusts appearance based on `isActive` prop for use in interactive contexts like carousels.
  * - **Responsive Design**: Adapts its layout and text size for different screen sizes.
- * - **Accessibility**: Uses semantic HTML and ARIA attributes where appropriate (e.g., `aria-hidden` for decorative icon).
+ * - **Accessibility**: Uses semantic HTML and ARIA attributes where appropriate.
  * - **Memoization**: Wrapped with `memo` to optimize performance by preventing unnecessary re-renders.
  *
  * @param {TestimonialCardProps} props - The properties passed to the component.
@@ -94,8 +116,7 @@ const renderStars = (rating: number) => {
  *   position: "CEO",
  *   company: "Innovate Corp",
  *   content: "Working with InSite Tech was a game-changer for our business. Their custom software solution streamlined our operations and boosted efficiency!",
- *   rating: 5,
- *   image: "/images/jane-doe.jpg",
+ *   isBusiness: true,
  * };
  *
  * <TestimonialCard testimonial={myTestimonial} isActive={true} />
@@ -103,11 +124,7 @@ const renderStars = (rating: number) => {
  * const anotherTestimonial = {
  *   id: 2,
  *   name: "John Smith",
- *   position: "Marketing Director",
- *   company: "Global Brands",
  *   content: "The SEO strategies implemented by InSite Tech significantly increased our online visibility and lead generation. Highly recommend!",
- *   rating: 4,
- *   image: "/images/john-smith.jpg",
  * };
  *
  * <TestimonialCard testimonial={anotherTestimonial} />
@@ -138,20 +155,19 @@ function TestimonialCard({ testimonial, isActive }: TestimonialCardProps): JSX.E
       </div>
       {/* Author Info */}
       <div className="flex items-center mt-auto pt-4"> {/* mt-auto pushes this to bottom, pt-4 for spacing */}
-        <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4 ring-2 ring-blue-100 flex-shrink-0">
-          <Image
-            src={testimonial.image || "/placeholder.svg"}
-            alt={testimonial.name}
-            fill
-            className="object-cover"
-          />
+        <div className="ring-2 ring-blue-100 rounded-full mr-4 flex-shrink-0">
+          {renderAvatar(testimonial)}
         </div>
         <div>
           <h3 className="font-semibold text-gray-800 text-base md:text-lg">{testimonial.name}</h3>
-          <p className="text-sm text-gray-600">
-            {testimonial.position}, {testimonial.company}
-          </p>
-          <div className="flex mt-1">{renderStars(testimonial.rating)}</div>
+          {(testimonial.position || testimonial.company) && (
+            <p className="text-sm text-gray-600">
+              {testimonial.position && testimonial.company 
+                ? `${testimonial.position}, ${testimonial.company}`
+                : testimonial.position || testimonial.company
+              }
+            </p>
+          )}
         </div>
       </div>
     </div>

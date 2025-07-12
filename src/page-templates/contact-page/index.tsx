@@ -63,7 +63,7 @@ export function ContactPageContent(): JSX.Element {
       
       {/* Main Content Layout - Wrapped sections with responsive design */}
       <Layout>
-        <div className="py-16 lg:py-20">
+        <div className="container mx-auto py-16 lg:py-20">
           {/* Hero Section - Compelling messaging and introduction */}
           <div className="relative overflow-hidden mb-16 lg:mb-20">
             <div className="text-center">

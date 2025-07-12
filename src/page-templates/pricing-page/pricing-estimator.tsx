@@ -186,7 +186,7 @@ const PriceFactor = React.memo(PriceFactorCard)
  */
 export default function PricingEstimator(): JSX.Element {
   return (
-    <section className="w-full" aria-labelledby="pricing-estimator-title">
+    <section className="container mx-auto" aria-labelledby="pricing-estimator-title">
       {/* Hidden heading for screen readers - provides accessible section context */}
       <h2 id="pricing-estimator-title" className="sr-only">Interactive Pricing Estimator</h2>
       

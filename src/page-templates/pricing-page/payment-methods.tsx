@@ -99,6 +99,7 @@ const paymentMethods: PaymentMethod[] = [
 export default function PaymentOptions(): JSX.Element {
   return (
     <section aria-labelledby="payment-methods-title">
+      <div className="container mx-auto">
       {/* Hidden heading for screen readers - provides accessible section context */}
       <h2 id="payment-methods-title" className="sr-only">Payment Methods</h2>
 
@@ -150,7 +151,7 @@ export default function PaymentOptions(): JSX.Element {
             {/* Primary processor logo (Stripe) */}
             <div className="flex justify-center md:justify-start">
               <Image 
-                src="/Stripe.png" 
+                src="/payment-icons/Stripe.png" 
                 alt="Stripe" 
                 width={60} 
                 height={40} 
@@ -161,35 +162,35 @@ export default function PaymentOptions(): JSX.Element {
             {/* Supported payment method logos */}
             <div className="flex items-center justify-center md:justify-start gap-3">
               <Image 
-                src="/Visa.png" 
+                src="/payment-icons/Visa.png" 
                 alt="Visa" 
                 width={60} 
                 height={40} 
                 className="h-9 mt-1.5 w-auto" 
               />
               <Image 
-                src="/Mastercard.png" 
+                src="/payment-icons/Mastercard.png" 
                 alt="Mastercard" 
                 width={60} 
                 height={40} 
                 className="h-10 w-auto" 
               />
               <Image 
-                src="/Amex.png" 
+                src="/payment-icons/Amex.png" 
                 alt="American Express" 
                 width={60} 
                 height={40} 
                 className="h-9 mt-1 w-auto" 
               />
               <Image 
-                src="/ApplePay.png" 
+                src="/payment-icons/ApplePay.png" 
                 alt="Apple Pay" 
                 width={60} 
                 height={40} 
                 className="h-10 w-auto" 
               />
               <Image 
-                src="/GooglePay.png" 
+                src="/payment-icons/GooglePay.png" 
                 alt="Google Pay" 
                 width={60} 
                 height={40} 
@@ -199,6 +200,7 @@ export default function PaymentOptions(): JSX.Element {
           </div>
         </div>
       </div>
+      </div>  
     </section>
   )
 }

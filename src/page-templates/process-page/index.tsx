@@ -11,20 +11,27 @@
  * - Hero section outside main layout for full-width design
  * - Layout wrapper for content sections with consistent spacing
  * - Modular section components for maintainability
+ * - Dynamic imports for below-the-fold content to improve performance
  */
 
 'use client';
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
-import HeroSection from './hero-section';
-import ProcessOverviewSection from './process-overview-section';
-import DetailedProcessSection from './detailed-process-section';
-import BestPracticesSection from './best-practices-section';
-import FAQSection from '@/page-templates/service-page/faq-section/faq-section';
-import CtaSection from './cta-section';
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+
+// Direct imports for critical above-the-fold content
+import HeroSection from './hero-section';
+import ProcessOverviewSection from './process-overview-section';
+
+// Dynamic imports for below-the-fold content to improve initial page load performance
+const DetailedProcessSection = dynamic(() => import('./detailed-process-section'), { ssr: false });
+const BestPracticesSection = dynamic(() => import('./best-practices-section'), { ssr: false });
+const FAQSection = dynamic(() => import('@/page-templates/service-page/faq-section/faq-section'), { ssr: false });
+const CtaSection = dynamic(() => import('./cta-section'), { ssr: false });
+
 import processFAQContent from '@/content/about-pages/process-page/process-faq-content';
 
 /**

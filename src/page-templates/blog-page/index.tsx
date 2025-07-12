@@ -12,6 +12,7 @@
  * - Layout wrapper for content sections with consistent spacing
  * - Modular section components for maintainability
  * - Conditional blog listing based on post availability
+ * - Dynamic imports for below-the-fold content to improve performance
  * 
  * Architecture:
  * - PageLoadingProvider context wrapper for loading states
@@ -24,13 +25,19 @@
 'use client';
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
-import HeroSection from './hero-section';
-import BlogComingSoonSection from './blog-coming-soon-section';
-import BlogListingSection from './blog-listing-section';
-import CtaSection from './cta-section';
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+
+// Direct imports for critical above-the-fold content
+import HeroSection from './hero-section';
+import BlogComingSoonSection from './blog-coming-soon-section';
+
+// Dynamic imports for below-the-fold content to improve initial page load performance
+const BlogListingSection = dynamic(() => import('./blog-listing-section'), { ssr: false });
+const CtaSection = dynamic(() => import('./cta-section'), { ssr: false });
+
 import { BlogPost } from '@/lib/blog-loader';
 
 /**
