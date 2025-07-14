@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { Code, Palette, BarChart, Bot, Users, Search, Laptop, CheckCircle } from 'lucide-react'
 import WebAppDevGraphic from '@/assets/svg/web-app-dev-graphic.svg'
 import CustomSoftwareGraphic from '@/assets/svg/custom-software-graphic.svg'
@@ -18,6 +18,22 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import TailwindButton from '@/components/reusable-components/tailwind-button'
+
+/**
+ * Animation variant for section entrance
+ * Simple, clean entrance for the entire services section
+ */
+const sectionEntrance: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+}
 
 const tabs = [
   { id: 'webDev', icon: Laptop, title: 'Web & App Development' },
@@ -131,134 +147,139 @@ export default function ServicesSection() {
   const ActiveIcon = tabs.find(tab => tab.id === activeTab)?.icon || Laptop
 
   return (
-    <div>
-    <div className="container mx-auto relative rounded-xl p-6 bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt shadow-xl text-white">
-      <motion.h1 
-        className="text-3xl md:text-4xl font-bold text-center my-2"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Our Services & Solutions
-      </motion.h1>
-      <motion.p 
-        className="text-lg text-center text-gray-100 mb-6"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Empowering your digital journey with comprehensive technology services
-      </motion.p>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionEntrance}
+    >
+      <div className="container mx-auto relative rounded-xl p-6 bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt shadow-xl text-white">
+        <motion.h1 
+          className="text-3xl md:text-4xl font-bold text-center my-2"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Our Services & Solutions
+        </motion.h1>
+        <motion.p 
+          className="text-lg text-center text-gray-100 mb-6"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Empowering your digital journey with comprehensive technology services
+        </motion.p>
 
-      <div className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all mb-2">
-          <div className="hidden lg:flex flex-wrap justify-center mb-6">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center px-4 py-2 m-1 rounded-lg transition-all duration-300 ${
-                  activeTab === tab.id
-                    ? 'bg-white text-medium-blue'
-                    : 'bg-transparent text-white hover:bg-white hover:bg-opacity-20'
-                }`}
-              >
-                <tab.icon className="mr-2" />
-                {tab.title}
-              </button>
-            ))}
-          </div>
-          <div className="lg:hidden mb-8">
-            <Select onValueChange={(value) => setActiveTab(value)} defaultValue={activeTab}>
-              <SelectTrigger className="w-full rounded-lg bg-white text-blue-700 border border-blue-200 shadow-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
-                <SelectValue placeholder="Select a service" />
-              </SelectTrigger>
-              <SelectContent className="bg-white border-blue-200 rounded-lg shadow-lg text-blue-700 overflow-hidden">
-                {tabs.map((tab) => (
-                  <SelectItem
-                    key={tab.id}
-                    value={tab.id}
-                    className="hover:bg-blue-100 focus:bg-blue-100 text-blue-700 pl-8 py-2 rounded-lg cursor-pointer"
-                  >
-                    {tab.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeTab}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-2 gap-6 items-center"
-            >
-              <div className="space-y-4">
-                <motion.h2 
-                  className="text-3xl font-bold"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
+        <div className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all mb-2">
+            <div className="hidden lg:flex flex-wrap justify-center mb-6">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center px-4 py-2 m-1 rounded-lg transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? 'bg-white text-medium-blue'
+                      : 'bg-transparent text-white hover:bg-white hover:bg-opacity-20'
+                  }`}
                 >
-                  {content[activeTab].title}
-                </motion.h2>
-                <motion.p 
-                  className="text-lg"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                >
-                  {content[activeTab].description}
-                </motion.p>
-                <ul className="space-y-2">
-                  {content[activeTab].features.map((feature, index) => (
-                    <motion.li 
-                      key={index} 
-                      className="flex items-center"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                  <tab.icon className="mr-2" />
+                  {tab.title}
+                </button>
+              ))}
+            </div>
+            <div className="lg:hidden mb-8">
+              <Select onValueChange={(value) => setActiveTab(value)} defaultValue={activeTab}>
+                <SelectTrigger className="w-full rounded-lg bg-white text-blue-700 border border-blue-200 shadow-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+                  <SelectValue placeholder="Select a service" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border-blue-200 rounded-lg shadow-lg text-blue-700 overflow-hidden">
+                  {tabs.map((tab) => (
+                    <SelectItem
+                      key={tab.id}
+                      value={tab.id}
+                      className="hover:bg-blue-100 focus:bg-blue-100 text-blue-700 pl-8 py-2 rounded-lg cursor-pointer"
                     >
-                      <CheckCircle className="h-5 w-5 rounded-full text-very-light-grey-alt mt-0.5 mr-2 flex-shrink-0" />
-                      {feature}
-                    </motion.li>
+                      {tab.title}
+                    </SelectItem>
                   ))}
-                </ul>
-                <motion.button 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.6 }}
-                >
-                  <TailwindButton href="/contact" className="bg-gray-50 font-semibold w-1/2 mx-auto mt-4 rounded-lg">
-                  Learn More
-                  </TailwindButton>
-                </motion.button>
-              </div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="relative"
+                </SelectContent>
+              </Select>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeTab}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+                className="grid md:grid-cols-2 gap-6 items-center"
               >
-                {content[activeTab].image && (() => {
-                  const SvgComponent = content[activeTab].image;
-                  return (
-                    <SvgComponent
-                      className="rounded-lg w-full h-auto max-w-[600px]"
-                      aria-label={content[activeTab].title}
-                    />
-                  );
-                })()}
-                <div className="absolute -bottom-4 -right-4 bg-blue-700 text-white p-4 rounded-full shadow-lg">
-                  <ActiveIcon size={32} />
+                <div className="space-y-4">
+                  <motion.h2 
+                    className="text-3xl font-bold"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                  >
+                    {content[activeTab].title}
+                  </motion.h2>
+                  <motion.p 
+                    className="text-lg"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
+                  >
+                    {content[activeTab].description}
+                  </motion.p>
+                  <ul className="space-y-2">
+                    {content[activeTab].features.map((feature, index) => (
+                      <motion.li 
+                        key={index} 
+                        className="flex items-center"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                      >
+                        <CheckCircle className="h-5 w-5 rounded-full text-very-light-grey-alt mt-0.5 mr-2 flex-shrink-0" />
+                        {feature}
+                      </motion.li>
+                    ))}
+                  </ul>
+                  <motion.button 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.6 }}
+                  >
+                    <TailwindButton href="/contact" className="bg-gray-50 font-semibold w-1/2 mx-auto mt-4 rounded-lg">
+                    Learn More
+                    </TailwindButton>
+                  </motion.button>
                 </div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative"
+                >
+                  {content[activeTab].image && (() => {
+                    const SvgComponent = content[activeTab].image;
+                    return (
+                      <SvgComponent
+                        className="rounded-lg w-full h-auto max-w-[600px]"
+                        aria-label={content[activeTab].title}
+                      />
+                    );
+                  })()}
+                  <div className="absolute -bottom-4 -right-4 bg-blue-700 text-white p-4 rounded-full shadow-lg">
+                    <ActiveIcon size={32} />
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          </AnimatePresence>
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
-    </div>
+    </motion.div>
   )
 }

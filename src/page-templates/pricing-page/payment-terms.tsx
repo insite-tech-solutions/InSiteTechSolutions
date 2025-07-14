@@ -6,7 +6,10 @@
  * Covers down payments, payment plans, late payment policies, and transparency practices.
  */
 
+"use client"
+
 import { AlertCircle, Clock, FileText, Percent, Info } from "lucide-react"
+import { motion } from "framer-motion"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 /**
@@ -19,6 +22,42 @@ interface PaymentTerm {
   title: string
   /** Detailed description explaining the specific term or policy */
   description: string
+}
+
+/**
+ * Animation variants for the payment terms component
+ */
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+}
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const cardVariants = {
+  initial: { opacity: 0, y: 20, scale: 0.95 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+const alertVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut", delay: 0.3 }
+  }
 }
 
 /**
@@ -93,21 +132,34 @@ export default function PaymentTerms(): JSX.Element {
       {/* Main Content Section - Gradient background with glassmorphism cards */}
       <div className="rounded-xl mx-auto p-6 bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt mb-8">
         {/* Section Header - Title and introductory text */}
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold mt-6 mb-6 text-gray-50">
             Payment Terms & Policies
           </h2>
           <p className="text-xl text-gray-100 max-w-3xl mx-auto">
             Clear expectations and transparent policies for a smooth working relationship.
           </p>
-        </div>
+        </motion.div>
 
         {/* Payment Terms Grid - Glassmorphism cards with responsive layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-2">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-2"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
+        >
           {paymentTerms.map((term) => (
-            <div 
+            <motion.div 
               key={term.title.toLowerCase().replace(/\s+/g, '-')} 
               className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg"
+              variants={cardVariants}
             >
               {/* Term Header - Icon and title */}
               <div className="flex items-center gap-4 mb-4">
@@ -120,28 +172,35 @@ export default function PaymentTerms(): JSX.Element {
               
               {/* Term Description */}
               <p className="text-gray-100">{term.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Additional Information Alert - Net 30 terms and links to full policies */}
-      <Alert className="bg-blue-50 border-blue-200">
-        <Info className="h-5 w-5 text-blue-600" />
-        <AlertTitle className="text-blue-700 mt-1">About Payment Terms</AlertTitle>
-        <AlertDescription className="text-gray-600">
-          Given the complex nature of software development, we can only provide detailed quotes for well-defined projects. For
-          projects with evolving requirements, we recommend our hybrid pricing model which balances predictability with
-          flexibility. We&apos;ll always work with you to find the most appropriate pricing structure for your specific
-          needs. We typically follow a Net 30 payment term, requiring invoices to be paid in full within 30 days of receipt.
-          <br /><br />
-          Each project includes a custom contract tailored to the specific requirements. You can view our full{" "}
-          <a href="/about/privacy-policy-and-terms" className="text-blue-600 hover:text-blue-800 underline">
-            Terms of Service and Privacy Policy
-          </a>{" "}
-          for complete details on our policies and procedures.
-        </AlertDescription>
-      </Alert>
+      <motion.div
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={alertVariants}
+      >
+        <Alert className="bg-blue-50 border-blue-200">
+          <Info className="h-5 w-5 text-blue-600" />
+          <AlertTitle className="text-blue-700 mt-1">About Payment Terms</AlertTitle>
+          <AlertDescription className="text-gray-600">
+            Given the complex nature of software development, we can only provide detailed quotes for well-defined projects. For
+            projects with evolving requirements, we recommend our hybrid pricing model which balances predictability with
+            flexibility. We&apos;ll always work with you to find the most appropriate pricing structure for your specific
+            needs. We typically follow a Net 30 payment term, requiring invoices to be paid in full within 30 days of receipt.
+            <br /><br />
+            Each project includes a custom contract tailored to the specific requirements. You can view our full{" "}
+            <a href="/about/privacy-policy-and-terms" className="text-blue-600 hover:text-blue-800 underline">
+              Terms of Service and Privacy Policy
+            </a>{" "}
+            for complete details on our policies and procedures.
+          </AlertDescription>
+        </Alert>
+      </motion.div>
       </div>
     </section>
   )

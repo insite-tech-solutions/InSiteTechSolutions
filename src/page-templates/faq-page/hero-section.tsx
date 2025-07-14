@@ -65,7 +65,7 @@ export default function FAQPageHero(): JSX.Element {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
           >
             Frequently Asked Questions
@@ -74,7 +74,7 @@ export default function FAQPageHero(): JSX.Element {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             className="text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow"
           >
             Have questions? We have answers. Browse our most commonly asked questions across services, pricing, process, and more.

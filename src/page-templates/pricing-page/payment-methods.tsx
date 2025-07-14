@@ -7,7 +7,10 @@
  * 
  */
 
+"use client"
+
 import { CreditCard, Wallet, Globe, ShieldCheck, Clock, Landmark } from "lucide-react"
+import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 
@@ -21,6 +24,41 @@ interface PaymentMethod {
   title: string
   /** Detailed description explaining the payment method and its benefits */
   description: string
+}
+
+/**
+ * Animation variants for the payment methods component
+ */
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+}
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+}
+
+const cardVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+const securitySectionVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut", delay: 0.2 }
+  }
 }
 
 /**
@@ -104,39 +142,59 @@ export default function PaymentOptions(): JSX.Element {
       <h2 id="payment-methods-title" className="sr-only">Payment Methods</h2>
 
       {/* Section Header - Title and introductory text */}
-      <div className="text-center mb-12">
+      <motion.div 
+        className="text-center mb-12"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={fadeInUp}
+      >
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Payment Methods</h2>
         <p className="text-xl text-gray-600 max-w-4xl mx-auto">
           Choose from a variety of secure payment options that work best for your needs.
         </p>
-      </div>
+      </motion.div>
 
       {/* Payment Methods Grid - Responsive layout with hover effects */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+      >
         {paymentMethods.map((method) => (
-          <Card 
-            key={method.title.toLowerCase().replace(/\s+/g, '-')} 
-            className="border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all duration-300"
+          <motion.div
+            key={method.title.toLowerCase().replace(/\s+/g, '-')}
+            variants={cardVariants}
           >
-            {/* Card Header - Icon and title */}
-            <CardHeader className="pb-2">
-              {/* Payment method icon with consistent styling */}
-              {method.icon}
-              <CardTitle className="text-xl">{method.title}</CardTitle>
-            </CardHeader>
-            
-            {/* Card Content - Method description */}
-            <CardContent>
-              <CardDescription className="text-base text-gray-600">
-                {method.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
+            <Card className="border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+              {/* Card Header - Icon and title */}
+              <CardHeader className="pb-2">
+                {/* Payment method icon with consistent styling */}
+                {method.icon}
+                <CardTitle className="text-xl">{method.title}</CardTitle>
+              </CardHeader>
+              
+              {/* Card Content - Method description */}
+              <CardContent>
+                <CardDescription className="text-base text-gray-600">
+                  {method.description}
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Security Assurance Section - Trust indicators and payment provider logos */}
-      <div className="mt-10 p-6 bg-blue-50 rounded-lg border border-blue-100">
+      <motion.div 
+        className="mt-10 p-6 bg-blue-50 rounded-lg border border-blue-100"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={securitySectionVariants}
+      >
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Security messaging */}
           <div className="flex-1">
@@ -199,7 +257,7 @@ export default function PaymentOptions(): JSX.Element {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       </div>  
     </section>
   )

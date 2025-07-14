@@ -7,6 +7,7 @@
  */
 
 import Image from "next/image";
+import { Globe } from "lucide-react";
 
 /**
  * LocationImageSection Component
@@ -42,7 +43,7 @@ import Image from "next/image";
  */
 export default function LocationImageSection(): JSX.Element {
   return (
-    <section aria-labelledby="location-image-section-title" className="bg-white p-6 rounded-lg shadow-md text-gray-900">
+    <section aria-labelledby="location-image-section-title" className="bg-white p-6 rounded-lg shadow-md text-gray-900 relative">
       {/* Hidden heading for screen readers - provides accessible section context */}
       <h2 id="location-image-section-title" className="sr-only">Our Reach</h2>
       
@@ -65,6 +66,11 @@ export default function LocationImageSection(): JSX.Element {
         Proudly serving <span className="font-semibold text-medium-blue">Western New York</span> locally,
         and the <span className="font-semibold text-medium-blue">globe</span> remotely.
       </p>
+      
+      {/* Globe Icon - Positioned in bottom right corner */}
+      <div className="absolute bottom-24 right-6 rounded-full bg-medium-blue p-2 shadow-lg">
+        <Globe className="w-12 h-12 text-white" />
+      </div>
     </section>
   );
 }

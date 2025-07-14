@@ -66,7 +66,7 @@ export default function HeroSection(): JSX.Element {
           id="hero-section-title"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg text-white"
         >
           Our Development Process: The 5Ds
@@ -76,7 +76,7 @@ export default function HeroSection(): JSX.Element {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="text-2xl md:text-3xl font-semibold mb-4 text-blue-100 drop-shadow"
         >
           Streamlined. Collaborative. Results-Driven.
@@ -86,7 +86,7 @@ export default function HeroSection(): JSX.Element {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="text-lg md:text-xl mb-8 text-blue-50 max-w-3xl mx-auto drop-shadow"
         >
           {subtitle}
@@ -96,7 +96,7 @@ export default function HeroSection(): JSX.Element {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-6 justify-center"
         >
           <TailwindButton

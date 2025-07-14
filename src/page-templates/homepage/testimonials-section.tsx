@@ -3,6 +3,7 @@
 import CarouselSection from "@/components/reusable-components/carousel-section"
 import TestimonialCard from "@/components/reusable-components/testimonial-card" // Adjusted import path
 import { SwiperProps } from "swiper/react";
+import { motion } from 'framer-motion';
 
 // Testimonial type definition (ensure this matches or is imported if defined elsewhere)
 interface Testimonial {
@@ -71,7 +72,7 @@ const testimonialsData: Testimonial[] = [
 export default function TestimonialsSection() {
   if (!testimonialsData || testimonialsData.length === 0) {
     return (
-      <section className="py-16">
+      <section>
         <div className="container mx-auto px-4 text-center">
           <p>No testimonials yet.</p>
         </div>
@@ -113,7 +114,15 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section>
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.8,
+        ease: 'easeOut',
+      }}
+    >
       {/* 
         The <CarouselSection> already includes a container, title, and description structure.
         We pass our specific title and description. 
@@ -184,6 +193,6 @@ export default function TestimonialsSection() {
           bottom: -8px !important;
         }
       `}</style>
-    </section>
+    </motion.section>
   );
 }

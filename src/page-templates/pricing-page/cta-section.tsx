@@ -9,6 +9,7 @@
 "use client";
 
 import { CheckCircle2 } from "lucide-react"
+import { motion } from "framer-motion"
 import ContactForm from "@/components/reusable-components/contact-form"
 
 /**
@@ -19,6 +20,42 @@ interface CTAFeature {
   title: string
   /** Detailed description explaining the feature */
   description: string
+}
+
+/**
+ * Animation variants for the CTA section component
+ */
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+}
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+}
+
+const featureVariants = {
+  initial: { opacity: 0, x: -20 },
+  animate: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+const contactFormVariants = {
+  initial: { opacity: 0, y: 30, scale: 0.95 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.8, ease: "easeOut", delay: 0.3 }
+  }
 }
 
 /**
@@ -75,17 +112,31 @@ export default function CustomSolutionSection(): JSX.Element {
       {/* Main Content Section - Header and features */}
       <div className="text-center">
         {/* Section Header - Compelling headline and persuasive copy */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
-        <p className="text-lg text-muted-foreground mb-8">
-          Need a custom solution or still have questions? Every project is unique, and so is every budget. Get a free personalized consultation or estimate that fits your specific needs and financial situation.
-        </p>
+        <motion.div
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeInUp}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Need a custom solution or still have questions? Every project is unique, and so is every budget. Get a free personalized consultation or estimate that fits your specific needs and financial situation.
+          </p>
+        </motion.div>
         
         {/* Key Benefits Section - Features list with checkmark icons */}
-        <div className="space-y-6 max-w-2xl mx-auto">
+        <motion.div 
+          className="space-y-6 max-w-2xl mx-auto"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+        >
           {ctaFeatures.map((feature) => (
-            <div 
+            <motion.div 
               key={feature.title.toLowerCase().replace(/\s+/g, '-')} 
               className="flex items-start gap-3 text-left"
+              variants={featureVariants}
             >
               {/* Checkmark Icon - Visual indicator for each benefit */}
               <CheckCircle2 className="h-6 w-6 text-medium-blue shrink-0 mt-0.5" aria-hidden="true" />
@@ -95,18 +146,24 @@ export default function CustomSolutionSection(): JSX.Element {
                 <h3 className="font-semibold text-lg">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
       
       {/* Contact Form Section - Gradient background with integrated form */}
-      <div className="max-w-4xl mx-auto">
+      <motion.div 
+        className="max-w-4xl mx-auto"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={contactFormVariants}
+      >
         <div className="bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt rounded-2xl p-2 md:p-6 shadow-lg">
           {/* Frosted Contact Form - Professional styling with gradient background */}
           <ContactForm variant="frosted" showHeader={true} />
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

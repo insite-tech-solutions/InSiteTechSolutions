@@ -16,10 +16,43 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { Calendar, Clock, User, Search } from 'lucide-react';
 import { BlogPost } from '@/lib/blog-loader';
+
+// Animation variants
+const fadeInUp: Variants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 }
+};
+
+const staggerContainer: Variants = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const filterControlsVariants: Variants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
+const blogCardVariants: Variants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
 
 /**
  * Props interface for the BlogListingSection component
@@ -48,9 +81,7 @@ interface BlogListingSectionProps {
 function BlogPostCard({ post }: { post: BlogPost }): JSX.Element {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      variants={blogCardVariants}
       className="relative bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
     >
       {/* Featured Badge */}
@@ -270,17 +301,30 @@ export default function BlogListingSection({
     <section>
       <div>
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={fadeInUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Latest Blog Posts
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Stay updated with our latest insights, tutorials, and industry knowledge.
           </p>
-        </div>
+        </motion.div>
 
         {/* Filters and Search */}
-        <div className="mb-8 space-y-4">
+        <motion.div 
+          className="mb-8 space-y-4"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={filterControlsVariants}
+        >
           {/* Search Bar */}
           <div className="relative max-w-md mx-auto">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -331,16 +375,22 @@ export default function BlogListingSection({
             {selectedTags.length > 0 && ` in ${selectedTags.join(', ')}`}
             {showFeaturedOnly && ' (featured only)'}
           </div>
-        </div>
+        </motion.div>
 
         {/* Blog Posts Grid */}
         {currentPosts.length > 0 ? (
           <>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={staggerContainer}
+            >
               {currentPosts.map((post) => (
                 <BlogPostCard key={post.slug} post={post} />
               ))}
-            </div>
+            </motion.div>
 
             {/* Pagination */}
             {totalPages > 1 && (

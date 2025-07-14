@@ -3,7 +3,7 @@
  * 
  * Interactive tabbed section displaying professional experience and educational background.
  * Features responsive design with sidebar navigation on desktop and horizontal scrolling
- * on mobile, detailed cards with highlights, and smooth transitions.
+ * on mobile, detailed cards with highlights, smooth transitions, and entrance animations.
  * 
  * Key Features:
  * - Tabbed interface switching between Experience and Education
@@ -20,6 +20,7 @@
  * - TypeScript interfaces for type safety
  * - Image optimization with Next.js Image component
  * - Lucide React icons for consistent iconography
+ * - Framer Motion for smooth animations and transitions
  * 
  * @component ExperienceEducation
  * @returns {JSX.Element} Interactive experience and education section
@@ -29,7 +30,56 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { MapPin, Calendar, Award, Code, Microscope, Rocket, Satellite } from 'lucide-react';
+
+/**
+ * Animation variants for the experience-education section
+ * Three-moment approach: header → content → card transitions
+ */
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const contentReveal: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const cardTransition: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.4,
+      ease: 'easeOut',
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 20,
+    transition: {
+      duration: 0.3,
+      ease: 'easeIn',
+    },
+  },
+};
 
 /**
  * Experience item data structure
@@ -93,6 +143,7 @@ interface EducationItem {
  * - Detailed information cards with highlights
  * - Logo and icon integration for visual appeal
  * - Consistent styling with brand colors
+ * - Smart animation sequence for enhanced user experience
  * 
  * State Management:
  * - activeTab: Controls Experience/Education tab selection
@@ -243,7 +294,13 @@ const ExperienceEducation = () => {
     <section>
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-10">
+        <motion.div 
+          className="text-center mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.8 }}
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
             Background
           </h2>
@@ -251,10 +308,16 @@ const ExperienceEducation = () => {
           <p className="text-xl text-gray-600 mt-4">
             Education and professional experience driving innovative solutions
           </p>
-        </div>
+        </motion.div>
 
         {/* Toggle Buttons */}
-        <div className="flex justify-center mb-8">
+        <motion.div 
+          className="flex justify-center mb-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={contentReveal}
+        >
           <div className="bg-gray-100 rounded-lg p-1 flex">
             <button
               onClick={() => setActiveTab('experience')}
@@ -277,10 +340,16 @@ const ExperienceEducation = () => {
               Education
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Mobile: Horizontal List */}
-        <div className="block lg:hidden mb-4">
+        <motion.div 
+          className="block lg:hidden mb-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={contentReveal}
+        >
           <div className="overflow-x-auto pb-2">
             <div className="flex space-x-3 min-w-max">
               {currentData.map((item, index) => (
@@ -308,10 +377,16 @@ const ExperienceEducation = () => {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Desktop: Flex row for sidebar + content */}
-        <div className="lg:flex lg:gap-4">
+        <motion.div 
+          className="lg:flex lg:gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={contentReveal}
+        >
           {/* Desktop: Vertical Sidebar */}
           <div className="hidden lg:block w-24 flex-shrink-0">
             <div className="space-y-3">
@@ -343,53 +418,68 @@ const ExperienceEducation = () => {
 
           {/* Main Content */}
           <div className="flex-1">
-            <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 pb-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              {/* Card layout according to new design */}
-              <div className="flex-1">
-                <div className="flex flex-col space-y-2 mb-4">
-                  {/* Icon + Title Row */}
-                  <div className="flex items-center space-x-3">
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-light-blue to-blue-900 text-white">{selectedItem.icon}</div>
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${activeTab}-${selectedIndex}`}
+                variants={cardTransition}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="bg-white border-2 border-gray-200 rounded-2xl p-6 pb-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                {/* Card layout according to new design */}
+                <div className="flex-1">
+                  <div className="flex flex-col space-y-2 mb-4">
+                    {/* Icon + Title Row */}
+                    <div className="flex items-center space-x-3">
+                      <div className="p-3 rounded-lg bg-gradient-to-br from-light-blue to-blue-900 text-white">{selectedItem.icon}</div>
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-900">
+                        {activeTab === 'experience' 
+                          ? (selectedItem as ExperienceItem).role 
+                          : `${(selectedItem as EducationItem).degree} in ${(selectedItem as EducationItem).field}`
+                        }
+                      </h3>
+                    </div>
+                    {/* Company Row */}
+                    <p className="text-lg font-semibold text-medium-blue">
                       {activeTab === 'experience' 
-                        ? (selectedItem as ExperienceItem).role 
-                        : `${(selectedItem as EducationItem).degree} in ${(selectedItem as EducationItem).field}`
+                        ? (selectedItem as ExperienceItem).company 
+                        : (selectedItem as EducationItem).institution
                       }
-                    </h3>
-                  </div>
-                  {/* Company Row */}
-                  <p className="text-lg font-semibold text-medium-blue">
-                    {activeTab === 'experience' 
-                      ? (selectedItem as ExperienceItem).company 
-                      : (selectedItem as EducationItem).institution
-                    }
-                  </p>
-                  {/* Location + Date Row (always on same line, always with vertical bar) */}
-                  <div className="flex flex-row items-center space-x-2 text-gray-600 text-sm">
-                    <div className="flex items-center space-x-1">
-                      <MapPin className="w-4 h-4" />
-                      <span>{selectedItem.location}</span>
-                    </div>
-                    <span className="text-gray-400">|</span>
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{selectedItem.period}</span>
+                    </p>
+                    {/* Location + Date Row (always on same line, always with vertical bar) */}
+                    <div className="flex flex-row items-center space-x-2 text-gray-600 text-sm">
+                      <div className="flex items-center space-x-1">
+                        <MapPin className="w-4 h-4" />
+                        <span>{selectedItem.location}</span>
+                      </div>
+                      <span className="text-gray-400">|</span>
+                      <div className="flex items-center space-x-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>{selectedItem.period}</span>
+                      </div>
                     </div>
                   </div>
+                  {/* Highlights */}
+                  <div className="space-y-3">
+                    {selectedItem.highlights.map((highlight, index) => (
+                      <motion.div 
+                        key={index} 
+                        className="flex items-start space-x-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                      >
+                        <div className="w-2 h-2 bg-medium-blue rounded-full mt-2 flex-shrink-0"></div>
+                        <p className="text-gray-700 leading-relaxed text-sm lg:text-base">{highlight}</p>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-                {/* Highlights */}
-                <div className="space-y-3">
-                  {selectedItem.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-medium-blue rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-gray-700 leading-relaxed text-sm lg:text-base">{highlight}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -17,7 +17,7 @@
  * Technical Implementation:
  * - Swiper.js for carousel functionality with Autoplay and FreeMode
  * - Next.js Image component for optimized icon loading
- * - Framer Motion for CTA animations
+ * - Framer Motion for entrance and CTA animations
  * - Memoized component for performance optimization
  * - CSS gradients for fade effects
  * 
@@ -89,7 +89,7 @@ const technologies: Technology[] = [
  * - Gradient fade effects on carousel edges
  * - Consistent technology icon styling
  * - Responsive layout for all devices
- * - Call-to-action with animation
+ * - Call-to-action with viewport-triggered animation
  * - Accessibility-compliant with proper alt text
  * 
  * Carousel Configuration:
@@ -107,66 +107,79 @@ function Technologies(): JSX.Element {
       {/* Accessible landmark for Technologies Section */}
       <h2 id="technologies-section-title" className="sr-only">Technologies We Use</h2>
       <div className="container mx-auto">
-        {/* Section Introduction */}
-        <div className="text-center mb-6">
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            These are the tools and technologies we&apos;re most experienced with, but our broad skillset 
-            allows us to adapt to many other tools to meet your needs as best we can.
-          </p>
-        </div>
+        {/* Main Content - Section Introduction and Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.8,
+            ease: 'easeOut',
+          }}
+        >
+          {/* Section Introduction */}
+          <div className="text-center mb-6">
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+              These are the tools and technologies we&apos;re most experienced with, but our broad skillset 
+              allows us to adapt to many other tools to meet your needs as best we can.
+            </p>
+          </div>
 
-        {/* Scrolling Technologies Carousel */}
-        <div className="relative overflow-hidden group">
-          {/* Gradient overlays for fade effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
-          
-          {/* Scrolling container */}
-          <Swiper
-            modules={[Autoplay, FreeMode]}
-            loop={true}
-            freeMode={true}
-            slidesPerView="auto"
-            spaceBetween={16}
-            speed={5000}
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-          >
-            {technologies.map((tech) => (
-              <SwiperSlide key={tech.name.toLowerCase().replace(/\s+/g, '-') } style={{ width: 'auto' }}> 
-                <div 
-                  className="flex-shrink-0 rounded-xl px-1 md:px-4 py-1 my-2 hover:shadow-md transition-shadow duration-300"
-                >
-                  <div className="flex flex-col items-center space-y-2">
-                   <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-light-blue to-blue-900 rounded-md p-2">
-                      <Image
-                        src={tech.logo}
-                        alt={`${tech.name} logo`}
-                        width={48}
-                        height={48}
-                        className="object-contain invert"
-                      />
+          {/* Scrolling Technologies Carousel */}
+          <div className="relative overflow-hidden group">
+            {/* Gradient overlays for fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+            
+            {/* Scrolling container */}
+            <Swiper
+              modules={[Autoplay, FreeMode]}
+              loop={true}
+              freeMode={true}
+              slidesPerView="auto"
+              spaceBetween={16}
+              speed={5000}
+              autoplay={{
+                delay: 1,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+            >
+              {technologies.map((tech) => (
+                <SwiperSlide key={tech.name.toLowerCase().replace(/\s+/g, '-') } style={{ width: 'auto' }}> 
+                  <div 
+                    className="flex-shrink-0 rounded-xl px-1 md:px-4 py-1 my-2 hover:shadow-md transition-shadow duration-300"
+                  >
+                    <div className="flex flex-col items-center space-y-2">
+                     <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-light-blue to-blue-900 rounded-md p-2">
+                        <Image
+                          src={tech.logo}
+                          alt={`${tech.name} logo`}
+                          width={48}
+                          height={48}
+                          className="object-contain invert"
+                        />
+                      </div>
+                    <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">
+                      {tech.name}
+                    </span>
                     </div>
-                  <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">
-                    {tech.name}
-                  </span>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </motion.div>
 
         {/* CTA: Discuss Your Tech Stack */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{
             duration: 0.6,
             ease: 'easeOut',
+            delay: 0.15,
           }}
           className="max-w-4xl mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-6 md:mt-8 shadow-md hover:shadow-lg transition-all duration-200"
         >

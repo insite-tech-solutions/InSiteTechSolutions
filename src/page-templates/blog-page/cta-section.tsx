@@ -9,7 +9,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 
 /**
@@ -77,7 +77,6 @@ export default function CtaSection(): JSX.Element {
                 className="inline-flex items-center gap-2 text-white font-medium py-3 px-6 rounded-full border border-white/30 hover:bg-white/10 transition-all duration-300"
               >
                 Explore Our Work
-                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 

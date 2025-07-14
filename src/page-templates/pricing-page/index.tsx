@@ -72,39 +72,39 @@ export function PricingPageContent(): JSX.Element {
       
       {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout>
-        <div className="py-16">
+        <div className="py-12">
           {/* Pricing Overview Section - Introduction and key advantages */}
             <div>
             <PricingOverview />
             </div>
           
           {/* Pricing Models Section - Available pricing structures */}
-            <div className="my-16">
+            <div className="my-12">
             <PricingModels />
             </div>
           
           {/* Payment Options Section - Available payment methods */}
-            <div className="my-16">
+            <div className="my-12">
             <PaymentOptions />
             </div>
           
           {/* Payment Terms Section - Policies and terms */}
-            <div className="my-16">
+            <div className="my-12">
               <PaymentTerms />
             </div>
           
           {/* Interactive Pricing Estimator Section */}
-            <div className="my-16">
+            <div className="my-12">
               <PricingEstimator />
             </div>
           
           {/* FAQ Section - Pricing-specific questions and answers */}
-            <div className="my-16">
+            <div className="my-12">
               <FAQSection content={pricingFAQContent} />
             </div>
           
           {/* Call-to-Action Section - Final conversion element */}
-            <div className="my-12">
+            <div className="my-10">
               <CustomSolutionSection />
             </div>
         </div>

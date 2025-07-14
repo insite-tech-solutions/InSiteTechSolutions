@@ -9,7 +9,10 @@
  * @version 1.0.0
  */
 
+"use client"
+
 import { CheckCircle2, Star } from "lucide-react"
+import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -31,6 +34,33 @@ interface PricingModel {
   recommended: boolean
   /** Optional additional note or disclaimer */
   note?: string
+}
+
+/**
+ * Animation variants for the pricing models component
+ */
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+}
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+}
+
+const cardVariants = {
+  initial: { opacity: 0, y: 20, scale: 0.95 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
 }
 
 /**
@@ -131,72 +161,88 @@ export default function PricingModels(): JSX.Element {
       <h2 id="pricing-models-title" className="sr-only">Pricing Models</h2>
 
       {/* Section Header - Title and introductory text */}
-      <div className="text-center mb-12">
+      <motion.div 
+        className="text-center mb-12"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={fadeInUp}
+      >
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Pricing Models</h2>
         <p className="text-xl text-gray-600 max-w-4xl mx-auto">
           We&apos;ll help you choose the pricing structure that works best for your project needs and budget.
         </p>
-      </div>
+      </motion.div>
 
       {/* Pricing Models Grid - Responsive layout with equal height cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+      >
         {pricingModels.map((model) => (
-          <Card
+          <motion.div
             key={model.name.toLowerCase().replace(/\s+/g, '-')}
-            className={`flex flex-col h-full transition-all duration-300 ${
-              model.recommended 
-                ? "border-medium-blue shadow-lg hover:shadow-xl"  
-                : "border-gray-200 hover:shadow-md"
-            }`}
+            variants={cardVariants}
           >
-            {/* Card Header - Title, badge, and description */}
-            <CardHeader className="pb-4">
-              {/* Recommended Badge - Only shown for recommended models */}
-              {model.recommended && (
-                <Badge className="w-fit mb-2 text-medium-blue bg-blue-100">
-                  <Star className="h-3 w-3 mr-1" /> Recommended
-                </Badge>
-              )}
-              <CardTitle className="text-xl">{model.name}</CardTitle>
-              <CardDescription>{model.description}</CardDescription>
-            </CardHeader>
-
-            {/* Card Content - Features list with flex-grow for equal height */}
-            <CardContent className="flex-grow">
-              <ul className="space-y-2">
-                {/* Feature List - Each feature with checkmark icon */}
-                {model.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-medium-blue shrink-0 mr-2" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-                
-                {/* Optional Note - Displayed below features if present */}
-                {model.note && (
-                  <p className="text-xs text-gray-500 pt-2 ml-2">{model.note}</p>
+            <Card
+              className={`flex flex-col h-full transition-all duration-300 ${
+                model.recommended 
+                  ? "border-medium-blue shadow-lg hover:shadow-xl"  
+                  : "border-gray-200 hover:shadow-md"
+              }`}
+            >
+              {/* Card Header - Title, badge, and description */}
+              <CardHeader className="pb-4">
+                {/* Recommended Badge - Only shown for recommended models */}
+                {model.recommended && (
+                  <Badge className="w-fit mb-2 text-medium-blue bg-blue-100">
+                    <Star className="h-3 w-3 mr-1" /> Recommended
+                  </Badge>
                 )}
-              </ul>
-            </CardContent>
+                <CardTitle className="text-xl">{model.name}</CardTitle>
+                <CardDescription>{model.description}</CardDescription>
+              </CardHeader>
 
-            {/* Card Footer - Call-to-action button */}
-            <CardFooter className="flex flex-col space-y-2">
-              <Link href="/contact" className="w-full">
-                <Button
-                  variant={model.recommended ? "default" : "outline"}
-                  className={`w-full ${
-                    model.recommended 
-                      ? "text-white bg-medium-blue hover:bg-dark-blue-alt" 
-                      : "border-medium-blue text-medium-blue hover:bg-blue-50"
-                  }`}
-                >
-                  {model.cta}
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
+              {/* Card Content - Features list with flex-grow for equal height */}
+              <CardContent className="flex-grow">
+                <ul className="space-y-2">
+                  {/* Feature List - Each feature with checkmark icon */}
+                  {model.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <CheckCircle2 className="h-5 w-5 text-medium-blue shrink-0 mr-2" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                  
+                  {/* Optional Note - Displayed below features if present */}
+                  {model.note && (
+                    <p className="text-xs text-gray-500 pt-2 ml-2">{model.note}</p>
+                  )}
+                </ul>
+              </CardContent>
+
+              {/* Card Footer - Call-to-action button */}
+              <CardFooter className="flex flex-col space-y-2">
+                <Link href="/contact" className="w-full">
+                  <Button
+                    variant={model.recommended ? "default" : "outline"}
+                    className={`w-full ${
+                      model.recommended 
+                        ? "text-white bg-medium-blue hover:bg-dark-blue-alt" 
+                        : "border-medium-blue text-medium-blue hover:bg-blue-50"
+                    }`}
+                  >
+                    {model.cta}
+                  </Button>
+                </Link>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   )
 }

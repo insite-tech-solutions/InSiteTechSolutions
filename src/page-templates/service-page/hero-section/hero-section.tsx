@@ -3,17 +3,84 @@
  * 
  * This component renders a responsive hero banner with customizable background,
  * content, SVG graphics, and decorative elements. It supports both SVG and image-based
- * illustrations with dynamic loading of SVG components.
+ * illustrations with dynamic loading of SVG components. Enhanced with Framer Motion
+ * animations for smooth entrance effects.
  */
+
+'use client';
 
 import React, { useMemo, memo } from 'react';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 import { HeroSectionContent } from '../types';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { getIcon } from '@/utils/icon-registry';
 // This dynamic import is needed to load SVGs
 import dynamic from 'next/dynamic';
+
+/**
+ * Animation variants for the hero section elements
+ * Following the established pattern from other components in the codebase
+ */
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const fadeInLeft: Variants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const fadeInRight: Variants = {
+  hidden: { opacity: 0, x: 30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.4,
+    },
+  },
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
 
 /**
  * Hero Section for Service Pages
@@ -28,6 +95,7 @@ import dynamic from 'next/dynamic';
  * - Customizable background gradients and decorative elements
  * - Accessible structure with proper ARIA attributes
  * - Support for custom elements insertion
+ * - Smooth Framer Motion animations for enhanced user experience
  * 
  * @returns {JSX.Element} The rendered hero section
  */
@@ -99,73 +167,107 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
         decorElements={processedDecorElements}
       >
         <div className="max-w-8xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
             {/* Text Content */}
-            <div className="order-1 md:order-none text-left px-3 lg:px-6 pt-4">
-              <h1
+            <motion.div 
+              className="order-1 md:order-none text-left px-3 lg:px-6 pt-4"
+              variants={fadeInLeft}
+            >
+              <motion.h1
                 id="hero-title"
                 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg"
+                variants={fadeInUp}
               >
                 {title}
-              </h1>
-              <p className="text-xl md:text-2xl mb-6 drop-shadow-lg">
+              </motion.h1>
+              <motion.p 
+                className="text-xl md:text-2xl mb-6 drop-shadow-lg"
+                variants={fadeInUp}
+              >
                 {subtitle}
-              </p>
-              <p className="text-lg md:text-xl drop-shadow-lg">
+              </motion.p>
+              <motion.p 
+                className="text-lg md:text-xl drop-shadow-lg"
+                variants={fadeInUp}
+              >
                 {description}
-              </p>
+              </motion.p>
               {/* Desktop CTA Button - visible on md and above */}
-              <div className="hidden md:block mt-8 mb-4">
+              <motion.div 
+                className="hidden md:block mt-8 mb-4"
+                variants={fadeInUp}
+              >
                 <TailwindButton
                   href={ctaLink}
                   className="bg-gray-50 font-semibold"
                 >
                   {ctaText}
                 </TailwindButton>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
             {/* Illustration: SVG or Image */}
-            <div className="order-2 md:order-none flex items-center justify-center h-full min-h-[400px]">
+            <motion.div 
+              className="order-2 md:order-none flex items-center justify-center h-full min-h-[400px]"
+              variants={fadeInRight}
+            >
               {/* Use SVG component if provided */}
               {SvgGraphic && (
-                <SvgGraphic 
-                  className="w-full h-auto max-w-[600px] rounded-lg md:pt-12" 
-                  aria-label={title}
-                />
+                <motion.div
+                  variants={scaleIn}
+                  className="w-full h-auto max-w-[600px] rounded-lg md:pt-12"
+                >
+                  <SvgGraphic 
+                    className="w-full h-auto" 
+                    aria-label={title}
+                  />
+                </motion.div>
               )}
               {/* Fall back to Image if no SVG provided */}
               {!SvgGraphic && image && (
-                <Image
-                  src={image}
-                  alt={title}
-                  width={600}
-                  height={400}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="rounded-lg"
-                  priority
-                  aria-label={title}
-                />
+                <motion.div variants={scaleIn}>
+                  <Image
+                    src={image}
+                    alt={title}
+                    width={600}
+                    height={400}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="rounded-lg"
+                    priority
+                    aria-label={title}
+                  />
+                </motion.div>
               )}
-            </div>
+            </motion.div>
 
             {/* Mobile CTA Button - Only visible on small screens */}
-            <div className="order-3 md:hidden px-6 pb-6 flex items-center justify-center">
+            <motion.div 
+              className="order-3 md:hidden px-6 pb-6 flex items-center justify-center"
+              variants={fadeInUp}
+            >
               <TailwindButton 
                 href={ctaLink} 
                 className="bg-gray-50 font-semibold w-1/2 mx-auto"
               >
                 {ctaText}
               </TailwindButton>
-            </div>
+            </motion.div>
             
             {/* Optional Custom Elements Container - Spans full width */}
             {customElements && (
-              <div className="col-span-1 md:col-span-2">
+              <motion.div 
+                className="col-span-1 md:col-span-2"
+                variants={fadeInUp}
+              >
                 {customElements}
-              </div>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
         </div>
       </TailwindHeroBackground>
     </section>

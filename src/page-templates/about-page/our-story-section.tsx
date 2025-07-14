@@ -3,7 +3,7 @@
  * 
  * This component renders the company's origin story and mission statement.
  * Features narrative content about the company's founding principles, values,
- * and approach to technology solutions.
+ * and approach to technology solutions with thoughtful entrance animations.
  * 
  * Features:
  * - Narrative storytelling with structured content layout
@@ -11,7 +11,52 @@
  * - Responsive typography and spacing
  * - Accessible markup with proper ARIA labels
  * - Brand-consistent color scheme and visual hierarchy
+ * - Smart three-moment animation sequence respecting content hierarchy
  */
+
+'use client';
+
+import { motion, Variants } from 'framer-motion';
+
+/**
+ * Animation variants for the our story section
+ * Three-moment approach: title → content → mission
+ */
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const contentReveal: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const missionHighlight: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
 
 /**
  * OurStory Component
@@ -26,6 +71,7 @@
  * - Responsive layout with proper content hierarchy
  * - Accessible semantic markup
  * - Brand-consistent styling and visual elements
+ * - Three-moment animation sequence that respects content hierarchy
  * 
  * @returns {JSX.Element} The rendered our story section
  */
@@ -37,16 +83,27 @@ export default function OurStory(): JSX.Element {
       <h2 id="our-story-title" className="sr-only">Our Story</h2>
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-8">
+        <motion.div 
+          className="text-center mb-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.8 }}
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
             Our Story
           </h2>
           <div className="w-24 h-1 bg-medium-blue mx-auto mb-8"></div>
-        </div>
+        </motion.div>
 
         {/* Story Content Section */}
-        {/* Main Story Content */}
-        <div className="flex mb-8">
+        <motion.div 
+          className="flex mb-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={contentReveal}
+        >
           {/* Story Text */}
           <div className="space-y-6">
             <div className="text-lg text-gray-700 leading-relaxed space-y-4">
@@ -70,11 +127,16 @@ export default function OurStory(): JSX.Element {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Mission Statement Section */}
-        {/* Mission Statement */}
-        <div className="text-center">
+        <motion.div 
+          className="text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={missionHighlight}
+        >
           <div className="container mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center shadow-md hover:shadow-lg transition-all duration-200">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               Our Mission
@@ -84,7 +146,7 @@ export default function OurStory(): JSX.Element {
               while maintaining the integrity and personal touch that big tech companies have forgotten.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

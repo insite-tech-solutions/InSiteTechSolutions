@@ -8,7 +8,10 @@
  * @version 1.0.0
  */
 
+"use client"
+
 import { Package, TrendingDown, Users } from "lucide-react"
+import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 /**
@@ -24,11 +27,43 @@ interface Advantage {
 }
 
 /**
+ * Animation variants for the pricing overview component
+ */
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" }
+}
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+}
+
+const cardVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+}
+
+/**
  * Static content for the flexible solutions section
  * Extracted as a constant for better maintainability and potential reuse
  */
 const flexibleSolutionsContent = (
-  <div className="max-w-7xl mx-auto px-2 text-center">
+  <motion.div 
+    className="max-w-7xl mx-auto px-2 text-center"
+    initial="initial"
+    whileInView="animate"
+    viewport={{ once: true, amount: 0.2 }}
+    variants={fadeInUp}
+  >
     <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
       Flexible Solutions for Every Project
     </h2>
@@ -38,7 +73,7 @@ const flexibleSolutionsContent = (
       an academic researcher, a growing small business, or an established enterprise with complex requirements—we&apos;ll work together 
       to find a solution that delivers genuine value.
     </p>
-  </div>
+  </motion.div>
 )
 
 /**
@@ -102,7 +137,13 @@ export default function PricingOverview(): JSX.Element {
         {flexibleSolutionsContent}
         
         {/* One-Stop Shop Header Section */}
-        <div className="text-center mb-8">
+        <motion.div 
+          className="text-center mb-8"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
           <h3 className="text-2xl font-bold mb-4 text-gray-800">
             Your One-Stop Shop for All Things Tech
           </h3>
@@ -111,32 +152,40 @@ export default function PricingOverview(): JSX.Element {
             If you need a website, branding, and SEO, why juggle multiple vendors when you can get everything you need from one experienced partner? 
             Save time, money, and headaches with our comprehensive tech services.
           </p>
-        </div>
+        </motion.div>
 
         {/* Advantages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
+        >
           {advantages.map((advantage) => (
-            <Card 
-              key={advantage.title.toLowerCase().replace(/\s+/g, '-')} 
-              className="border-gray-200 hover:shadow-md transition-shadow"
+            <motion.div
+              key={advantage.title.toLowerCase().replace(/\s+/g, '-')}
+              variants={cardVariants}
             >
-              <CardHeader className="pb-4 text-gray-800">
-                <div className="flex items-center mb-3">
-                  {/* Icon container with consistent styling */}
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                    <advantage.icon className="h-6 w-6 text-medium-blue" />
+              <Card className="border-gray-200 hover:shadow-md transition-shadow">
+                <CardHeader className="pb-4 text-gray-800">
+                  <div className="flex items-center mb-3">
+                    {/* Icon container with consistent styling */}
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                      <advantage.icon className="h-6 w-6 text-medium-blue" />
+                    </div>
+                    <CardTitle className="text-lg">{advantage.title}</CardTitle>
                   </div>
-                  <CardTitle className="text-lg">{advantage.title}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600">
-                  {advantage.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-600">
+                    {advantage.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -85,7 +85,7 @@ function BestPracticesSection(): JSX.Element {
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
                     variants={containerVariants}
                 >
                     {/* Section Header: Displays the main title and description for the best practices section. */}

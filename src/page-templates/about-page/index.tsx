@@ -101,39 +101,39 @@ export function AboutUsPageContent(): JSX.Element {
       
       {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout>
-        <div className="pt-16">
+        <div className="pt-12">
           {/* Meet The Team Section - Team member introductions */}
           <div>
             <MeetTheTeamSection />
           </div>
           
           {/* Our Story Section - Company history and mission */}
-          <div className="my-16">
+          <div className="my-12">
             <OurStorySection />
           </div>
           
           {/* Timeline Section - Company milestones and achievements */}
-          <div className="my-16">
+          <div className="my-12">
             <TimelineSection />
           </div>
           
           {/* Experience & Education Section - Team qualifications */}
-          <div className="my-16">
+          <div className="my-12">
             <ExperienceEducationSection />
           </div>
           
           {/* Services Section - Overview of all services offered */}
-          <div className="my-10">
+          <div className="mt-12 mb-10">
             <ServicesSection />
           </div>
           
           {/* Technologies Section - Tech stack and tools */}
-          <div className="my-10">
+          <div className="mt-10 mb-4">
             <TechnologiesSection />
           </div>
           
           {/* InSite Advantage Section - Company strengths and benefits */}
-          <div className="mt-10">
+          <div className="mt-2 mb-[-18px]">
             <InSiteAdvantageSection />
           </div>
 

@@ -3,7 +3,7 @@
  * 
  * This component renders a team showcase section with individual team member cards.
  * Features a playful approach to presenting the solo business structure while maintaining
- * professional presentation and responsive design.
+ * professional presentation, responsive design, and smooth entrance animations.
  * 
  * Features:
  * - Responsive grid layout for team member cards
@@ -13,12 +13,54 @@
  * - Accessible markup with proper ARIA labels
  * - Gradient overlays and visual enhancements
  * - Memoized component for performance optimization
+ * - Framer Motion animations for smooth card entrances
  */
 
 'use client'
 
 import { memo } from 'react';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
+
+/**
+ * Animation variants for the team section
+ * Keeping it balanced and smooth
+ */
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.25,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
 
 /**
  * Interface representing a team member
@@ -109,6 +151,7 @@ const teamMembers: TeamMember[] = [
  * - Accessible markup with proper ARIA labels and semantic structure
  * - Gradient overlays for enhanced visual appeal
  * - Performance optimization through memoization
+ * - Smooth entrance animations for enhanced user experience
  * 
  * @returns {JSX.Element} The rendered meet the team section
  */
@@ -119,7 +162,13 @@ export default memo(function MeetTheTeam(): JSX.Element {
       <h2 id="meet-team-title" className="sr-only">Meet the Team</h2>
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-10">
+        <motion.div 
+          className="text-center mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
             Meet the Team
           </h2>
@@ -128,12 +177,18 @@ export default memo(function MeetTheTeam(): JSX.Element {
             We&apos;re a tight-knit group of professionals dedicated to delivering exceptional results. 
             Each team member brings unique expertise to every project.
           </p>
-        </div>
+        </motion.div>
 
         {/* Team Members Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={staggerContainer}
+        >
           {teamMembers.map((member, index) => (
-            <div 
+            <motion.div 
               key={member.name.toLowerCase().replace(/\s+/g,'-')}
               className={`group relative ${
                 // On large screens, move the logo card (index 5) to position 4 (before intern)
@@ -141,6 +196,7 @@ export default memo(function MeetTheTeam(): JSX.Element {
                 index === 4 ? 'lg:order-5' : 
                 `lg:order-${index + 1}`
               }`}
+              variants={cardVariants}
             >
               {/* Card */}
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200 flex flex-col h-full">
@@ -169,9 +225,9 @@ export default memo(function MeetTheTeam(): JSX.Element {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -69,7 +69,7 @@ export function ProcessPageContent(): JSX.Element {
       
       {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout>
-        <div className="pt-16">
+        <div className="pt-12">
           {/* Process Overview Section - Introduction to the 5Ds methodology */}
           <div>
             <ProcessOverviewSection />
@@ -86,12 +86,12 @@ export function ProcessPageContent(): JSX.Element {
           </div>
 
           {/* FAQ Section - Additional information and questions */}
-          <div className="my-10">
+          <div className="mt-10 mb-6">
             <FAQSection content={processFAQContent} />
           </div>
           
           {/* Call-to-Action Section - Final conversion element */}
-          <div className="mt-10">
+          <div className="mt-6">
             <CtaSection />
           </div>
         </div>

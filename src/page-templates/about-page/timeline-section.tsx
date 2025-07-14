@@ -27,9 +27,49 @@
 "use client";
 
 import { useState, memo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
+
+/**
+ * Animation variants for the timeline section
+ * Three-moment approach: header → timeline → CTA
+ */
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const timelineReveal: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const ctaHighlight: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
 
 /**
  * Timeline data structure for yearly milestones
@@ -102,7 +142,7 @@ const timelineData: TimelineEntry[] = [
  * 
  * Features:
  * - Collapsible year sections with toggle functionality
- * - Smooth scroll-triggered animations
+ * - Smart three-moment animation sequence
  * - Keyboard accessibility (Enter/Space to toggle)
  * - Visual timeline with connecting line and markers
  * - Responsive design for all screen sizes
@@ -120,7 +160,13 @@ function Timeline(): JSX.Element {
       <h2 id="timeline-section-title" className="sr-only">Timeline</h2>
       <div className="container max-w-4xl mx-auto lg:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.8 }}
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
             Timeline
           </h2>
@@ -128,8 +174,7 @@ function Timeline(): JSX.Element {
           <p className="text-xl text-gray-600 mt-4">
             Key milestones in education, research, and professional development
           </p>
-          
-        </div>
+        </motion.div>
 
         {/* Timeline Container */}
         <div className="relative">
@@ -197,7 +242,13 @@ function Timeline(): JSX.Element {
         </div>
 
         {/* Bottom CTA */}
-        <div className="container mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-16 shadow-md hover:shadow-lg transition-all duration-200">
+        <motion.div 
+          className="container mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-16 shadow-md hover:shadow-lg transition-all duration-200"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={ctaHighlight}
+        >
           <div className="flex items-center justify-center gap-2 mb-4">
             <h3 className="text-2xl font-semibold">Ready to Add Your Project to the Timeline?</h3>
           </div>
@@ -210,7 +261,7 @@ function Timeline(): JSX.Element {
           >
             Start Your Project
           </TailwindButton>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

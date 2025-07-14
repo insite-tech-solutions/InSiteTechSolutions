@@ -62,7 +62,7 @@ export default function HeroSection(): JSX.Element {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
           >
             Legal Center
@@ -71,7 +71,7 @@ export default function HeroSection(): JSX.Element {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
             className="text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow"
           >
             Your privacy and our terms of service are important. Here&apos;s a clear look at our policies and your rights.

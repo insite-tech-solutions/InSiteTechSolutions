@@ -68,7 +68,14 @@ export default function CTASection({ content }: CTASectionProps): JSX.Element {
 
   return (
     <div className="pb-16 py-8">
-      <section
+      <motion.section
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{
+          duration: 0.6,
+          ease: 'easeOut',
+        }}
         className={`container mx-auto relative rounded-2xl overflow-hidden ${bgClassName} border-2 border-light-blue shadow-lg hover:shadow-xl text-white py-8 lg:py-16 px-8 transition-all duration-300`}
         aria-labelledby="cta-section-title"
       >
@@ -80,7 +87,10 @@ export default function CTASection({ content }: CTASectionProps): JSX.Element {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ 
+              duration: 0.6,
+              delay: 0.2,
+            }}
             viewport={{ once: true }}
             className="space-y-8"
           >
@@ -115,7 +125,7 @@ export default function CTASection({ content }: CTASectionProps): JSX.Element {
             </div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   )
 }
