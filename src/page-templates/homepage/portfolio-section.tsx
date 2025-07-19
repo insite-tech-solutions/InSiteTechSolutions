@@ -42,31 +42,31 @@ export default function FeaturedPortfolio() {
 
   const featuredProjects: Project[] = [
     {
-      id: "1",
-      title: "E-Commerce Platform",
+      id: "pycat-napari",
+      title: "PyCAT-Napari",
       description:
-        "A full-stack e-commerce solution with real-time inventory management and payment processing integration.",
-      image: "/placeholder.svg?height=800&width=600",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "Supabase"],
-      link: "/portfolio/e-commerce",
+        "An open-source bio-image analysis platform that provides biologists with a low-code solution for studying biomolecular condensates. Built on napari, it streamlines complex analysis workflows into an intuitive graphical interface.",
+      image: "/portfolio-media/pycat/1_pycat_logo_512.webp",
+      technologies: ["Python", "Napari"],
+      link: "/about/previous-works#pycat-napari",
     },
     {
-      id: "2",
-      title: "SaaS Dashboard",
+      id: "banerjee-lab",
+      title: "Banerjee Lab Website",
       description:
-        "Custom analytics dashboard for a SaaS company, featuring real-time data visualization and user management.",
-      image: "/placeholder.svg?height=800&width=600",
-      technologies: ["React", "TypeScript", "D3.js", "Node.js", "PostgreSQL"],
-      link: "/portfolio/saas-dashboard",
+        "A comprehensive migration and modernization of an academic lab website, transforming it into a sleek, accessible platform with modernized branding and a secure Members Portal for internal resources.",
+      image: "/portfolio-media/banerjee-lab/1_banerjee_lab_homepage.jpg",
+      technologies: ["Squarespace", "CSS", "Zapier", "Google Forms"],
+      link: "/about/previous-works#banerjee-lab",
     },
     {
-      id: "3",
-      title: "Mobile App Development",
+      id: "dla-inverse-design",
+      title: "DLA Inverse Design",
       description:
-        "Cross-platform mobile application for a healthcare provider, enabling patient scheduling and telehealth services.",
-      image: "/placeholder.svg?height=800&width=600",
-      technologies: ["React Native", "Firebase", "Redux", "WebRTC", "Jest"],
-      link: "/portfolio/healthcare-app",
+        "Advanced photonics research that automated the design of high-performance, nanoscale photonic structures for next-generation particle-on-a-chip accelerators using novel optimization algorithms.",
+      image: "/portfolio-media/inverse-design/1_sem_image.jpg",
+      technologies: ["Python", "Ansys Lumerical"],
+      link: "/about/previous-works#dla-inverse-design",
     },
   ]
 
@@ -103,7 +103,7 @@ export default function FeaturedPortfolio() {
                 {/* Overlay that expands on hover */}
                 <div
                   className={cn(
-                    "absolute bottom-0 left-0 right-0 bg-gradient-to-br from-mild-blue/80 to-blue-800 backdrop-blur-sm transition-all duration-400 ease-in-out p-6",
+                    "absolute bottom-0 left-0 right-0 bg-gradient-to-br from-light-blue/90 via-blue-800/90 to-mild-blue-alt/90 backdrop-blur-sm transition-all duration-400 ease-in-out p-6",
                     hoveredProject === project.id ? "h-2/3" : "h-1/6",
                   )}
                 >
