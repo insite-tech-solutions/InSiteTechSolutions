@@ -12,12 +12,14 @@
  * - Accessibility features with ARIA labels
  * - Scroll indicator with animation
  * - Call-to-action button integration
+ * - Smooth entrance animations with Framer Motion
  *
  * @module HeroSection
  */
 
 "use client";
 
+import { motion, Variants } from 'framer-motion';
 import MiniWebPage from './mini-webpage';
 import CodeWebPage from './code-webpage';
 import MagnifyingGlass from './magnifying-glass';
@@ -25,6 +27,43 @@ import { useInteraction } from './useInteraction';
 import { useRevealEffect } from './useRevealEffect';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import styles from './hero-section.module.css';
+
+// Animation variants
+const fadeInUp: Variants = {
+  initial: { opacity: 0, y: 30 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+const staggerContainer: Variants = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const slideInLeft: Variants = {
+  initial: { opacity: 0, x: -50 },
+  animate: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+const slideInRight: Variants = {
+  initial: { opacity: 0, x: 50 },
+  animate: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
 
 /**
  * HeroSection Component
@@ -41,6 +80,7 @@ import styles from './hero-section.module.css';
  * - Call-to-action button for lead generation
  * - Scroll indicator with animated arrow
  * - Responsive layout for mobile and desktop
+ * - Smooth entrance animations with Framer Motion
  * 
  * All interactive elements are properly labeled for accessibility,
  * and the component uses semantic HTML structure with landmarks.
@@ -68,29 +108,49 @@ const HeroSection = (): JSX.Element => {
       </h2>
       
       {/* Main content container with responsive layout */}
-      <div className="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between mb-48 md:mb-64">
+      <motion.div 
+        className="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between mb-48 md:mb-64"
+        initial="initial"
+        animate="animate"
+        variants={staggerContainer}
+      >
         {/* Hero Text Content */}
-        <div className="lg:w-1/2 text-white mb-4 lg:mb-0 text-center lg:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+        <motion.div 
+          className="lg:w-1/2 text-white mb-4 lg:mb-0 text-center lg:text-left"
+          variants={slideInLeft}
+        >
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg"
+            variants={fadeInUp}
+          >
             Innovative Website and Software Solutions
-          </h1>
-          <p className="text-lg md:text-xl drop-shadow">
+          </motion.h1>
+          <motion.p 
+            className="text-lg md:text-xl drop-shadow"
+            variants={fadeInUp}
+          >
             From simple web design to complex software applications, InSite Tech provides the
             expertise to tailor solutions to all your tech-related needs.
-          </p>
+          </motion.p>
           {/* Desktop CTA Button - visible on md and above */}
-          <div className="block mt-6">
+          <motion.div 
+            className="block mt-6"
+            variants={fadeInUp}
+          >
             <TailwindButton
               href="/contact"
               className="bg-gray-50 font-semibold"
             >
               Schedule a Free Consultation
             </TailwindButton>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Interactive Preview Area */}
-        <div className="lg:w-1/2 flex flex-col items-center">
+        <motion.div 
+          className="lg:w-1/2 flex flex-col items-center"
+          variants={slideInRight}
+        >
           <div
             className={`relative w-full max-w-lg ${styles.interactiveArea}`}
             ref={webpageRef}
@@ -110,8 +170,8 @@ const HeroSection = (): JSX.Element => {
               </>
             )}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-32 md:bottom-48 left-1/2 transform -translate-x-1/2 text-white text-center">

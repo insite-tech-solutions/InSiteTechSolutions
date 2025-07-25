@@ -8,7 +8,7 @@
  * Features:
  * - Interactive expandable step cards with smooth animations
  * - Responsive design with different layouts for mobile/desktop
- * - Framer Motion animations for expand/collapse effects
+ * - Framer Motion animations for expand/collapse effects and entrance animations
  * - Accessibility features with ARIA labels and keyboard navigation
  * - Visual process flow with arrow indicators
  * - Call-to-action link to detailed process page
@@ -103,6 +103,68 @@ const fadeInUp: Variants = {
 }
 
 /**
+ * Animation variant for staggered container
+ * 
+ * Provides staggered animation timing for child elements
+ * to create a wave-like entrance effect.
+ * 
+ * @constant {Variants} staggerContainer
+ */
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+/**
+ * Animation variant for process step cards
+ * 
+ * Card entrance animation with scale and fade effect
+ * for engaging visual introduction.
+ * 
+ * @constant {Variants} stepCardVariants
+ */
+const stepCardVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    scale: 0.95
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
+/**
+ * Animation variant for arrow indicators
+ * 
+ * Simple fade-in for arrow elements between steps
+ * with subtle delay for natural flow.
+ * 
+ * @constant {Variants} arrowVariants
+ */
+const arrowVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      delay: 0.3
+    }
+  }
+};
+
+/**
  * ProcessSection Component
  * 
  * Creates an interactive process workflow section showcasing
@@ -112,7 +174,7 @@ const fadeInUp: Variants = {
  * The component includes:
  * - Interactive step cards with expand/collapse functionality
  * - Responsive layouts for desktop (horizontal) and mobile (vertical)
- * - Smooth animations using Framer Motion
+ * - Smooth animations using Framer Motion for entrance and interactions
  * - Visual process flow with arrow indicators
  * - Accessibility features with proper ARIA attributes
  * - Call-to-action link to detailed process information
@@ -156,28 +218,37 @@ function ProcessSection(): JSX.Element {
   };
 
   return (
-    <section aria-labelledby="process-section-title">
+    <motion.section 
+      aria-labelledby="process-section-title"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       {/* Accessible landmark for Process Section */}
       <h2 id="process-section-title" className="sr-only">Our Process</h2>
       
       {/* Main container */}
       <div className="container mx-auto">
         {/* Section header with title and description */}
-        <div className="text-center mb-10">
+        <motion.div className="text-center mb-10" variants={fadeInUp}>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Process</h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
             We believe that every successful project starts with a clear, collaborative process. We follow a methodology that we refer to as the 5 Ds: Discovery, Definition, Design, Development, and Deployment. Our approach is designed to deliver results that drive your business forward—combining strategic insight, creative thinking, and technical expertise at every stage.
           </p>
-        </div>
+        </motion.div>
 
         {/* Desktop Process Steps - Horizontal layout */}
-        <div className="hidden md:flex flex-wrap justify-center items-start gap-x-0 gap-y-6">
+        <motion.div 
+          className="hidden md:flex flex-wrap justify-center items-start gap-x-0 gap-y-6"
+          variants={staggerContainer}
+        >
           {processSteps.map((step, index) => (
             <React.Fragment key={step.number}>
               {/* Process step card */}
-              <div
+              <motion.div
                 className={`bg-white rounded-lg shadow-md border overflow-hidden transition-all duration-300 max-w-xs w-full flex flex-col
                   ${expandedStep === index ? 'border-blue-600' : 'border-gray-300 hover:border-mild-blue'}`}
+                variants={stepCardVariants}
               >
                 {/* Clickable Header with icon, title, and chevron */}
                 <button
@@ -228,25 +299,32 @@ function ProcessSection(): JSX.Element {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
               {/* Arrow indicator between steps (except after last step) */}
               {index < processSteps.length - 1 && (
-                <div className="flex items-center mt-4">
+                <motion.div 
+                  className="flex items-center mt-4"
+                  variants={arrowVariants}
+                >
                   <ArrowRight size={32} className="text-mild-grey" />
-                </div>
+                </motion.div>
               )}
             </React.Fragment>
           ))}
-        </div>
+        </motion.div>
 
         {/* Mobile Process Steps - Vertical layout */}
-        <div className="md:hidden space-y-4">
+        <motion.div 
+          className="md:hidden space-y-4"
+          variants={staggerContainer}
+        >
           {processSteps.map((step, index) => (
             <React.Fragment key={step.number}>
               {/* Process step card for mobile */}
-              <div 
+              <motion.div 
                 className={`bg-white rounded-lg shadow-md border overflow-hidden transition-all duration-300 flex flex-col
                           ${expandedStep === index ? 'border-blue-600' : 'border-gray-300 hover:border-mild-blue'}`}
+                variants={stepCardVariants}
               >
                 {/* Clickable Header with icon, title, and chevron */}
                 <button
@@ -297,16 +375,19 @@ function ProcessSection(): JSX.Element {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
               {/* Arrow indicator between steps (except after last step) */}
               {index < processSteps.length - 1 && (
-                <div className="flex items-center justify-center my-2">
+                <motion.div 
+                  className="flex items-center justify-center my-2"
+                  variants={arrowVariants}
+                >
                   <ArrowDown size={32} className="text-mild-grey" />
-                </div>
+                </motion.div>
               )}
             </React.Fragment>
           ))}
-        </div>
+        </motion.div>
 
         {/* Process CTA with animation */}
         <motion.div variants={fadeInUp} className="mt-10 flex justify-center">
@@ -332,7 +413,7 @@ function ProcessSection(): JSX.Element {
                 </a>
               </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

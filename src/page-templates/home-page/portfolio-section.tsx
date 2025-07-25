@@ -8,7 +8,7 @@
  * Features:
  * - Interactive project cards with hover expansion effects
  * - Technology badges with overflow handling
- * - Smooth animations with Framer Motion
+ * - Smooth animations with Framer Motion for entrance and hover interactions
  * - Responsive design with flexible layouts
  * - Image optimization with Next.js Image component
  * - Call-to-action link to full portfolio
@@ -110,6 +110,49 @@ const fadeInUp: Variants = {
 }
 
 /**
+ * Animation variant for staggered container
+ * 
+ * Provides staggered animation timing for child elements
+ * to create a sequential entrance effect for portfolio cards.
+ * 
+ * @constant {Variants} staggerContainer
+ */
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+/**
+ * Animation variant for portfolio cards
+ * 
+ * Card entrance animation with scale and fade effect
+ * for engaging visual introduction without interfering with hover.
+ * 
+ * @constant {Variants} cardVariants
+ */
+const cardVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    scale: 0.95
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+/**
  * FeaturedPortfolio Component
  * 
  * Creates a featured portfolio showcase with interactive project cards
@@ -119,7 +162,7 @@ const fadeInUp: Variants = {
  * The component includes:
  * - Interactive project cards with hover expansion effects
  * - Technology badges with overflow handling (+X more indicator)
- * - Smooth animations using Framer Motion
+ * - Smooth animations using Framer Motion for entrance and hover interactions
  * - Responsive design with flexible layouts
  * - Image optimization with Next.js Image component
  * - Call-to-action link to full portfolio
@@ -150,28 +193,39 @@ function FeaturedPortfolio(): JSX.Element {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
 
   return (
-    <section aria-labelledby="featured-portfolio-title">
+    <motion.section 
+      aria-labelledby="featured-portfolio-title"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       {/* Accessible landmark for Featured Portfolio */}
       <h2 id="featured-portfolio-title" className="sr-only">Featured Work</h2>
       
       {/* Main container */}
       <div className="container mx-auto">
         {/* Section Header with title and description */}
-        <div className="text-center max-w-4xl mx-auto mb-12">
+        <motion.div className="text-center max-w-4xl mx-auto mb-12" variants={fadeInUp}>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Work</h2>
           <p className="text-lg text-gray-600">
             Showcasing some of our recent projects which demonstrate our expertise in building effective tech solutions.
           </p>
-        </div>
+        </motion.div>
 
         {/* Portfolio Cards Container with responsive layout */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-8">
+        <motion.div 
+          className="flex flex-col md:flex-row gap-4 md:gap-6 mb-8"
+          variants={staggerContainer}
+        >
           {featuredProjects.map((project) => (
-            <div
+            <motion.div
               key={project.id}
               className="group relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-400 hover:shadow-lg flex-1"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
+              variants={cardVariants}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               {/* Project image container with aspect ratio */}
               <div className="relative aspect-[5/6] w-full overflow-hidden">
@@ -233,9 +287,9 @@ function FeaturedPortfolio(): JSX.Element {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Portfolio CTA with animation */}
         <motion.div variants={fadeInUp} className="mt-10 flex justify-center">
@@ -261,7 +315,7 @@ function FeaturedPortfolio(): JSX.Element {
                 </a>
               </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
