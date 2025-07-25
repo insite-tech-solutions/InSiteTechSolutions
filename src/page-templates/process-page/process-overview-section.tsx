@@ -104,7 +104,7 @@ export default function ProcessOverviewSection(): JSX.Element {
           <h2 className="text-3xl font-extrabold text-gray-900 md:text-4xl">
             {title}
           </h2>
-          <p className="mt-4 text-xl text-gray-600">
+          <p className="mt-4 text-xl text-gray-600 max-w-4xl mx-auto">
             {description}
           </p>
         </div>

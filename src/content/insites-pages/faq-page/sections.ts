@@ -33,7 +33,7 @@ import seoMarketingFAQContent from '@/content/service-pages/seo-marketing/faq-co
 import webAppDevFAQContent from '@/content/service-pages/web-app-dev/faq-content';
 
 // Homepage (general) FAQs
-import homepageFAQContent from '@/content/homepage/faq-content';
+import homepageFAQContent from '@/content/home-page/faq-content';
 
 /**
  * Represents a single section within the FAQ page

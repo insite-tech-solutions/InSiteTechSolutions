@@ -79,7 +79,7 @@ const pricingPagePriceFactors: PriceFactor[] = [
     items: [
       "Standard delivery vs. expedited requests",
       "Number of requested revisions",
-      "Resource allocation based on deadlines",
+      "Project urgency and resource allocation",
     ],
     icon: "Clock",
   },

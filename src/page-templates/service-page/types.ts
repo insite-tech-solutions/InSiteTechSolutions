@@ -419,13 +419,13 @@ export interface InSiteBenefitItem {
  * @property {string} title - Section heading
  * @property {string} description - Section description
  * @property {InSiteAdvantageItem[]} advantages - Array of company advantages
- * @property {InSiteBenefitItem[]} benefits - Array of client benefits
+ * @property {InSiteBenefitItem[]} [benefits] - Optional array of client benefits
  */
 export interface InSiteAdvantageContent {
   title: string;
   description: string;
   advantages: InSiteAdvantageItem[];
-  benefits: InSiteBenefitItem[];
+  benefits?: InSiteBenefitItem[];
 }
 
 /**

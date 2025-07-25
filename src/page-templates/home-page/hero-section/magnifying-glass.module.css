@@ -1,0 +1,169 @@
+/**
+ * @fileoverview Magnifying Glass CSS Module for Hero Section
+ *
+ * This CSS module provides styling for the magnifying glass component
+ * that follows the cursor and creates a visual magnifier effect.
+ *
+ * Features:
+ * - Multi-layered circular design with concentric circles
+ * - Realistic magnifier handle with 3D styling
+ * - Smooth positioning and transformations
+ * - Shadow effects for depth
+ * - Responsive sizing and positioning
+ *
+ * @module MagnifyingGlassStyles
+ */
+
+/* MagnifyingGlass.module.css */
+
+/**
+ * Main container for the magnifying glass
+ * 
+ * Positions the magnifier relative to the cursor and centers it
+ * using transform translate. Disables pointer events to prevent
+ * interference with underlying elements.
+ * 
+ * Key properties:
+ * - Absolute positioning for cursor following
+ * - Centered positioning with transform
+ * - Pointer events disabled
+ */
+.magnifierContainer {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+/**
+ * Content wrapper for magnifier elements
+ * 
+ * Contains all the visual elements of the magnifier including
+ * the concentric circles and handle. Provides relative positioning
+ * context for child elements.
+ * 
+ * Key properties:
+ * - Full width and height coverage
+ * - Relative positioning for child elements
+ */
+.magnifierContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+/**
+ * Base circle styles for concentric design
+ * 
+ * Common styles for all three circular layers that create
+ * the magnifier lens effect. Each circle is centered and
+ * uses border-radius for perfect circular shape.
+ * 
+ * Key properties:
+ * - Absolute positioning with center alignment
+ * - Perfect circular shape with border-radius
+ * - Centered positioning with transform
+ */
+.circle1,
+.circle2,
+.circle3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  
+/**
+ * Outer circle - magnifier frame
+ * 
+ * The largest circle that forms the outer frame of the magnifier.
+ * Uses a neutral gray color to create the frame effect.
+ * 
+ * Key properties:
+ * - 95% size for frame effect
+ * - Gray background color
+ */
+.circle1 {
+    width: 95%;
+    height: 95%;
+    background-color: #929699;
+  }
+  
+/**
+ * Middle circle - magnifier border
+ * 
+ * The middle circle that creates the white border effect
+ * between the outer frame and the lens.
+ * 
+ * Key properties:
+ * - 89% size for border effect
+ * - White background color
+ */
+.circle2 {
+    width: 89%;
+    height: 89%;
+    background-color: #ffffff;
+  }
+  
+/**
+ * Inner circle - magnifier lens
+ * 
+ * The smallest circle that represents the actual lens
+ * of the magnifier. Uses a blue color to simulate glass.
+ * 
+ * Key properties:
+ * - 85% size for lens effect
+ * - Blue background color for glass appearance
+ */
+.circle3 {
+    width: 85%;
+    height: 85%;
+    background-color: #1472bb;
+  }
+  
+/**
+ * Magnifier handle
+ * 
+ * Creates the handle portion of the magnifier with a
+ * realistic 3D appearance. Positioned at the bottom-right
+ * and rotated for natural angle.
+ * 
+ * Key properties:
+ * - Positioned at bottom-right with offset
+ * - Rotated -40deg for natural angle
+ * - Rounded corners for smooth appearance
+ * - Gray background color
+ */
+.magnifierHandle {
+    position: absolute;
+    bottom: -42%;
+    right: -9%;
+    width: 14%;
+    height: 59%;
+    background-color: #929699;
+    transform: rotate(-40deg);
+    border-radius: 5px;
+  }
+  
+/**
+ * Handle accent element
+ * 
+ * Creates a decorative accent on the handle using
+ * a pseudo-element. Adds depth and visual interest
+ * to the magnifier handle.
+ * 
+ * Key properties:
+ * - Positioned within the handle
+ * - Blue accent color matching the lens
+ * - 59% height with bottom positioning
+ */
+.magnifierHandle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 59%;
+    bottom: 25%;
+    left: 0;
+    background-color: #1472bb;
+  }
+  

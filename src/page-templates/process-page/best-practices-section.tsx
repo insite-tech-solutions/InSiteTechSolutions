@@ -93,7 +93,7 @@ function BestPracticesSection(): JSX.Element {
                         <h2 className="text-3xl md:text-4xl font-bold mt-6 mb-6 text-gray-50">
                             {title}
                         </h2>
-                        <p className="text-lg text-gray-100 leading-relaxed max-w-3xl mx-auto">
+                        <p className="text-lg text-gray-100 leading-relaxed max-w-4xl mx-auto">
                             {description}
                         </p>
                     </motion.div>

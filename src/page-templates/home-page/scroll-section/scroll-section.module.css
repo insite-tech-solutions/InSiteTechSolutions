@@ -1,0 +1,31 @@
+/**
+ * @fileoverview Scroll Section CSS Module for Homepage
+ *
+ * This CSS module provides styling for the scroll-triggered animation section
+ * that creates dynamic text animations and visual effects during scrolling.
+ *
+ * Features:
+ * - Responsive text sizing with clamp functions
+ * - Scroll-triggered animations
+ * - Dynamic font scaling
+ * - Performance optimizations
+ *
+ * @module ScrollSectionStyles
+ */
+
+/**
+ * Responsive text styling
+ * 
+ * Creates fluid typography that scales smoothly between
+ * minimum and maximum sizes based on viewport width.
+ * Uses clamp() function for optimal responsive behavior.
+ * 
+ * Key properties:
+ * - Minimum size: 2rem (32px)
+ * - Maximum size: 10rem (160px)
+ * - Viewport-based scaling: 10vw
+ * - Smooth scaling between breakpoints
+ */
+.responsive-text {
+    font-size: clamp(2rem, 10vw, 10rem);
+  }

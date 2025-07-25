@@ -145,7 +145,7 @@ function ApplicationCategories({ title, description, categories }: ApplicationCa
           <h2 className="text-3xl md:text-4xl font-bold mt-6 mb-6 text-gray-50">
             {title}
           </h2>
-          <p className="max-w-3xl mx-auto text-lg text-gray-100 leading-relaxed">
+          <p className="max-w-4xl mx-auto text-lg text-gray-100 leading-relaxed">
             {description}
           </p>
         </motion.header>

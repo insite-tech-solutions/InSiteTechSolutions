@@ -206,7 +206,7 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content, anchorId, showB
         {/* Animated Container - Staggered animations for child elements */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerChildren}>
           {/* Section Header - Title, badge, and description */}
-          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-8">
+          <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
             {showBadge && (
               <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-medium-blue-alt text-md font-medium mb-6">
                 Frequently Asked Questions (FAQs)

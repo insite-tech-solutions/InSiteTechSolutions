@@ -109,7 +109,7 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
     ctaText = "Start Your Project Today",
     ctaLink = "/contact",
     decorElements = [],
-    bgClassName = "bg-gradient-to-br from-dark-blue to-blue-800 p-6",
+    bgClassName = "bg-gradient-to-br from-medium-blue via-mild-blue to-blue-700 p-6",
     customElements
   } = content;
 
@@ -175,24 +175,24 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
           >
             {/* Text Content */}
             <motion.div 
-              className="order-1 md:order-none text-left px-3 lg:px-6 pt-4"
+              className="order-1 md:order-none text-left px-1 lg:px-6 pt-4"
               variants={fadeInLeft}
             >
               <motion.h1
                 id="hero-title"
-                className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg"
+                className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
                 variants={fadeInUp}
               >
                 {title}
               </motion.h1>
               <motion.p 
-                className="text-xl md:text-2xl mb-6 drop-shadow-lg"
+                className="text-xl md:text-2xl mb-6 drop-shadow"
                 variants={fadeInUp}
               >
                 {subtitle}
               </motion.p>
               <motion.p 
-                className="text-lg md:text-xl drop-shadow-lg"
+                className="text-lg md:text-xl drop-shadow"
                 variants={fadeInUp}
               >
                 {description}

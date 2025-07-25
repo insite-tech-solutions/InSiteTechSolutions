@@ -1,57 +1,58 @@
-// src/app/page.tsx
+/**
+ * @fileoverview Home Page Route Component for Next.js App Router
+ *
+ * Next.js App Router page component for the root route (/).
+ * Implements server-side rendering with static metadata export and component
+ * delegation pattern for a clean and optimized home page.
+ *
+ * Features:
+ * - Server-side rendering for optimal performance
+ * - Static metadata export for SEO optimization
+ * - Component delegation pattern for clean architecture
+ * - TypeScript support with proper type definitions
+ * - SEO-optimized metadata configuration
+ *
+ * @module Page
+ */
+import type { Metadata } from "next";
+import HomePage from "@/components/home-pages/home-page";
 
-
-//import HeroSection from '../components/HomepageHeroSec';
-import HeroSection from '@/page-templates/homepage/hero-section/hero-section';
-import Header from '@/components/site-header/header';
-import Footer from '@/components/site-footer/footer';
-import ScrollAnimationSection from '@/page-templates/homepage/scroll-section/scroll-section';
-import ServiceSection from '@/page-templates/homepage/services-section/services-section';
-import ProcessSection from '@/page-templates/homepage/process-section';
-import HomepagePricingSection from '@/page-templates/homepage/pricing-section';
-import InsiteAdvantageHomepageSection from '@/page-templates/homepage/insite-advantage';
-import PortfolioSection from '@/page-templates/homepage/portfolio-section';
-import TestimonialsSection from '@/page-templates/homepage/testimonials-section';
-import BlogNewsSection from '@/page-templates/homepage/blog-news-section';
-import HomepageFAQSection from '@/page-templates/homepage/faq-section';
-import NewsletterSection from '@/page-templates/homepage/newsletter-section';
-import ContactForm from '@/page-templates/homepage/cta-section';
-import Layout from '@/components/reusable-components/layout';
-
-
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-white">
-
-      <Header />
-    
-      <HeroSection />
-      <ScrollAnimationSection />
-
-      <Layout>
-      <ServiceSection />
-
-      <ProcessSection />
-
-      <HomepagePricingSection />
-
-      <InsiteAdvantageHomepageSection />
-
-      <PortfolioSection />
-
-      <TestimonialsSection />
-
-      <BlogNewsSection />
-
-      <HomepageFAQSection />
-
-      <NewsletterSection />
-
-      <ContactForm />
-      </Layout>
-      
-      <Footer />
-
-    </main>
-  )
+/**
+ * Static metadata configuration for the Home page
+ *
+ * Provides SEO optimization with a descriptive title and summary
+ * for search engines. Includes key business information and
+ * service offerings for better search visibility.
+ * 
+ * @constant {Metadata} metadata
+ */
+export const metadata: Metadata = {
+  title: "InSite Tech Solutions | Custom Software, Web & App Development",
+  description:
+    "InSite Tech Solutions offers custom software development, web and mobile app creation, data analysis, and AI-powered automation to elevate your business.",
 };
+
+/**
+ * Home Page Route Component
+ *
+ * Server component that renders the home page. It delegates the entire
+ * page structure to the HomePage component, keeping this entry point clean
+ * and focused on Next.js App Router responsibilities.
+ * 
+ * This component follows the component delegation pattern:
+ * - Handles Next.js App Router responsibilities (metadata, routing)
+ * - Delegates rendering to the HomePage client component
+ * - Maintains clean separation between server and client concerns
+ * - Enables server-side rendering benefits while supporting client-side interactivity
+ * 
+ * @returns {JSX.Element} The rendered Home page component
+ * 
+ * @example
+ * ```tsx
+ * // This component is automatically rendered by Next.js
+ * // when users visit the root route (/)
+ * ```
+ */
+export default function Page(): JSX.Element {
+  return <HomePage />;
+}

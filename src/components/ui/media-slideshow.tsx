@@ -1,15 +1,41 @@
 /**
- * @fileoverview MediaSlideshow component for displaying project media with slideshow functionality
+ * @fileoverview MediaSlideshow Component for Project Media Display
+ *
+ * This component creates an interactive slideshow for displaying project media
+ * including images and videos. Features automatic playback, manual controls,
+ * global slideshow state management, and responsive design.
+ *
+ * Features:
+ * - Automatic slideshow with configurable timing
+ * - Manual navigation controls (arrows, indicators, play/pause)
+ * - Video support with autoplay and end handling
+ * - Global slideshow state management (only one active at a time)
+ * - Responsive design with mobile-specific interactions
+ * - Crossfade transitions between media items
+ * - Progress bar and visual indicators
+ * - External video link support
+ *
+ * @module MediaSlideshow
  */
 
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import Image from 'next/image';
 import { Play, ChevronLeft, ChevronRight, Pause } from 'lucide-react';
 import { MediaItem } from '@/lib/portfolio-media';
 import { useSlideshow } from '@/contexts/slideshow-context';
 
+/**
+ * Props for the MediaSlideshow component
+ * 
+ * @interface MediaSlideshowProps
+ * @property {MediaItem[]} media - Array of media items to display
+ * @property {string} projectTitle - Title of the project for accessibility
+ * @property {string} [className] - Additional CSS classes
+ * @property {string} [videoUrl] - Optional external video URL
+ * @property {string} projectId - Unique identifier for the slideshow
+ */
 interface MediaSlideshowProps {
   media: MediaItem[];
   projectTitle: string;
@@ -18,33 +44,81 @@ interface MediaSlideshowProps {
   projectId: string; // Add this to identify each slideshow uniquely
 }
 
-const MediaSlideshow: React.FC<MediaSlideshowProps> = ({
+/**
+ * MediaSlideshow Component
+ * 
+ * Creates an interactive slideshow for displaying project media with
+ * automatic playback, manual controls, and global state management.
+ * Supports both images and videos with smooth transitions.
+ * 
+ * The component includes:
+ * - Automatic slideshow with 2.5-second intervals for images
+ * - Video autoplay with end-of-video handling
+ * - Manual navigation with arrow buttons and indicators
+ * - Play/pause controls with visual feedback
+ * - Global slideshow state management (only one active at a time)
+ * - Responsive design with mobile-specific interactions
+ * - Crossfade transitions between media items
+ * - Progress bar showing slideshow progress
+ * - External video link support
+ * 
+ * Interaction Modes:
+ * - Desktop: Hover to start, mouse leave to stop
+ * - Mobile: Click to toggle slideshow state
+ * - Global: Only one slideshow active at a time
+ * 
+ * @param {MediaSlideshowProps} props - Component props
+ * @returns {JSX.Element} Interactive media slideshow
+ * 
+ * @example
+ * ```tsx
+ * <MediaSlideshow
+ *   media={projectMedia}
+ *   projectTitle="Project Name"
+ *   projectId="project-1"
+ *   className="w-full"
+ * />
+ * ```
+ */
+function MediaSlideshow({
   media,
   projectTitle,
   className = '',
   videoUrl,
   projectId,
-}) => {
+}: MediaSlideshowProps): JSX.Element {
+  // Local state management
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showControls, setShowControls] = useState(false);
   
+  // Refs for timers and DOM elements
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
 
-  // Global slideshow state
+  // Global slideshow state management
   const { activeSlideshow, setActiveSlideshow, isSlideShowActive } = useSlideshow();
   const slideshowId = `project-${projectId}`;
   const isThisSlideShowActive = isSlideShowActive(slideshowId);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Detect mobile on mount only
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
+    setIsMounted(true);
+    
+    const checkMobile = () => {
+      if (isMounted) {
+        setIsMobile(window.innerWidth < 768);
+      }
+    };
+    
+    if (isMounted) {
+      checkMobile();
+    }
 
     let resizeTimeout: NodeJS.Timeout | null = null;
     const handleResize = () => {
@@ -52,12 +126,15 @@ const MediaSlideshow: React.FC<MediaSlideshowProps> = ({
       resizeTimeout = setTimeout(checkMobile, 150);
     };
 
-    window.addEventListener('resize', handleResize);
+    if (isMounted) {
+      window.addEventListener('resize', handleResize);
+    }
+    
     return () => {
       window.removeEventListener('resize', handleResize);
       if (resizeTimeout) clearTimeout(resizeTimeout);
     };
-  }, []);
+  }, [isMounted]);
 
   // Clean up all timers on unmount
   useEffect(() => {
@@ -67,6 +144,9 @@ const MediaSlideshow: React.FC<MediaSlideshowProps> = ({
     };
   }, []);
 
+  /**
+   * Start the slideshow with automatic progression
+   */
   const startSlideshow = useCallback(() => {
     if (media.length <= 1) return;
     
@@ -88,6 +168,9 @@ const MediaSlideshow: React.FC<MediaSlideshowProps> = ({
     }
   }, [media, currentIndex]);
 
+  /**
+   * Stop the slideshow and pause all videos
+   */
   const stopSlideshow = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -143,6 +226,9 @@ const MediaSlideshow: React.FC<MediaSlideshowProps> = ({
     }
   }, [currentIndex, isPlaying, media]);
 
+  /**
+   * Reset slideshow to initial state
+   */
   const resetToStart = useCallback(() => {
     stopSlideshow();
     setCurrentIndex(0);
@@ -272,141 +358,142 @@ const MediaSlideshow: React.FC<MediaSlideshowProps> = ({
   }
 
   return (
-    <div
-      ref={containerRef}
-      className={`relative aspect-video bg-gray-100 rounded-xl overflow-hidden cursor-pointer group ${className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      {/* Image Container with Crossfade */}
-      <div className="relative w-full h-full">
-        {media.map((item, index) => (
-          <div
-            key={`${item.src}-${index}`}
-            className={`absolute inset-0 transition-all duration-700 ease-out ${
-              index === currentIndex 
-                ? 'opacity-100 scale-100' 
-                : 'opacity-0 scale-105'
-            }`}
-            style={{
-              transitionDelay: index === currentIndex ? '50ms' : '0ms'
-            }}
-          >
-            {item.type === 'image' ? (
-              <Image
-                src={item.src}
-                alt={`${projectTitle} - Image ${index + 1}`}
-                fill
-                className="object-contain bg-gray-100"
-                style={{
-                  transform: 'scale(1.05)',
-                  transformOrigin: 'center'
-                }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority={index === 0}
-                quality={90}
-              />
-            ) : (
-              <video
-                ref={setVideoRef(index)}
-                src={item.src}
-                className="w-full h-full object-contain bg-gray-100"
-                style={{
-                  transform: 'scale(1.05)',
-                  transformOrigin: 'center'
-                }}
-                muted
-                playsInline
-                onEnded={handleVideoEnd}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-
-
-      {/* Controls Overlay */}
-      {showControls && hasMultipleItems && (
-        <div className="absolute inset-0">
-          {/* Navigation Arrows */}
-          <button
-            onClick={goToPrevious}
-            aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all duration-200 transform hover:scale-110 hover:-translate-x-1 z-10"
-          >
-            <ChevronLeft className="w-4 h-4 text-gray-700" />
-          </button>
-
-          <button
-            onClick={goToNext}
-            aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all duration-200 transform hover:scale-110 hover:translate-x-1 z-10"
-          >
-            <ChevronRight className="w-4 h-4 text-gray-700" />
-          </button>
-
-          {/* Play/Pause Button */}
-          <button
-            onClick={togglePlayPause}
-            aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
-            className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all duration-200 transform hover:scale-110 z-10"
-          >
-            {isPlaying ? (
-              <Pause className="w-4 h-4 text-gray-700" />
-            ) : (
-              <Play className="w-4 h-4 text-gray-700 ml-0.5" />
-            )}
-          </button>
-
-          {/* Slide Indicators */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
-            {media.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goToSlide(index);
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 transform hover:scale-125 ${
-                  index === currentIndex
-                    ? 'bg-white scale-110 shadow-md'
-                    : 'bg-white/60 hover:bg-white/80'
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Progress Bar */}
-          {isPlaying && (
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-white via-white to-white/80 transition-all duration-500 ease-out shadow-sm"
-                style={{
-                  width: `${((currentIndex + 1) / media.length) * 100}%`,
-                }}
-              />
+    <>
+      {/* Slideshow Container */}
+      <div
+        ref={containerRef}
+        className={`relative aspect-video bg-gray-100 rounded-xl overflow-hidden cursor-pointer group ${className}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+      >
+        {/* Image Container with Crossfade */}
+        <div className="relative w-full h-full">
+          {media.map((item, index) => (
+            <div
+              key={`${item.src}-${index}`}
+              className={`absolute inset-0 transition-all duration-700 ease-out ${
+                index === currentIndex 
+                  ? 'opacity-100 scale-100' 
+                  : 'opacity-0 scale-105'
+              }`}
+              style={{
+                transitionDelay: index === currentIndex ? '50ms' : '0ms'
+              }}
+            >
+              {item.type === 'image' ? (
+                <Image
+                  src={item.src}
+                  alt={`${projectTitle} - Image ${index + 1}`}
+                  fill
+                  className="object-contain bg-gray-100"
+                  style={{
+                    transform: 'scale(1.05)',
+                    transformOrigin: 'center'
+                  }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={index === 0}
+                  quality={90}
+                />
+              ) : (
+                <video
+                  ref={setVideoRef(index)}
+                  src={item.src}
+                  className="w-full h-full object-contain bg-gray-100"
+                  style={{
+                    transform: 'scale(1.05)',
+                    transformOrigin: 'center'
+                  }}
+                  muted
+                  playsInline
+                  onEnded={handleVideoEnd}
+                />
+              )}
             </div>
-          )}
+          ))}
         </div>
-      )}
 
-      {/* External Video Play Button */}
-      {videoUrl && currentIndex === 0 && !showControls && (
-        <a
-          href={videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-4 left-4 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 transform hover:scale-110 hover:rotate-3 z-20"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Play className="h-4 w-4 text-gray-700 ml-0.5 transition-transform duration-200" />
-        </a>
-      )}
-    </div>
+        {/* Controls Overlay */}
+        {showControls && hasMultipleItems && (
+          <div className="absolute inset-0">
+            {/* Navigation Arrows */}
+            <button
+              onClick={goToPrevious}
+              aria-label="Previous slide"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all duration-200 transform hover:scale-110 hover:-translate-x-1 z-10"
+            >
+              <ChevronLeft className="w-4 h-4 text-gray-700" />
+            </button>
+
+            <button
+              onClick={goToNext}
+              aria-label="Next slide"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all duration-200 transform hover:scale-110 hover:translate-x-1 z-10"
+            >
+              <ChevronRight className="w-4 h-4 text-gray-700" />
+            </button>
+
+            {/* Play/Pause Button */}
+            <button
+              onClick={togglePlayPause}
+              aria-label={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
+              className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-lg transition-all duration-200 transform hover:scale-110 z-10"
+            >
+              {isPlaying ? (
+                <Pause className="w-4 h-4 text-gray-700" />
+              ) : (
+                <Play className="w-4 h-4 text-gray-700 ml-0.5" />
+              )}
+            </button>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+              {media.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToSlide(index);
+                  }}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 transform hover:scale-125 ${
+                    index === currentIndex
+                      ? 'bg-white scale-110 shadow-md'
+                      : 'bg-white/60 hover:bg-white/80'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Progress Bar */}
+            {isPlaying && (
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-white via-white to-white/80 transition-all duration-500 ease-out shadow-sm"
+                  style={{
+                    width: `${((currentIndex + 1) / media.length) * 100}%`,
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* External Video Play Button */}
+        {videoUrl && currentIndex === 0 && !showControls && (
+          <a
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-4 left-4 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 transform hover:scale-110 hover:rotate-3 z-20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Play className="h-4 w-4 text-gray-700 ml-0.5 transition-transform duration-200" />
+          </a>
+        )}
+      </div>
+    </>
   );
 };
 
-export default MediaSlideshow; 
+export default memo(MediaSlideshow);

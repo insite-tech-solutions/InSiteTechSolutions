@@ -1,0 +1,532 @@
+/**
+ * @fileoverview Hero Section CSS Module for Homepage
+ *
+ * This CSS module provides styling for the main hero section of the homepage,
+ * including layout, responsive design, interactive elements, and decorative
+ * background effects.
+ *
+ * Features:
+ * - Responsive layout with flexbox and grid
+ * - Gradient backgrounds and decorative elements
+ * - Interactive area styling for magnifier effects
+ * - Mobile-first responsive design
+ * - CSS custom properties for theming
+ *
+ * @module HeroSectionStyles
+ */
+
+/* src/components/HomepageHero/HeroSection.module.css */
+
+/**
+ * Main hero container with gradient background
+ * 
+ * Creates the primary hero section with gradient background,
+ * full viewport height, and centered content layout.
+ * 
+ * Key properties:
+ * - CSS custom properties for theming
+ * - Linear gradient background
+ * - Full viewport height
+ * - Centered flexbox layout
+ */
+.heroContainer {
+    --primary-color: #0e72c8;
+    --primary-dark: #194acf;
+    --text-light: #ffffff;
+    --text-dark: #1f2937;
+    --bg-light: #ffffff;
+    --bg-dark: #111827;
+  
+    background: linear-gradient(to bottom right, var(--primary-color), var(--primary-dark));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+/**
+ * Content wrapper for responsive layout
+ * 
+ * Manages the layout of hero content with responsive
+ * flexbox design that adapts from column to row layout.
+ * 
+ * Key properties:
+ * - Column layout on mobile
+ * - Row layout on desktop (1024px+)
+ * - Centered alignment
+ * - Maximum width constraint
+ */
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+@media (min-width: 1024px) {
+    .contentWrapper {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  
+/**
+ * Text content area styling
+ * 
+ * Styles the text content area with responsive width
+ * and proper spacing for mobile and desktop layouts.
+ * 
+ * Key properties:
+ * - White text color
+ * - Responsive width (45% on desktop)
+ * - Proper spacing and margins
+ */
+.textContent {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+  }
+  
+@media (min-width: 1024px) {
+    .textContent {
+      width: 45%;
+      margin-bottom: 0;
+    }
+  }
+  
+/**
+ * Hero title styling
+ * 
+ * Large, bold title text for the hero section
+ * with proper spacing and typography.
+ * 
+ * Key properties:
+ * - Large font size (2.5rem)
+ * - Bold font weight
+ * - Proper margin spacing
+ */
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+/**
+ * Hero description styling
+ * 
+ * Description text with appropriate size and spacing
+ * for readability and visual hierarchy.
+ * 
+ * Key properties:
+ * - Medium font size (1.25rem)
+ * - Proper margin spacing
+ */
+.description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+/**
+ * Webpage wrapper for interactive area
+ * 
+ * Container for the interactive webpage preview
+ * with relative positioning and responsive sizing.
+ * 
+ * Key properties:
+ * - Relative positioning for overlays
+ * - Responsive width (50% on desktop)
+ * - Padding for magnifier movement
+ */
+.webpageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    /* Add some padding to allow magnifier to move outside */
+    padding: 20px;
+  }
+  
+@media (min-width: 1024px) {
+    .webpageWrapper {
+      width: 50%;
+    }
+  }
+  
+
+/**
+ * Magnifier wrapper for overlay positioning
+ * 
+ * Container for the magnifying glass overlay
+ * with absolute positioning and full coverage.
+ * 
+ * Key properties:
+ * - Absolute positioning
+ * - Full width and height coverage
+ * - Visible overflow for magnifier movement
+ */
+.magnifierWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  
+/**
+ * Browser top bar styling
+ * 
+ * Styles the browser window top bar with
+ * control buttons and address bar.
+ * 
+ * Key properties:
+ * - Light gray background
+ * - Rounded top corners
+ * - Flexbox layout for controls
+ */
+.browserTopBar {
+    background-color: #f3f4f6;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  
+/**
+ * Browser control buttons container
+ * 
+ * Container for window control buttons
+ * (close, minimize, maximize) with proper spacing.
+ * 
+ * Key properties:
+ * - Flexbox layout with gap
+ * - Proper spacing between controls
+ */
+.browserControls {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+/**
+ * Individual browser control button
+ * 
+ * Styles for individual window control buttons
+ * with circular shape and color coding.
+ * 
+ * Key properties:
+ * - Circular shape with border-radius
+ * - Small size (0.75rem)
+ * - Color-coded for different actions
+ */
+.browserControl {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+  }
+  
+/**
+ * Browser URL bar styling
+ * 
+ * Address bar with security indicator and
+ * navigation controls styling.
+ * 
+ * Key properties:
+ * - White background
+ * - Rounded corners
+ * - Flex-grow for responsive width
+ * - Proper text styling
+ */
+.browserUrlBar {
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bg-light);
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--text-dark);
+    flex-grow: 1;
+  }
+  
+/**
+ * Webpage content area styling
+ * 
+ * Main content area of the browser window
+ * with proper padding and rounded corners.
+ * 
+ * Key properties:
+ * - White background
+ * - Rounded bottom corners
+ * - Proper padding for content
+ */
+.webpageContent {
+    background-color: var(--bg-light);
+    padding: 1.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+  
+/**
+ * Webpage title styling
+ * 
+ * Large, bold title within the webpage preview
+ * with proper typography and spacing.
+ * 
+ * Key properties:
+ * - Large font size (1.5rem)
+ * - Bold font weight
+ * - Dark text color
+ * - Proper margin spacing
+ */
+.webpageTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+  }
+  
+/**
+ * Webpage text content styling
+ * 
+ * Description text within the webpage preview
+ * with appropriate color and spacing.
+ * 
+ * Key properties:
+ * - Gray text color for readability
+ * - Proper margin spacing
+ */
+.webpageText {
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+  
+/**
+ * Services list container
+ * 
+ * Container for the services grid/list
+ * with proper spacing and layout.
+ * 
+ * Key properties:
+ * - Flexbox layout with gap
+ * - Proper margin spacing
+ */
+.servicesList {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+/**
+ * Individual service item styling
+ * 
+ * Container for each service item with
+ * icon and text layout.
+ * 
+ * Key properties:
+ * - Flexbox layout for icon and text
+ * - Proper alignment
+ */
+.serviceItem {
+    display: flex;
+    align-items: center;
+  }
+  
+/**
+ * Service icon styling
+ * 
+ * Icons for service items with
+ * consistent color and spacing.
+ * 
+ * Key properties:
+ * - Primary color for consistency
+ * - Proper margin spacing
+ */
+.serviceIcon {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+  }
+  
+/**
+ * Service name text styling
+ * 
+ * Text labels for service items
+ * with appropriate size and color.
+ * 
+ * Key properties:
+ * - Small font size (0.875rem)
+ * - Gray text color
+ */
+.serviceName {
+    font-size: 0.875rem;
+    color: #374151;
+  }
+  
+/**
+ * Call-to-action button styling
+ * 
+ * Primary action button with hover effects
+ * and consistent theming.
+ * 
+ * Key properties:
+ * - Primary color background
+ * - White text color
+ * - Rounded corners
+ * - Hover transition effects
+ */
+.ctaButton {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+.ctaButton:hover {
+    background-color: var(--primary-dark);
+  }
+
+/**
+ * Primary background gradient
+ * 
+ * Main gradient background for the hero section
+ * with blue gradient and white fade effect.
+ * 
+ * Key properties:
+ * - Blue gradient background
+ * - White text color
+ * - Relative positioning
+ */
+.bgPrimary {
+  background: linear-gradient(to bottom, #0073e3 calc(110% - 400px), #ffffff);
+  color: #fff;
+  position: relative;
+}
+
+/**
+ * Decorative background elements
+ * 
+ * Creates decorative background elements using
+ * pseudo-elements for visual interest.
+ * 
+ * Key properties:
+ * - Relative positioning
+ * - Z-index layering
+ * - Overflow hidden
+ */
+.bgDecor {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  overflow: hidden;
+}
+
+/**
+ * Decorative pseudo-elements
+ * 
+ * Creates decorative background shapes using
+ * pseudo-elements with gradient fills.
+ * 
+ * Key properties:
+ * - Absolute positioning
+ * - Gradient backgrounds
+ * - Rounded shapes
+ * - Transform rotations
+ */
+.bgDecor::before,
+.bgDecor::after {
+  content: "";
+  position: absolute;
+  background-image: linear-gradient(133.6deg, hsla(0,0%,100%,.2) 54.65%, hsla(0,0%,100%,.1) 91.5%);
+  border-radius: 50px;
+  z-index: -1;
+}
+
+.bgDecor::before {
+  width: 50%;
+  height: 0;
+  padding-bottom: 50%;
+  transform: rotate(-15deg);
+  top: -23%;
+  left: -30%;
+  opacity: 0.7;
+}
+
+.bgDecor::after {
+  width: 50%;
+  height: 0;
+  padding-bottom: 50%;
+  bottom: -5%;
+  right: -30%;
+  transform: rotate(-195deg);
+  opacity: 0.6;
+}
+
+/**
+ * Mobile-specific decorative styling
+ * 
+ * Responsive adjustments for decorative elements
+ * on mobile devices with different sizing and positioning.
+ * 
+ * Key properties:
+ * - Larger size on mobile (90%)
+ * - Adjusted positioning
+ * - Maintained rotations
+ */
+@media (max-width: 768px) {
+  .bgDecor::before {
+    /* Mobile customization - adjust these values as needed */
+    width: 90%;
+    height: 0;
+    padding-bottom: 90%;
+    transform: rotate(-15deg);
+    top: -15%;
+    right: -1%;
+  }
+
+  .bgDecor::after {
+    /* Mobile customization - adjust these values as needed */
+    width: 90%;
+    height: 0;
+    padding-bottom: 90%;
+    bottom: -1%;
+    right: -19%;
+    transform: rotate(-195deg);
+  }
+}
+
+/**
+ * Gradient overlay for fade effect
+ * 
+ * Creates a fade-to-white effect at the bottom
+ * of the hero section for smooth transitions.
+ * 
+ * Key properties:
+ * - Absolute positioning at bottom
+ * - Gradient fade effect
+ * - Pointer events disabled
+ * - Z-index layering
+ */
+.gradientOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;  /* Adjust this value to control the height of the fade effect */
+  background: linear-gradient(to bottom, rgba(42, 90, 248, 0), #ffffff);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/**
+ * Hero section height
+ * 
+ * Sets the minimum height for the hero section
+ * to be 20% taller than the viewport for visual impact.
+ * 
+ * Key properties:
+ * - Minimum height of 120vh
+ * - Ensures full coverage
+ */
+.heroHeight {
+  min-height: 120vh; /* This makes it 20% taller than the viewport */
+}

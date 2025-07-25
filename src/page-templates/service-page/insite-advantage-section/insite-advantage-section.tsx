@@ -200,14 +200,16 @@ const InSiteAdvantageSectionWrapper: React.FC<InSiteAdvantageSectionProps> = ({ 
       </div>
       
       {/* Benefits Section - Displays competitive advantages and client benefits */}
-      <div>
-        <div className="pt-8">
-          <BenefitsSection 
-            title="Competitive Advantages and Client Benefits"
-            items={benefits}
-          />
+      {benefits && benefits.length > 0 && (
+        <div>
+          <div className="pt-8">
+            <BenefitsSection 
+              title="Competitive Advantages and Client Benefits"
+              items={benefits}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </section>
   )
 }

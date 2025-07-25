@@ -16,7 +16,7 @@
 
 import Header from '@/components/site-header/header';
 import Footer from '@/components/site-footer/footer';
-import AboutUsPageTemplate from '@/page-templates/about-page';
+import AboutUsPageTemplate from '@/page-templates/about-us-page';
 
 /**
  * AboutUsPage Component

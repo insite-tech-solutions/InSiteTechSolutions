@@ -103,7 +103,7 @@ export function ContactPageContent(): JSX.Element {
       {/* Page Header - Gradient background section outside main layout */}
       <div className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 text-white text-left py-8 px-4 mt-[104px]">
         <motion.h1 
-          className="text-3xl font-bold"
+          className="text-3xl font-bold drop-shadow"
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.4 }}
@@ -139,7 +139,7 @@ export function ContactPageContent(): JSX.Element {
                 <span className="block text-medium-blue">Amazing Together</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Have a project in mind or need expert tech consulting? We&apos;re here to help turn your ideas into reality.
+                Have a project in mind or need expert tech consulting? We&apos;re here to help turn your ideas into reality. Fill out the contact form below or email us and we will get back to you as soon as possible.
               </p>
             </div>
           </motion.div>
