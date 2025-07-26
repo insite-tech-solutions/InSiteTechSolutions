@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -51,36 +51,37 @@ const Header: React.FC = () => {
         isScrolled ? 'bg-white shadow-md' : 'bg-white'
       }`}>
         <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-2">
+          <div className="flex justify-between items-center py-1">
             <div className="flex justify-start lg:w-0 lg:flex-1">
-              <Link href="/" className="text-blue-600 font-bold text-xl">
+              <Link href="/" className="text-medium-blue font-bold text-xl">
                 <span className="sr-only">InSite Tech Solutions</span>
                 {/* Using next/image for optimized image loading */}
                 <Image
                   src="/Insite Tech Solutions Light.svg"
                   alt="InSite Tech Solutions Logo"
-                  width={190}
-                  height={88}
+                  width={160}
+                  height={72}
                   priority
+                  // style={{ objectFit: 'cover' }}
                 />
               </Link>
             </div>
             <div className="flex items-center justify-end flex-1">
-              <div className="hidden md:flex items-center space-x-6">
+              <div className="hidden md:flex items-center space-x-4">
                 <DesktopNav menuItems={menuItems} />
                 <SearchButton />
               </div>
               <div className="md:hidden">
                 <button
                   onClick={toggleMobileMenu}
-                  className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                  className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-mild-blue-alt"
                   aria-expanded={isMobileMenuOpen}
                 >
                   <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
                   {isMobileMenuOpen ? (
-                    <X className="h-6 w-6" aria-hidden="true" />
+                    <X className="h-8 w-8" aria-hidden="true" />
                   ) : (
-                    <Menu className="h-6 w-6" aria-hidden="true" />
+                    <Menu className="h-8 w-8" aria-hidden="true" />
                   )}
                 </button>
               </div>

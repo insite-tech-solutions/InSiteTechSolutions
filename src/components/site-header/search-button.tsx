@@ -23,14 +23,15 @@ const SearchButton: React.FC<SearchButtonProps> = ({ className = '' }) => {
         className={`
           p-3 rounded-md
           transition-colors duration-200
-          bg-white hover:bg-blue-600 focus:bg-blue-600
-          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+          bg-white hover:bg-medium-blue focus:bg-medium-blue
+          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mild-blue-alt
+          transition-all duration-200
           ${className}
         `}
         aria-label="Search"
       >
         <Search 
-          className="h-6 w-6 text-blue-600 group-hover:text-white group-focus:text-white" 
+          className="h-6 w-6 text-medium-blue group-hover:text-white group-focus:text-white transition-all duration-200" 
           aria-hidden="true" 
         />
       </button>

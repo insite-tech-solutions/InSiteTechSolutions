@@ -159,7 +159,7 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
   return (
     /* Hero Section Container */
     <section
-      className="relative text-white mt-[104px]"
+      className="relative text-white mt-header"
       aria-labelledby="hero-title"
     >
       <TailwindHeroBackground 

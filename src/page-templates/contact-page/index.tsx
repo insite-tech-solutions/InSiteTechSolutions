@@ -101,7 +101,7 @@ export function ContactPageContent(): JSX.Element {
   return (
     <>
       {/* Page Header - Gradient background section outside main layout */}
-      <div className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 text-white text-left py-8 px-4 mt-[104px]">
+      <div className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 text-white text-left py-8 px-4 mt-header">
         <motion.h1 
           className="text-3xl font-bold drop-shadow"
           initial={{ opacity: 0, x: -30 }}

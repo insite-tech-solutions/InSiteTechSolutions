@@ -27,6 +27,7 @@ import { useCallback, MouseEvent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ServiceOverviewContent, TOCItem } from '../types';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
+import { HEADER_HEIGHT } from '@/lib/constants';
 
 /**
  * Props interface for the ServiceOverviewSection component
@@ -77,7 +78,7 @@ export default function ServiceOverviewSection({ content }: ServiceOverviewSecti
     const element = document.querySelector(selector);
     
     if (element) {
-      const headerOffset = 80; // Adjust based on the actual fixed header height
+      const headerOffset = HEADER_HEIGHT - 24; // Adjust based on the actual fixed header height
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
 

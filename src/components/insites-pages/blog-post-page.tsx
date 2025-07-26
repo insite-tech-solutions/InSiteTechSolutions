@@ -57,7 +57,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps): JSX.Element {
       <main 
         id="blog-post-main"
         aria-labelledby="blog-post-main-title"
-        className="min-h-screen bg-gray-50 mt-[104px]"
+        className="min-h-screen bg-gray-50 mt-header"
       >
         {/* Accessible landmark for Blog Post Content */}
         <h2 id="blog-post-main-title" className="sr-only">Blog Post Content</h2>

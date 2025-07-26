@@ -54,7 +54,7 @@ const decorElements: DecorElement[] = [
  */
 export default function FAQPageHero(): JSX.Element {
   return (
-    <section aria-labelledby="faq-hero-title" className="mt-[104px]">
+    <section aria-labelledby="faq-hero-title" className="mt-header">
       {/* Accessible landmark for FAQ Hero */}
       <h2 id="faq-hero-title" className="sr-only">Frequently Asked Questions</h2>
       <TailwindHeroBackground 

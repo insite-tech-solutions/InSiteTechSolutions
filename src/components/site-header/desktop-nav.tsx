@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react'
 import Link from 'next/link'
@@ -47,7 +47,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
       return (
         <span
           key={`letter-${index}`}
-          className="text-gray-500 group-hover:text-blue-600 transition-colors duration-300"
+          className="text-gray-500 group-hover:text-medium-blue transition-colors duration-300"
           style={{ transitionDelay: `${index * delayIncrement}ms`,
           letterSpacing: '0.1em' }}
         >
@@ -60,14 +60,12 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
       spans.push(
         <span
           key="chevron"
-//          className="text-gray-500 group-hover:text-blue-600 transition-colors transition-transform duration-300 group-hover:rotate-180"
-          className="text-gray-500 group-hover:text-blue-600 transition-colors duration-300"
+          className="text-gray-500 group-hover:text-medium-blue transition-colors duration-300"
           style={{ transitionDelay: `${letters.length * delayIncrement}ms` }}
         >
           <ChevronDown
             className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-180"
-            style={{ transitionDelay: `${letters.length * (delayIncrement/2.65)}ms` }}
-//            style={{ transitionDelay: `${letters.length * (delayIncrement/2.75)}ms`, transitionDuration: `${letters.length * (delayIncrement*1.65)}ms` }}
+            style={{ transitionDelay: `${letters.length * (delayIncrement/2.55)}ms` }}
             aria-hidden="true"
           />
         </span>
@@ -88,9 +86,8 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
               onMouseLeave={handleMouseLeave}
             >
               <button
-                className="group text-gray-500 inline-flex items-center rounded-md bg-white text-base font-medium 
-                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 px-4 py-8"            
-                style={{ fontFamily: "'Open Sans', sans-serif", fontSize: '1rem', fontWeight: 500 }}
+                className="group text-gray-500 inline-flex items-center rounded-md bg-white text-base font-kohinoor font-medium 
+                focus:outline-none focus:ring-2 focus:ring-mild-blue-alt focus:ring-offset-2 px-3 py-6"            
               >
                 {splitTextIntoSpans(item.name, true)}
               </button>
@@ -100,8 +97,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ menuItems }) => {
           ) : (
             <Link
               href={item.href}
-              className="group text-gray-500 inline-flex items-center px-3 py-8"
-              style={{ fontFamily: "'Open Sans', sans-serif", fontSize: '1rem', fontWeight: 500 }}
+              className="group rounded-md text-gray-500 inline-flex items-center text-base font-kohinoor font-medium px-3 py-6"
             >
               {splitTextIntoSpans(item.name)}
             </Link>

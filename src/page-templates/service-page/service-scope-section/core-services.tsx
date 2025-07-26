@@ -31,6 +31,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ServiceItem } from '../types'
 import { CheckCircle } from 'lucide-react'
 import { getIcon } from '@/utils/icon-registry'
+import { HEADER_HEIGHT } from '@/lib/constants'
 
 // Register GSAP ScrollTrigger plugin only if window is defined (client-side)
 if (typeof window !== 'undefined') {
@@ -226,8 +227,8 @@ function CoreServicesMain({ title, description, services }: CoreServicesProps): 
         const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
         // Adjust distance for mobile to accommodate different layout/spacing
         const distance = isMobile
-          ? cardsHeight - pinnedHeight + 48 + 236 // Additional offset for mobile
-          : cardsHeight - pinnedHeight + 48 // Standard offset for desktop
+          ? cardsHeight - pinnedHeight + HEADER_HEIGHT / 2 + 248 // Additional offset for mobile
+          : cardsHeight - pinnedHeight + HEADER_HEIGHT / 2 // Standard offset for desktop
         
         // Ensure scroll distance is not negative
         return Math.max(0, distance);
@@ -241,7 +242,7 @@ function CoreServicesMain({ title, description, services }: CoreServicesProps): 
         willChange: 'transform', // Hints browser about upcoming transform changes
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 128px', // Start pinning when trigger top hits 128px from viewport top (header height + padding)
+          start: `top ${HEADER_HEIGHT + 18}px`, // Start pinning when trigger top hits header height + padding from viewport top
           end: () => `+=${calculateScrollDistance()}`, // End pinning after scrolling calculated distance
           pin: pinnedRef.current, // Pin the header/description element
           pinSpacing: true, // Add padding to prevent content from jumping
@@ -285,7 +286,7 @@ function CoreServicesMain({ title, description, services }: CoreServicesProps): 
               className="rounded-xl w-full mx-auto p-6 bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt
               shadow-2xl overflow-hidden flex flex-col lg:flex-row"
               style={{
-                height: `calc(100vh - 104px - 3rem)`, // Dynamic height calculation: viewport height - navbar height - padding
+                height: `calc(100vh - ${HEADER_HEIGHT}px - 2rem)`, // Dynamic height calculation: viewport height - navbar height - padding
                 minHeight: 0, // Prevents intrinsic height issues for flexible layout
               }}
             >

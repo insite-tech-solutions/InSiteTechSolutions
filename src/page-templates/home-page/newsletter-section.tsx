@@ -111,6 +111,7 @@ function NewsletterSubscription(): JSX.Element {
       whileInView="animate"
       viewport={{ once: true, amount: 0.3 }}
       variants={staggerContainer}
+      className="overflow-hidden"
     >
       {/* Accessible landmark for Newsletter Subscription */}
       <h2 id="newsletter-subscription-title" className="sr-only">

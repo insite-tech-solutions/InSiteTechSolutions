@@ -9,6 +9,7 @@
 "use client";
 import { ReactNode, useMemo, memo } from 'react';
 import { DecorElement } from '@/page-templates/service-page/types';
+import { HEADER_HEIGHT } from '@/lib/constants';
 
 /**
  * A utility function to conditionally join Tailwind CSS classes.
@@ -130,7 +131,7 @@ const TailwindHeroBackground = ({
         className
       )}
       style={{ 
-        minHeight: `calc(100vh - 104px)`,
+        minHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
         maxHeight: '1248px'
       }}
     >

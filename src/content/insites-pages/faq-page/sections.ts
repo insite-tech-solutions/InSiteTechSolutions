@@ -97,11 +97,6 @@ export const faqPageSections: FAQPageSection[] = [
           icon: 'MapPin', 
           question: 'Where are you located and do you work with clients remotely?', 
           answer: 'We are based in Western New York but work with clients worldwide. All our services are delivered remotely, allowing us to serve clients regardless of location while maintaining the same high quality and personalized approach.' 
-        },
-        { 
-          icon: 'Zap', 
-          question: 'What makes InSite Tech Solutions different from other tech companies?', 
-          answer: 'We combine technical expertise with personalized service, offering a one-stop solution for all your tech needs. Our 5D methodology ensures transparent communication, our flexible pricing adapts to your budget, and our ongoing support offerings mean we\'re invested in your long-term success.' 
         }
       ]
     }),

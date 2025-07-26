@@ -53,7 +53,7 @@ const decorElements: DecorElement[] = [
 export default function HeroSection(): JSX.Element {
 
   return (
-    <div className="mt-[104px]">
+    <div className="mt-header">
       <TailwindHeroBackground 
         className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-700 py-20 md:py-32"
         decorElements={decorElements}

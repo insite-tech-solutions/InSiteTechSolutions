@@ -52,7 +52,7 @@ const featuredProjects: Project[] = [
     description:
       "A comprehensive migration and modernization of an academic lab website, transforming it into a sleek, accessible platform with modernized branding and a secure Members Portal for internal resources.",
     image: "/portfolio-media/banerjee-lab/1_banerjee_lab_homepage.jpg",
-    technologies: ["Squarespace", "CSS", "Zapier", "Google Forms"],
+    technologies: ["Squarespace", "CSS", "Zapier"],
     link: "/about/previous-works#banerjee-lab",
   },
   {
@@ -214,7 +214,7 @@ function FeaturedPortfolio(): JSX.Element {
 
         {/* Portfolio Cards Container with responsive layout */}
         <motion.div 
-          className="flex flex-col md:flex-row gap-4 md:gap-6 mb-8"
+          className="flex flex-col md:flex-row gap-4 lg:gap-6 mb-8"
           variants={staggerContainer}
         >
           {featuredProjects.map((project) => (
@@ -224,8 +224,6 @@ function FeaturedPortfolio(): JSX.Element {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
               variants={cardVariants}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               {/* Project image container with aspect ratio */}
               <div className="relative aspect-[5/6] w-full overflow-hidden">
@@ -234,13 +232,13 @@ function FeaturedPortfolio(): JSX.Element {
                 {/* Expandable overlay with gradient background */}
                 <div
                   className={cn(
-                    "absolute bottom-0 left-0 right-0 bg-gradient-to-br from-light-blue/90 via-blue-800/90 to-mild-blue-alt/90 backdrop-blur-sm transition-all duration-400 ease-in-out p-6",
-                    hoveredProject === project.id ? "h-3/4" : "h-1/6",
+                    "absolute bottom-0 left-0 right-0 bg-gradient-to-br from-light-blue/90 via-blue-800/90 to-mild-blue-alt/90 backdrop-blur-sm transition-all duration-400 ease-in-out p-6 md:p-4 lg:px-6 lg:py-4",
+                    hoveredProject === project.id ? "h-3/4 md:h-full lg:h-5/6" : "h-1/6",
                   )}
                 >
                   <div className="flex flex-col h-full">
                     {/* Project title - always visible */}
-                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-2 shrink-0">
+                    <h3 className="text-xl lg:text-2xl font-semibold text-white mb-2 shrink-0">
                       {project.title}
                     </h3>
 
@@ -252,7 +250,7 @@ function FeaturedPortfolio(): JSX.Element {
                       )}
                     >
                       {/* Project description */}
-                      <p className="text-gray-100 mb-4 text-sm">
+                      <p className="text-gray-100 mb-4 text-sm md:line-clamp-5 lg:line-clamp-none">
                         {project.description}
                       </p>
 

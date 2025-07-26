@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react'
 import Link from 'next/link'
@@ -24,7 +24,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen }) => {
             stiffness: 500,
             damping: 30,
           }}
-          className="absolute -left-1 mt-2 w-56 rounded-b-md shadow-lg bg-white border-b border-r border-l border-gray-200 divide-y divide-gray-100 focus:outline-none z-50 overflow-hidden"
+          className="absolute -left-1 mt-1 w-56 rounded-b-md shadow-lg bg-white border-b border-r border-l border-gray-200 divide-y divide-gray-100 focus:outline-none z-50 overflow-hidden"
         >
           {items.map((item: MenuItem, index: number) => (
             <motion.li
@@ -41,7 +41,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen }) => {
             >
               <Link
                 href={item.href}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150"
+                className="block px-4 py-2 text-base font-kohinoor font-medium text-gray-700 hover:bg-blue-50 hover:text-medium-blue transition-colors duration-150"
               >
                 {item.name}
               </Link>

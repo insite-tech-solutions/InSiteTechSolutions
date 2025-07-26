@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react'
 import Link from 'next/link'
@@ -37,7 +37,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen }) => {
                   <div>
                     <button
                       onClick={() => handleSubmenuToggle(item.name)}
-                      className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:text-blue-600 focus:bg-blue-50 transition duration-150 ease-in-out"
+                      className="w-full text-left block px-3 py-2 rounded-md text-lg font-kohinoor font-semibold text-gray-700 hover:text-medium-blue hover:bg-blue-50 focus:outline-none focus:text-medium-blue focus:bg-blue-50 transition duration-150 ease-in-out"
                     >
                       {item.name}
                       <ChevronDown 
@@ -59,7 +59,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen }) => {
                             <li key={subItem.name}>
                               <Link 
                                 href={subItem.href}
-                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:text-blue-600 focus:bg-blue-50 transition duration-150 ease-in-out"
+                                className="block px-3 py-2 rounded-md text-lg font-kohinoor font-medium text-gray-700 hover:text-medium-blue hover:bg-blue-50 focus:outline-none focus:text-medium-blue focus:bg-blue-50 transition duration-150 ease-in-out"
                               >
                                 {subItem.name}
                               </Link>
@@ -72,7 +72,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen }) => {
                 ) : (
                   <Link 
                     href={item.href}
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:text-blue-600 focus:bg-blue-50 transition duration-150 ease-in-out"
+                    className="block px-3 py-2 rounded-md text-lg font-kohinoor font-semibold text-gray-700 hover:text-medium-blue hover:bg-blue-50 focus:outline-none focus:text-medium-blue focus:bg-blue-50 transition duration-150 ease-in-out"
                   >
                     {item.name}
                   </Link>

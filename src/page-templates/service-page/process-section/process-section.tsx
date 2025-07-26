@@ -12,6 +12,7 @@ import { TracingBeam } from './tracing-beam';
 import { ProcessContent } from '@/page-templates/service-page/types';
 import { Clock, ExternalLink } from 'lucide-react';
 import { getIcon } from '@/utils/icon-registry';
+import { HEADER_HEIGHT } from '@/lib/constants';
 
 /**
  * ProcessSectionWrapper Component
@@ -277,7 +278,7 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }): JSX.E
         willChange: 'transform', // Add this to hint the browser about upcoming changes
         scrollTrigger: {
           trigger: circle,
-          start: 'center center+=48px', // Offset by half the header height (104px/2)
+          start: `center center+=${HEADER_HEIGHT / 2}px`, // Offset by half the header height
           toggleActions: 'play none reverse none',
           markers: false,
         },

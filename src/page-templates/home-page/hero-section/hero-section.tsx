@@ -34,7 +34,7 @@ const fadeInUp: Variants = {
   animate: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: 0.7, ease: "easeOut" }
   }
 };
 
@@ -52,7 +52,7 @@ const slideInLeft: Variants = {
   animate: { 
     opacity: 1, 
     x: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: 0.6, delay: 0.4, ease: "easeOut" }
   }
 };
 
@@ -61,7 +61,7 @@ const slideInRight: Variants = {
   animate: { 
     opacity: 1, 
     x: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: 0.6, delay: 0.4, ease: "easeOut" }
   }
 };
 
@@ -100,7 +100,7 @@ const HeroSection = (): JSX.Element => {
   return (
     <section
       aria-labelledby="hero-section-title"
-      className={`${styles.bgPrimary} ${styles.bgDecor} ${styles.heroHeight} flex items-center justify-center p-4 md:p-8 md:pl-10 mt-[104px]`}
+      className={`${styles.bgPrimary} ${styles.bgDecor} ${styles.heroHeight} flex items-center justify-center p-4 md:p-8 md:pl-10 overflow-hidden mt-header`}
     >
       {/* Accessible landmark for Hero Section */}
       <h2 id="hero-section-title" className="sr-only">

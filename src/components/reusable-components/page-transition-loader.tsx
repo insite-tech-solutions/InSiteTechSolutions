@@ -30,7 +30,7 @@
  */
 export default function PageTransitionLoader(): JSX.Element {
   return (
-    <div className="fixed left-0 right-0 top-[104px] h-[calc(100vh-104px)] z-[9999] flex flex-col items-center justify-center bg-gray-900 transition-opacity duration-100 opacity-100" id="page-transition-loader">
+    <div className="fixed left-0 right-0 top-header h-screen-header z-[9999] flex flex-col items-center justify-center bg-gray-900 transition-opacity duration-100 opacity-100" id="page-transition-loader">
       {/* Pulse dots */}
       <div className="flex space-x-3">
         <div className="w-5 h-5 bg-light-blue rounded-full animate-loader-pulse" style={{ animationDelay: '0s' }}></div>

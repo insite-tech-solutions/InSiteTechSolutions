@@ -158,8 +158,8 @@ const arrowVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.4,
-      delay: 0.3
+      duration: 0.3,
+      delay: 0.2
     }
   }
 };

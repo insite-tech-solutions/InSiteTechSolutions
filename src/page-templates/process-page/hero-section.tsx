@@ -56,7 +56,7 @@ export default function HeroSection(): JSX.Element {
 
   return (
     <TailwindHeroBackground 
-      className="from-medium-blue via-mild-blue to-blue-700 mt-[104px]"
+      className="from-medium-blue via-mild-blue to-blue-700 mt-header"
       decorElements={decorElements}
     >
       {/* Hero Content Container - Main content with proper z-index layering */}
