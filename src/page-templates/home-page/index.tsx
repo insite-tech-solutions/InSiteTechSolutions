@@ -21,6 +21,7 @@ import dynamic from 'next/dynamic';
 import Layout from '@/components/reusable-components/layout';
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+import { handleInitialAnchorScroll } from '@/utils/scroll-to-section';
 
 // Direct imports for critical above-the-fold content
 import HeroSection from '@/page-templates/home-page/hero-section/hero-section';
@@ -62,6 +63,8 @@ export function HomePageContent(): JSX.Element {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsPageLoading(false);
+      // Handle anchor scrolling after content loads
+      handleInitialAnchorScroll();
     }, 500);
 
     return () => clearTimeout(timer);
@@ -123,7 +126,7 @@ export function HomePageContent(): JSX.Element {
         </div>
         
         {/* Newsletter Section - Subscription signup */}
-        <div className="my-12">
+        <div className="my-10">
           <NewsletterSection />
         </div>
         
