@@ -227,7 +227,13 @@ function FeaturedPortfolio(): JSX.Element {
             >
               {/* Project image container with aspect ratio */}
               <div className="relative aspect-[5/6] w-full overflow-hidden">
-                <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+                <Image 
+                  src={project.image || "/placeholder.svg"} 
+                  alt={project.title} 
+                  fill 
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw"
+                />
 
                 {/* Expandable overlay with gradient background */}
                 <div

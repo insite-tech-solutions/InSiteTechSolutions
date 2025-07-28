@@ -214,6 +214,8 @@ function CoreServicesMain({ title, description, services }: CoreServicesProps): 
 
   // GSAP ScrollTrigger setup and cleanup
   useEffect(() => {
+    if (!containerRef.current || !cardsRef.current || !pinnedRef.current) return;
+    
     const ctx = gsap.context(() => {
       /**
        * Calculates the necessary scroll distance for the animation.
@@ -269,7 +271,6 @@ function CoreServicesMain({ title, description, services }: CoreServicesProps): 
     // Cleanup GSAP context and kill all ScrollTriggers on component unmount
     return () => {
       ctx.revert() // Reverts all GSAP animations and ScrollTriggers created in this context
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill()) // Ensures all triggers are removed
     }
   }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
 

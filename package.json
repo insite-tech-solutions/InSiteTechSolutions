@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "generate-icons": "node scripts/generate-icon-registry.mjs",
-    "prebuild": "npm run generate-icons",
     "predev": "npm run generate-icons",
     "dev": "next dev",
     "build": "next build",
@@ -27,11 +26,13 @@
     "@radix-ui/react-tooltip": "^1.1.8",
     "@react-email/components": "^0.0.41",
     "@supabase/supabase-js": "^2.49.8",
+    "@types/flexsearch": "^0.7.6",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/uuid": "^10.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
+    "flexsearch": "^0.8.205",
     "framer-motion": "^11.5.5",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.5",
@@ -62,9 +63,10 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "fs-extra": "^11.3.0",
-    "glob": "^11.0.1",
+    "glob": "^11.0.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }

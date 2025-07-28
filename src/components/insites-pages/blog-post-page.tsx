@@ -14,7 +14,7 @@ import ShareButton from '@/components/reusable-components/share-button';
 import { BlogPost, loadAllBlogPosts } from '@/lib/blog-loader';
 import Layout from '@/components/reusable-components/layout';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
 /**
  * Props interface for the BlogPostPage component
@@ -62,17 +62,22 @@ export default function BlogPostPage({ post }: BlogPostPageProps): JSX.Element {
         {/* Accessible landmark for Blog Post Content */}
         <h2 id="blog-post-main-title" className="sr-only">Blog Post Content</h2>
         {/* Back Navigation */}
-        <div className="bg-medium-blue border-b border-gray-200">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <Link
+        <div className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 text-white text-left pt-5 pb-6 px-4 ">
+          <div className="mb-4">
+            <Link 
               href="/insites/blog"
-              className="inline-flex items-center gap-2 text-white hover:text-gray-200 transition-colors"
+              className="text-sm text-white hover:text-gray-200 flex items-center gap-1 mb-2"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4" />
               Back to Blog
             </Link>
           </div>
-        </div>
+
+          {/* Search Header */}
+          <div>
+            <h1 className="text-3xl font-bold text-white drop-shadow">Blog Post</h1>
+          </div>
+          </div>
 
         {/* Blog Post Content */}
         <Layout>

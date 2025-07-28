@@ -86,14 +86,14 @@ function BlogPostCard({ post }: { post: BlogPost }): JSX.Element {
     >
       {/* Featured Badge */}
       {post.featured && (
-        <div className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 absolute bottom-6 right-4 rounded-full z-10">
+        <div className="bg-medium-blue text-white text-xs font-semibold px-3 py-1 absolute bottom-6 right-4 rounded-full z-10">
           Featured
         </div>
       )}
 
       <div className="p-6">
         {/* Post Title */}
-        <h2 className="mt-1 text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+        <h2 className="mt-1 text-xl font-bold text-gray-900 mb-3 hover:text-medium-blue transition-colors">
           <Link href={post.url}>
             {post.title}
           </Link>
@@ -132,7 +132,7 @@ function BlogPostCard({ post }: { post: BlogPost }): JSX.Element {
             {post.tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full"
+                className="inline-block px-2 py-1 text-xs bg-blue-50 text-medium-blue-alt rounded-full"
               >
                 {tag}
               </span>
@@ -148,7 +148,7 @@ function BlogPostCard({ post }: { post: BlogPost }): JSX.Element {
         {/* Read More Link */}
         <Link
           href={post.url}
-          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
+          className="inline-flex items-center text-medium-blue hover:text-blue-700 font-medium text-sm"
         >
           Read more
           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ function Pagination({
           onClick={() => onPageChange(page)}
           className={`px-3 py-2 text-sm font-medium rounded-md ${
             currentPage === page
-              ? 'bg-blue-600 text-white'
+              ? 'bg-medium-blue text-white'
               : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
           }`}
         >
@@ -345,7 +345,7 @@ export default function BlogListingSection({
                 type="checkbox"
                 checked={showFeaturedOnly}
                 onChange={(e) => handleFeaturedToggle(e.target.checked)}
-                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="rounded border-gray-300 text-medium-blue focus:ring-blue-500"
               />
               <span className="text-sm text-gray-700">Featured only</span>
             </label>
@@ -358,7 +358,7 @@ export default function BlogListingSection({
                   onClick={() => handleTagToggle(tag)}
                   className={`px-3 py-1 text-sm rounded-full transition-colors ${
                     selectedTags.includes(tag)
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-medium-blue text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >

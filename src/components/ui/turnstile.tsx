@@ -164,18 +164,27 @@ export default function Turnstile({
     if (window.turnstile) {
       loadTurnstile()
     } else {
-      // Load Turnstile script
-      const script = document.createElement('script')
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
-      script.async = true
-      script.defer = true
-      script.onload = loadTurnstile
-      document.head.appendChild(script)
-
-      return () => {
-        if (document.head.contains(script)) {
-          document.head.removeChild(script)
+      // Check if script is already being loaded
+      const existingScript = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]')
+      
+      if (existingScript) {
+        // Script is already being loaded, wait for it
+        const checkTurnstile = () => {
+          if (window.turnstile) {
+            loadTurnstile()
+          } else {
+            setTimeout(checkTurnstile, 100)
+          }
         }
+        checkTurnstile()
+      } else {
+        // Load Turnstile script
+        const script = document.createElement('script')
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
+        script.async = true
+        script.defer = true
+        script.onload = loadTurnstile
+        document.head.appendChild(script)
       }
     }
 

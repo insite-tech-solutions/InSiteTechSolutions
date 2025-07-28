@@ -147,7 +147,8 @@ const PortfolioCard = memo(function PortfolioCard({ project }: PortfolioCardProp
           alt={project.title} 
           width={400}
           height={320}
-          className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500" 
+          className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 640px) 100vw"
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-br from-light-blue/90 via-blue-800/90 to-mild-blue-alt/90 p-6 group-hover:opacity-0 transition-opacity duration-300">
           <h3 className="text-white text-xl font-bold">{project.title}</h3>

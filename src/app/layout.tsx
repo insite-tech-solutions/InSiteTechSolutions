@@ -21,6 +21,7 @@ import "../styles/globals.css";
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
+import { SearchProvider } from '@/contexts/search-context';
 
 /*
  * Commented out local font configuration for future use
@@ -146,7 +147,11 @@ function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body style={{ borderTopStyle: 'solid' }}>{children}</body>
+      <body style={{ borderTopStyle: 'solid' }}>
+        <SearchProvider>
+          {children}
+        </SearchProvider>
+      </body>
     </html>
   )
 }

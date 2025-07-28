@@ -115,7 +115,7 @@ export default function ScrollAnimationSection(): JSX.Element {
     gsap.registerPlugin(ScrollTrigger);
 
     // Only run GSAP animations after mounting
-    if (!isMounted) return;
+    if (!isMounted || !sectionRef.current) return;
 
     // Validate that both text arrays have the same length
     if (text_right.length !== text_left.length) {

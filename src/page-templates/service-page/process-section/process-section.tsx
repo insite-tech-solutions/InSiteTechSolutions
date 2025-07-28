@@ -211,6 +211,8 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }): JSX.E
       return;
     }
     
+    if (!sectionRef.current) return;
+    
     gsap.registerPlugin(ScrollTrigger);
   
     // Add a delay to ensure proper layout calculation
@@ -363,11 +365,6 @@ const ProcessSection: React.FC<{content: ProcessContent}> = ({ content }): JSX.E
           
           // Kill all created timelines to prevent memory leaks
           timelines.forEach(tl => tl.kill());
-          
-          // Kill all ScrollTriggers created by this component
-          ScrollTrigger.getAll().forEach(st => {
-            st.kill();
-          });
         };
       };
     
