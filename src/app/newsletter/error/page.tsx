@@ -67,6 +67,14 @@ export default function NewsletterErrorPage(): JSX.Element {
           We encountered an issue processing your newsletter request. This could be due to an expired link, network issues, or a temporary problem on our end.
         </p>
 
+        <div className="bg-blue-50 rounded-lg p-4 mb-6">
+          <p className="text-sm text-blue-800">
+            <strong>Note:</strong> Some email providers (like Outlook) use link protection systems that may redirect you here by mistake. 
+            If this happened, please click &quot;Try Again&quot; below, then wait a few minutes and check your email - 
+            your subscription likely worked correctly and you&apos;ll have received a welcome email.
+          </p>
+        </div>
+
         {/* Help Section */}
         <div className="bg-yellow-50 rounded-lg p-4 mb-6">
           <h2 className="font-semibold text-yellow-900 mb-2">What You Can Do</h2>
