@@ -48,8 +48,8 @@ export const EmailHeader = ({ logoUrl }: HeaderProps): JSX.Element => {
                 <Link href={logoUrl} style={link}>
                   <Img
                     src={logoUrl}
-                    width="220"
-                    height="70"
+                    width="180"
+                    height="80"
                     alt="InSite Tech Solutions"
                     style={logo}
                   />

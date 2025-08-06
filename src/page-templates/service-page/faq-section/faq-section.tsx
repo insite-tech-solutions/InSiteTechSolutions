@@ -108,7 +108,7 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
       {/* FAQ Question Button - Toggles expanded state */}
       <button
         onClick={onToggle}
-        className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-mild-blue focus:ring-opacity-50 rounded-xl"
+        className="w-full text-left p-6 focus:outline-none rounded-xl"
         aria-expanded={isOpen}
       >
         <div className="flex items-center justify-between">
