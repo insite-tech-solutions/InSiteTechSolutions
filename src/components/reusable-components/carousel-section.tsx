@@ -12,7 +12,6 @@
 import { useState, useMemo, cloneElement, memo } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react'
-import SwiperCore from 'swiper'
 import { Autoplay, Navigation, Pagination, EffectCoverflow } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -20,8 +19,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/effect-coverflow'
 
 
-// Initialize Swiper modules globally to ensure they are available for all Swiper instances.
-SwiperCore.use([Autoplay, Navigation, Pagination, EffectCoverflow]);
+// In Swiper 11.x, modules are passed directly to the Swiper component via the modules prop
 
 /**
  * Defines the animation variants for a fade-in-up effect.
@@ -86,6 +84,7 @@ const CarouselSection = ({
   const mergedSwiperParams: SwiperProps = useMemo(() => {
       // Default Swiper parameters
   const defaultSwiperParams: SwiperProps = {
+    modules: [Autoplay, Navigation, Pagination, EffectCoverflow],
     spaceBetween: 30,
     slidesPerView: 3,
     loop: true,

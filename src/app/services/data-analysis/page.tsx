@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import DataAnalysisPage from '@/components/service-pages/data-analysis-page';
 import dataAnalysisContent from '@/content/service-pages/data-analysis';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Data Analysis service page.
@@ -19,10 +21,11 @@ import dataAnalysisContent from '@/content/service-pages/data-analysis';
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: dataAnalysisContent.metadata.title + ' | InSite Tech',
-  description: dataAnalysisContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  dataAnalysisContent.metadata.title,
+  dataAnalysisContent.metadata.description,
+  'data-analysis'
+);
 
 /**
  * Data Analysis Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <DataAnalysisPage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={dataAnalysisContent.metadata.title}
+        serviceDescription={dataAnalysisContent.metadata.description}
+        serviceType="Data Analysis Services"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Data Analysis", url: "https://insitetechsolutions.com/services/data-analysis" }
+        ]}
+      />
+      <DataAnalysisPage />
+    </>
+  );
 }

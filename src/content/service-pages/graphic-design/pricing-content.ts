@@ -65,7 +65,7 @@ const graphicDesignPricingContent: PricingContent = {
     description: "Investing in professional design delivers value far beyond the initial project cost. A strong visual identity builds brand equity, creating a valuable business asset that appreciates over time. Professional design enhances customer perception, leading to improved conversion rates and the ability to command premium pricing. Consistent branding across all touchpoints builds recognition and trust, increasing customer retention and lifetime value. The initial investment in quality design pays ongoing dividends through enhanced market position, customer loyalty, and operational efficiency for marketing and communications.",
     link: {
       text: "View detailed pricing",
-      url: "/pricing",
+      url: "/about/pricing-and-payments",
     },
   },
 };

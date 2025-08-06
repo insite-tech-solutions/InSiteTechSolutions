@@ -88,7 +88,7 @@ export const graphicDesignProcess: ProcessContent = {
   ],
   note: "We cannot provide exact timelines until we have a well-defined project and plan. Timelines may vary based on project scope and complexity. A basic logo or graphic design can typically be done in 1-2 weeks, while a complete branding package may require 4-6+ weeks.",
   linkText: "Learn more about our process",
-  linkUrl: "/process",
+  linkUrl: "/about/development-process",
 };
 
 export default graphicDesignProcess;

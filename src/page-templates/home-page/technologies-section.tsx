@@ -69,7 +69,7 @@ const technologies: Technology[] = [
   { name: "reST", logo: "/technologies-icons/ReStructuredText_Logo.svg" },
   { name: "Squarespace", logo: "/technologies-icons/squarespace.svg" },
   { name: "WordPress", logo: "/technologies-icons/wordpress.svg" },
-  { name: "Wix", logo: "/technologies-icons/wix.svg" },
+  // { name: "Wix", logo: "/technologies-icons/wix.svg" },
   { name: "Shopify", logo: "/technologies-icons/shopify.svg" },
   { name: "WooCommerce", logo: "/technologies-icons/woocommerce.svg" },
   { name: "Zapier", logo: "/technologies-icons/zapier.svg" },
@@ -109,12 +109,15 @@ function Technologies(): JSX.Element {
       <div className="container mx-auto">
         {/* Main Content - Section Introduction and Carousel */}
         <motion.div
+          key="technologies-main-content"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 0.8,
-            ease: 'easeOut',
+            ease: [0.25, 0.46, 0.45, 0.94],
+            opacity: { duration: 0.6 },
+            y: { duration: 0.8 }
           }}
         >
           {/* Section Introduction */}
@@ -132,7 +135,13 @@ function Technologies(): JSX.Element {
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
             
             {/* Scrolling container */}
+            <style jsx global>{`
+              .technologies-carousel .swiper-wrapper {
+                transition-timing-function: linear !important;
+              }
+            `}</style>
             <Swiper
+              className="technologies-carousel"
               modules={[Autoplay, FreeMode]}
               loop={true}
               freeMode={true}
@@ -140,15 +149,15 @@ function Technologies(): JSX.Element {
               spaceBetween={16}
               speed={5000}
               autoplay={{
-                delay: 1,
+                delay: 0,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: true,
+                pauseOnMouseEnter: false,
               }}
             >
               {technologies.map((tech) => (
                 <SwiperSlide key={tech.name.toLowerCase().replace(/\s+/g, '-') } style={{ width: 'auto' }}> 
                   <div 
-                    className="flex-shrink-0 rounded-xl px-1 md:px-4 py-1 my-2 hover:shadow-md transition-shadow duration-300"
+                    className="flex-shrink-0 rounded-xl px-1 md:px-4 py-1"
                   >
                     <div className="flex flex-col items-center space-y-2">
                      <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-light-blue to-blue-900 rounded-md p-2">
@@ -173,15 +182,19 @@ function Technologies(): JSX.Element {
 
         {/* CTA: Discuss Your Tech Stack */}
         <motion.div
+          key="technologies-cta"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{
             duration: 0.6,
-            ease: 'easeOut',
+            ease: [0.25, 0.46, 0.45, 0.94],
             delay: 0.15,
+            opacity: { duration: 0.4 },
+            y: { duration: 0.6 }
           }}
-          className="max-w-4xl mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-6 md:mt-8 shadow-md hover:shadow-lg transition-all duration-200"
+          className="max-w-4xl mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-6 md:mt-8 shadow-md hover:shadow-lg"
+          style={{ transition: "box-shadow 0.2s ease" }}
         >
           <div className="flex items-center justify-center gap-2 mb-4">
             <h4 className="text-2xl font-semibold">

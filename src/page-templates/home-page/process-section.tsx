@@ -97,7 +97,9 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     },
   },
 }
@@ -140,29 +142,15 @@ const stepCardVariants: Variants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.5 },
+      scale: { duration: 0.5 }
     }
   }
 };
 
-/**
- * Animation variant for arrow indicators
- * 
- * Simple fade-in for arrow elements between steps
- * with subtle delay for natural flow.
- * 
- * @constant {Variants} arrowVariants
- */
-const arrowVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      delay: 0.2
-    }
-  }
-};
+
 
 /**
  * ProcessSection Component
@@ -230,7 +218,11 @@ function ProcessSection(): JSX.Element {
       {/* Main container */}
       <div className="container mx-auto">
         {/* Section header with title and description */}
-        <motion.div className="text-center mb-10" variants={fadeInUp}>
+        <motion.div 
+          key="process-header"
+          className="text-center mb-10" 
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Process</h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
             We believe that every successful project starts with a clear, collaborative process. We follow a methodology that we refer to as the 5 Ds: Discovery, Definition, Design, Development, and Deployment. Our approach is designed to deliver results that drive your business forward—combining strategic insight, creative thinking, and technical expertise at every stage.
@@ -239,6 +231,7 @@ function ProcessSection(): JSX.Element {
 
         {/* Desktop Process Steps - Horizontal layout */}
         <motion.div 
+          key="process-desktop-container"
           className="hidden md:flex flex-wrap justify-center items-start gap-x-0 gap-y-6"
           variants={staggerContainer}
         >
@@ -246,8 +239,10 @@ function ProcessSection(): JSX.Element {
             <React.Fragment key={step.number}>
               {/* Process step card */}
               <motion.div
-                className={`bg-white rounded-lg shadow-md border overflow-hidden transition-all duration-300 max-w-xs w-full flex flex-col
+                key={`process-desktop-step-${step.number}`}
+                className={`bg-white rounded-lg shadow-md border overflow-hidden max-w-xs w-full flex flex-col
                   ${expandedStep === index ? 'border-blue-600' : 'border-gray-300 hover:border-mild-blue'}`}
+                style={{ transition: "border-color 0.3s ease" }}
                 variants={stepCardVariants}
               >
                 {/* Clickable Header with icon, title, and chevron */}
@@ -304,7 +299,7 @@ function ProcessSection(): JSX.Element {
               {index < processSteps.length - 1 && (
                 <motion.div 
                   className="flex items-center mt-4"
-                  variants={arrowVariants}
+                  variants={stepCardVariants}
                 >
                   <ArrowRight size={32} className="text-mild-grey" />
                 </motion.div>
@@ -315,6 +310,7 @@ function ProcessSection(): JSX.Element {
 
         {/* Mobile Process Steps - Vertical layout */}
         <motion.div 
+          key="process-mobile-container"
           className="md:hidden space-y-4"
           variants={staggerContainer}
         >
@@ -322,8 +318,10 @@ function ProcessSection(): JSX.Element {
             <React.Fragment key={step.number}>
               {/* Process step card for mobile */}
               <motion.div 
-                className={`bg-white rounded-lg shadow-md border overflow-hidden transition-all duration-300 flex flex-col
+                key={`process-mobile-step-${step.number}`}
+                className={`bg-white rounded-lg shadow-md border overflow-hidden flex flex-col
                           ${expandedStep === index ? 'border-blue-600' : 'border-gray-300 hover:border-mild-blue'}`}
+                style={{ transition: "border-color 0.3s ease" }}
                 variants={stepCardVariants}
               >
                 {/* Clickable Header with icon, title, and chevron */}
@@ -380,7 +378,7 @@ function ProcessSection(): JSX.Element {
               {index < processSteps.length - 1 && (
                 <motion.div 
                   className="flex items-center justify-center my-2"
-                  variants={arrowVariants}
+                  variants={stepCardVariants}
                 >
                   <ArrowDown size={32} className="text-mild-grey" />
                 </motion.div>
@@ -390,7 +388,11 @@ function ProcessSection(): JSX.Element {
         </motion.div>
 
         {/* Process CTA with animation */}
-        <motion.div variants={fadeInUp} className="mt-10 flex justify-center">
+        <motion.div 
+          key="process-cta"
+          variants={fadeInUp} 
+          className="mt-10 flex justify-center"
+        >
                 <a
                   href={"/about/development-process"}
                   className="group inline-flex items-center gap-2 text-mild-blue hover:text-medium-blue-alt font-medium transition-colors"

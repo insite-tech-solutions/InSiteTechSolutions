@@ -37,7 +37,7 @@ const pricingFAQContent: FAQContent = {
     {
       icon: "DollarSign",
       question: "What pricing models do you offer?",
-      answer: "We offer hourly billing ($40-100/hour), fixed-price projects, hybrid pricing (10-25% down + hourly billing), and monthly retainers. We'll help you choose the best fit during your consultation based on your project needs and budget.",
+      answer: "We offer hourly billing ($50-100/hour), fixed-price projects, hybrid pricing (10-25% down + hourly billing), and monthly retainers. We'll help you choose the best fit during your consultation based on your project needs and budget.",
     },
     {
       icon: "CreditCard", 
@@ -74,7 +74,7 @@ const pricingFAQContent: FAQContent = {
   /** Optional link to additional FAQ resources */
   moreLink: {
     text: "View all frequently asked questions",
-    url: "/faq",
+    url: "/insites/faq",
   },
 };
 

@@ -9,8 +9,10 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { MessageCircle } from 'lucide-react';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
+import { scrollToSection } from '@/utils/scroll-to-section';
 
 /**
  * CtaSection Component
@@ -28,6 +30,32 @@ import TailwindButton from '@/components/reusable-components/tailwind-button';
  * @returns {JSX.Element} The call-to-action section
  */
 export default function CtaSection(): JSX.Element {
+  const router = useRouter();
+
+  /**
+   * Handles services section navigation with cross-page support
+   * 
+   * Navigates to services section on homepage or navigates to homepage
+   * first if on a different page, then scrolls to services section.
+   * 
+   * @param {React.MouseEvent<HTMLAnchorElement>} e - Click event
+   */
+  const handleServicesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // If we're already on homepage, just scroll to section
+    if (window.location.pathname === "/") {
+      scrollToSection("services-section");
+    } else {
+      // Navigate to homepage first, then scroll to section
+      router.push('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        scrollToSection('services-section');
+      }, 100);
+    }
+  };
+
   return (
     <div className="pb-16 py-8">
       <section
@@ -73,10 +101,11 @@ export default function CtaSection(): JSX.Element {
 
               {/* Optional Secondary Button with ghost styling */}
               <Link
-                href="/portfolio"
+                href="/#services-section"
+                onClick={handleServicesClick}
                 className="inline-flex items-center gap-2 text-white font-medium py-3 px-6 rounded-full border border-white/30 hover:bg-white/10 transition-all duration-300"
               >
-                Explore Our Work
+                Explore Our Services
               </Link>
             </div>
 

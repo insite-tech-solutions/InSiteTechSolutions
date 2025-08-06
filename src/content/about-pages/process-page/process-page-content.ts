@@ -83,7 +83,7 @@ export const processPageHeroContent: HeroContent = {
   },
   cta2: {
     text: "View Our Work",
-    href: "/portfolio",
+    href: "/about/previous-works",
   },
 };
 

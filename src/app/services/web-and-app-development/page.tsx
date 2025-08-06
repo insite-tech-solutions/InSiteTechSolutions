@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import WebAppDevelopmentPage from '@/components/service-pages/web-app-development-page';
 import webAppDevelopmentContent from '@/content/service-pages/web-app-dev';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Web & App Development service page.
@@ -19,10 +21,11 @@ import webAppDevelopmentContent from '@/content/service-pages/web-app-dev';
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: webAppDevelopmentContent.metadata.title + ' | InSite Tech',
-  description: webAppDevelopmentContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  webAppDevelopmentContent.metadata.title,
+  webAppDevelopmentContent.metadata.description,
+  'web-and-app-development'
+);
 
 /**
  * Web & App Development Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <WebAppDevelopmentPage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={webAppDevelopmentContent.metadata.title}
+        serviceDescription={webAppDevelopmentContent.metadata.description}
+        serviceType="Web and Mobile App Development"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Web & App Development", url: "https://insitetechsolutions.com/services/web-and-app-development" }
+        ]}
+      />
+      <WebAppDevelopmentPage />
+    </>
+  );
 }

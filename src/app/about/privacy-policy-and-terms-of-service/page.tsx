@@ -9,6 +9,8 @@
 import type { Metadata } from "next";
 import { loadAllLegalDocuments } from '@/lib/markdown-loader';
 import PrivacyAndTermsPage from "@/components/about-pages/privacy-and-terms-page";
+import { generateAboutMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Privacy Policy & Terms of Service page.
@@ -18,11 +20,11 @@ import PrivacyAndTermsPage from "@/components/about-pages/privacy-and-terms-page
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: "Legal Center | InSite Tech Solutions",
-  description: "Review our Privacy Policy and Terms of Service. Understand how we handle your data, our service terms, and your rights.",
-  keywords: "privacy policy, terms of service, legal, data protection, InSite Tech Solutions",
-};
+export const metadata: Metadata = generateAboutMetadata(
+  "Legal Center",
+  "Review our Privacy Policy and Terms of Service. Understand how we handle your data, our service terms, and your rights.",
+  "privacy-policy-and-terms-of-service"
+);
 
 /**
  * Privacy Policy & Terms of Service Page Route Component
@@ -49,5 +51,20 @@ export const metadata: Metadata = {
 export default function Page(): JSX.Element {
   const documents = loadAllLegalDocuments();
   
-  return <PrivacyAndTermsPage documents={documents} />;
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="Legal Center | InSite Tech Solutions"
+        pageDescription="Review our Privacy Policy and Terms of Service. Understand how we handle your data, our service terms, and your rights."
+        pageUrl="https://insitetechsolutions.com/about/privacy-policy-and-terms-of-service"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Legal Center", url: "https://insitetechsolutions.com/about/privacy-policy-and-terms-of-service" }
+        ]}
+      />
+      <PrivacyAndTermsPage documents={documents} />
+    </>
+  );
 }

@@ -8,6 +8,8 @@
 
 import type { Metadata } from "next";
 import ProcessPage from "@/components/about-pages/process-page";
+import { generateAboutMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Development Process page.
@@ -18,11 +20,11 @@ import ProcessPage from "@/components/about-pages/process-page";
  * @property {string} title - The title of the page displayed in the browser tab and search results.
  * @property {string} description - A brief, SEO-friendly description of the page content.
  */
-export const metadata: Metadata = {
-  title: "Our Development Process | InSite Tech Solutions",
-  description:
-    "Learn about our streamlined and collaborative 5D process: Discovery, Definition, Design, Development, and Deployment. We build for results, not just code.",
-};
+export const metadata: Metadata = generateAboutMetadata(
+  "Our Development Process",
+  "Learn about our streamlined and collaborative 5D process: Discovery, Definition, Design, Development, and Deployment. We build for results, not just code.",
+  "development-process"
+);
 
 /**
  * Development Process Page Route Component
@@ -32,5 +34,20 @@ export const metadata: Metadata = {
  *  * @returns {JSX.Element} The root JSX element for the development process page.
  */
 export default function Page(): JSX.Element {
-  return <ProcessPage />;
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="Our Development Process | InSite Tech Solutions"
+        pageDescription="Learn about our streamlined and collaborative 5D process: Discovery, Definition, Design, Development, and Deployment. We build for results, not just code."
+        pageUrl="https://insitetechsolutions.com/about/development-process"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Our Development Process", url: "https://insitetechsolutions.com/about/development-process" }
+        ]}
+      />
+      <ProcessPage />
+    </>
+  );
 }

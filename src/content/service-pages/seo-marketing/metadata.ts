@@ -18,7 +18,7 @@ import { ServiceMetadata } from '@/page-templates/service-page/types';
  */
 const seoMarketingMetadata: ServiceMetadata = {
   title: "SEO & Online Marketing",
-  description: "Boost visibility, drive Engagement, and grow your business online",
+  description: "Boost visibility, drive engagement, and grow your business online",
   slug: "seo-and-online-marketing",
 };
 

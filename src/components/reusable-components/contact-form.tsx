@@ -269,7 +269,7 @@ export default function ContactForm({
           {/* Form Fields */}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {/* Error Message */}
+              {/* Error Messages */}
               {submitError && (
                 <div className="p-4 bg-red-50 border border-red-200 rounded-md">
                   <p className="text-red-600 text-sm">{submitError}</p>
@@ -285,9 +285,16 @@ export default function ContactForm({
                     <FormItem>
                       <FormLabel className={variant === "frosted" ? "text-white after:content-['*'] after:text-red-500 after:ml-0.5" : "after:content-['*'] after:text-red-500 after:ml-0.5"}>First Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="John" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
+                        <Input 
+                          placeholder="John" 
+                          className={clsx(
+                            variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : "",
+                            form.formState.errors.firstName && "border-red-500 focus:border-red-500"
+                          )} 
+                          {...field} 
+                        />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
                     </FormItem>
                   )}
                 />
@@ -300,7 +307,7 @@ export default function ContactForm({
                       <FormControl>
                         <Input placeholder="Doe" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
                     </FormItem>
                   )}
                 />
@@ -314,9 +321,17 @@ export default function ContactForm({
                     <FormItem>
                       <FormLabel className={variant === "frosted" ? "text-white after:content-['*'] after:text-red-500 after:ml-0.5" : "after:content-['*'] after:text-red-500 after:ml-0.5"}>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="john.doe@example.com" type="email" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
+                        <Input 
+                          placeholder="john.doe@example.com" 
+                          type="email" 
+                          className={clsx(
+                            variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : "",
+                            form.formState.errors.email && "border-red-500 focus:border-red-500"
+                          )} 
+                          {...field} 
+                        />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
                     </FormItem>
                   )}
                 />
@@ -338,7 +353,7 @@ export default function ContactForm({
                           maxLength={14}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className={variant === "frosted" ? "text-white" : undefined} />
                     </FormItem>
                   )}
                 />
@@ -354,7 +369,7 @@ export default function ContactForm({
                       <FormControl>
                         <Input placeholder="https://example.com" className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className={variant === "frosted" ? "text-white" : undefined} />
                     </FormItem>
                   )}
                 />
@@ -367,44 +382,56 @@ export default function ContactForm({
                       <FormControl>
                         <Input placeholder="Acme Inc." className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className={variant === "frosted" ? "text-white" : undefined} />
                     </FormItem>
                   )}
                 />
               </div>
               {/* Services section */}
-              <div>
-                <h3 className={clsx("text-lg font-medium mb-2", variant === "frosted" && "text-white")}>What can we do for you?<span className="text-red-500 ml-1">*</span></h3>
-                <p className={clsx("text-sm mb-4", variant === "frosted" ? "text-gray-200" : "text-muted-foreground")}>Check all that apply</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
-                  {services.map((service) => (
-                    <FormField
-                      key={service.id}
-                      control={form.control}
-                      name="services"
-                      render={({ field }) => (
-                        <FormItem className="flex flex-row items-center space-x-2">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value?.includes(service.id)}
-                              className={variant === "frosted" ? "data-[state=checked]:text-white" : "data-[state=checked]:text-medium-blue"}
-                              onCheckedChange={(checked) => {
-                                const currentValues = field.value || []
-                                if (checked) {
-                                  field.onChange([...currentValues, service.id])
-                                } else {
-                                  field.onChange(currentValues.filter((value) => value !== service.id))
-                                }
-                              }}
-                            />
-                          </FormControl>
-                          <FormLabel className={clsx("font-normal cursor-pointer", variant === "frosted" && "text-white")}>{service.label}</FormLabel>
-                        </FormItem>
-                      )}
-                    />
-                  ))}
-                </div>
-              </div>
+              <FormField
+                control={form.control}
+                name="services"
+                render={() => (
+                  <FormItem>
+                    <div className={clsx(
+                      "p-3 rounded-lg transition-colors",
+                      form.formState.errors.services && "border border-red-500 focus:border-red-500"
+                    )}>
+                      <h3 className={clsx("text-lg font-medium mb-2", variant === "frosted" && "text-white")}>What can we do for you?<span className="text-red-500 ml-1">*</span></h3>
+                      <p className={clsx("text-sm mb-4", variant === "frosted" ? "text-gray-200" : "text-muted-foreground")}>Check all that apply</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                        {services.map((service) => (
+                          <FormField
+                            key={service.id}
+                            control={form.control}
+                            name="services"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-center space-x-2">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(service.id)}
+                                    className={variant === "frosted" ? "data-[state=checked]:text-white" : "data-[state=checked]:text-medium-blue"}
+                                    onCheckedChange={(checked) => {
+                                      const currentValues = field.value || []
+                                      if (checked) {
+                                        field.onChange([...currentValues, service.id])
+                                      } else {
+                                        field.onChange(currentValues.filter((value) => value !== service.id))
+                                      }
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className={clsx("font-normal cursor-pointer", variant === "frosted" && "text-white")}>{service.label}</FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
+                  </FormItem>
+                )}
+              />
               {/* Comments */}
               <FormField
                 control={form.control}
@@ -412,10 +439,17 @@ export default function ContactForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className={variant === "frosted" ? "text-white" : undefined}>Additional information</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Tell us more about your project timeline, goals, technical requirements, or any questions you have..." className={variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : undefined} {...field} />
-                    </FormControl>
-                    <FormMessage />
+                                          <FormControl>
+                        <Textarea 
+                          placeholder="Tell us more about your project timeline, goals, technical requirements, or any questions you have..." 
+                          className={clsx(
+                            variant === "frosted" ? "font-semibold bg-white/10 placeholder:text-gray-200/60 text-white" : "",
+                            form.formState.errors.comments && "border border-red-500 focus:border-red-500"
+                          )} 
+                          {...field} 
+                        />
+                      </FormControl>
+                    <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
                   </FormItem>
                 )}
               />
@@ -425,7 +459,11 @@ export default function ContactForm({
                 name="budget"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
-                    <FormLabel className={variant === "frosted" ? "text-white after:content-['*'] after:text-red-500 after:ml-0.5" : "after:content-['*'] after:text-red-500 after:ml-0.5"}>What is your estimated budget?</FormLabel>
+                    <div className={clsx(
+                      "p-3 rounded-lg transition-colors",
+                      form.formState.errors.budget && "border border-red-500 focus:border-red-500"
+                    )}>
+                      <FormLabel className={variant === "frosted" ? "text-white after:content-['*'] after:text-red-500 after:ml-0.5" : "after:content-['*'] after:text-red-500 after:ml-0.5"}>What is your estimated budget?</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -445,7 +483,8 @@ export default function ContactForm({
                         ))}
                       </RadioGroup>
                     </FormControl>
-                    <FormMessage />
+                    </div>
+                    <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
                   </FormItem>
                 )}
               />
@@ -454,7 +493,7 @@ export default function ContactForm({
                 control={form.control}
                 name="mailingList"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 px-3">
                     <FormControl>
                       <Checkbox
                         checked={field.value}
@@ -478,9 +517,21 @@ export default function ContactForm({
                           {showMailingListInfo ? "Show less" : "Learn more"}
                         </button>
                         {showMailingListInfo && (
-                          <p className={clsx("text-xs leading-relaxed", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
-                            We use separate databases for our promotional and contact emails, if you don&apos;t click this box, you will not be added to the promo list. We value your privacy and security. You will receive an email to confirm your address (check your spam folder) and can unsubscribe at any time. We will never share your information without your consent.
-                          </p>
+                          <div className="space-y-2">
+                            <p className={clsx("text-xs leading-relaxed", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
+                              We use separate databases for our promotional and contact emails, if you don&apos;t click this box, you will not be added to the promo list. We value your privacy and security. You will receive an email to confirm your address (check your spam folder) and can unsubscribe at any time. We will never share your information without your consent.
+                            </p>
+                            <p className={clsx("text-xs", variant === "frosted" ? "text-gray-300" : "text-muted-foreground")}>
+                              By subscribing, you agree to our{" "}
+                              <a href="/about/privacy-policy-and-terms-of-service#privacy-policy" target="_blank" className="underline hover:no-underline">
+                                Privacy Policy
+                              </a>{" "}
+                              and{" "}
+                              <a href="/about/privacy-policy-and-terms-of-service#terms-of-service" target="_blank" className="underline hover:no-underline">
+                                Terms of Service
+                              </a>.
+                            </p>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -492,27 +543,33 @@ export default function ContactForm({
                 control={form.control}
                 name="tosAgreement"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormItem className={clsx(
+                    "flex flex-row items-start space-x-3 space-y-0 p-3 rounded-lg transition-colors",
+                    form.formState.errors.tosAgreement && "border border-red-500 focus:border-red-500"
+                  )}>
                     <FormControl>
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        className={variant === "frosted" ? "data-[state=checked]:text-white" : "data-[state=checked]:text-medium-blue"}
+                        className={clsx(
+                          variant === "frosted" ? "data-[state=checked]:text-white" : "data-[state=checked]:text-medium-blue",
+                          form.formState.errors.tosAgreement && "border-red-500"
+                        )}
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
                       <FormLabel className={clsx("font-normal cursor-pointer after:content-['*'] after:text-red-500 after:ml-0.5", variant === "frosted" && "text-white")}>
                         I agree to the{" "}
-                        <a href="/terms" target="_blank" className="underline hover:no-underline">
-                          Terms of Service
+                        <a href="/about/privacy-policy-and-terms-of-service#privacy-policy" target="_blank" className="underline hover:no-underline">
+                          Privacy Policy
                         </a>{" "}
                         and{" "}
-                        <a href="/privacy" target="_blank" className="underline hover:no-underline">
-                          Privacy Policy
+                        <a href="/about/privacy-policy-and-terms-of-service#terms-of-service" target="_blank" className="underline hover:no-underline">
+                          Terms of Service
                         </a>
                       </FormLabel>
                     </div>
-                    <FormMessage />
+                    <FormMessage className={variant === "frosted" ? "text-red-50" : undefined} />
                   </FormItem>
                 )}
               />

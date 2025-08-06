@@ -8,6 +8,8 @@
  */
 import type { Metadata } from "next";
 import PreviousWorksPage from "@/components/about-pages/previous-works-page";
+import { generateAboutMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Previous Works page.
@@ -17,11 +19,11 @@ import PreviousWorksPage from "@/components/about-pages/previous-works-page";
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: "Previous Works | InSite Tech Solutions",
-  description:
-    "Explore our portfolio of successful projects, from custom software solutions to web and app development. See how we've helped clients achieve their goals.",
-};
+export const metadata: Metadata = generateAboutMetadata(
+  "Previous Works",
+  "Explore our portfolio of successful projects, from custom software solutions to web and app development. See how we've helped clients achieve their goals.",
+  "previous-works"
+);
 
 /**
  * Previous Works Page Route Component
@@ -33,5 +35,20 @@ export const metadata: Metadata = {
  * @returns {JSX.Element} The rendered Previous Works page component
  */
 export default function Page(): JSX.Element {
-  return <PreviousWorksPage />;
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="Previous Works | InSite Tech Solutions"
+        pageDescription="Explore our portfolio of successful projects, from custom software solutions to web and app development. See how we've helped clients achieve their goals."
+        pageUrl="https://insitetechsolutions.com/about/previous-works"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Previous Works", url: "https://insitetechsolutions.com/about/previous-works" }
+        ]}
+      />
+      <PreviousWorksPage />
+    </>
+  );
 }

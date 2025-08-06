@@ -1,0 +1,130 @@
+[
+  {
+    "id": "HomepageHeroContent",
+    "title": "Innovative Website and Software Solutions",
+    "description": "From simple web design to complex software applications, InSite Tech provides the expertise to tailor solutions to all your tech-related needs.",
+    "url": "/",
+    "type": "page",
+    "tags": [
+      "page"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a collaborative, transparent, and iterative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure that every project meets your unique needs while staying on time and on budget. We believe in right-sized solutions—no overengineering, no unnecessary complexity.",
+    "url": "/services/web-app-dev",
+    "type": "service",
+    "tags": [
+      "web-app-dev",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a systematic, data-driven approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure maximum online visibility and sustainable growth. Each step is tailored specifically to align with your business needs.",
+    "url": "/services/seo-marketing",
+    "type": "service",
+    "tags": [
+      "seo-marketing",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a collaborative, creative, and strategic approach we call the 5 Ds—Discovery, Definition, Design, Development, and Delivery—to ensure that every design project effectively communicates your brand's unique value while capturing your vision and meeting your objectives.",
+    "url": "/services/graphic-design",
+    "type": "service",
+    "tags": [
+      "graphic-design",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Delivery—to ensure that every analysis project delivers clear, actionable insights aligned with your business objectives.",
+    "url": "/services/data-analysis",
+    "type": "service",
+    "tags": [
+      "data-analysis",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure your custom software solution meets all requirements while maintaining flexibility for future growth.",
+    "url": "/services/custom-software",
+    "type": "service",
+    "tags": [
+      "custom-software",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Delivery—to ensure that our consulting and training services deliver meaningful results and build lasting capabilities within your organization.",
+    "url": "/services/consulting-training",
+    "type": "service",
+    "tags": [
+      "consulting-training",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-content",
+    "title": "Our Approach",
+    "description": "We follow a systematic, collaborative approach we call the 5 Ds—Discovery, Definition, Design, Development, and Deployment—to ensure that every AI and automation project delivers measurable business value while aligning with your operational needs and strategic objectives.",
+    "url": "/services/ai-automation",
+    "type": "service",
+    "tags": [
+      "ai-automation",
+      "service"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-page-content",
+    "title": "Our Proven 5-Step Process",
+    "description": "We believe every successful project starts with a clear, collaborative process. We follow a methodology that we refer to as the 5 Ds: Discovery, Definition, Design, Development, and Deployment. Our approach is designed to deliver results that drive your business forward—combining strategic insight, creative thinking, and technical expertise at every stage.",
+    "url": "/about/process",
+    "type": "about",
+    "tags": [
+      "about"
+    ],
+    "score": 1
+  },
+  {
+    "id": "process-page-content",
+    "title": "A Deeper Dive Into Our Methodology",
+    "description": "We blend the flexibility of modern agile development principles with practical experience, ensuring transparency and focus at every stage. Our process is built on MVP-first thinking, rapid prototyping, and feedback-focused sprints to deliver tailored solutions. This can be humourously described as make it work, make it right, make it fast (MVP/prototyping, refactoring/iteration, optimization/polish).",
+    "url": "/about/process",
+    "type": "about",
+    "tags": [
+      "about"
+    ],
+    "score": 1
+  },
+  {
+    "id": "privacy-and-terms-cta-content",
+    "title": "Have Questions About Our Legal Documents?",
+    "description": "If you have any questions about our Privacy Policy, Terms of Service, or any other legal documents, our support team is here to help. We're committed to transparency and want to ensure you understand your rights and our practices.",
+    "url": "/about/privacy-and-terms",
+    "type": "about",
+    "tags": [
+      "about"
+    ],
+    "score": 1
+  }
+]

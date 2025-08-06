@@ -1,0 +1,44 @@
+/**
+ * @fileoverview Blog Page Hero Section CSS Module
+ *
+ * This CSS module provides styling for the Blog page hero section,
+ * including entrance animations optimized for performance to match the
+ * original Framer Motion implementation.
+ *
+ * @module BlogHeroSectionStyles
+ */
+
+/* === Keyframes based on Framer Motion variants === */
+
+@keyframes blogFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Animation classes with staggered delays === */
+
+/* Primary heading: delay 0.4s */
+.primaryHeading {
+  animation: blogFadeInUp 0.5s ease-out 0.4s both;
+}
+
+/* Secondary heading: delay 0.5s */
+.secondaryHeading {
+  animation: blogFadeInUp 0.5s ease-out 0.5s both;
+}
+
+/* Description text: delay 0.6s */
+.descriptionText {
+  animation: blogFadeInUp 0.5s ease-out 0.6s both;
+}
+
+/* CTA buttons container: delay 0.7s */
+.ctaContainer {
+  animation: blogFadeInUp 0.5s ease-out 0.7s both;
+} 

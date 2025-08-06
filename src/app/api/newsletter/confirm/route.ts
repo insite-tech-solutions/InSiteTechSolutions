@@ -26,6 +26,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
+import { render } from '@react-email/render'
 import { supabaseAdmin } from '@/lib/supabase'
 import { resend, emailConfig } from '@/lib/resend'
 import { checkRateLimit, confirmationLimiter, getClientIP } from '@/lib/rate-limit'
@@ -124,14 +125,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       const unsubscribeToken = generateUnsubscribeToken(email)
       const unsubscribeUrl = `${emailConfig.siteUrl}/api/newsletter/unsubscribe?token=${unsubscribeToken}`
       
+      const welcomeEmailHtml = await render(NewsletterWelcome({
+        unsubscribeUrl,
+        logoUrl: `${emailConfig.siteUrl}/Insite Tech Solutions Light.png`,
+      }))
+      
       await resend.emails.send({
         from: `InSite Tech Solutions <${emailConfig.from}>`,
         to: [email],
         subject: 'Welcome to the InSite Tech Solutions Newsletter!',
-        react: NewsletterWelcome({
-          unsubscribeUrl,
-          logoUrl: `${emailConfig.siteUrl}/logo.png`,
-        }),
+        html: welcomeEmailHtml,
       })
     } catch (emailError) {
       console.error('Failed to send welcome email:', emailError)

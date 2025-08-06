@@ -55,7 +55,9 @@ const fadeInUp = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     }
   }
 }
@@ -91,8 +93,10 @@ const CategoryCard = memo(function CategoryCard({ category }: { category: Applic
 
   return (
     <motion.article
+      key={`category-card-${category.title.toLowerCase().replace(/\s+/g, '-')}`}
       variants={fadeInUp} // Apply the fade-in-up animation to each card
-      className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg transition-all"
+      className="bg-white bg-opacity-15 backdrop-filter backdrop-blur-lg rounded-xl p-6 shadow-lg"
+      style={{ transition: "box-shadow 0.3s ease" }}
     >
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 rounded-lg bg-blue-100">
@@ -135,13 +139,18 @@ function ApplicationCategories({ title, description, categories }: ApplicationCa
       {/* Hidden heading for screen readers to provide accessible context for the section */}
       <h2 id="application-categories-title" className="sr-only">{title}</h2>
       <motion.div
+        key="application-categories-container"
         initial="hidden" // Initial state for Framer Motion animation
         whileInView="visible" // Animate to 'visible' when component enters viewport
         viewport={{ once: true }} // Trigger animation only once when it comes into view
         variants={staggerChildren} // Apply stagger animation to children
       >
         {/* Section Header with fade-in-up animation */}
-        <motion.header variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
+        <motion.header 
+          key="application-categories-header"
+          variants={fadeInUp} 
+          className="text-center max-w-4xl mx-auto mb-8"
+        >
           <h2 className="text-3xl md:text-4xl font-bold mt-6 mb-6 text-gray-50">
             {title}
           </h2>

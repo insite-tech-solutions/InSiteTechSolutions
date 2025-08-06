@@ -65,7 +65,7 @@ const dataAnalysisPricingContent: PricingContent = {
     description: "Investment in data analysis delivers returns far beyond the initial project cost. Effective data analysis leads to improved operational efficiency, reduced costs, enhanced decision accuracy, and identification of new revenue opportunities. Organizations typically see ROI from analytics investments within 3-6 months through cost savings and performance improvements. Additionally, the insights gained from analysis often reveal unexpected opportunities for innovation and competitive advantage. As your analytical capabilities mature, the cumulative value increases as insights compound and predictive models become more refined with additional data.",
     link: {
       text: "View detailed pricing",
-      url: "/pricing",
+      url: "/about/pricing-and-payments",
     },
   },
 };

@@ -43,7 +43,7 @@ export const EmailFooter = (): JSX.Element => {
             <strong>InSite Tech Solutions</strong>
           </Text>
           <Text style={footerTagline}>
-            Professional solutions for all your tech related needs
+            Innovative solutions for all your tech related needs
           </Text>
           <Hr style={hr} />
           <Text style={footerContact}>
@@ -57,17 +57,25 @@ export const EmailFooter = (): JSX.Element => {
           </Text>
           <Text style={footerSocial}>
             Follow us: {' '}
-            <Link href="https://linkedin.com/company/insite-tech-solutions" style={link}>
+            <Link href="https://www.linkedin.com/company/insite-tech-solutions" style={link}>
               LinkedIn
             </Link>
             {' | '}
-            <Link href="https://twitter.com/insitetechsol" style={link}>
-              Twitter
+            <Link href="https://github.com/insite-tech-solutions" style={link}>
+              GitHub
+            </Link>
+            {' | '}
+            <Link href="https://www.facebook.com/share/198f3uKoyc/?mibextid=wwXIfr" style={link}>
+              Facebook
+            </Link>
+            {' | '}
+            <Link href="https://nextdoor.com/pages/insite-tech-solutions-lockport-ny/" style={link}>
+              Nextdoor
             </Link>
           </Text>
           <Text style={copyright}>
-            © 2025 InSite Tech Solutions. All rights reserved.<br />
-            YOUR_PHYSICAL_ADDRESS
+            &copy; {new Date().getFullYear()} InSite Tech Solutions. All rights reserved.<br />
+            {/* YOUR_PHYSICAL_ADDRESS */}
           </Text>
           <Text style={unsubscribeText}>
             You received this email because you contacted us or subscribed to our newsletter.

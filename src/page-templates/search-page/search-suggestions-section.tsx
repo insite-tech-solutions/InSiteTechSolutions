@@ -27,10 +27,11 @@
 'use client';
 
 import { memo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Search, TrendingUp, Sparkles, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSearch } from '@/contexts/search-context';
+import { scrollToSection } from '@/utils/scroll-to-section';
 
 /**
  * Popular search suggestions for user discovery
@@ -104,7 +105,32 @@ const TRENDING_TOPICS = [
  */
 function SearchSuggestionsSection(): JSX.Element {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const { searchHistory, clearSearchHistory } = useSearch();
+
+  /**
+   * Handles services section navigation with cross-page support
+   * 
+   * Navigates to services section on homepage or navigates to homepage
+   * first if on a different page, then scrolls to services section.
+   * 
+   * @param {React.MouseEvent<HTMLAnchorElement>} e - Click event
+   */
+  const handleServicesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // If we're already on homepage, just scroll to section
+    if (window.location.pathname === "/") {
+      scrollToSection("services-section");
+    } else {
+      // Navigate to homepage first, then scroll to section
+      router.push('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        scrollToSection('services-section');
+      }, 100);
+    }
+  };
 
   /**
    * Handles search suggestion clicks and navigates to search results
@@ -227,7 +253,8 @@ function SearchSuggestionsSection(): JSX.Element {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a
-                href="/services"
+                href="/#services-section"
+                onClick={handleServicesClick}
                 className="px-4 py-2 text-sm bg-medium-blue text-white rounded-lg hover:bg-dark-blue-alt transition-colors duration-200"
               >
                 Browse Services

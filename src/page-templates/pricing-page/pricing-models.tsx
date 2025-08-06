@@ -76,7 +76,7 @@ const pricingModels: PricingModel[] = [
       "Pay only for the time spent on your project",
       "Detailed time tracking and reporting",
       "Great for exploratory projects and ad-hoc requests",
-      "Rates typically range from $40–100/hour, depending on complexity",
+      "Rates typically range from $50–100/hour, depending on complexity",
     ],
     cta: "Schedule a Consultation",
     recommended: false,

@@ -59,7 +59,7 @@ const customSoftwarePricingContent: PricingContent = {
     description: "The true cost of custom software extends beyond development expenses. While initial development costs may seem higher compared to off-the-shelf solutions, the long-term savings and efficiency gains far outweigh the investment. Custom software eliminates the need for multiple subscriptions, reduces manual processes, and enhances overall productivity. It's more than a one-time investment—it's a foundation for long-term growth. By eliminating unnecessary subscriptions and automating key processes, custom solutions can significantly reduce operational costs over time while giving your business a competitive edge.",
     link: {
       text: "View detailed pricing",
-      url: "/process",
+      url: "/about/pricing-and-payments",
     },
   },
 };

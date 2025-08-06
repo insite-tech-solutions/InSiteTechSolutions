@@ -9,7 +9,7 @@ version: "1.1"
 
 **Last updated June 30, 2025**
 
-We are InSite Tech Solutions (“Company,” “we,” “us,” “our”) — a sole proprietorship registered in Niagara County, NY. (Mailing address available upon request; we operate remotely and do not maintain a public office.)
+We are Christian Neureuter doing business as (DBA) InSite Tech Solutions (“Company,” “we,” “us,” “our”) — a sole proprietorship registered in Niagara County, NY. (Mailing address available upon request; we operate remotely and do not maintain a public office.)
 
 This Privacy Notice for InSite Tech Solutions ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:
 

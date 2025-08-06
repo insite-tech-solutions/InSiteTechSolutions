@@ -159,7 +159,7 @@ function CTASection(): JSX.Element {
               className="text-xl"
               variants={fadeInUp}
             >
-              (123) 456-7890 | hello@yourcompany.com
+              (716) 406-8988 | contact@insitetechsolutions.com
             </motion.p>
             
             {/* CTA Buttons with responsive layout */}
@@ -180,7 +180,7 @@ function CTASection(): JSX.Element {
               {/* Secondary action link - case studies */}
               <motion.div variants={buttonVariants}>
                 <Link
-                  href="/case-studies"
+                  href="/about/previous-works"
                   className="inline-flex items-center gap-2 w-fit text-white font-medium py-3 px-6 rounded-full border border-white/30 hover:bg-white/10 transition-all duration-300"
                 >
                   View Case Studies

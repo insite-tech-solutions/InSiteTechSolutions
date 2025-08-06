@@ -194,7 +194,7 @@ export default function PaymentTerms(): JSX.Element {
             needs. We typically follow a Net 30 payment term, requiring invoices to be paid in full within 30 days of receipt.
             <br /><br />
             Each project includes a custom contract tailored to the specific requirements. You can view our full{" "}
-            <a href="/about/privacy-policy-and-terms" className="text-blue-600 hover:text-blue-800 underline">
+            <a href="/about/privacy-policy-and-terms-of-service" className="text-blue-600 hover:text-blue-800 underline">
               Terms of Service and Privacy Policy
             </a>{" "}
             for complete details on our policies and procedures.

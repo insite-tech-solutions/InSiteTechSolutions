@@ -20,13 +20,13 @@ import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-con
 
 // Direct imports for critical above-the-fold content
 import HeroSection from './hero-section';
-import ServiceOverviewSection from './overview-section';
-import ValuePropSection from './value-prop-section';
 
 /**
  * Dynamic imports for below-the-fold content to improve initial page load performance
  * These sections are loaded asynchronously after the initial render
  */
+const ServiceOverviewSection = dynamic(() => import('./overview-section'), { ssr: false });
+const ValuePropSection = dynamic(() => import('./value-prop-section'), { ssr: false });
 const ServiceScopeSection = dynamic(() => import('./service-scope-section'), { ssr: false });
 const ApplicationsSection = dynamic(() => import('./applications-section'), { ssr: false });
 const ProcessSection = dynamic(() => import('./process-section'), { ssr: false });

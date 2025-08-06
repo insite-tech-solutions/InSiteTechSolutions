@@ -8,6 +8,8 @@
  */
 import type { Metadata } from "next";
 import PricingPage from "@/components/about-pages/pricing-page";
+import { generateAboutMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Pricing & Payments page.
@@ -17,11 +19,11 @@ import PricingPage from "@/components/about-pages/pricing-page";
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: "Pricing & Payment Options | Your Tech Services",
-  description:
-    "Flexible pricing models and secure payment options for web development, custom software, and data analytics services.",
-};
+export const metadata: Metadata = generateAboutMetadata(
+  "Pricing & Payment Options",
+  "Flexible pricing models and secure payment options for web development, custom software, data analytics, consulting, and other tech services. Transparent, fair, and results-driven pricing.",
+  "pricing-and-payments"
+);
 
 /**
  * Pricing & Payments Page Route Component
@@ -45,5 +47,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <PricingPage />;
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="Pricing & Payment Options | InSite Tech Solutions"
+        pageDescription="Flexible pricing models and secure payment options for web development, custom software, data analytics, consulting, and other tech services. Transparent, fair, and results-driven pricing."
+        pageUrl="https://insitetechsolutions.com/about/pricing-and-payments"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Pricing & Payment Options", url: "https://insitetechsolutions.com/about/pricing-and-payments" }
+        ]}
+      />
+      <PricingPage />
+    </>
+  );
 }

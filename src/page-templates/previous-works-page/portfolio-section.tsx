@@ -49,12 +49,18 @@ const staggerContainer: Variants = {
 };
 
 const cardVariants: Variants = {
-  initial: { opacity: 0, y: 20, scale: 0.95 },
+  initial: { opacity: 0, y: 30, scale: 0.9 },
   animate: { 
     opacity: 1, 
     y: 0, 
     scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" }
+    transition: { 
+      duration: 0.6, 
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 },
+      scale: { duration: 0.6 }
+    }
   }
 };
 
@@ -138,7 +144,9 @@ interface PortfolioCardProps {
 const PortfolioCard = memo(function PortfolioCard({ project }: PortfolioCardProps): JSX.Element {
   return (
     <motion.div 
-      className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      key={`portfolio-card-${project.id}`}
+      className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl"
+      style={{ transition: "box-shadow 0.3s ease" }}
       variants={cardVariants}
     >
       <div className="relative overflow-hidden">
@@ -275,11 +283,11 @@ const PortfolioSection = (): JSX.Element => {
         <FilterControls services={allServices} onFilterChange={setActiveFilter} activeFilter={activeFilter} />
 
         <motion.div 
+          key={`portfolio-grid-${activeFilter}`}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-          key={activeFilter} // Force re-render when filter changes
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={staggerContainer}
         >
           {filteredProjects.map(project => (

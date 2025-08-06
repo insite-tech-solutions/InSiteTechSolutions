@@ -66,7 +66,9 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     }
   }
 };
@@ -112,8 +114,10 @@ const TrendCard = React.memo(function TrendCard({
 
   return (
     <motion.article
+      key={`trend-card-${title.toLowerCase().replace(/\s+/g, '-')}`}
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-mild-blue transition-all hover:shadow-lg p-4"
+      className="bg-white rounded-lg shadow-md border border-gray-200 hover:border-mild-blue hover:shadow-lg p-4"
+      style={{ transition: "border-color 0.3s ease, box-shadow 0.3s ease" }}
       onClick={onToggle}
     >
       <header className="flex items-center justify-between">
@@ -340,6 +344,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
   // Memoize the rendered trends list to prevent unnecessary re-renders
   const renderedTrends = useMemo(() => (
     <motion.div
+      key="trends-container"
       variants={staggerChildren}
       initial="hidden"
       whileInView="visible"
@@ -363,6 +368,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
       <h2 id="value-prop-section-title" className="sr-only">{title}</h2>
       <div className={`container mx-auto ${layoutVariant === 'compact' ? 'max-w-7xl' : ''}`}>
         <motion.div
+          key="value-prop-main-container"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -370,6 +376,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
         >
           {/* Section Title */}
           <motion.h2 
+            key="value-prop-title"
             variants={fadeInUp}
             className="text-3xl md:text-4xl font-bold pb-8 text-center text-gray-900"
           >
@@ -381,6 +388,7 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
             <div className="space-y-8">
               {/* Description Paragraph */}
               <motion.p 
+                key="value-prop-description"
                 variants={fadeInUp}
                 className="text-lg px-2 text-gray-700 leading-relaxed"
               >
@@ -432,8 +440,10 @@ const ValuePropSectionWrapper = React.memo(function ValuePropSection({
 
               {/* Call to Action Section */}
               <motion.aside
+                key="value-prop-cta"
                 variants={fadeInUp}
-                className="bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                className="bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white p-6 rounded-lg shadow-lg hover:shadow-xl"
+                style={{ transition: "box-shadow 0.2s ease" }}
               >
                 <h3 className="text-2xl font-semibold mb-4">{callToAction.title}</h3>
                 <p className="mb-6">

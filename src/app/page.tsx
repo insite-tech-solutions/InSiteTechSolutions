@@ -16,6 +16,7 @@
  */
 import type { Metadata } from "next";
 import HomePage from "@/components/home-pages/home-page";
+import { OrganizationStructuredData, WebPageStructuredData, LocalBusinessStructuredData } from "@/components/seo/structured-data";
 
 /**
  * Static metadata configuration for the Home page
@@ -27,9 +28,8 @@ import HomePage from "@/components/home-pages/home-page";
  * @constant {Metadata} metadata
  */
 export const metadata: Metadata = {
-  title: "InSite Tech Solutions | Custom Software, Web & App Development",
-  description:
-    "InSite Tech Solutions offers custom software development, web and mobile app creation, data analysis, and AI-powered automation to elevate your business.",
+  title: "InSite Tech Solutions | Custom Software, Web Development & Technical Consulting",
+  description: "InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services.",
 };
 
 /**
@@ -54,5 +54,16 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <HomePage />;
+  return (
+    <>
+      <OrganizationStructuredData />
+      <LocalBusinessStructuredData />
+      <WebPageStructuredData 
+        pageName="InSite Tech Solutions | Custom Software, Web Development & Technical Consulting"
+        pageDescription="InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services."
+        pageUrl="https://insitetechsolutions.com"
+      />
+      <HomePage />
+    </>
+  );
 }

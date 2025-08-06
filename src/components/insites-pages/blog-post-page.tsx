@@ -118,7 +118,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps): JSX.Element {
                   Stay updated with our latest insights and tutorials. Subscribe to our newsletter 
                   to get notified when we publish new content.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-row gap-4 justify-start">
                   <Link
                     href="/insites/blog"
                     className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"

@@ -26,7 +26,7 @@ const seoMarketingCTAContent: CTAContent = {
   primaryButtonText: "Schedule Free Consultation",
   primaryButtonLink: "/contact",
   secondaryButtonText: "View Case Studies",
-  secondaryButtonLink: "/case-studies",
+  secondaryButtonLink: "/about/previous-works",
   //bgClassName: "bg-gradient-to-br from-medium-blue to-blue-800", // Optional custom background
 };
 

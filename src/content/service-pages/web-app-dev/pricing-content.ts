@@ -65,7 +65,7 @@ const webAppDevelopmentPricingContent: PricingContent = {
     description: "The true cost of a website or app extends beyond development expenses. An outdated or poorly functioning digital presence can result in lost revenue, decreased engagement, reduced efficiency, and diminished market presence. Investing in a high-quality digital solution provides long-term returns through increased user engagement, higher conversion rates, and improved operational efficiency.",
     link: {
       text: "View detailed pricing",
-      url: "/pricing",
+      url: "/about/pricing-and-payments",
     },
   },
 };

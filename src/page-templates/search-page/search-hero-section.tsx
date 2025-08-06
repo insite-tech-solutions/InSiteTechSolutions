@@ -21,7 +21,6 @@
 
 import { useState, useEffect, useRef, memo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { Search, ChevronLeft, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -145,13 +144,14 @@ function SearchHeroSection(): JSX.Element {
           {/* Breadcrumb Navigation */}
           <div className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 text-white text-left pt-5 pb-6 px-4 ">
           <div className="mb-4">
-            <Link 
-              href="/" 
-              className="text-sm text-white hover:text-gray-200 flex items-center gap-1 mb-2"
+            <button 
+              onClick={() => window.history.back()}
+              className="text-sm text-white hover:text-gray-200 flex items-center gap-1 mb-2 transition-colors duration-200"
+              aria-label="Go back to previous page"
             >
               <ChevronLeft className="h-4 w-4" />
-              Back to Home
-            </Link>
+              Back
+            </button>
           </div>
 
           {/* Search Header */}

@@ -26,7 +26,7 @@ const graphicDesignCTAContent: CTAContent = {
   primaryButtonText: "Schedule Free Consultation",
   primaryButtonLink: "/contact",
   secondaryButtonText: "View Case Studies",
-  secondaryButtonLink: "/case-studies",
+  secondaryButtonLink: "/about/previous-works",
 };
 
 export default graphicDesignCTAContent;

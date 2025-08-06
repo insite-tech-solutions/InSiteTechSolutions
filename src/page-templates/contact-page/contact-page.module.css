@@ -1,0 +1,66 @@
+/**
+ * @fileoverview Contact Page CSS Module
+ *
+ * This CSS module provides styling for the Contact page,
+ * including entrance animations optimized for performance to match the
+ * original Framer Motion implementation.
+ *
+ * @module ContactPageStyles
+ */
+
+/* === Keyframes based on Framer Motion variants === */
+
+@keyframes contactSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes contactSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes contactFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Animation classes with staggered delays === */
+
+/* Page header: delay 0.4s */
+.pageHeader {
+  animation: contactSlideInLeft 0.6s ease-out 0.4s both;
+}
+
+/* Hero section: delay 0.5s */
+.heroSection {
+  animation: contactFadeInUp 0.6s ease-out 0.5s both;
+}
+
+/* Left column: delay 0.7s */
+.leftColumn {
+  animation: contactSlideInLeft 0.7s ease-out 0.8s both;
+}
+
+/* Right column: delay 0.7s */
+.rightColumn {
+  animation: contactSlideInRight 0.7s ease-out 0.8s both;
+} 

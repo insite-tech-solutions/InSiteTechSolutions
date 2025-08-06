@@ -62,7 +62,7 @@ const seoMarketingPricingContent: PricingContent = {
     description: "Investment in digital marketing provides compound returns over time. Unlike traditional advertising that stops working when you stop paying, SEO and content marketing continue to generate value long after implementation. Our strategies build sustainable organic growth, strengthen brand equity, provide valuable market intelligence, and create a scalable competitive advantage that grows with your business. The true value extends beyond initial costs through increased brand awareness, higher search rankings, and consistent lead generation, leading to ongoing revenue growth.",
     link: {
       text: "View detailed pricing",
-      url: "/case-studies",
+      url: "/about/pricing-and-payments",
     },
   },
 };

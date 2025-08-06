@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import AIAutomationPage from '@/components/service-pages/ai-automation-page';
 import aiAutomationContent from '@/content/service-pages/ai-automation';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the AI & Automation service page.
@@ -19,10 +21,11 @@ import aiAutomationContent from '@/content/service-pages/ai-automation';
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: aiAutomationContent.metadata.title + ' | InSite Tech',
-  description: aiAutomationContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  aiAutomationContent.metadata.title,
+  aiAutomationContent.metadata.description,
+  'ai-and-automation'
+);
 
 /**
  * AI & Automation Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <AIAutomationPage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={aiAutomationContent.metadata.title}
+        serviceDescription={aiAutomationContent.metadata.description}
+        serviceType="AI & Automation Services"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "AI & Automation", url: "https://insitetechsolutions.com/services/ai-and-automation" }
+        ]}
+      />
+      <AIAutomationPage />
+    </>
+  );
 }

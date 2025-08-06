@@ -23,7 +23,12 @@ const fadeInUp: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
+    transition: { 
+      duration: 0.6, 
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
+    }
   }
 }
 
@@ -79,11 +84,13 @@ function PriceFactorCard({ title, items, icon }: PriceFactorProps): JSX.Element 
 
   return (
     <motion.div
+      key={`homepage-price-factor-${title.toLowerCase().replace(/\s+/g, '-')}`}
       ref={ref}
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg transition-all"
+      className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg"
+      style={{ transition: "box-shadow 0.3s ease" }}
     >
       {/* Card Header - Gradient background with icon and title */}
       <div className="w-full rounded-t-lg bg-gradient-to-br from-light-blue to-blue-800 flex items-center gap-3 min-h-[56px] px-4 py-3">
@@ -148,13 +155,18 @@ function HomepagePriceSection(): JSX.Element {
       <h2 id="pricing-section-title" className="sr-only">Our Pricing</h2>
       <div className="container mx-auto md:px-4">
         <motion.div
+          key="homepage-pricing-stagger-container"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerChildren}
         >
           {/* Section Header */}
-          <motion.div variants={fadeInUp} className="text-center mb-10 lg:mb-12">
+          <motion.div 
+            key="homepage-pricing-header"
+            variants={fadeInUp} 
+            className="text-center mb-10 lg:mb-12"
+          >
             <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
               Our Pricing
             </h2>
@@ -165,6 +177,7 @@ function HomepagePriceSection(): JSX.Element {
 
           {/* Primary Project Cost Factors Section */}
           <motion.h3
+            key="homepage-pricing-factors-title"
             variants={fadeInUp}
             className="text-2xl font-semibold text-gray-800 text-center mb-8"
           >
@@ -184,7 +197,11 @@ function HomepagePriceSection(): JSX.Element {
           </div>
 
           {/* Flexible Pricing Info */}
-          <motion.div variants={fadeInUp} className="text-center bg-white p-8 rounded-lg shadow-md border border-gray-200">
+          <motion.div 
+            key="homepage-pricing-flexible-info"
+            variants={fadeInUp} 
+            className="text-center bg-white p-8 rounded-lg shadow-md border border-gray-200"
+          >
             <h3 className="text-2xl font-semibold text-gray-800 mb-4">
               Flexible and Secure Solutions
             </h3>
@@ -196,7 +213,11 @@ function HomepagePriceSection(): JSX.Element {
 
 
         {/* Pricing CTA */}
-        <motion.div variants={fadeInUp} className="mt-10 flex justify-center">
+        <motion.div 
+          key="homepage-pricing-cta"
+          variants={fadeInUp} 
+          className="mt-10 flex justify-center"
+        >
         <a
           href={"/about/pricing-and-payments"}
           className="group inline-flex items-center gap-2 text-mild-blue hover:text-medium-blue-alt font-medium transition-colors"

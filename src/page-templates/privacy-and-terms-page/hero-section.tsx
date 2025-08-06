@@ -5,10 +5,10 @@
  * component with decorative elements and proper styling consistent with the site architecture.
  */
 
-import { motion } from 'framer-motion';
 import { Shield, FileText } from 'lucide-react';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { DecorElement } from '@/page-templates/service-page/types';
+import styles from './hero-section.module.css';
 
 // Static decorative elements for Privacy & Terms HeroSection
 const decorElements: DecorElement[] = [
@@ -59,23 +59,17 @@ export default function HeroSection(): JSX.Element {
         decorElements={decorElements}
       >
         <div className="flex flex-col items-center justify-center px-4 text-center text-white">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
+          <h1
+            className={`text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg ${styles.primaryHeading}`}
           >
             Legal Center
-          </motion.h1>
+          </h1>
           
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow"
+          <p
+            className={`text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow ${styles.descriptionText}`}
           >
             Your privacy and our terms of service are important. Here&apos;s a clear look at our policies and your rights.
-          </motion.p>
+          </p>
         </div>
       </TailwindHeroBackground>
     </div>

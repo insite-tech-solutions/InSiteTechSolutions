@@ -87,7 +87,7 @@ export const webAppDevelopmentProcess: ProcessContent = {
   ],
   note: "We cannot provide exact timelines until we have a well defined project and plan. Projects can range from a few weeks to several months; however, a simple reference point is most small business website projects are completed in 6–8 weeks, while larger sites and app development can range from 8–16+ weeks, depending on the complexity.",
   linkText: "Learn more about our process",
-  linkUrl: "/process",
+  linkUrl: "/about/development-process",
 };
 
 export default webAppDevelopmentProcess;

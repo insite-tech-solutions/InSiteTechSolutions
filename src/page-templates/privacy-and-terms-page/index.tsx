@@ -11,7 +11,7 @@
  * - Hero section outside main layout for full-width design
  * - Layout wrapper for content sections with consistent spacing
  * - Modular section components for maintainability
- * - Dynamic imports for below-the-fold content to improve performance
+ * - Direct imports for all content sections to enable section anchors and improve UX
  */
 
 'use client';

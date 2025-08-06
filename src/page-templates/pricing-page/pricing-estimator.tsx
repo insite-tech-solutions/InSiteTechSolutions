@@ -23,7 +23,12 @@ const fadeInUp: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
+    transition: { 
+      duration: 0.6, 
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
+    }
   }
 }
 
@@ -121,11 +126,13 @@ const PriceFactorCard: React.FC<PriceFactorProps> = ({ title, items, icon }) => 
 
   return (
     <motion.div
+      key={`pricing-estimator-factor-${title.toLowerCase().replace(/\s+/g, '-')}`}
       ref={ref}
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg transition-all"
+      className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg"
+      style={{ transition: "box-shadow 0.3s ease" }}
     >
       {/* Card Header - Gradient background with icon and title */}
       <div className="w-full rounded-t-lg bg-gradient-to-br from-light-blue to-blue-800 flex items-center gap-3 min-h-[56px] px-4 py-3">
@@ -200,6 +207,7 @@ export default function PricingEstimator(): JSX.Element {
 
       {/* Animated Content Container - Staggered animations for child elements */}
       <motion.div
+        key="pricing-estimator-stagger-container"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -208,6 +216,7 @@ export default function PricingEstimator(): JSX.Element {
       >
         {/* Price Factors Section Title */}
         <motion.h3
+          key="pricing-estimator-factors-title"
           variants={fadeInUp}
           className="text-2xl font-semibold text-gray-800 text-center mb-8 mt-4"
         >

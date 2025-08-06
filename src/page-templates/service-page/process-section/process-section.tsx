@@ -6,7 +6,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback, memo } from 'react';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TracingBeam } from './tracing-beam';
 import { ProcessContent } from '@/page-templates/service-page/types';

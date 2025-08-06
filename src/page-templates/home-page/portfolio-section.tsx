@@ -104,7 +104,9 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     },
   },
 }
@@ -147,7 +149,10 @@ const cardVariants: Variants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 },
+      scale: { duration: 0.6 }
     }
   }
 };
@@ -205,7 +210,11 @@ function FeaturedPortfolio(): JSX.Element {
       {/* Main container */}
       <div className="container mx-auto">
         {/* Section Header with title and description */}
-        <motion.div className="text-center max-w-4xl mx-auto mb-12" variants={fadeInUp}>
+        <motion.div 
+          key="portfolio-header"
+          className="text-center max-w-4xl mx-auto mb-12" 
+          variants={fadeInUp}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Work</h2>
           <p className="text-lg text-gray-600">
             Showcasing some of our recent projects which demonstrate our expertise in building effective tech solutions.
@@ -214,13 +223,15 @@ function FeaturedPortfolio(): JSX.Element {
 
         {/* Portfolio Cards Container with responsive layout */}
         <motion.div 
+          key="portfolio-cards-container"
           className="flex flex-col md:flex-row gap-4 lg:gap-6 mb-8"
           variants={staggerContainer}
         >
           {featuredProjects.map((project) => (
             <motion.div
-              key={project.id}
-              className="group relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-400 hover:shadow-lg flex-1"
+              key={`portfolio-card-${project.id}`}
+              className="group relative rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg flex-1"
+              style={{ transition: "box-shadow 0.4s ease" }}
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
               variants={cardVariants}
@@ -296,7 +307,11 @@ function FeaturedPortfolio(): JSX.Element {
         </motion.div>
 
         {/* Portfolio CTA with animation */}
-        <motion.div variants={fadeInUp} className="mt-10 flex justify-center">
+        <motion.div 
+          key="portfolio-cta"
+          variants={fadeInUp} 
+          className="mt-10 flex justify-center"
+        >
                 <a
                   href={"/about/previous-works"}
                   className="group inline-flex items-center gap-2 text-mild-blue hover:text-medium-blue-alt font-medium transition-colors"

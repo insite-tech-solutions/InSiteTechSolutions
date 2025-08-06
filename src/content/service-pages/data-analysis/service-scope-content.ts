@@ -24,7 +24,7 @@ import { ServiceScopeContent } from '@/page-templates/service-page/types';
  */
 const dataAnalysisServiceScope: ServiceScopeContent = {
   title: "Comprehensive Data Analysis Services",
-  description: "We transform complex data into clear, actionable insights through a range of specialized analytical services. Our approach combines statistical expertise with domain knowledge to deliver solutions that address your specific business challenges and research questions.",
+  description: "We transform complex data into clear, actionable insights through a range of specialized analytical services. Our approach combines statistical expertise with domain knowledge to deliver solutions that address your specific challenges and questions.",
   
   services: [
     {

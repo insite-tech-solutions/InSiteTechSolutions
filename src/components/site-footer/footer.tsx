@@ -23,7 +23,7 @@ import { memo } from 'react';
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight, Github } from "lucide-react"
+import { Facebook, Linkedin, Mail, Phone, MapPin, ArrowRight, Github, Home } from "lucide-react"
 import { scrollToSection } from "@/utils/scroll-to-section"
 
 /**
@@ -84,16 +84,15 @@ function Footer(): JSX.Element {
   // Company information and contact details
   const companyInfo = {
     name: "InSite Tech Solutions",
-    tagline: "Transforming businesses through innovative technology solutions",
+    tagline: "Innovative solutions for all your tech related needs",
     address: "Serving WNY Locally and the Globe Remotely",
-    phone: "+1 (555) 123-4567", // TODO: Update with your phone number
+    phone: "+1 (716) 406-8988",
     email: "contact@insitetechsolutions.com",
     socialMedia: [
-      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/" }, // TODO: Update with your LinkedIn URL
-      { name: "Twitter", icon: Twitter, url: "https://twitter.com/" }, // TODO: Update with your Twitter URL
-      { name: "Facebook", icon: Facebook, url: "https://facebook.com/" }, // TODO: Update with your Facebook URL
-      { name: "Instagram", icon: Instagram, url: "https://instagram.com/" }, // TODO: Update with your Instagram URL
-      { name: "GitHub", icon: Github, url: "https://github.com/" }, // TODO: Update with your GitHub URL
+      { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/company/insite-tech-solutions" },
+      { name: "GitHub", icon: Github, url: "https://github.com/insite-tech-solutions" },
+      { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/share/198f3uKoyc/?mibextid=wwXIfr" },
+      { name: "Nextdoor", icon: Home, url: "https://nextdoor.com/pages/insite-tech-solutions-lockport-ny/" },
     ],
   }
 

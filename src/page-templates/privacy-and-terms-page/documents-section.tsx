@@ -21,6 +21,7 @@ import { useState, useEffect, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, FileText, Shield, ChevronsRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { LegalDocument, LegalDocuments } from '@/lib/markdown-loader';
 import { cn } from '@/lib/utils';
@@ -54,10 +55,11 @@ interface Heading {
  * @returns Rendered link component
  */
 const CustomLink = ({ href, children }: { href?: string; children?: React.ReactNode }) => {
+  const linkClasses = "text-blue-600 underline hover:text-blue-800 transition-colors";
   if (!href) return <>{children}</>;
-  if (href.startsWith('/')) return <Link href={href}>{children}</Link>;
-  if (href.startsWith('#')) return <a href={href}>{children}</a>;
-  return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
+  if (href.startsWith('/')) return <Link href={href} className={linkClasses}>{children}</Link>;
+  if (href.startsWith('#')) return <a href={href} className={linkClasses}>{children}</a>;
+  return <a href={href} target="_blank" rel="noopener noreferrer" className={linkClasses}>{children}</a>;
 };
 
 /**
@@ -197,6 +199,7 @@ const Document = memo(function Document({ document, isOpen, onToggle }: Document
               <div className="flex-grow px-8 py-6" ref={contentRef}>
                 <div className="prose prose-lg max-w-none text-gray-700">
                   <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
                     components={{
                       h2: ({ ...props }) => {
                         const text = props.children?.toString() || '';

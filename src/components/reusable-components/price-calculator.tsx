@@ -961,9 +961,15 @@ const renderRadio = (sectionKey: string, section: ServiceSection | undefined) =>
           <p className="text-sm text-gray-600 text-center sm:text-left">
             Ready to get started? Request a detailed estimate and free consultation.
           </p>
-          <Button size="lg" className="px-8 bg-mild-blue hover:bg-medium-blue-alt text-white transition-colors w-full sm:w-auto">
-            Request Detailed Estimate
-            <ArrowRight className="ml-2 h-4 w-4" />
+          <Button
+            asChild
+            size="lg"
+            className="px-8 bg-mild-blue hover:bg-medium-blue-alt text-white transition-colors w-full sm:w-auto"
+          >
+            <a href="/contact">
+              Request Detailed Estimate
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </CardFooter>
       </Card>

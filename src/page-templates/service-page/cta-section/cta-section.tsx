@@ -69,14 +69,18 @@ export default function CTASection({ content }: CTASectionProps): JSX.Element {
   return (
     <div className="pb-16 py-8">
       <motion.section
+        key="cta-section-main"
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{
           duration: 0.6,
-          ease: 'easeOut',
+          ease: [0.25, 0.46, 0.45, 0.94],
+          opacity: { duration: 0.4 },
+          scale: { duration: 0.6 }
         }}
-        className={`container mx-auto relative rounded-2xl overflow-hidden ${bgClassName} border-2 border-light-blue shadow-lg hover:shadow-xl text-white py-8 lg:py-16 px-8 transition-all duration-300`}
+        className={`container mx-auto relative rounded-2xl overflow-hidden ${bgClassName} border-2 border-light-blue shadow-lg hover:shadow-xl text-white py-8 lg:py-16 px-8`}
+        style={{ transition: "box-shadow 0.3s ease" }}
         aria-labelledby="cta-section-title"
       >
           {/* Accessible landmark for screen readers */}

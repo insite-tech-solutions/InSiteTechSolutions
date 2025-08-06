@@ -125,7 +125,7 @@ export const ContactConfirmation = ({
             <Text style={emailStyles.signature}>
               Best regards,<br />
               <strong>The InSite Tech Solutions Team</strong><br />
-              <span style={teamRole}>Your Technology Partners</span>
+              <span style={teamRole}>Your Trusted Technology Partners</span>
             </Text>
 
 
@@ -138,7 +138,7 @@ export const ContactConfirmation = ({
               </Text>
               <Text style={contactInfo}>
                 📧 contact@insitetechsolutions.com<br />
-                📞 (555) 123-4567<br />
+                📞 (716) 406-8988<br />
                 🌐 insitetechsolutions.com
               </Text>
             </Section>

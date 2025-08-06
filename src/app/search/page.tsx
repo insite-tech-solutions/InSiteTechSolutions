@@ -15,6 +15,7 @@
  */
 
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import SearchPage from "@/components/search-pages/search-page";
 
 /**
@@ -57,6 +58,7 @@ export async function generateMetadata({
  * - URL parameter handling for search queries
  * - Component delegation for clean architecture
  * - SEO-optimized with proper metadata
+ * - Suspense boundary for useSearchParams
  * 
  * @returns {JSX.Element} The rendered search results page
  *
@@ -67,5 +69,9 @@ export async function generateMetadata({
  * ```
  */
 export default function Page(): JSX.Element {
-  return <SearchPage />;
+  return (
+    <Suspense fallback={<div>Loading search...</div>}>
+      <SearchPage />
+    </Suspense>
+  );
 } 

@@ -41,9 +41,9 @@ import PageTransitionLoader from '@/components/reusable-components/page-transiti
 
 // Direct imports for critical above-the-fold content
 import HeroSection from './hero-section';
-import MeetTheTeamSection from './meet-the-team-section';
 
 // Dynamic imports for below-the-fold content to improve initial page load performance
+const MeetTheTeamSection = dynamic(() => import('./meet-the-team-section'), { ssr: false });
 const OurStorySection = dynamic(() => import('./our-story-section'), { ssr: false });
 const TimelineSection = dynamic(() => import('./timeline-section'), { ssr: false });
 const ExperienceEducationSection = dynamic(() => import('./experience-education-section'), { ssr: false });

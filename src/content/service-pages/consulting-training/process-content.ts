@@ -87,7 +87,7 @@ export const consultingTrainingProcess: ProcessContent = {
   ],
   note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few hours to several months depending on complexity and scope. As a simple reference point, simple tech help and focused consulting engagements typically take on the order of days, while comprehensive training programs may require 8-12+ weeks. Many clients opt for ongoing advisory relationships that evolve with their changing needs and objectives.",
   linkText: "Learn more about our process",
-  linkUrl: "/process",
+  linkUrl: "/about/development-process",
 };
 
 export default consultingTrainingProcess;

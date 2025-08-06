@@ -24,9 +24,9 @@ import PageTransitionLoader from '@/components/reusable-components/page-transiti
 
 // Direct imports for critical above-the-fold content
 import HeroSection from './hero-section';
-import ProcessOverviewSection from './process-overview-section';
 
 // Dynamic imports for below-the-fold content to improve initial page load performance
+const ProcessOverviewSection = dynamic(() => import('./process-overview-section'), { ssr: false });
 const DetailedProcessSection = dynamic(() => import('./detailed-process-section'), { ssr: false });
 const BestPracticesSection = dynamic(() => import('./best-practices-section'), { ssr: false });
 const FAQSection = dynamic(() => import('@/page-templates/service-page/faq-section/faq-section'), { ssr: false });

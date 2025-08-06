@@ -62,7 +62,7 @@ const aiAutomationPricingContent: PricingContent = {
     description: "Investment in AI and automation delivers exceptional returns that compound over time. Organizations typically see ROI within 3-9 months through cost reductions, productivity improvements, and enhanced decision quality. Unlike traditional technology investments, AI systems continue to learn and improve with use, creating increasing value through progressively better predictions and recommendations. Beyond the immediate operational benefits, AI and automation enable business model innovation and new capabilities that provide sustainable competitive advantages.",
     link: {
       text: "View detailed pricing",
-      url: "/pricing",
+      url: "/about/pricing-and-payments",
     },
   },
 };

@@ -16,28 +16,13 @@
  * @module RootLayout
  */
 import type { Metadata } from "next";
-import { Open_Sans, Noto_Sans, Lato, Roboto } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import "../styles/globals.css";
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
 import { SearchProvider } from '@/contexts/search-context';
-
-/*
- * Commented out local font configuration for future use
- * 
- * import localFont from "next/font/local";
- * const geistSans = localFont({
- *   src: "./fonts/GeistVF.woff",
- *   variable: "--font-geist-sans",
- *   weight: "100 900",
- * });
- * const geistMono = localFont({
- *   src: "./fonts/GeistMonoVF.woff",
- *   variable: "--font-geist-mono",
- *   weight: "100 900",
- * });
- */
+import { generateOrganizationJsonLd } from '@/utils/metadata-helpers';
 
 /**
  * Static metadata configuration for the application
@@ -49,53 +34,48 @@ import { SearchProvider } from '@/contexts/search-context';
  * @constant {Metadata} metadata
  */
 export const metadata: Metadata = {
-  title: "InSite Tech Solutions | Custom Software, Web & App Development",
-  description: "InSite Tech Solutions offers custom software development, web and mobile app creation, data analysis, AI automation, and technical consulting to elevate your business. Transform your ideas into powerful digital solutions.",
-  keywords: "custom software development, web development, mobile app development, data analysis, AI automation, technical consulting, Buffalo NY, technology solutions",
+  title: "InSite Tech Solutions | Custom Software, Web Development & Technical Consulting",
+  description: "InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services. Transform your ideas into powerful digital solutions.",
+  keywords: "custom software development, web development, mobile app development, data analysis, AI automation, technical consulting, Buffalo NY, technology solutions, SEO, graphic design, WNY tech solutions",
   authors: [{ name: "InSite Tech Solutions" }],
   creator: "InSite Tech Solutions",
   publisher: "InSite Tech Solutions",
   robots: "index, follow",
+  alternates: {
+    canonical: "https://insitetechsolutions.com",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://insitetechsolutions.com",
-    title: "InSite Tech Solutions | Custom Software, Web & App Development",
-    description: "InSite Tech Solutions offers custom software development, web and mobile app creation, data analysis, AI automation, and technical consulting to elevate your business.",
+    title: "InSite Tech Solutions | Custom Software, Web Development & Technical Consulting",
+    description: "InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services. Transform your ideas into powerful digital solutions.",
     siteName: "InSite Tech Solutions",
+    images: [
+      {
+        url: "https://insitetechsolutions.com/Insite Tech Solutions Light.png",
+        width: 1200,
+        height: 630,
+        alt: "InSite Tech Solutions - Custom Software, Web Development & Technical Consulting",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "InSite Tech Solutions | Custom Software, Web & App Development",
-    description: "InSite Tech Solutions offers custom software development, web and mobile app creation, data analysis, AI automation, and technical consulting to elevate your business.",
+    title: "InSite Tech Solutions | Custom Software, Web Development & Technical Consulting",
+    description: "Transform your ideas into powerful digital solutions with InSite Tech—specialists in custom software, websites, data analysis, AI, and more.",
+    images: ["https://insitetechsolutions.com/Insite Tech Solutions Light.png"],
   },
 };
 
-/*
- * Commented out original layout implementation for reference
- * 
- * export default function RootLayout({
- *   children,
- * }: Readonly<{
- *   children: React.ReactNode;
- * }>) {
- *   return (
- *     <html lang="en">
- *       <body
- *         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
- *       >
- *         {children}
- *       </body>
- *     </html>
- *   );
- * }
- */
-
-// Google Fonts configuration for optimal loading
-const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
-const notoSans = Noto_Sans({ subsets: ['latin'], variable: '--font-noto-sans' })
-const lato = Lato({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-lato' })
-const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-roboto' })
+// OPTIMIZED: Only load Open Sans from Google Fonts with display swap
+const openSans = Open_Sans({ 
+  subsets: ['latin'], 
+  variable: '--font-open-sans',
+  display: 'swap', // CRITICAL: Shows text immediately with fallback font
+  preload: true,
+  weight: ['400', '700'] // Only load the weights you actually use
+})
 
 /**
  * RootLayout Component
@@ -104,33 +84,9 @@ const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'], variable: '-
  * Provides the base HTML structure and global configurations
  * for all pages in the application.
  * 
- * The component includes:
- * - Global font configuration with CSS variables
- * - Analytics integration with Umami
- * - Proper HTML structure with language attribute
- * - Performance-optimized font loading
- * - Clean separation of concerns
- * 
- * Font Strategy:
- * - Uses Google Fonts for optimal loading performance
- * - Implements CSS variables for flexible font usage
- * - Supports multiple font weights and styles
- * - Enables responsive typography across the site
- * 
- * Analytics Integration:
- * - Umami analytics for privacy-focused tracking
- * - Loads after interactive for performance
- * - Provides insights without compromising user privacy
- * 
  * @param {Object} props - Component props
  * @param {ReactNode} props.children - Child components to render
  * @returns {JSX.Element} The complete HTML structure for the application
- * 
- * @example
- * ```tsx
- * // This component is automatically used by Next.js
- * // to wrap all pages in the application
- * ```
  */
 function RootLayout({
   children,
@@ -138,19 +94,57 @@ function RootLayout({
   children: ReactNode
 }): JSX.Element {
   return (
-    <html lang="en" className={`${openSans.variable} ${notoSans.variable} ${lato.variable} ${roboto.variable}`}>
+    <html lang="en" className={openSans.variable}>
       <head>
-        {/* Analytics script with performance optimization */}
-        <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id="eca7ade8-1f83-4309-b1d4-6d2f5fbe7173"
-          strategy="afterInteractive"
+        {/* CRITICAL: Preconnect to Google Fonts for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* CRITICAL: Preload your local Kohinoor font (only the main weight) */}
+        <link 
+          rel="preload" 
+          href="/fonts/KohinoorLatin-Book.otf" 
+          as="font" 
+          type="font/otf" 
+          crossOrigin="anonymous" 
         />
+
+        {/* DNS prefetch for external domains */}
+        <link rel="dns-prefetch" href="https://cloud.umami.is" />
+        
+        {/* Web App Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* Security headers */}
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Accessibility: Language & direction */}
+        <meta httpEquiv="Content-Language" content="en" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Theme color for mobile browsers */}
+        <meta name="theme-color" content="#0e72c8" />
       </head>
-      <body style={{ borderTopStyle: 'solid' }}>
+      <body>
         <SearchProvider>
           {children}
         </SearchProvider>
+        
+        {/* MOVED: Analytics to end of body with lazyOnload */}
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="eca7ade8-1f83-4309-b1d4-6d2f5fbe7173"
+          strategy="lazyOnload"
+        />
+        <Script
+          id="jsonld-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateOrganizationJsonLd()),
+          }}
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   )

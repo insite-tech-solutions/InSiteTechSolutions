@@ -48,7 +48,7 @@ const graphicDesignFAQContent: FAQContent = {
   
   moreLink: {
     text: "View all frequently asked questions",
-    url: "/faq",
+    url: "/insites/faq",
   }
 };
 

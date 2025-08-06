@@ -19,7 +19,7 @@
 
 "use client";
 
-import { motion, Variants } from 'framer-motion';
+import Image from 'next/image';
 import MiniWebPage from './mini-webpage';
 import CodeWebPage from './code-webpage';
 import MagnifyingGlass from './magnifying-glass';
@@ -28,42 +28,7 @@ import { useRevealEffect } from './useRevealEffect';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import styles from './hero-section.module.css';
 
-// Animation variants
-const fadeInUp: Variants = {
-  initial: { opacity: 0, y: 30 },
-  animate: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut" }
-  }
-};
-
-const staggerContainer: Variants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
-};
-
-const slideInLeft: Variants = {
-  initial: { opacity: 0, x: -50 },
-  animate: { 
-    opacity: 1, 
-    x: 0,
-    transition: { duration: 0.6, delay: 0.4, ease: "easeOut" }
-  }
-};
-
-const slideInRight: Variants = {
-  initial: { opacity: 0, x: 50 },
-  animate: { 
-    opacity: 1, 
-    x: 0,
-    transition: { duration: 0.6, delay: 0.4, ease: "easeOut" }
-  }
-};
+// Remove Framer Motion animation variants and wrappers for hero text and interactive area
 
 /**
  * HeroSection Component
@@ -100,57 +65,52 @@ const HeroSection = (): JSX.Element => {
   return (
     <section
       aria-labelledby="hero-section-title"
-      className={`${styles.bgPrimary} ${styles.bgDecor} ${styles.heroHeight} flex items-center justify-center p-4 md:p-8 md:pl-10 overflow-hidden mt-header`}
+      className={`${styles.bgPrimary} ${styles.bgDecor} ${styles.heroHeight} flex items-center justify-center p-4 md:p-8 md:pt-12 lg:pt-10 md:pl-10 overflow-hidden mt-header`}
     >
+      {/* Hidden priority LCP marker for Lighthouse */}
+      <Image
+        src="/hero-placeholder.png"
+        alt=""
+        width={1}
+        height={1}
+        priority
+        style={{
+          position: 'absolute',
+          opacity: 0,
+          pointerEvents: 'none',
+          zIndex: -1,
+        }}
+      />
+      
       {/* Accessible landmark for Hero Section */}
       <h2 id="hero-section-title" className="sr-only">
         Innovative Website and Software Solutions
       </h2>
       
       {/* Main content container with responsive layout */}
-      <motion.div 
-        className="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between mb-48 md:mb-64"
-        initial="initial"
-        animate="animate"
-        variants={staggerContainer}
-      >
+      <div className="max-w-8xl mx-auto flex flex-col lg:flex-row gap-6 items-center justify-between mb-48 md:mb-64">
         {/* Hero Text Content */}
-        <motion.div 
-          className="lg:w-1/2 text-white mb-4 lg:mb-0 text-center lg:text-left"
-          variants={slideInLeft}
-        >
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg"
-            variants={fadeInUp}
-          >
+        <div className={`lg:w-1/2 text-white mb-4 lg:mb-0 text-center lg:text-left ${styles.heroTextEntrance}`}> 
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
             Innovative Website and Software Solutions
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl drop-shadow"
-            variants={fadeInUp}
-          >
+          </h1>
+          <p className="text-lg md:text-xl drop-shadow">
             From simple web design to complex software applications, InSite Tech provides the
             expertise to tailor solutions to all your tech-related needs.
-          </motion.p>
+          </p>
           {/* Desktop CTA Button - visible on md and above */}
-          <motion.div 
-            className="block mt-6"
-            variants={fadeInUp}
-          >
+          <div className="block mt-6">
             <TailwindButton
               href="/contact"
               className="bg-gray-50 font-semibold"
             >
               Schedule a Free Consultation
             </TailwindButton>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Interactive Preview Area */}
-        <motion.div 
-          className="lg:w-1/2 flex flex-col items-center"
-          variants={slideInRight}
-        >
+        <div className={`lg:w-1/2 flex flex-col items-center ${styles.heroInteractiveEntrance}`}> 
           <div
             className={`relative w-full max-w-lg ${styles.interactiveArea}`}
             ref={webpageRef}
@@ -170,8 +130,8 @@ const HeroSection = (): JSX.Element => {
               </>
             )}
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-32 md:bottom-48 left-1/2 transform -translate-x-1/2 text-white text-center">

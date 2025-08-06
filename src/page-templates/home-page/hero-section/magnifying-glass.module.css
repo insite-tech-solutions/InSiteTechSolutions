@@ -87,6 +87,7 @@
     width: 95%;
     height: 95%;
     background-color: #929699;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
   }
   
 /**
@@ -143,6 +144,7 @@
     background-color: #929699;
     transform: rotate(-40deg);
     border-radius: 5px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
   }
   
 /**

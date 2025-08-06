@@ -42,7 +42,7 @@ const aiAutomationFAQContent: FAQContent = {
     {
       icon: "Clock",
       question: "How long does it take to implement an AI or automation solution?",
-      answer: "Implementation timelines vary based on complexity and scope. Simple automation projects may be completed in 2-4 weeks, while more comprehensive AI solutions typically require 8-16+ weeks. Our phased approach allows you to see incremental value throughout the implementation process."
+      answer: "Implementation timelines vary based on complexity and scope. Simple automation projects may be completed in 2-4 weeks, while more comprehensive AI solutions typically require 8-16+ weeks."
     },
     {
       icon: "Users",
@@ -53,7 +53,7 @@ const aiAutomationFAQContent: FAQContent = {
   
   moreLink: {
     text: "View all frequently asked questions",
-    url: "/faq",
+    url: "/insites/faq",
   }
 };
 

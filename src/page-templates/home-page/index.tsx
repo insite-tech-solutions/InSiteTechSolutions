@@ -11,7 +11,7 @@
  * - Hero and scroll sections outside main layout for full-width design
  * - Layout wrapper for content sections with consistent spacing
  * - Modular section components for maintainability
- * - Dynamic imports for below-the-fold content to improve performance
+ * - Dynamic imports for all below-the-fold content (everything below hero) to improve performance
  */
 
 'use client';
@@ -23,13 +23,13 @@ import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-con
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
 import { handleInitialAnchorScroll } from '@/utils/scroll-to-section';
 
-// Direct imports for critical above-the-fold content
+// Direct imports for critical above-the-fold content (hero and scroll sections only)
 import HeroSection from '@/page-templates/home-page/hero-section/hero-section';
-import ScrollAnimationSection from '@/page-templates/home-page/scroll-section/scroll-section';
-import ServiceSection from '@/page-templates/home-page/services-section';
-import TechnologiesSection from '@/page-templates/home-page/technologies-section';
 
-// Dynamic imports for below-the-fold content to improve initial page load performance
+// Dynamic imports for all below-the-fold content to improve initial page load performance
+const ScrollAnimationSection = dynamic(() => import('@/page-templates/home-page/scroll-section/scroll-section'), { ssr: false });
+const ServiceSection = dynamic(() => import('@/page-templates/home-page/services-section'), { ssr: false });
+const TechnologiesSection = dynamic(() => import('@/page-templates/home-page/technologies-section'), { ssr: false });
 const ProcessSection = dynamic(() => import('@/page-templates/home-page/process-section'), { ssr: false });
 const HomepagePricingSection = dynamic(() => import('@/page-templates/home-page/pricing-section'), { ssr: false });
 const InsiteAdvantageHomepageSection = dynamic(() => import('@/page-templates/home-page/insite-advantage'), { ssr: false });
@@ -81,7 +81,7 @@ export function HomePageContent(): JSX.Element {
       {/* Main Content Layout - Wrapped sections with consistent spacing */}
       <Layout>
         {/* Services Section - Core service offerings */}
-        <div className="-mt-64 md:-mt-24">
+        <div id="services-section" className="-mt-64 md:-mt-24">
           <ServiceSection />
         </div>
 

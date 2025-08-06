@@ -8,12 +8,14 @@
 
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FolderOpen, Trophy } from 'lucide-react';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { DecorElement } from '@/page-templates/service-page/types';
+import { scrollToSection } from '@/utils/scroll-to-section';
+import styles from './hero-section.module.css';
 
 // Static decorative elements for Previous Works HeroSection
 const decorElements: DecorElement[] = [
@@ -51,6 +53,32 @@ const decorElements: DecorElement[] = [
  * @returns {JSX.Element} The rendered hero section component
  */
 export default function HeroSection(): JSX.Element {
+  const router = useRouter();
+
+  /**
+   * Handles services section navigation with cross-page support
+   * 
+   * Navigates to services section on homepage or navigates to homepage
+   * first if on a different page, then scrolls to services section.
+   * 
+   * @param {React.MouseEvent<HTMLAnchorElement>} e - Click event
+   */
+  const handleServicesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // If we're already on homepage, just scroll to section
+    if (window.location.pathname === "/") {
+      scrollToSection("services-section");
+    } else {
+      // Navigate to homepage first, then scroll to section
+      router.push('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        scrollToSection('services-section');
+      }, 100);
+    }
+  };
+
   return (
     <TailwindHeroBackground 
       className="from-medium-blue via-mild-blue to-blue-700 mt-header"
@@ -59,42 +87,30 @@ export default function HeroSection(): JSX.Element {
       {/* Hero Content Container - Main content with proper z-index layering */}
       <div className="flex flex-col items-center justify-center px-4 text-center py-20 md:py-32">
         {/* Primary Heading - Main page title */}
-        <motion.h1
+        <h1
           id="hero-section-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg text-white"
+          className={`text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg text-white ${styles.primaryHeading}`}
         >
           Our Work & Portfolio
-        </motion.h1>
+        </h1>
         
         {/* Secondary Heading - Supporting messaging */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-2xl md:text-3xl font-semibold mb-4 text-blue-100 drop-shadow"
+        <h2
+          className={`text-2xl md:text-3xl font-semibold mb-4 text-blue-100 drop-shadow ${styles.secondaryHeading}`}
         >
           Proven Results. Real Impact.
-        </motion.h2>
+        </h2>
         
         {/* Description Text - Supporting paragraph with constraints */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="text-lg md:text-xl mb-8 text-blue-50 max-w-3xl mx-auto drop-shadow"
+        <p
+          className={`text-lg md:text-xl mb-8 text-blue-50 max-w-3xl mx-auto drop-shadow ${styles.descriptionText}`}
         >
           We take pride in the solutions we&apos;ve delivered. Explore our portfolio to see the tangible results and successful partnerships that define our work. Each project is a testament to our commitment to quality and innovation.
-        </motion.p>
+        </p>
         
         {/* Call-to-Action Buttons - Primary conversion elements */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+        <div
+          className={`flex flex-col sm:flex-row gap-6 justify-center ${styles.ctaContainer}`}
         >
           <TailwindButton
             href="/contact"
@@ -103,12 +119,13 @@ export default function HeroSection(): JSX.Element {
             Start Your Project
           </TailwindButton>
           <Link
-            href="/services/custom-software-solutions"
+            href="/#services-section"
+            onClick={handleServicesClick}
             className="inline-flex items-center justify-center gap-2 text-white font-medium py-3 px-6 rounded-full border border-white/30 hover:bg-white/10 transition-all duration-300"
           >
             View Our Services
           </Link>
-        </motion.div>
+        </div>
       </div>
     </TailwindHeroBackground>
   );

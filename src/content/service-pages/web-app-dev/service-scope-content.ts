@@ -52,8 +52,8 @@ const webAppDevelopmentServiceScope: ServiceScopeContent = {
       title: "Cross-Platform Development",
       description: "Unified experiences across devices to ensure consistency for users.",
       benefits: [
-        "Native iOS and Android development",
-        "Cross-platform compatible frameworks (React Native, Flutter, etc.)",
+        "Deployment across Mac, Windows, and Linux",
+        "Cross-platform (iOS, Android) compatible frameworks like React Native",
         "Synchronized data across platforms",
         "Cost-effective maintenance"
       ]
@@ -64,7 +64,7 @@ const webAppDevelopmentServiceScope: ServiceScopeContent = {
       description: "Leveraging the latest frameworks for future-proof solutions.",
       benefits: [
         "React and Next.js expertise",
-        "Swift and Kotlin for mobile",
+        "Modern builders like Squarespace and WordPress",
         "Progressive Web Apps",
         "Modern architecture patterns"
       ]

@@ -39,7 +39,7 @@ const homepageFAQContent: FAQContent = {
     {
       icon: "UserCheck",
       question: "Who are your typical clients?",
-      answer: "Our clients range from individuals and small businesses to established enterprises across various industries seeking innovative technology solutions.",
+      answer: "Our clients range from individuals and small businesses to academic research labs andestablished enterprises across various industries seeking innovative technology solutions.",
     },
     {
       icon: "Calendar",
@@ -59,7 +59,7 @@ const homepageFAQContent: FAQContent = {
   ],
   moreLink: {
     text: "View all frequently asked questions",
-    url: "/faq",
+    url: "/insites/faq",
   },
 };
 

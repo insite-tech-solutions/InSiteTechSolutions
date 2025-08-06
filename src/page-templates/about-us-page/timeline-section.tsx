@@ -42,7 +42,9 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: 'easeOut',
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     },
   },
 };
@@ -54,7 +56,9 @@ const ctaHighlight: Variants = {
     scale: 1,
     transition: {
       duration: 0.7,
-      ease: 'easeOut',
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.5 },
+      scale: { duration: 0.7 }
     },
   },
 };
@@ -149,6 +153,7 @@ function Timeline(): JSX.Element {
       <div className="container max-w-4xl mx-auto lg:px-6">
         {/* Section Header */}
         <motion.div 
+          key="timeline-header"
           className="text-center mb-16"
           initial="hidden"
           whileInView="visible"
@@ -173,12 +178,18 @@ function Timeline(): JSX.Element {
           <div className="space-y-8 md:space-y-12">
             {timelineData.map((yearData, yearIndex) => (
               <motion.div
-                key={yearData.year}
+                key={`timeline-year-${yearData.year}`}
                 className="relative"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: yearIndex * 0.1 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: yearIndex * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  opacity: { duration: 0.4 },
+                  y: { duration: 0.5 }
+                }}
               >
                 {/* Year Toggle Marker */}
                 <div
@@ -231,7 +242,9 @@ function Timeline(): JSX.Element {
 
         {/* Bottom CTA */}
         <motion.div 
-          className="container mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-16 shadow-md hover:shadow-lg transition-all duration-200"
+          key="timeline-cta"
+          className="container mx-auto bg-gradient-to-br from-light-blue to-blue-800 border border-light-blue text-white rounded-xl p-8 text-center mt-16 shadow-md hover:shadow-lg"
+          style={{ transition: "box-shadow 0.2s ease" }}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}

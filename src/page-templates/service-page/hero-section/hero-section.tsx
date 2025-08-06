@@ -3,84 +3,21 @@
  * 
  * This component renders a responsive hero banner with customizable background,
  * content, SVG graphics, and decorative elements. It supports both SVG and image-based
- * illustrations with dynamic loading of SVG components. Enhanced with Framer Motion
- * animations for smooth entrance effects.
+ * illustrations with dynamic loading of SVG components. Entrance animations are
+ * handled by a dedicated CSS module for improved performance.
  */
 
 'use client';
 
 import React, { useMemo, memo } from 'react';
 import Image from 'next/image';
-import { motion, Variants } from 'framer-motion';
 import { HeroSectionContent } from '../types';
 import TailwindButton from '@/components/reusable-components/tailwind-button';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { getIcon } from '@/utils/icon-registry';
 // This dynamic import is needed to load SVGs
 import dynamic from 'next/dynamic';
-
-/**
- * Animation variants for the hero section elements
- * Following the established pattern from other components in the codebase
- */
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.4,
-    },
-  },
-};
-
-const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
-    },
-  },
-};
+import styles from './hero-section.module.css';
 
 /**
  * Hero Section for Service Pages
@@ -95,7 +32,7 @@ const scaleIn: Variants = {
  * - Customizable background gradients and decorative elements
  * - Accessible structure with proper ARIA attributes
  * - Support for custom elements insertion
- * - Smooth Framer Motion animations for enhanced user experience
+ * - Performance-optimized CSS animations for entrance effects
  * 
  * @returns {JSX.Element} The rendered hero section
  */
@@ -167,73 +104,49 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
         decorElements={processedDecorElements}
       >
         <div className="max-w-8xl mx-auto">
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Text Content */}
-            <motion.div 
-              className="order-1 md:order-none text-left px-1 lg:px-6 pt-4"
-              variants={fadeInLeft}
-            >
-              <motion.h1
+            <div className={`order-1 md:order-none text-left px-1 lg:px-6 pt-4 ${styles.textContainer}`}>
+              <h1
                 id="hero-title"
                 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
-                variants={fadeInUp}
               >
                 {title}
-              </motion.h1>
-              <motion.p 
-                className="text-xl md:text-2xl mb-6 drop-shadow"
-                variants={fadeInUp}
-              >
+              </h1>
+              <p className="text-xl md:text-2xl mb-6 drop-shadow">
                 {subtitle}
-              </motion.p>
-              <motion.p 
-                className="text-lg md:text-xl drop-shadow"
-                variants={fadeInUp}
-              >
+              </p>
+              <p className="text-lg md:text-xl drop-shadow">
                 {description}
-              </motion.p>
+              </p>
               {/* Desktop CTA Button - visible on md and above */}
-              <motion.div 
-                className="hidden md:block mt-8 mb-4"
-                variants={fadeInUp}
-              >
+              <div className="hidden md:block mt-8 mb-4">
                 <TailwindButton
                   href={ctaLink}
                   className="bg-gray-50 font-semibold"
                 >
                   {ctaText}
                 </TailwindButton>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
             
             {/* Illustration: SVG or Image */}
-            <motion.div 
-              className="order-2 md:order-none flex items-center justify-center h-full min-h-[400px]"
-              variants={fadeInRight}
-            >
+            <div className={`order-2 md:order-none flex items-center justify-center h-full min-h-[400px] ${styles.illustrationContainer}`}>
               {/* Use SVG component if provided */}
               {SvgGraphic && (
-                <motion.div
-                  variants={scaleIn}
-                  className="w-full h-auto max-w-[600px] rounded-lg md:pt-12"
-                >
+                <div className={styles.illustrationSvg}>
                   <SvgGraphic 
                     className="w-full h-auto" 
                     aria-label={title}
                   />
-                </motion.div>
+                </div>
               )}
               {/* Fall back to Image if no SVG provided */}
               {!SvgGraphic && image && (
-                <motion.div variants={scaleIn}>
+                <div className={styles.illustrationSvg}>
                   <Image
                     src={image}
-                    alt={title}
+                    alt={`${title} service illustration and visual representation`}
                     width={600}
                     height={400}
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -241,33 +154,27 @@ function HeroSectionWrapper({ content }: { content: HeroSectionContent }): JSX.E
                     priority
                     aria-label={title}
                   />
-                </motion.div>
+                </div>
               )}
-            </motion.div>
+            </div>
 
             {/* Mobile CTA Button - Only visible on small screens */}
-            <motion.div 
-              className="order-3 md:hidden px-6 pb-6 flex items-center justify-center"
-              variants={fadeInUp}
-            >
+            <div className={`order-3 md:hidden px-6 pb-6 flex items-center justify-center ${styles.mobileCtaContainer}`}>
               <TailwindButton 
                 href={ctaLink} 
                 className="bg-gray-50 font-semibold w-1/2 mx-auto"
               >
                 {ctaText}
               </TailwindButton>
-            </motion.div>
+            </div>
             
             {/* Optional Custom Elements Container - Spans full width */}
             {customElements && (
-              <motion.div 
-                className="col-span-1 md:col-span-2"
-                variants={fadeInUp}
-              >
+              <div className="col-span-1 md:col-span-2">
                 {customElements}
-              </motion.div>
+              </div>
             )}
-          </motion.div>
+          </div>
         </div>
       </TailwindHeroBackground>
     </section>

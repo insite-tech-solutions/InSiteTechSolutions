@@ -57,10 +57,10 @@ const aiAutomationServiceScope: ServiceScopeContent = {
       description: "Develop and train AI models tailored to your specific business challenges and objectives.",
       benefits: [
         "Custom machine learning model development",
-        "Supervised and unsupervised learning systems",
-        "Natural language processing solutions",
+        "Novel optimization algorithm development",
         "Computer vision applications",
-        "Reinforcement learning implementations"
+        "Natural language processing solutions",
+        "Supervised and unsupervised learning methods"
       ]
     },
     {

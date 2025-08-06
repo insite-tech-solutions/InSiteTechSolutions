@@ -103,9 +103,9 @@ export const projects = [
   },
   {
     id: 6,
-    title: "LaTeX Docs - Calspan",
+    title: "Calspan LaTeX Docs",
     shortDesc: "Modernized outdated technical documents into clean, branded formats for professional presentation and usability.",
-    image: "/portfolio-media/calspan-latex/1_calspan_doc.jpeg",
+    image: "/portfolio-media/calspan-latex/1_calspan_doc.jpg",
     technologies: ["LaTeX"],
     services: ["Consulting & Training", "Design & Branding"],
     year: "2020",

@@ -7,10 +7,10 @@
 
 'use client';
 
-import { motion } from 'framer-motion';
 import { HelpCircle, MessageCircle } from 'lucide-react';
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { DecorElement } from '@/page-templates/service-page/types';
+import styles from './hero-section.module.css';
 
 // Static decorative elements for FAQPageHero
 const decorElements: DecorElement[] = [
@@ -62,23 +62,17 @@ export default function FAQPageHero(): JSX.Element {
         decorElements={decorElements}
       >
         <div className="flex flex-col items-center justify-center px-4 text-center text-white">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
+          <h1
+            className={`text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg ${styles.primaryHeading}`}
           >
             Frequently Asked Questions
-          </motion.h1>
+          </h1>
           
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow"
+          <p
+            className={`text-lg md:text-xl text-blue-50 max-w-3xl mx-auto drop-shadow ${styles.descriptionText}`}
           >
             Have questions? We have answers. Browse our most commonly asked questions across services, pricing, process, and more.
-          </motion.p>
+          </p>
         </div>
       </TailwindHeroBackground>
     </section>

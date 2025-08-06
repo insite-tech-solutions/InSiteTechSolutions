@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import CustomSoftwarePage from '@/components/service-pages/custom-software-page';
 import customSoftwareContent from '@/content/service-pages/custom-software';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Custom Software Solutions service page.
@@ -19,10 +21,11 @@ import customSoftwareContent from '@/content/service-pages/custom-software';
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: customSoftwareContent.metadata.title + ' | InSite Tech',
-  description: customSoftwareContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  customSoftwareContent.metadata.title,
+  customSoftwareContent.metadata.description,
+  'custom-software-solutions'
+);
 
 /**
  * Custom Software Solutions Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <CustomSoftwarePage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={customSoftwareContent.metadata.title}
+        serviceDescription={customSoftwareContent.metadata.description}
+        serviceType="Custom Software Development"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Custom Software Solutions", url: "https://insitetechsolutions.com/services/custom-software-solutions" }
+        ]}
+      />
+      <CustomSoftwarePage />
+    </>
+  );
 }

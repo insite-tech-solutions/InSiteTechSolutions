@@ -5,11 +5,11 @@
  * component with decorative elements and proper styling consistent with the site architecture.
  */
 
-import { motion } from 'framer-motion';
 import { BadgeCent, BadgeDollarSign } from "lucide-react";
 import TailwindButton from "@/components/reusable-components/tailwind-button";
 import TailwindHeroBackground from '@/components/reusable-components/tailwind-hero-background';
 import { DecorElement } from '@/page-templates/service-page/types';
+import styles from './hero-section.module.css';
 
 // Static decorative elements for Pricing HeroSection
 const decorElements: DecorElement[] = [
@@ -82,46 +82,33 @@ export default function HeroSection(): JSX.Element {
         decorElements={decorElements}
       >
         <div className="flex flex-col items-center justify-center px-4 text-center text-white">
-          <motion.h1 
+          <h1 
             id="hero-section-title" 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg"
+            className={`text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg ${styles.primaryHeading}`}
           >
             Transparent Pricing, Exceptional Value
-          </motion.h1>
+          </h1>
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-2xl md:text-3xl font-semibold mb-4 text-blue-100 drop-shadow"
+          <h2 
+            className={`text-2xl md:text-3xl font-semibold mb-4 text-blue-100 drop-shadow ${styles.secondaryHeading}`}
           >
             Flexible Models. Secure Payments. No Surprises.
-          </motion.h2>
+          </h2>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-lg md:text-xl mb-8 text-blue-50 max-w-2xl mx-auto drop-shadow"
+          <p 
+            className={`text-lg md:text-xl mb-8 text-blue-50 max-w-2xl mx-auto drop-shadow ${styles.descriptionText}`}
           >
             We offer clear, flexible pricing options and secure payment methods for all your tech related needs. We&apos;ll work with you to find the best solution for your goals and budget.
-          </motion.p>
+          </p>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
+          <div className={styles.ctaContainer}>
             <TailwindButton 
               href="/contact" 
               className="bg-gray-50 font-semibold"
             >
               Get a Custom Estimate
             </TailwindButton>
-          </motion.div>
+          </div>
         </div>
       </TailwindHeroBackground>
     </div>

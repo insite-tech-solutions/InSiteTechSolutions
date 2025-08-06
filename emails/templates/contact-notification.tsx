@@ -268,7 +268,7 @@ export const ContactNotification = ({
                     </Button>
                   </div>
                   <div style={actionColumn}>
-                    <Button style={secondaryActionButton} href="https://insitetechsolutions.com/admin/schedule">
+                    <Button style={secondaryActionButton} href={`mailto:${email}?subject=Schedule Follow-up: ${fullName} - ${selectedServices[0] || 'Project Discussion'}&body=Hi ${firstName},%0D%0A%0D%0AI'd like to schedule a follow-up call to discuss your ${selectedServices[0] || 'project requirements'} in more detail.%0D%0A%0D%0APlease let me know your availability for a 30-minute consultation.%0D%0A%0D%0ABest regards,%0D%0AInSite Tech Solutions Team`}>
                       📅 Schedule Follow-up
                     </Button>
                   </div>

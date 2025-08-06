@@ -31,11 +31,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { v4 as uuidv4 } from 'uuid'
+import { render } from '@react-email/render'
 import { supabaseAdmin } from '@/lib/supabase'
 import { resend, emailConfig } from '@/lib/resend'
 import { checkRateLimit, newsletterLimiter, getClientIP } from '@/lib/rate-limit'
 import { validateTurnstile } from '@/lib/turnstile'
 import { generateConfirmationToken } from '@/lib/jwt'
+import { sanitizeNewsletterForm } from '@/lib/sanitizer'
 import { NewsletterConfirm } from '../../../../emails'
 
 /**
@@ -96,7 +98,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       )
     }
 
-    const { name, email, turnstileToken } = validationResult.data
+    // Sanitize the validated form data to prevent XSS attacks
+    const { name, email, turnstileToken } = sanitizeNewsletterForm(validationResult.data)
 
     // Verify the Cloudflare Turnstile token to ensure the request is not from a bot
     const turnstileResult = await validateTurnstile(turnstileToken, clientIP)
@@ -161,14 +164,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // Send the confirmation email to the subscriber's address
     try {
+      const confirmationEmailHtml = await render(NewsletterConfirm({
+        confirmationUrl,
+        logoUrl: `${emailConfig.siteUrl}/Insite Tech Solutions Light.png`,
+      }))
+
       await resend.emails.send({
         from: `InSite Tech Solutions <${emailConfig.from}>`,
         to: [email],
         subject: 'Please confirm your email address',
-        react: NewsletterConfirm({
-          confirmationUrl,
-          logoUrl: `${emailConfig.siteUrl}/logo.png`,
-        }),
+        html: confirmationEmailHtml,
       })
     } catch (emailError) {
       console.error('Failed to send confirmation email:', emailError)

@@ -19,7 +19,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion, Variants } from 'framer-motion';
 import Layout from '@/components/reusable-components/layout';
 import ContactInfo from "@/page-templates/contact-page/contact-info";
 import LocationImageSection from "@/page-templates/contact-page/location-image-section";
@@ -27,45 +26,9 @@ import ContactPageCTASection from "@/page-templates/contact-page/cta-section";
 import ContactForm from "@/components/reusable-components/contact-form";
 import { PageLoadingProvider, usePageLoading } from '@/contexts/page-loading-context';
 import PageTransitionLoader from '@/components/reusable-components/page-transition-loader';
+import styles from './contact-page.module.css';
 
-/**
- * Animation variants for the contact page
- * Keeping it balanced and smooth
- */
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.7, // Start after hero animation
-    },
-  },
-};
 
-const slideInLeft: Variants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const slideInRight: Variants = {
-  hidden: { opacity: 0, x: 30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.7,
-      ease: 'easeOut',
-    },
-  },
-};
 
 /**
  * ContactPageContent Component
@@ -102,36 +65,19 @@ export function ContactPageContent(): JSX.Element {
     <>
       {/* Page Header - Gradient background section outside main layout */}
       <div className="bg-gradient-to-br from-medium-blue via-mild-blue to-blue-800 text-white text-left py-8 px-4 mt-header">
-        <motion.h1 
-          className="text-3xl font-bold drop-shadow"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.4 }}
+        <h1 
+          className={`text-3xl font-bold drop-shadow ${styles.pageHeader}`}
         >
           Contact
-        </motion.h1>
+        </h1>
       </div>
       
       {/* Main Content Layout - Wrapped sections with responsive design */}
       <Layout>
-        <div className="container mx-auto py-16 lg:py-20">
+        <div className="container mx-auto py-16 lg:py-20 overflow-hidden">
           {/* Hero Section - Compelling messaging and introduction */}
-          <motion.div 
-            className="relative overflow-hidden mb-16 lg:mb-20"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.6,
-                  ease: 'easeOut',
-                  delay: 0.5,
-                },
-              },
-            }}
+          <div 
+            className={`relative overflow-hidden mb-16 lg:mb-20 ${styles.heroSection}`}
           >
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 mt-2">
@@ -142,19 +88,13 @@ export function ContactPageContent(): JSX.Element {
                 Have a project in mind or need expert tech consulting? We&apos;re here to help turn your ideas into reality. Fill out the contact form below or email us and we will get back to you as soon as possible.
               </p>
             </div>
-          </motion.div>
+          </div>
           
           {/* Two-Column Layout - Contact info sidebar and main form */}
-          <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
             {/* Left Column - Contact information sidebar */}
-            <motion.div 
-              className="flex flex-col gap-8 lg:gap-10 order-2 lg:order-1"
-              variants={slideInLeft}
+            <div 
+              className={`flex flex-col gap-8 lg:gap-10 order-2 lg:order-1 ${styles.leftColumn}`}
             >
               {/* Contact Methods and Details */}
               <ContactInfo />
@@ -164,16 +104,15 @@ export function ContactPageContent(): JSX.Element {
               
               {/* Additional Call-to-Action */}
               <ContactPageCTASection />
-            </motion.div>
+            </div>
             
             {/* Right Column - Main contact form */}
-            <motion.div 
-              className="order-1 lg:order-2"
-              variants={slideInRight}
+            <div 
+              className={`order-1 lg:order-2 ${styles.rightColumn}`}
             >
               <ContactForm />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </Layout>
     </>

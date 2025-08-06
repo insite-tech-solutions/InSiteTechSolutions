@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import ConsultingTrainingPage from '@/components/service-pages/consulting-training-page';
 import consultingTrainingContent from '@/content/service-pages/consulting-training';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Consulting & Training service page.
@@ -19,10 +21,11 @@ import consultingTrainingContent from '@/content/service-pages/consulting-traini
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: consultingTrainingContent.metadata.title + ' | InSite Tech',
-  description: consultingTrainingContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  consultingTrainingContent.metadata.title,
+  consultingTrainingContent.metadata.description,
+  'consulting-and-training'
+);
 
 /**
  * Consulting & Training Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <ConsultingTrainingPage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={consultingTrainingContent.metadata.title}
+        serviceDescription={consultingTrainingContent.metadata.description}
+        serviceType="Technical Consulting and Training"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Consulting & Training", url: "https://insitetechsolutions.com/services/consulting-and-training" }
+        ]}
+      />
+      <ConsultingTrainingPage />
+    </>
+  );
 }

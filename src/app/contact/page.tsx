@@ -8,6 +8,8 @@
 
 import type { Metadata } from "next"
 import ContactPage from "@/components/contact-pages/contact-page";
+import { generateMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData, LocalBusinessStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Contact page.
@@ -17,11 +19,13 @@ import ContactPage from "@/components/contact-pages/contact-page";
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: "Contact Us | Tech Services",
-  description:
-    "Get in touch with our team for web development, software solutions, data analytics, and consulting services.",
-};
+export const metadata: Metadata = generateMetadata({
+  title: "Contact Us | InSite Tech Solutions",
+  description: "Get in touch with our team for web development, software solutions, data analytics, and consulting services. Ready to transform your business with technology?",
+  path: "/contact",
+  image: "https://insitetechsolutions.com/Insite Tech Solutions Light.png", // Use company logo for contact page
+  keywords: "contact, web development, software solutions, data analytics, consulting services, InSite Tech Solutions"
+});
 
 /**
  * Contact Page Route Component
@@ -46,6 +50,21 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  // Render the ContactPage component
-  return <ContactPage />;
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="Contact Us | InSite Tech Solutions"
+        pageDescription="Get in touch with our team for web development, software solutions, data analytics, and consulting services. Ready to transform your business with technology?"
+        pageUrl="https://insitetechsolutions.com/contact"
+      />
+      <LocalBusinessStructuredData />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Contact", url: "https://insitetechsolutions.com/contact" }
+        ]}
+      />
+      <ContactPage />
+    </>
+  );
 }

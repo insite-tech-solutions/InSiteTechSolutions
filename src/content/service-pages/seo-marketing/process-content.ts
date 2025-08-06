@@ -87,7 +87,7 @@ export const seoMarketingProcess: ProcessContent = {
   ],
   note: "We cannot provide exact timelines until we have a well defined project and plan. Projects can range from a few weeks to several months; however, while initial setup typically takes 4-8 weeks, digital marketing is an ongoing process that delivers increasing value over time. SEO typically shows noticeable results within 3-6 months, while paid campaigns can generate more immediate visibility.",
   linkText: "Learn more about our process",
-  linkUrl: "/process",
+  linkUrl: "/about/development-process",
 };
 
 export default seoMarketingProcess;

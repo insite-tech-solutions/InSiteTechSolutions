@@ -24,10 +24,9 @@ import PageTransitionLoader from '@/components/reusable-components/page-transiti
 
 // Direct imports for critical above-the-fold content
 import HeroSection from '@/page-templates/pricing-page/hero-section';
-import PricingOverview from '@/page-templates/pricing-page/pricing-overview';
-
 
 // Dynamic imports for below-the-fold content to improve initial page load performance
+const PricingOverview = dynamic(() => import('@/page-templates/pricing-page/pricing-overview'), { ssr: false });
 const PricingModels = dynamic(() => import('@/page-templates/pricing-page/pricing-models'), { ssr: false });
 const PaymentOptions = dynamic(() => import('@/page-templates/pricing-page/payment-methods'), { ssr: false });
 const PaymentTerms = dynamic(() => import('@/page-templates/pricing-page/payment-terms'), { ssr: false });

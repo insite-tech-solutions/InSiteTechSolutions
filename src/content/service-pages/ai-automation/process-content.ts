@@ -88,7 +88,7 @@ export const aiAutomationProcess: ProcessContent = {
   ],
   note: "We cannot provide exact timelines until we have a well-defined project and plan. Projects can range from a few weeks to several months depending on complexity and scope. As a simple reference point, targeted automation projects typically take 4-6 weeks, while comprehensive AI implementations with multiple components may require 12-16+ weeks. For most AI systems, an ongoing optimization phase follows initial deployment to continuously improve performance.",
   linkText: "Learn more about our process",
-  linkUrl: "/process",
+  linkUrl: "/about/development-process",
 };
 
 export default aiAutomationProcess;

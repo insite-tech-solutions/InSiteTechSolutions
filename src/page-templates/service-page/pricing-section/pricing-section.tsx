@@ -32,7 +32,9 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     }
   }
 }
@@ -98,11 +100,13 @@ const PriceFactorComponent: React.FC<PriceFactorProps> = ({ title, items, icon }
 
   return (
     <motion.div
+      key={`price-factor-${title.toLowerCase().replace(/\s+/g, '-')}`}
       ref={ref}
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg transition-all"
+      className="bg-white rounded-lg shadow-md border border-gray-200 p-0 hover:shadow-lg"
+      style={{ transition: "box-shadow 0.3s ease" }}
     >
       {/* Card Header - Gradient background with icon and title */}
       <div className="w-full rounded-t-lg bg-gradient-to-br from-light-blue to-blue-800 flex items-center gap-3 min-h-[56px] px-4 py-3">
@@ -160,13 +164,18 @@ const PriceSectionWrapper: React.FC<PriceSectionProps> = ({ content }): JSX.Elem
       <h2 id="pricing-section-title" className="sr-only">{content.title}</h2>
       <div className="container mx-auto">
         <motion.div
+          key="pricing-stagger-container"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerChildren}
         >
           {/* Section Header */}
-          <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
+          <motion.div 
+            key="pricing-header"
+            variants={fadeInUp} 
+            className="text-center max-w-4xl mx-auto mb-8"
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
               {title}
             </h2>
@@ -177,6 +186,7 @@ const PriceSectionWrapper: React.FC<PriceSectionProps> = ({ content }): JSX.Elem
 
           {/* Cost Factors Title */}
           <motion.h3 
+            key="pricing-factors-title"
             variants={fadeInUp}
             className="text-2xl font-semibold text-gray-800 text-center mb-8"
           >
@@ -203,6 +213,7 @@ const PriceSectionWrapper: React.FC<PriceSectionProps> = ({ content }): JSX.Elem
           {/* Long-Term Value Section - Highlights ROI and benefits */}
           <div className="max-w-5xl mx-auto lg:px-6">
             <motion.div 
+              key="pricing-long-term-value"
               variants={fadeInUp}
               className="bg-blue-50 border border-blue-100 rounded-lg p-8"
             >

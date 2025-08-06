@@ -25,7 +25,9 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut",
+      ease: [0.25, 0.46, 0.45, 0.94],
+      opacity: { duration: 0.4 },
+      y: { duration: 0.6 }
     },
   },
 }
@@ -95,11 +97,13 @@ const FAQItemComponent: React.FC<FAQItemProps> = ({ question, answer, icon, isOp
 
   return (
     <motion.div
+      key={`faq-item-${question.toLowerCase().replace(/\s+/g, '-')}`}
       ref={ref}
       initial="hidden"
       animate={controls}
       variants={fadeInUp}
-      className="bg-white rounded-xl shadow-sm border border-gray-100 hover:border-mild-blue transition-all duration-300"
+      className="bg-white rounded-xl shadow-sm border border-gray-100 hover:border-mild-blue"
+      style={{ transition: "border-color 0.3s ease" }}
     >
       {/* FAQ Question Button - Toggles expanded state */}
       <button
@@ -204,9 +208,19 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content, anchorId, showB
       <h2 id="faq-section-title" className="sr-only">{title}</h2>
       <div className="max-w-4xl mx-auto">
         {/* Animated Container - Staggered animations for child elements */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerChildren}>
+        <motion.div 
+          key="faq-stagger-container"
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={staggerChildren}
+        >
           {/* Section Header - Title, badge, and description */}
-          <motion.div variants={fadeInUp} className="text-center max-w-4xl mx-auto mb-8">
+          <motion.div 
+            key="faq-header"
+            variants={fadeInUp} 
+            className="text-center max-w-4xl mx-auto mb-8"
+          >
             {showBadge && (
               <div className="inline-block px-4 py-2 bg-blue-50 rounded-full text-medium-blue-alt text-md font-medium mb-6">
                 Frequently Asked Questions (FAQs)
@@ -236,7 +250,11 @@ const FAQSectionWrapper: React.FC<FAQSectionProps> = ({ content, anchorId, showB
 
             {/* Optional Call-to-Action Link - Links to additional resources */}
             {moreLink && (
-              <motion.div variants={fadeInUp} className="mt-12 flex justify-center">
+              <motion.div 
+                key="faq-more-link"
+                variants={fadeInUp} 
+                className="mt-12 flex justify-center"
+              >
                 <a
                   href={moreLink.url}
                   className="group inline-flex items-center gap-2 text-mild-blue hover:text-medium-blue-alt font-medium transition-colors"

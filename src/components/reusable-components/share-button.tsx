@@ -42,6 +42,12 @@ const ShareButton = ({ title, text, url, className = '' }: ShareButtonProps): JS
         console.log('URL copied to clipboard');
       }
     } catch (error) {
+      // Check if the error is due to user cancellation (AbortError)
+      if (error instanceof Error && error.name === 'AbortError') {
+        // User cancelled the share dialog - this is normal behavior, not an error
+        return;
+      }
+      // Log other actual errors
       console.error('Error sharing:', error);
     }
   }, [title, text, url]);

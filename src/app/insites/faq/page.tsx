@@ -14,6 +14,9 @@
 
 import type { Metadata } from 'next';
 import FAQPage from '@/components/insites-pages/faq-page';
+import { generateMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData, FAQStructuredData } from '@/components/seo/structured-data';
+import { extractAllFAQs } from '@/utils/faq-helpers';
 
 /**
  * Static metadata configuration for the FAQ page
@@ -24,10 +27,13 @@ import FAQPage from '@/components/insites-pages/faq-page';
  * 
  * @type {Metadata}
  */
-export const metadata: Metadata = {
+export const metadata: Metadata = generateMetadata({
   title: 'Frequently Asked Questions | InSite Tech Solutions',
-  description: 'Find answers to the most common questions about our services, pricing, process, and more.',
-};
+  description: 'Find answers to the most common questions about our services, pricing, process, and more. Get quick solutions to your tech-related inquiries.',
+  path: '/insites/faq',
+  image: 'https://insitetechsolutions.com/Insite Tech Solutions Light.png', // Use company logo for FAQ page
+  keywords: 'FAQ, frequently asked questions, tech services, web development, custom software, InSite Tech Solutions'
+});
 
 /**
  * FAQ Page Route Component
@@ -42,5 +48,23 @@ export const metadata: Metadata = {
  * @returns {JSX.Element} The rendered FAQ page
  */
 export default function Page(): JSX.Element {
-  return <FAQPage />;
+  const allFAQs = extractAllFAQs();
+  
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="Frequently Asked Questions | InSite Tech Solutions"
+        pageDescription="Find answers to the most common questions about our services, pricing, process, and more. Get quick solutions to your tech-related inquiries."
+        pageUrl="https://insitetechsolutions.com/insites/faq"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "FAQ", url: "https://insitetechsolutions.com/insites/faq" }
+        ]}
+      />
+      <FAQStructuredData faqs={allFAQs} />
+      <FAQPage />
+    </>
+  );
 } 

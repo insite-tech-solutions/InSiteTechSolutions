@@ -81,7 +81,7 @@ const paymentMethods: PaymentMethod[] = [
     icon: <Landmark className="h-8 w-8 mb-4 text-medium-blue" />,
     title: "Bank Transfers",
     description:
-      "Direct bank transfers via Stripe for domestic clients, with detailed invoicing and payment tracking.",
+      "Direct bank transfers (ACH) via Stripe for domestic clients, with detailed invoicing and payment tracking.",
   },
   {
     icon: <Globe className="h-8 w-8 mb-4 text-medium-blue" />,

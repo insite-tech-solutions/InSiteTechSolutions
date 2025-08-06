@@ -395,11 +395,14 @@
  * - Blue gradient background
  * - White text color
  * - Relative positioning
+ * - Optimized for fast rendering
  */
 .bgPrimary {
   background: linear-gradient(to bottom, #0073e3 calc(110% - 400px), #ffffff);
   color: #fff;
   position: relative;
+  will-change: auto;
+  contain: layout style paint;
 }
 
 /**
@@ -529,4 +532,35 @@
  */
 .heroHeight {
   min-height: 120vh; /* This makes it 20% taller than the viewport */
+}
+
+/* === Hero Section Entrance Animations === */
+@keyframes heroSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.heroTextEntrance {
+  animation: heroSlideInLeft 0.6s cubic-bezier(0.2,0,0.7,1) 0.45s both;
+}
+
+.heroInteractiveEntrance {
+  animation: heroSlideInRight 0.6s cubic-bezier(0.2,0,0.7,1) 0.55s both;
 }

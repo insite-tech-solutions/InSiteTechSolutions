@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import GraphicDesignPage from '@/components/service-pages/graphic-design-page';
 import graphicDesignContent from '@/content/service-pages/graphic-design';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the Graphic Design & Branding service page.
@@ -19,10 +21,11 @@ import graphicDesignContent from '@/content/service-pages/graphic-design';
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: graphicDesignContent.metadata.title + ' | InSite Tech',
-  description: graphicDesignContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  graphicDesignContent.metadata.title,
+  graphicDesignContent.metadata.description,
+  'graphic-design-and-branding'
+);
 
 /**
  * Graphic Design & Branding Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <GraphicDesignPage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={graphicDesignContent.metadata.title}
+        serviceDescription={graphicDesignContent.metadata.description}
+        serviceType="Graphic Design and Branding"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "Graphic Design & Branding", url: "https://insitetechsolutions.com/services/graphic-design-and-branding" }
+        ]}
+      />
+      <GraphicDesignPage />
+    </>
+  );
 }

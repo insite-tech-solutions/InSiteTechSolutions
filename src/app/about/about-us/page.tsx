@@ -8,6 +8,8 @@
  */
 import type { Metadata } from "next";
 import AboutUsPage from "@/components/about-pages/about-us-page";
+import { generateAboutMetadata } from '@/utils/metadata-helpers';
+import { WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the About Us page.
@@ -17,11 +19,11 @@ import AboutUsPage from "@/components/about-pages/about-us-page";
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: "About Us | InSite Tech Solutions",
-  description:
-    "Learn about our team, mission, and approach to technology solutions. Discover how we help businesses transform their digital presence with personalized, results-driven services.",
-};
+export const metadata: Metadata = generateAboutMetadata(
+  "About Us",
+  "Learn about our team, mission, and approach to technology solutions. Discover how we help businesses transform their digital presence with personalized, results-driven services.",
+  "about-us"
+);
 
 /**
  * About Us Page Route Component
@@ -45,5 +47,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <AboutUsPage />;
+  return (
+    <>
+      <WebPageStructuredData 
+        pageName="About Us | InSite Tech Solutions"
+        pageDescription="Learn about our team, mission, and approach to technology solutions. Discover how we help businesses transform their digital presence with personalized, results-driven services."
+        pageUrl="https://insitetechsolutions.com/about/about-us"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "About Us", url: "https://insitetechsolutions.com/about/about-us" }
+        ]}
+      />
+      <AboutUsPage />
+    </>
+  );
 }

@@ -9,6 +9,8 @@
 import { Metadata } from 'next';
 import SEOMarketingPage from '@/components/service-pages/seo-marketing-page';
 import seoMarketingContent from '@/content/service-pages/seo-marketing';
+import { generateServiceMetadata } from '@/utils/metadata-helpers';
+import { ServiceStructuredData, BreadcrumbStructuredData } from '@/components/seo/structured-data';
 
 /**
  * Static metadata configuration for the SEO & Online Marketing service page.
@@ -19,10 +21,11 @@ import seoMarketingContent from '@/content/service-pages/seo-marketing';
  * 
  * @type {Metadata} Next.js metadata configuration object
  */
-export const metadata: Metadata = {
-  title: seoMarketingContent.metadata.title + ' | InSite Tech',
-  description: seoMarketingContent.metadata.description,
-};
+export const metadata: Metadata = generateServiceMetadata(
+  seoMarketingContent.metadata.title,
+  seoMarketingContent.metadata.description,
+  'seo-and-online-marketing'
+);
 
 /**
  * SEO & Online Marketing Service Page Route Component
@@ -46,5 +49,20 @@ export const metadata: Metadata = {
  * ```
  */
 export default function Page(): JSX.Element {
-  return <SEOMarketingPage />;
+  return (
+    <>
+      <ServiceStructuredData 
+        serviceName={seoMarketingContent.metadata.title}
+        serviceDescription={seoMarketingContent.metadata.description}
+        serviceType="SEO and Digital Marketing"
+      />
+      <BreadcrumbStructuredData 
+        breadcrumbs={[
+          { name: "Home", url: "https://insitetechsolutions.com" },
+          { name: "SEO & Online Marketing", url: "https://insitetechsolutions.com/services/seo-and-online-marketing" }
+        ]}
+      />
+      <SEOMarketingPage />
+    </>
+  );
 }

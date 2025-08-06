@@ -7,7 +7,7 @@
  */
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, Linkedin, Twitter, Facebook } from "lucide-react"
+import { Mail, Phone, Linkedin, Facebook, Github, Home } from "lucide-react"
 import Link from "next/link"
 
 /**
@@ -49,9 +49,9 @@ const contactMethods: ContactMethod[] = [
   },
   {
     icon: Phone,
-    contact: "(716) 220-8781",
+    contact: "+1 (716) 406-8988",
     label: "Phone",
-    href: "tel:+17162208781",
+    href: "tel:+17164068988",
   },
   // Placeholder until business gets PO box setup
   // {
@@ -68,19 +68,24 @@ const contactMethods: ContactMethod[] = [
  */
 const socialLinks: SocialLink[] = [
   {
-    icon: Twitter,
-    href: "https://twitter.com",
-    ariaLabel: "Twitter",
-  },
-  {
     icon: Linkedin,
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/company/insite-tech-solutions",
     ariaLabel: "LinkedIn",
   },
   {
+    icon: Github,
+    href: "https://github.com/insite-tech-solutions",
+    ariaLabel: "GitHub",
+  },
+  {
     icon: Facebook,
-    href: "https://facebook.com",
+    href: "https://www.facebook.com/share/198f3uKoyc/?mibextid=wwXIfr",
     ariaLabel: "Facebook",
+  },
+  {
+    icon: Home,
+    href: "https://nextdoor.com/pages/insite-tech-solutions-lockport-ny/",
+    ariaLabel: "Nextdoor",
   },
 ];
 

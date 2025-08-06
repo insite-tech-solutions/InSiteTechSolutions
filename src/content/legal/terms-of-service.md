@@ -11,7 +11,7 @@ This document explains in plain English the rules and guidelines for using our s
 
 ## AGREEMENT TO OUR LEGAL TERMS
 
-We are InSite Tech Solutions (“Company,” “we,” “us,” “our”) — a sole proprietorship registered in Niagara County, NY. (Mailing address available upon request; we operate remotely and do not maintain a public office.)
+We are Christian Neureuter doing business as (DBA) InSite Tech Solutions (“Company,” “we,” “us,” “our”) — a sole proprietorship registered in Niagara County, NY. (Mailing address available upon request; we operate remotely and do not maintain a public office.)
 
 We operate the website https://insitetechsolutions.com (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").
 

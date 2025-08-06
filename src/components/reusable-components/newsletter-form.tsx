@@ -224,8 +224,20 @@ export default function NewsletterForm({
               <p className="text-xs text-gray-500 mt-3">
                 By subscribing, you agree to receive marketing emails from InSite Tech Solutions. 
                 You can unsubscribe at any time. See our{" "}
-                <a href="/privacy-policy" className="text-medium-blue hover:underline">
+                <a
+                  href="/about/privacy-policy-and-terms-of-service#privacy-policy"
+                  target="_blank"
+                  className="text-medium-blue hover:underline"
+                >
                   Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/about/privacy-policy-and-terms-of-service#terms-of-service"
+                  target="_blank"
+                  className="text-medium-blue hover:underline"
+                >
+                  Terms of Service
                 </a>
                 .
               </p>

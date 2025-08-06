@@ -45,11 +45,6 @@ const consultingTrainingValueProp: ValuePropContent = {
       title: "Workflow Optimization",
       description: "Focus on streamlining business processes through technology to increase efficiency and reduce operational costs."
     },
-    {
-      icon: "Shield",
-      title: "Digital Resilience",
-      description: "Growing need for robust technology strategies that ensure continuity and security in a digital-first world."
-    }
   ],
   
   // Description for the industry trends section

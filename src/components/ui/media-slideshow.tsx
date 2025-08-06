@@ -384,7 +384,7 @@ function MediaSlideshow({
               {item.type === 'image' ? (
                 <Image
                   src={item.src}
-                  alt={`${projectTitle} - Image ${index + 1}`}
+                  alt={`${projectTitle} project showcase - ${index === 0 ? 'main interface' : index === 1 ? 'key features' : index === 2 ? 'user experience' : `additional view ${index + 1}`}`}
                   fill
                   className="object-contain bg-gray-100"
                   style={{

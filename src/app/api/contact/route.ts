@@ -32,11 +32,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { v4 as uuidv4 } from 'uuid'
+import { render } from '@react-email/render'
 import { supabaseAdmin } from '@/lib/supabase'
 import { resend, emailConfig } from '@/lib/resend'
 import { checkRateLimit, contactFormLimiter, getClientIP } from '@/lib/rate-limit'
 import { validateTurnstile } from '@/lib/turnstile'
 import { generateConfirmationToken } from '@/lib/jwt'
+import { sanitizeContactForm } from '@/lib/sanitizer'
 import { ContactConfirmation, ContactNotification, NewsletterConfirm } from '../../../../emails'
 
 /**
@@ -116,7 +118,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       )
     }
 
-    const formData = validationResult.data
+    // Sanitize the validated form data to prevent XSS attacks
+    const formData = sanitizeContactForm(validationResult.data)
 
     // Verify Cloudflare Turnstile token to ensure it's not a bot
     const turnstileResult = await validateTurnstile(formData.turnstileToken, clientIP)
@@ -139,15 +142,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // Attempt to send confirmation email to the customer
     try {
+      const confirmationEmailHtml = await render(ContactConfirmation({
+        customerName: formData.firstName + (formData.lastName ? ` ${formData.lastName}` : ''),
+        submittedAt,
+        logoUrl: `${emailConfig.siteUrl}/Insite Tech Solutions Light.png`,
+      }))
+
       await resend.emails.send({
         from: `InSite Tech Solutions <${emailConfig.from}>`,
         to: [formData.email],
         subject: 'Thank you for contacting InSite Tech Solutions!',
-        react: ContactConfirmation({
-          customerName: formData.firstName + (formData.lastName ? ` ${formData.lastName}` : ''),
-          submittedAt,
-          logoUrl: `${emailConfig.siteUrl}/logo.png`,
-        }),
+        html: confirmationEmailHtml,
       })
     } catch (emailError) {
       console.error('Failed to send confirmation email:', emailError)
@@ -156,24 +161,26 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // Attempt to send notification email to the business
     try {
+      const notificationEmailHtml = await render(ContactNotification({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        websiteUrl: formData.websiteUrl,
+        companyName: formData.companyName,
+        services: formData.services,
+        budget: formData.budget,
+        comments: formData.comments,
+        mailingList: formData.mailingList,
+        submittedAt,
+        logoUrl: `${emailConfig.siteUrl}/Insite Tech Solutions Light.png`,
+      }))
+
       await resend.emails.send({
         from: `InSite Tech Contact Form <${emailConfig.from}>`,
         to: [emailConfig.contactEmail],
         subject: `New Contact Form Submission from ${formData.firstName}${formData.lastName ? ` ${formData.lastName}` : ''}`,
-        react: ContactNotification({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phoneNumber: formData.phoneNumber,
-          websiteUrl: formData.websiteUrl,
-          companyName: formData.companyName,
-          services: formData.services,
-          budget: formData.budget,
-          comments: formData.comments,
-          mailingList: formData.mailingList,
-          submittedAt,
-          logoUrl: `${emailConfig.siteUrl}/logo.png`,
-        }),
+        html: notificationEmailHtml,
       })
     } catch (emailError) {
       console.error('Failed to send notification email:', emailError)
@@ -217,14 +224,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
             })
 
           // Send newsletter confirmation email to prompt double opt-in
+          const newsletterConfirmHtml = await render(NewsletterConfirm({
+            confirmationUrl,
+            logoUrl: `${emailConfig.siteUrl}/logo.png`,
+          }))
+
           await resend.emails.send({
             from: `InSite Tech Solutions <${emailConfig.from}>`,
             to: [formData.email],
             subject: 'Please confirm your newsletter subscription',
-            react: NewsletterConfirm({
-              confirmationUrl,
-              logoUrl: `${emailConfig.siteUrl}/logo.png`,
-            }),
+            html: newsletterConfirmHtml,
           })
         }
       } catch (newsletterError) {

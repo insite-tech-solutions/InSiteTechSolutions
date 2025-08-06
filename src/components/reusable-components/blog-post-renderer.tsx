@@ -280,7 +280,7 @@ export default function BlogPostRenderer({
               return (
                 <Image 
                   src={props.src}
-                  alt={props.alt || 'Blog post image'}
+                  alt={props.alt || 'Blog post content image'}
                   width={800}
                   height={600}
                   className="max-w-full h-auto rounded-lg shadow-md my-4" 
