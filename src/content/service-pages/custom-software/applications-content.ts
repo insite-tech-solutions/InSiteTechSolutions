@@ -1,0 +1,119 @@
+/**
+ * @fileoverview Applications Content for the Custom Software Service Page
+ *
+ * This file contains the content configuration for the Custom Software service page.
+ * It includes industry solutions, categories, and related descriptions/icons.
+ * The content is organized into sections and categories to provide a clear and structured presentation.
+ */
+
+import { ApplicationsContent } from '@/page-templates/service-page/types';
+
+/**
+ * Content configuration for the Custom Software Solutions service page.
+ * This includes industry solutions, categories, and related descriptions/icons.
+ * 
+ * @type {ApplicationsContent}
+ * @property {string} title - The main title for the applications section.
+ * @property {string} description - A brief description of the custom software solutions offered.
+ * @property {string} industrySolutionsTitle - Title for the industry-specific solutions carousel.
+ * @property {string} industrySolutionsDescription - Description for the industry-specific solutions carousel.
+ * @property {Array} categories - An array of categories, each containing a title, icon, and items.
+ * @property {Array} industries - An array of industries, each containing a title, icon, and items (carousel cards).
+ * @property {string} backgroundIcon - Icon used as a background for the section.
+ */
+const customSoftwareApplications: ApplicationsContent = {
+  title: "Empowering Businesses Across Diverse Sectors",
+  description: "Our custom software solutions cater to a wide range of industries, providing specialized tools that address unique challenges and drive innovation. Our digital strategies help clients by enhancing their:",
+  industrySolutionsTitle: "Industry-Specific Solutions",
+  industrySolutionsDescription: "Drawing on our technical expertise across numerous sectors, we create customized solutions that meet the unique demands of your industry.",
+  
+  categories: [
+    {
+      title: "Business Operations",
+      icon: "Cog",
+      items: [
+        "Custom management applications",
+        "Inventory and supply chain management systems",
+        "Workflow automation tools",
+        "Analytics and reporting dashboards",
+      ],
+    },
+    {
+      title: "Research & Development",
+      icon: "TestTube",
+      items: [
+        "Computational simulations and modeling",
+        "Data analysis and visualization tools",
+        "Research management systems",
+        "Laboratory information systems",
+      ],
+    },
+    {
+      title: "Digital Infrastructure",
+      icon: "Server",
+      items: [
+        "Legacy system modernization",
+        "Cloud migrations and system integrations",
+        "Digital workflow transformations",
+        "Internally managed software solutions",
+      ],
+    },
+  ],
+  
+  industries: [
+    {
+      title: "Research & Academia",
+      icon: "FlaskConical",
+      items: [
+        "Scientific workflow automation",
+        "Scalable and reusable analysis pipelines",
+        "Resource management systems",
+        "Data visualization dashboards",
+      ],
+    },
+    {
+      title: "Manufacturing & Engineering",
+      icon: "Settings",
+      items: [
+        "Process control systems",
+        "Quality assurance software",
+        "Equipment monitoring",
+        "Production planning tools",
+      ],
+    },
+    {
+      title: "Retail & E-commerce",
+      icon: "ShoppingCart",
+      items: [
+        "Custom POS systems",
+        "Product customization tools",
+        "Inventory management solutions",
+        "Interactive product catalogs",
+      ],
+    },
+    {
+      title: "Professional Services",
+      icon: "Briefcase",
+      items: [
+        "Client management portals",
+        "Service tracking platforms",
+        "Resource scheduling systems",
+        "Reporting and analytics tools",
+      ],
+    },
+    {
+      title: "Logistics & Supply Chain",
+      icon: "Truck",
+      items: [
+        "Transportation management systems",
+        "Warehouse management software",
+        "Supply chain optimization tools",
+      ],
+    },
+  ], 
+  backgroundIcon: "Code2",
+  backgroundIconWidth: 500,
+  backgroundIconHeight: 500,
+};
+
+export default customSoftwareApplications;

@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,3 +35,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Security & Database
+scripts/newsletter-schema.sql
+scripts/*-schema.sql
+scripts/migrations/
+*.sql
+*.backup
+*.dump
+SECURITY-CHECKLIST.md
+docs/security/
+.secrets/
+
+# Email templates (if containing sensitive info)
+emails/production/
+emails/templates/*.production.*
+
+# Exports and sensitive data
+exports/
+*.csv
+subscriber-data/
+
+# Logs and monitoring
+logs/
+*.log
+monitoring/

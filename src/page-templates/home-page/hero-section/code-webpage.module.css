@@ -1,0 +1,66 @@
+/**
+ * @fileoverview Code WebPage CSS Module for Hero Section
+ *
+ * This CSS module provides styling for the code reveal overlay component
+ * that displays HTML code through a circular clip path based on cursor position.
+ *
+ * Features:
+ * - Circular reveal effect with dynamic positioning
+ * - Dark theme code styling
+ * - Smooth transitions and animations
+ * - Responsive clip path calculations
+ * - Performance optimizations with will-change
+ *
+ * @module CodeWebPageStyles
+ */
+
+/* CodeWebPage.module.css */
+
+/**
+ * Main container for the code reveal overlay
+ * 
+ * Creates an absolutely positioned overlay that reveals code content
+ * through a circular clip path. The clip path is dynamically positioned
+ * based on cursor coordinates and provides a smooth reveal effect.
+ * 
+ * Key properties:
+ * - Absolute positioning with full coverage (inset: 0)
+ * - Dark background for code readability
+ * - Monospace font for authentic code appearance
+ * - Circular clip path with dynamic positioning
+ * - Performance optimization with will-change
+ * - Pointer events disabled to prevent interference
+ */
+.codeWebPage {
+    position: absolute;
+    inset: 0;
+    background-color: #1a1a1a;
+    color: #d4d4d4;
+    font-family: monospace;
+    font-size: 0.875rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    z-index: 50;
+    clip-path: circle(40.5px at var(--cursor-x) var(--cursor-y));
+    transform: translate(calc(-1 * var(--cursor-x)), calc(-1 * var(--cursor-y)));
+    width: 200%;
+    height: 200%;
+    will-change: clip-path, transform;
+  }
+  
+/**
+ * Code content container
+ * 
+ * Styles the actual code content within the reveal overlay,
+ * ensuring proper formatting and readability.
+ * 
+ * Key properties:
+ * - Pre-wrap whitespace for code formatting
+ * - Consistent padding for content spacing
+ */
+.codeContent {
+    white-space: pre-wrap;
+    padding: 1rem;
+}
+

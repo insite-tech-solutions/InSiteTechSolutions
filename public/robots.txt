@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block access to API routes
+Disallow: /api/
+
+# Block access to admin or private areas (if any)
+Disallow: /admin/
+
+# Block internal search result pages
+Disallow: /search
+
+# Allow access to public assets
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Sitemap location
+Sitemap: https://insitetechsolutions.com/sitemap.xml

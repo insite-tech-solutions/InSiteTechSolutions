@@ -1,0 +1,34 @@
+/**
+ * @fileoverview FAQ Page Hero Section CSS Module
+ *
+ * This CSS module provides styling for the FAQ page hero section,
+ * including entrance animations optimized for performance to match the
+ * original Framer Motion implementation.
+ *
+ * @module FAQHeroSectionStyles
+ */
+
+/* === Keyframes based on Framer Motion variants === */
+
+@keyframes faqFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Animation classes with staggered delays === */
+
+/* Primary heading: delay 0.4s */
+.primaryHeading {
+  animation: faqFadeInUp 0.5s ease-out 0.5s both;
+}
+
+/* Description text: delay 0.5s */
+.descriptionText {
+  animation: faqFadeInUp 0.5s ease-out 0.6s both;
+} 

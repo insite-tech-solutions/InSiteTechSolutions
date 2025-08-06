@@ -1,0 +1,133 @@
+<!--
+/**
+ * @fileoverview Generic Newsletter HTML Template.
+ *
+ * This HTML template serves as a basic structure for sending out newsletters
+ * from InSite Tech Solutions. It is designed for mail merge operations and provides
+ * a clean, responsive layout for delivering content to subscribers.
+ *
+ * Purpose:
+ * - **Content Delivery**: Provides a standardized layout for distributing articles, updates, and offers.
+ * - **Mail Merge Compatibility**: Designed to easily integrate with mail merge features of email clients
+ *   by using placeholders like `{{firstName}}` and `{{unsubscribeUrl}}`.
+ * - **Basic Branding**: Includes a simple header and footer with essential company information.
+ * - **Unsubscribe Mechanism**: Offers a clear link for users to opt-out of future communications.
+ *
+ * Usage:
+ * This HTML file is intended to be used as a base for creating individual newsletter campaigns.
+ * Content sections marked with comments can be replaced with specific newsletter articles,
+ * highlights, and calls to action.
+ *
+ * Technical Details:
+ * - Uses inline CSS for email client compatibility (to minimize rendering issues).
+ * - Basic responsive design principles are applied via `max-width` and `margin: 0 auto`.
+ * - Includes placeholders for dynamic data like `{{firstName}}` and `{{unsubscribeUrl}}`.
+ * - Sections are semantically marked for clarity and maintainability.
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InSite Tech Solutions Newsletter</title>
+    <style>
+        /* Global body styles for consistent rendering across email clients */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Styles for the header section of the email */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        /* Styles for the logo text within the header */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        /* Styles for the main content area */
+        .content {
+            margin-bottom: 30px;
+        }
+        /* Styles for the footer section of the email */
+        .footer {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        /* Styles for the unsubscribe section within the footer */
+        .unsubscribe {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        /* Styles for links within the unsubscribe section */
+        .unsubscribe a {
+            color: #666;
+            text-decoration: none;
+        }
+        /* Hover styles for links within the unsubscribe section */
+        .unsubscribe a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Email Header: Displays company name and tagline -->
+    <div class="header">
+        <div class="logo">InSite Tech Solutions</div>
+        <p>Your Technology Partner</p>
+    </div>
+
+    <!-- Main Content Area: Placeholder for newsletter articles and updates -->
+    <div class="content">
+        <h2>Hello {{firstName}}!</h2>
+        
+        <p>Welcome to our latest newsletter. Here's what's new in the world of technology and business solutions:</p>
+        
+        <!-- Newsletter Content Highlights Section -->
+        <h3>🚀 This Month's Highlights</h3>
+        <ul>
+            <li><strong>AI Automation:</strong> New tools to streamline your business processes</li>
+            <li><strong>Web Development:</strong> Latest trends in modern web applications</li>
+            <li><strong>Data Analytics:</strong> Turn your data into actionable insights</li>
+        </ul>
+
+        <!-- Featured Article Section -->
+        <h3>💡 Featured Article</h3>
+        <p>This month we're diving deep into how small businesses can leverage AI automation to save time and increase efficiency...</p>
+        
+        <!-- Call to Action Section -->
+        <h3>📞 Need Help?</h3>
+        <p>Ready to take your business to the next level? <a href="https://insitetechsolutions.com/contact">Get in touch</a> for a free consultation.</p>
+    </div>
+
+    <!-- Email Footer: Contains company information, contact details, and unsubscribe option -->
+    <div class="footer">
+        <p><strong>InSite Tech Solutions</strong><br>
+        Your trusted partner for web development, AI automation, and business solutions.</p>
+        
+        <p>📧 <a href="mailto:contact@insitetechsolutions.com">contact@insitetechsolutions.com</a><br>
+        🌐 <a href="https://insitetechsolutions.com">insitetechsolutions.com</a></p>
+        
+        <!-- Unsubscribe Section -->
+        <div class="unsubscribe">
+            <p><strong>Manage Your Subscription</strong></p>
+            <p>You're receiving this email because you subscribed to our newsletter at insitetechsolutions.com</p>
+            <p><a href="{{unsubscribeUrl}}">Unsubscribe from this list</a></p>
+        </div>
+    </div>
+</body>
+</html> 
