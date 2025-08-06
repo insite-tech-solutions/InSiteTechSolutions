@@ -127,7 +127,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       
       const welcomeEmailHtml = await render(NewsletterWelcome({
         unsubscribeUrl,
-        logoUrl: `${emailConfig.siteUrl}/Insite Tech Logo bg-white.png`,
+        logoUrl: `${emailConfig.siteUrl}/insite-tech-logo-bg-white.png`,
       }))
       
       await resend.emails.send({

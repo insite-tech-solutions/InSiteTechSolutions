@@ -145,7 +145,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       const confirmationEmailHtml = await render(ContactConfirmation({
         customerName: formData.firstName + (formData.lastName ? ` ${formData.lastName}` : ''),
         submittedAt,
-        logoUrl: `${emailConfig.siteUrl}/Insite Tech Logo bg-white.png`,
+        logoUrl: `${emailConfig.siteUrl}/insite-tech-logo-bg-white.png`,
       }))
 
       await resend.emails.send({
@@ -173,7 +173,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         comments: formData.comments,
         mailingList: formData.mailingList,
         submittedAt,
-        logoUrl: `${emailConfig.siteUrl}/Insite Tech Logo bg-white.png`,
+        logoUrl: `${emailConfig.siteUrl}/insite-tech-logo-bg-white.png`,
       }))
 
       await resend.emails.send({

@@ -166,7 +166,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     try {
       const confirmationEmailHtml = await render(NewsletterConfirm({
         confirmationUrl,
-        logoUrl: `${emailConfig.siteUrl}/Insite Tech Logo bg-white.png`,
+        logoUrl: `${emailConfig.siteUrl}/insite-tech-logo-bg-white.png`,
       }))
 
       await resend.emails.send({
