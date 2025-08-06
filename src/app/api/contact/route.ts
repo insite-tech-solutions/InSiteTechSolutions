@@ -226,7 +226,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           // Send newsletter confirmation email to prompt double opt-in
           const newsletterConfirmHtml = await render(NewsletterConfirm({
             confirmationUrl,
-            logoUrl: `${emailConfig.siteUrl}/logo.png`,
+            logoUrl: `${emailConfig.siteUrl}/insite-tech-logo-bg-white.png`,
           }))
 
           await resend.emails.send({
