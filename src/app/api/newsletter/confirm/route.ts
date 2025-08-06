@@ -120,8 +120,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       )
     }
 
-    // Send a welcome email to the newly confirmed subscriber
+    // Send a welcome email to the newly confirmed subscriber (with delay to avoid rate limiting)
     try {
+      // Add 5 second delay to avoid Resend rate limiting
+      await new Promise(resolve => setTimeout(resolve, 5000))
       const unsubscribeToken = generateUnsubscribeToken(email)
       const unsubscribeUrl = `${emailConfig.siteUrl}/api/newsletter/unsubscribe?token=${unsubscribeToken}`
       
@@ -143,7 +145,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     // Redirect the user to the newsletter confirmation success page
     const successUrl = `${emailConfig.siteUrl}/newsletter/confirmed`
-    return NextResponse.redirect(successUrl)
+    
+    // Force a 302 redirect instead of 307 to avoid token preservation issues
+    const response = NextResponse.redirect(successUrl, 302)
+    return response
 
   } catch (error) {
     console.error('Newsletter confirmation error:', error)

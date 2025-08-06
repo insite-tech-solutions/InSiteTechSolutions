@@ -191,9 +191,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       )
     }
 
-    // Handle newsletter subscription if the user opted in
+    // Handle newsletter subscription if the user opted in (with delay to avoid rate limiting)
     if (formData.mailingList) {
       try {
+        // Add 5 second delay to avoid Resend rate limiting (2 req/sec on free tier)
+        await new Promise(resolve => setTimeout(resolve, 5000))
         // Check if email already exists in the newsletter subscribers table and is confirmed
         const { data: existingSubscriber } = await supabaseAdmin
           .from('newsletter_subscribers')
