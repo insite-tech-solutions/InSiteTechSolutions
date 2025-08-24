@@ -40,12 +40,12 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="Previous Works | InSite Tech Solutions"
         pageDescription="Explore our portfolio of successful projects, from custom software solutions to web and app development. See how we've helped clients achieve their goals."
-        pageUrl="https://insitetechsolutions.com/about/previous-works"
+        pageUrl="https://www.insitetechsolutions.com/about/previous-works"
       />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Previous Works", url: "https://insitetechsolutions.com/about/previous-works" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Previous Works", url: "https://www.insitetechsolutions.com/about/previous-works" }
         ]}
       />
       <PreviousWorksPage />

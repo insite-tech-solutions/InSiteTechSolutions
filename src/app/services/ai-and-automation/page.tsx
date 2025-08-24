@@ -58,8 +58,8 @@ export default function Page(): JSX.Element {
       />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "AI & Automation", url: "https://insitetechsolutions.com/services/ai-and-automation" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "AI & Automation", url: "https://www.insitetechsolutions.com/services/ai-and-automation" }
         ]}
       />
       <AIAutomationPage />

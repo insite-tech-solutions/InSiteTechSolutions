@@ -42,18 +42,18 @@ export const metadata: Metadata = {
   publisher: "InSite Tech Solutions",
   robots: "index, follow",
   alternates: {
-    canonical: "https://insitetechsolutions.com",
+    canonical: "https://www.insitetechsolutions.com",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://insitetechsolutions.com",
+    url: "https://www.insitetechsolutions.com",
     title: "InSite Tech Solutions | Custom Software, Web Development & Technical Consulting",
     description: "InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services. Transform your ideas into powerful digital solutions.",
     siteName: "InSite Tech Solutions",
     images: [
       {
-        url: "https://insitetechsolutions.com/Insite Tech Solutions Light.png",
+        url: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.png",
         width: 1200,
         height: 630,
         alt: "InSite Tech Solutions - Custom Software, Web Development & Technical Consulting",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "InSite Tech Solutions | Custom Software, Web Development & Technical Consulting",
     description: "Transform your ideas into powerful digital solutions with InSite Tech—specialists in custom software, websites, data analysis, AI, and more.",
-    images: ["https://insitetechsolutions.com/Insite Tech Solutions Light.png"],
+    images: ["https://www.insitetechsolutions.com/Insite Tech Solutions Light.png"],
   },
 };
 

@@ -39,12 +39,12 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="Our Development Process | InSite Tech Solutions"
         pageDescription="Learn about our streamlined and collaborative 5D process: Discovery, Definition, Design, Development, and Deployment. We build for results, not just code."
-        pageUrl="https://insitetechsolutions.com/about/development-process"
+        pageUrl="https://www.insitetechsolutions.com/about/development-process"
       />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Our Development Process", url: "https://insitetechsolutions.com/about/development-process" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Our Development Process", url: "https://www.insitetechsolutions.com/about/development-process" }
         ]}
       />
       <ProcessPage />

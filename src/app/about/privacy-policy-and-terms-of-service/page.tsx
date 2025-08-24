@@ -56,12 +56,12 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="Legal Center | InSite Tech Solutions"
         pageDescription="Review our Privacy Policy and Terms of Service. Understand how we handle your data, our service terms, and your rights."
-        pageUrl="https://insitetechsolutions.com/about/privacy-policy-and-terms-of-service"
+        pageUrl="https://www.insitetechsolutions.com/about/privacy-policy-and-terms-of-service"
       />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Legal Center", url: "https://insitetechsolutions.com/about/privacy-policy-and-terms-of-service" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Legal Center", url: "https://www.insitetechsolutions.com/about/privacy-policy-and-terms-of-service" }
         ]}
       />
       <PrivacyAndTermsPage documents={documents} />

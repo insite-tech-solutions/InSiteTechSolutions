@@ -23,7 +23,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Contact Us | InSite Tech Solutions",
   description: "Get in touch with our team for web development, software solutions, data analytics, and consulting services. Ready to transform your business with technology?",
   path: "/contact",
-  image: "https://insitetechsolutions.com/Insite Tech Solutions Light.png", // Use company logo for contact page
+  image: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.png", // Use company logo for contact page
   keywords: "contact, web development, software solutions, data analytics, consulting services, InSite Tech Solutions"
 });
 
@@ -55,13 +55,13 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="Contact Us | InSite Tech Solutions"
         pageDescription="Get in touch with our team for web development, software solutions, data analytics, and consulting services. Ready to transform your business with technology?"
-        pageUrl="https://insitetechsolutions.com/contact"
+        pageUrl="https://www.insitetechsolutions.com/contact"
       />
       <LocalBusinessStructuredData />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Contact", url: "https://insitetechsolutions.com/contact" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Contact", url: "https://www.insitetechsolutions.com/contact" }
         ]}
       />
       <ContactPage />

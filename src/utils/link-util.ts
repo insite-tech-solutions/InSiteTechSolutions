@@ -65,7 +65,7 @@
  */
 export function getRelForLink(url: string): string | undefined {
     try {
-      const linkUrl = new URL(url, 'https://insitetechsolutions.com') // Replace with your actual domain
+      const linkUrl = new URL(url, 'https://www.insitetechsolutions.com') // Replace with your actual domain
       const isExternal = linkUrl.hostname && !linkUrl.hostname.includes('insitetechsolutions.com')
       return isExternal ? 'noopener noreferrer' : undefined
     } catch {

@@ -61,7 +61,7 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="InSite Tech Solutions | Custom Software, Web Development & Technical Consulting"
         pageDescription="InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services."
-        pageUrl="https://insitetechsolutions.com"
+        pageUrl="https://www.insitetechsolutions.com"
       />
       <HomePage />
     </>

@@ -24,7 +24,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Blog | InSite Tech Solutions",
   description: "Stay updated with the latest technology trends, development best practices, and industry insights from our team of experts. Blog coming soon!",
   path: "/insites/blog",
-  image: 'https://insitetechsolutions.com/Insite Tech Solutions Light.png', // Use company logo for blog page
+  image: 'https://www.insitetechsolutions.com/Insite Tech Solutions Light.png', // Use company logo for blog page
   keywords: "blog, technology trends, development, best practices, industry insights, InSite Tech Solutions"
 });
 
@@ -42,12 +42,12 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="Blog | InSite Tech Solutions"
         pageDescription="Stay updated with the latest technology trends, development best practices, and industry insights from our team of experts. Blog coming soon!"
-        pageUrl="https://insitetechsolutions.com/insites/blog"
+        pageUrl="https://www.insitetechsolutions.com/insites/blog"
       />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Blog", url: "https://insitetechsolutions.com/insites/blog" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Blog", url: "https://www.insitetechsolutions.com/insites/blog" }
         ]}
       />
       <BlogPage />

@@ -115,7 +115,7 @@ const email = (
   <ContactConfirmation
     customerName="John Doe"
     submittedAt="January 15, 2025 at 2:30 PM"
-    logoUrl="https://insitetechsolutions.com/Insite Tech Logo bg-white.png"
+    logoUrl="https://www.insitetechsolutions.com/Insite Tech Logo bg-white.png"
   />
 );
 ```
@@ -133,7 +133,7 @@ await resend.emails.send({
   react: ContactConfirmation({
     customerName,
     submittedAt: new Date().toLocaleString(),
-    logoUrl: 'https://insitetechsolutions.com/Insite Tech Logo bg-white.png',
+    logoUrl: 'https://www.insitetechsolutions.com/Insite Tech Logo bg-white.png',
   }),
 });
 ```

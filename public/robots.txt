@@ -20,4 +20,4 @@ Allow: /*.svg$
 Allow: /*.webp$
 
 # Sitemap location
-Sitemap: https://insitetechsolutions.com/sitemap.xml
+Sitemap: https://www.insitetechsolutions.com/sitemap.xml

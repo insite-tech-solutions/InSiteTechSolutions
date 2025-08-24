@@ -13,7 +13,7 @@ This document explains in plain English the rules and guidelines for using our s
 
 We are Christian Neureuter doing business as (DBA) InSite Tech Solutions (“Company,” “we,” “us,” “our”) — a sole proprietorship registered in Niagara County, NY. (Mailing address available upon request; we operate remotely and do not maintain a public office.)
 
-We operate the website https://insitetechsolutions.com (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").
+We operate the website https://www.insitetechsolutions.com (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").
 
 You can contact us by email at support@insitetechsolutions.com. (Mailing address and legal contact details available upon request; we operate remotely.)
 
@@ -142,7 +142,7 @@ Your subscription will continue and automatically renew unless canceled. You con
 
 ### Cancellation
 
-You can cancel your subscription at any time by emailing support@insitetechsolutions.com or through our contact page at https://insitetechsolutions.com/contact. Your cancellation will take effect at the end of the current paid term.
+You can cancel your subscription at any time by emailing support@insitetechsolutions.com or through our contact page at https://www.insitetechsolutions.com/contact. Your cancellation will take effect at the end of the current paid term.
 If you have any questions or are unsatisfied with our Services, please email us at support@insitetechsolutions.com.
 
 ### Fee Changes

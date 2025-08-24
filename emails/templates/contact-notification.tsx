@@ -263,7 +263,7 @@ export const ContactNotification = ({
                 
                 <div style={actionRow}>
                   <div style={actionColumn}>
-                    <Button style={secondaryActionButton} href={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://insitetechsolutions.com'}/api/crm/add-contact?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}${lastName ? `&lastName=${encodeURIComponent(lastName)}` : ''}${phoneNumber ? `&phone=${encodeURIComponent(phoneNumber)}` : ''}${companyName ? `&company=${encodeURIComponent(companyName)}` : ''}${websiteUrl ? `&website=${encodeURIComponent(websiteUrl)}` : ''}&services=${encodeURIComponent(services.join(','))}&budget=${encodeURIComponent(budget)}${comments ? `&comments=${encodeURIComponent(comments)}` : ''}&source=contact_form`}>
+                    <Button style={secondaryActionButton} href={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.insitetechsolutions.com'}/api/crm/add-contact?email=${encodeURIComponent(email)}&firstName=${encodeURIComponent(firstName)}${lastName ? `&lastName=${encodeURIComponent(lastName)}` : ''}${phoneNumber ? `&phone=${encodeURIComponent(phoneNumber)}` : ''}${companyName ? `&company=${encodeURIComponent(companyName)}` : ''}${websiteUrl ? `&website=${encodeURIComponent(websiteUrl)}` : ''}&services=${encodeURIComponent(services.join(','))}&budget=${encodeURIComponent(budget)}${comments ? `&comments=${encodeURIComponent(comments)}` : ''}&source=contact_form`}>
                       📋 Add to CRM
                     </Button>
                   </div>

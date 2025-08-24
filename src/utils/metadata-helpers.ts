@@ -20,7 +20,7 @@
 
 import { Metadata } from 'next'
 
-const BASE_URL = 'https://insitetechsolutions.com'
+const BASE_URL = 'https://www.insitetechsolutions.com'
 
 /**
  * Generate comprehensive metadata for a page

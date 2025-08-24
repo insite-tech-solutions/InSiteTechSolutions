@@ -177,9 +177,9 @@ const organizationData: OrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "InSite Tech Solutions",
-  url: "https://insitetechsolutions.com",
-  logo: "https://insitetechsolutions.com/Insite Tech Solutions Light.svg",
-  image: "https://insitetechsolutions.com/Insite Tech Solutions Light.svg",
+  url: "https://www.insitetechsolutions.com",
+  logo: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.svg",
+  image: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.svg",
   description: "InSite Tech Solutions offers web & app development, custom software solutions, SEO & online marketing, graphic design & branding, data analysis, AI & automation, and consulting & training services. Transform your ideas into powerful digital solutions.",
   address: {
     "@type": "PostalAddress",
@@ -277,7 +277,7 @@ export function ServiceStructuredData({
     provider: {
       "@type": "Organization",
       name: "InSite Tech Solutions",
-      url: "https://insitetechsolutions.com"
+      url: "https://www.insitetechsolutions.com"
     },
     serviceType: serviceType,
     areaServed: ["Western New York", "Global"],
@@ -315,7 +315,7 @@ export function ServiceStructuredData({
  * <WebPageStructuredData
  *   pageName="About Us"
  *   pageDescription="Learn about InSite Tech Solutions"
- *   pageUrl="https://insitetechsolutions.com/about"
+ *   pageUrl="https://www.insitetechsolutions.com/about"
  * />
  * ```
  */
@@ -429,7 +429,7 @@ export function BreadcrumbStructuredData({
  *   article={{
  *     title: "Latest Web Development Trends",
  *     description: "Explore the latest trends in web development",
- *     url: "https://insitetechsolutions.com/blog/trends",
+ *     url: "www.nsitetechsolutions.com/blog/trends",
  *     author: "John Doe",
  *     publishedTime: "2024-01-15T10:00:00Z"
  *   }}
@@ -454,7 +454,7 @@ export function ArticleStructuredData({
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    image: article.image || "https://insitetechsolutions.com/Insite Tech Solutions Light.svg",
+    image: article.image || "https://www.insitetechsolutions.com/Insite Tech Solutions Light.svg",
     author: {
       "@type": "Person",
       name: article.author
@@ -464,7 +464,7 @@ export function ArticleStructuredData({
       name: "InSite Tech Solutions",
       logo: {
         "@type": "ImageObject",
-        url: "https://insitetechsolutions.com/Insite Tech Solutions Light.svg"
+        url: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.svg"
       }
     },
     datePublished: article.publishedTime,
@@ -494,10 +494,10 @@ const localBusinessData: LocalBusinessSchema = {
   "@type": "LocalBusiness",
   name: "InSite Tech Solutions",
   description: "Custom software development, web development, and technical consulting services serving Western New York and beyond.",
-  url: "https://insitetechsolutions.com",
+  url: "https://www.insitetechsolutions.com",
   telephone: "+1-716-406-8988",
   email: "contact@insitetechsolutions.com",
-  image: "https://insitetechsolutions.com/Insite Tech Solutions Light.svg",
+  image: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.svg",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Buffalo",

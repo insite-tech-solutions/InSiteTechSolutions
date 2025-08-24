@@ -131,13 +131,13 @@ export const NewsletterWelcome = ({
                 
                 <Row style={resourceRow}>
                   <Column style={resourceColumn}>
-                    <Link href="https://insitetechsolutions.com/insites/blog" style={resourceLink}>
+                    <Link href="https://www.insitetechsolutions.com/insites/blog" style={resourceLink}>
                     Tech Blog
                     </Link>
                     <Text style={resourceDesc}>Latest articles and insights</Text>
                   </Column>
                   <Column style={resourceColumn}>
-                    <Link href="https://insitetechsolutions.com/about/previous-works" style={resourceLink}>
+                    <Link href="https://www.insitetechsolutions.com/about/previous-works" style={resourceLink}>
                     Case Studies
                     </Link>
                     <Text style={resourceDesc}>Real success stories</Text>
@@ -146,13 +146,13 @@ export const NewsletterWelcome = ({
                 
                 <Row style={resourceRow}>
                   <Column style={resourceColumn}>
-                    <Link href="https://insitetechsolutions.com/insites/faq" style={resourceLink}>
+                    <Link href="https://www.insitetechsolutions.com/insites/faq" style={resourceLink}>
                     FAQ
                     </Link>
                     <Text style={resourceDesc}>Common questions answered</Text>
                   </Column>
                   <Column style={resourceColumn}>
-                    <Link href="https://insitetechsolutions.com/contact" style={resourceLink}>
+                    <Link href="https://www.insitetechsolutions.com/contact" style={resourceLink}>
                     Contact Us
                     </Link>
                     <Text style={resourceDesc}>Get personalized help</Text>

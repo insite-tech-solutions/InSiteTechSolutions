@@ -57,7 +57,7 @@ const supabase = createClient(
 
 // Retrieve JWT secret and site URL from environment variables
 const JWT_SECRET = process.env.JWT_SECRET
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://insitetechsolutions.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.insitetechsolutions.com'
 
 /**
  * Generates a JSON Web Token (JWT) for newsletter unsubscription.

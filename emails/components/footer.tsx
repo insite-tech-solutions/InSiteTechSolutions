@@ -47,7 +47,7 @@ export const EmailFooter = (): JSX.Element => {
           </Text>
           <Hr style={hr} />
           <Text style={footerContact}>
-            <Link href="https://insitetechsolutions.com" style={link}>
+            <Link href="https://www.insitetechsolutions.com" style={link}>
               insitetechsolutions.com
             </Link>
             {' | '}

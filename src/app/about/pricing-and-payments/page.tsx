@@ -52,12 +52,12 @@ export default function Page(): JSX.Element {
       <WebPageStructuredData 
         pageName="Pricing & Payment Options | InSite Tech Solutions"
         pageDescription="Flexible pricing models and secure payment options for web development, custom software, data analytics, consulting, and other tech services. Transparent, fair, and results-driven pricing."
-        pageUrl="https://insitetechsolutions.com/about/pricing-and-payments"
+        pageUrl="https://www.insitetechsolutions.com/about/pricing-and-payments"
       />
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Pricing & Payment Options", url: "https://insitetechsolutions.com/about/pricing-and-payments" }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Pricing & Payment Options", url: "https://www.insitetechsolutions.com/about/pricing-and-payments" }
         ]}
       />
       <PricingPage />

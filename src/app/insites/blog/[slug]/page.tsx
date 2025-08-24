@@ -140,9 +140,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       {/* Breadcrumb structured data for navigation */}
       <BreadcrumbStructuredData 
         breadcrumbs={[
-          { name: "Home", url: "https://insitetechsolutions.com" },
-          { name: "Blog", url: "https://insitetechsolutions.com/insites/blog" },
-          { name: post.title, url: `https://insitetechsolutions.com/insites/blog/${slug}` }
+          { name: "Home", url: "https://www.insitetechsolutions.com" },
+          { name: "Blog", url: "https://www.insitetechsolutions.com/insites/blog" },
+          { name: post.title, url: `https://www.insitetechsolutions.com/insites/blog/${slug}` }
         ]}
       />
       {/* Article structured data for rich snippets */}
@@ -150,10 +150,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         article={{
           title: post.title,
           description: post.description,
-          url: `https://insitetechsolutions.com/insites/blog/${slug}`,
+          url: `https://www.insitetechsolutions.com/insites/blog/${slug}`,
           author: post.author,
           publishedTime: post.publishedAt,
-          image: "https://insitetechsolutions.com/Insite Tech Solutions Light.png" // Default blog image
+          image: "https://www.insitetechsolutions.com/Insite Tech Solutions Light.png" // Default blog image
         }}
       />
       {/* Main blog post content */}

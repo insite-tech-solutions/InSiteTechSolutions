@@ -3,7 +3,7 @@
 This repository contains the source code for the InSite Tech Solutions business website, built with Next.js 15, TypeScript, and Tailwind CSS.
 
 ## 🌐 Live Site
-Visit us at: [insitetechsolutions.com](https://insitetechsolutions.com)
+Visit us at: [insitetechsolutions.com](https://www.insitetechsolutions.com)
 
 ## 🏢 About InSite Tech Solutions
 We provide custom software development, web applications, AI automation, and technical consulting services for businesses in Western New York and beyond.
@@ -35,7 +35,7 @@ This code is provided for reference and transparency purposes only. See LICENSE 
 
 ## 📞 Contact
 - **Business Inquiries:** contact@insitetechsolutions.com
-- **Website:** https://insitetechsolutions.com
+- **Website:** https://www.insitetechsolutions.com
 - **Services:** Web & App Development, Custom Software Solutions, SEO & Online Marketing, Graphic Design & Branding, Data Analysis, AI & Automation, Consulting & Training
 
 ---

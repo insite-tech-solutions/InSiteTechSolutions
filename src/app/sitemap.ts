@@ -53,7 +53,7 @@ import { MetadataRoute } from 'next'
  * ```
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://insitetechsolutions.com'
+  const baseUrl = 'https://www.insitetechsolutions.com'
   
   // Use a single timestamp for all URLs for consistency
   const now = new Date();
