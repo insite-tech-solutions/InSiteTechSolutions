@@ -312,8 +312,7 @@ Affected party must notify the other within 10 days of such an event to invoke F
 
 ## 27. RIGHT TO REFUSE SERVICE
 
-We reserve the right to decline or terminate any engagement we deem unlawful, abusive, or harmful, with proportional refund of unused fees.
-Any unused prepaid fees will be returned to you within 30 days of termination.
+We reserve the right to decline or terminate any engagement we deem unlawful, abusive, or harmful, with proportional refund of unused fees. We reserve the right to refuse service or end service engagements with anyone for any reason. Any unused prepaid fees will be returned to you within 30 days of termination.
 
 ## 28. SEVERABILITY
 
