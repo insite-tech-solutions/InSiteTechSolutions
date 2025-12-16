@@ -255,12 +255,12 @@ export const customSoftwareSolutionsTable = {
       },
       basic: { 
         name: "Basic Maintenance (updates, troubleshooting | up to 10 hours dedicated support per month)", 
-        cost: { min: 150, max: 500 },
+        cost: { min: 50, max: 500 },
         description: "Up to 10 hours dedicated support per month"
       },
       extended: { 
         name: "Extended Support (continuous updates, technical support | up to 20 hours dedicated support per month)", 
-        cost: { min: 400, max: 900 },
+        cost: { min: 500, max: 1000 },
         description: "Up to 20 hours dedicated support per month"
       },
       dedicated: { 

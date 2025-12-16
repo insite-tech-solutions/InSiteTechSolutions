@@ -155,7 +155,7 @@ export const graphicDesignBrandingTable = {
       },
       ongoing: { 
         name: "Ongoing Updates & Maintenance (brand refreshes, seasonal updates)", 
-        cost: { min: 150, max: 1000 },
+        cost: { min: 100, max: 1000 },
         description: "Per month"
       }
     }

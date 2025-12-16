@@ -105,8 +105,7 @@ export const projects: Project[] = [
     ],
     serviceCategories: ['Custom Software', 'Data Analysis'],
     links: [
-      { type: 'github', url: 'https://github.com/BanerjeeLab-repertoire/pycat-napari', label: 'Code' },
-      { type: 'external', url: 'https://pycat-napari.readthedocs.io/', label: 'Docs' },
+      { type: 'github', url: '#', label: 'Manuscript in Progress' },
     ],
     bgColor: 'bg-gradient-to-br from-light-blue via-blue-800 to-mild-blue-alt',
   },

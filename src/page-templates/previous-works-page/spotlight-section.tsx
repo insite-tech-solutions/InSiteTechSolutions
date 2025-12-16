@@ -170,7 +170,14 @@ const ProjectDetails = memo(function ProjectDetails({ project }: ProjectDetailsP
       {project.links && project.links.length > 0 && (
         <div className="flex flex-wrap gap-3 pt-2">
           {project.links.map((link) => (
-            <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-medium-blue text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <a 
+              key={link.url} 
+              href={link.url} 
+              target={link.url === '#' ? undefined : '_blank'} 
+              rel={link.url === '#' ? undefined : 'noopener noreferrer'} 
+              onClick={link.url === '#' ? (e) => e.preventDefault() : undefined}
+              className="inline-flex items-center space-x-2 bg-medium-blue text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               {link.type === 'github' ? <Github className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
               <span>{link.label}</span>
             </a>
